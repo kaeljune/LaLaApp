@@ -14,6 +14,7 @@ import SigninScreen from './screens/AuthScreen/SignInScreen';
 import SignupScreen from './screens/AuthScreen/SignUpScreen';
 import ProfileScreen from './screens/AuthScreen/ProfileScreen';
 
+
 injectTapEventPlugin();
 
 class App extends Component {
@@ -73,10 +74,10 @@ class App extends Component {
       }
     });
     const MainNavigator = StackNavigator({
+      welcome: { screen: WelcomeScreen },
       default: { screen: DefaultScreen },
       signin: { screen: SigninScreen },
       signup: { screen: SignupScreen },
-      welcome: { screen: WelcomeScreen },
       profile: { screen: ProfileScreen },
       main: { screen: MainScreen },
     }, {
