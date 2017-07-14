@@ -46,7 +46,7 @@ class SignupScreen extends Component {
     render() {
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container}>           
-                <View style={{ alignItems: 'center', marginTop: 20 }}>
+                <View style={{ alignItems: 'center', marginTop: 0 }}>
                     <View style={{ width, marginBottom: 10 }}>
                         <FormLabel 
                             labelStyle={{ fontWeight: '300', color: '#313131' }}
@@ -99,7 +99,7 @@ class SignupScreen extends Component {
                         </FormLabel>
                         <FormInput
                             secureTextEntry
-                            placeholder="What’s your mobile number"
+                            placeholder="What’s your password"
                             placeholderTextColor='#A8A8A8'
                             keyboardType='default'
                             inputStyle={{ fontSize: 14 }}
@@ -110,13 +110,17 @@ class SignupScreen extends Component {
                 </View>
                 <Text 
                     style={{ 
-                        fontSize: 12, 
+                        fontSize: 12,                   
                         width: (width - 50), 
                         textAlign: 'center', 
                         paddingTop: 10, 
-                        paddingBottom: 10 }}
+                        paddingBottom: 10,
+                        lineHeight: 20 
+                    }}
                 >
-                    <Text>By pressing continue, you are agreeing to be bound by Airlala’s </Text>
+                    <Text style={{ color: '#5A5A5A' }}>
+                        By pressing continue, you are agreeing to be bound by Airlala’s 
+                    </Text>
                     <Text style={{ fontWeight: 'bold', color: '#11B8AB' }} onPress={this.onTerms}>
                         Terms of Use and Privacy Policy.
                     </Text>
@@ -163,7 +167,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F8F8F8',
         alignItems: 'center',
         flexDirection: 'column',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
     },
     textStyle: {
         textAlign: 'center',

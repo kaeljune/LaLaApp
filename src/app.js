@@ -77,12 +77,12 @@ class App extends Component {
       }
     });
     const MainNavigator = StackNavigator({
+      default: { screen: DefaultScreen },
+      signin: { screen: SigninScreen },
       signup: { screen: SignupScreen },
       giftselection: { screen: GiftSelection },
       afterrequest: { screen: AfterRequest },
-      signin: { screen: SigninScreen },
       welcome: { screen: WelcomeScreen },
-      default: { screen: DefaultScreen },
       profile: { screen: ProfileScreen },
       main: { screen: MainScreen },
     }, {
