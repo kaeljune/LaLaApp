@@ -19,6 +19,7 @@ import AfterRequest from './screens/AfterRequest';
 import FindAGift from './screens/FindAGift';
 import Checkout from './screens/Checkout';
 import WriteANote from './screens/WriteANote';
+import DeliveryBlank from './screens/DeliveryBlank';
 
 injectTapEventPlugin();
 
@@ -79,6 +80,8 @@ class App extends Component {
       }
     });
     const MainNavigator = StackNavigator({ 
+      
+      deliveryblank: { screen: DeliveryBlank },
       writeanote: { screen: WriteANote },
       checkout: { screen: Checkout },
       findagift: { screen: FindAGift },
