@@ -105,7 +105,6 @@ class SigninScreen extends Component {
                             fontSize: 14,
                             color: '#FFFFFF',
                             }}
-                            onPress={() => { }}
                         >
                             SIGN IN
                         </Text>

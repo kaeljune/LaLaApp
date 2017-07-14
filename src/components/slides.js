@@ -1,33 +1,48 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Dimensions } from 'react-native';
+import { Text, ScrollView, Dimensions, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 
-const SCREEN_WIDTH = Dimensions.get('window').width;
+import logo from '../../assets/images/logo.png';
+import backgroundImage from '../../assets/images/bg.png';
+
+const { width, height } = Dimensions.get('window');
 
 class Slides extends Component {
     renderLastSlide(index) {
         if (index === this.props.data.length - 1) {
             return (
                 <Button
-                    title="Onwards!"
-                    raised
-                    buttonStyle={styles.buttonStyle}
+                    title='START'
                     onPress={this.props.onComplete}
+                    backgroundColor='#11B8AB'
+                    fontSize={14}
+                    buttonStyle={{ width: 200, height: 50 }}
+                />
+            );
+        }
+        if (index !== this.props.data.length - 1) {
+            return (
+                <Button
+                    title='SKIP'
+                    onPress={this.props.onComplete}
+                    backgroundColor='#11B8AB'
+                    fontSize={14}
+                    buttonStyle={{ width, height: 50 }}
                 />
             );
         }
     }
     renderSlides() {
         return this.props.data.map((slide, index) => (
-                <View key={slide.text} style={[styles.slide, { backgroundColor: slide.color }]}>
+                <Image 
+                    source={backgroundImage} 
+                    key={slide.text} 
+                    style={styles.slide}
+                >
+                    <Image source={logo} style={styles.logoStyle} />
                     <Text style={styles.textStyle}>{ slide.text }</Text>
                     {this.renderLastSlide(index)}
-                    <Button
-                        title="Skip"
-                        raised
-                        onPress={this.props.onComplete}
-                    />
-                </View>
+                </Image>
             ));
     }
     render() {
@@ -47,13 +62,25 @@ class Slides extends Component {
 const styles = {
     slide: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
-        width: SCREEN_WIDTH
+        width,
+        height,
+        justifyContent: 'space-between'
+    },
+    logoStyle: {
+        resizeMode: 'contain',
+        width: 275,
+        //height: 40,
+        marginTop: 120,
     },
     textStyle: {
-        fontSize: 30,
-        color: 'white'
+        width: width - 100,
+        fontSize: 16,
+        lineHeight: 30,
+        fontWeight: '600',
+        textAlign: 'center',
+        backgroundColor: 'transparent',
+        color: '#313131'
     },
     buttonStyle: {
         backgroundColor: '#0288D1',

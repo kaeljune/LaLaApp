@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { Text, Animated, AsyncStorage, StyleSheet, Image, Dimensions } from 'react-native';
+import { 
+    Text, 
+    Animated, 
+    AsyncStorage, 
+    StyleSheet, 
+    Image, 
+    Dimensions, 
+    TouchableOpacity } from 'react-native';
 import { } from 'react-native-elements';
 import _ from 'lodash';
 import { AppLoading, LinearGradient } from 'expo';
@@ -48,6 +55,7 @@ class DefaultScreen extends Component {
                 <Text style={styles.desStyle}>
                     Empowering global artisans & small businesses by artificial intelligent
                 </Text>
+                <TouchableOpacity onPress={this.onGetStarted}>
                 <LinearGradient
                     colors={['#11B8AB', '#65C5B9']}
                     start={[0, 0.5]}
@@ -65,11 +73,11 @@ class DefaultScreen extends Component {
                             fontSize: 14,
                             color: '#FFFFFF',
                         }}
-                        onPress={() => { }}
                     >
                         START NOW
                     </Text>
                 </LinearGradient>
+                </TouchableOpacity>
                 <Text style={styles.textStyle}>
                     <Text>Already have an account? </Text>
                     <Text style={{ fontWeight: '600' }} onPress={this.onSignIn}>
@@ -84,7 +92,6 @@ class DefaultScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        //justifyContent: 'center',
         width,
         height
     },

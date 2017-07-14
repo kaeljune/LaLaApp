@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { AsyncStorage, Vibration } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import _ from 'lodash';
 import { AppLoading } from 'expo';
 
 import Slides from '../../components/slides';
 
 const SLIDE_DATA = [
-    { text: 'Welcome to JobApp', color: '#03A9F4' },
-    { text: 'Welcome to JobApp1', color: '#009688' },
-    { text: 'Welcome to JobApp2', color: '#03A9F4' },
+    { text: 'AirLaLa empowers local artisans and SMEs by AI-powered marketplace.', color: '#03A9F4' },
+    { text: 'Promoting and fostering local artisans and young entrepreneurs.', color: '#009688' },
+    { text: 'Matchmaking international buyers with local partners.', color: '#03A9F4' },
+    { text: 'Together, we can nurture artinsanship and SMEs.', color: '#03A9F4' },
 ];
 
 class WelcomeScreen extends Component {
@@ -27,7 +28,6 @@ class WelcomeScreen extends Component {
         }
     }
     onSlidesComplete = () => {
-        Vibration.vibrate([0.00005]);
         this.props.navigation.goBack();
     }
     render() {
@@ -35,7 +35,7 @@ class WelcomeScreen extends Component {
             return <AppLoading />;
         }
         return (
-            <Slides ref="slides" data={SLIDE_DATA} onComplete={this.onSlidesComplete} />
+                <Slides ref="slides" data={SLIDE_DATA} onComplete={this.onSlidesComplete} />
         );
     }
 }
