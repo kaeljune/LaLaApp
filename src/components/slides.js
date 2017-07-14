@@ -16,7 +16,7 @@ class Slides extends Component {
                     onPress={this.props.onComplete}
                     backgroundColor='#11B8AB'
                     fontSize={14}
-                    buttonStyle={{ width: 200, height: 50 }}
+                    buttonStyle={{ width, height: 50 }}
                 />
             );
         }

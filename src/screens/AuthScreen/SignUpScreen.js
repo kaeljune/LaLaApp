@@ -43,6 +43,9 @@ class SignupScreen extends Component {
     onTerms = () => {
 
     }
+    onSignIn = () => {
+        this.props.navigation.navigate('signin');
+    }
     render() {
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container}>           

@@ -30,14 +30,14 @@ class WelcomeScreen extends Component {
         }
     }
     onSlidesComplete = () => {
-        this.props.navigation.goBack();
+        this.props.navigation.navigate('signup');
     }
     render() {
         if (_.isNull(this.state.token)) {
             return <AppLoading />;
         }
         return (
-                <Slides ref="slides" data={SLIDE_DATA} onComplete={this.onSlidesComplete} />
+            <Slides ref="slides" data={SLIDE_DATA} onComplete={this.onSlidesComplete} />
         );
     }
 }

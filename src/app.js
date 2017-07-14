@@ -14,6 +14,7 @@ import MainScreen from './screens/MainScreen';
 import SigninScreen from './screens/AuthScreen/SignInScreen';
 import SignupScreen from './screens/AuthScreen/SignUpScreen';
 import ProfileScreen from './screens/AuthScreen/ProfileScreen';
+import ForgotScreen from './screens/AuthScreen/ForgotScreen';
 import GiftSelection from './screens/GiftSelection';
 import AfterRequest from './screens/AfterRequest';
 import FindAGift from './screens/FindAGift';
@@ -79,12 +80,13 @@ class App extends Component {
       }
     });
     const MainNavigator = StackNavigator({ 
+      default: { screen: DefaultScreen },
+      forgot: { screen: ForgotScreen },
+      findagift: { screen: FindAGift },
       giftselection: { screen: GiftSelection },
       afterrequest: { screen: AfterRequest },
-      findagift: { screen: FindAGift },
       checkout: { screen: Checkout },
       writeanote: { screen: WriteANote },
-      default: { screen: DefaultScreen },
       signup: { screen: SignupScreen }, 
       signin: { screen: SigninScreen },  
       welcome: { screen: WelcomeScreen },
