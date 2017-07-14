@@ -79,13 +79,14 @@ class App extends Component {
       }
     });
     const MainNavigator = StackNavigator({ 
-      writeanote: { screen: WriteANote },
-      checkout: { screen: Checkout },
-      findagift: { screen: FindAGift },
+      giftselection: { screen: GiftSelection },
       afterrequest: { screen: AfterRequest },
+      findagift: { screen: FindAGift },
+      checkout: { screen: Checkout },
+      writeanote: { screen: WriteANote },
+      default: { screen: DefaultScreen },
       signup: { screen: SignupScreen }, 
       signin: { screen: SigninScreen },  
-      giftselection: { screen: GiftSelection },
       welcome: { screen: WelcomeScreen },
       profile: { screen: ProfileScreen },
       main: { screen: MainScreen },

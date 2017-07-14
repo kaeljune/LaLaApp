@@ -56,27 +56,27 @@ class DefaultScreen extends Component {
                     Empowering global artisans & small businesses by artificial intelligent
                 </Text>
                 <TouchableOpacity onPress={this.onGetStarted}>
-                <LinearGradient
-                    colors={['#11B8AB', '#65C5B9']}
-                    start={[0, 0.5]}
-                    end={[1, 0.5]}
-                    style={{ 
-                        width: 200, 
-                        height: 50, 
-                        padding: 17, 
-                        alignItems: 'center', 
-                        marginTop: 100 }}
-                >
-                    <Text
-                        style={{
-                            backgroundColor: 'transparent',
-                            fontSize: 14,
-                            color: '#FFFFFF',
-                        }}
+                    <LinearGradient
+                        colors={['#11B8AB', '#65C5B9']}
+                        start={[0, 0.5]}
+                        end={[1, 0.5]}
+                        style={{ 
+                            width: 200, 
+                            height: 50, 
+                            padding: 17, 
+                            alignItems: 'center', 
+                            marginTop: 100 }}
                     >
-                        START NOW
-                    </Text>
-                </LinearGradient>
+                        <Text
+                            style={{
+                                backgroundColor: 'transparent',
+                                fontSize: 14,
+                                color: '#FFFFFF',
+                            }}
+                        >
+                            START NOW
+                        </Text>
+                    </LinearGradient>
                 </TouchableOpacity>
                 <Text style={styles.textStyle}>
                     <Text>Already have an account? </Text>

@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import {View, Text, StyleSheet, Dimensions, Image} from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, StyleSheet, Dimensions, Image } from 'react-native';
 import { Icon, Button } from 'react-native-elements';
 import avatar from '../../../assets/images/avatar.png';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 class Checkout extends Component {
      static navigationOptions = ({ navigation }) => ({
@@ -23,12 +23,15 @@ class Checkout extends Component {
             <Text style={{ marginLeft: 5, color: '#FF5700' }}>Chat</Text>
         </View>
     })
-    render () {
+    render() {
         return (
             <View style={styles.wraper}>
                 <View style={[styles.sectionContainer]}>
                     <View style={styles.sectionHead}>
-                        <Image style={{ width: 100, height: 100, marginBottom: 15 }} source={avatar} />
+                        <Image 
+                            style={{ width: 100, height: 100, marginBottom: 15 }} 
+                            source={avatar} 
+                        />
                         <Text>Hai Nguyen</Text>
                         <Text>for Birthday</Text>
                     </View>
@@ -36,40 +39,52 @@ class Checkout extends Component {
 
                 <View style={styles.listProduct}>
                     <View style={styles.Item}>
-                        <View style={{width: 100, height: 80, backgroundColor: '#eee'}}></View>
-                        <View style={{ width: width-190}}>
-                            <Text style={{fontWeight: 'bold', marginBottom: 10}}>Wine Bottle Holder</Text>
-                            <Text style={{color: '#FF5700'}}>$500</Text>
+                        <View style={{ width: 100, height: 80, backgroundColor: '#eee' }} />
+                        <View style={{ width: width - 190 }}>
+                            <Text 
+                                style={{ fontWeight: 'bold', marginBottom: 10 }}
+                            >
+                                Wine Bottle Holder
+                            </Text>
+                            <Text style={{ color: '#FF5700' }}>$500</Text>
                         </View>
-                        <View style={{
+                        <View
+style={{
                             borderColor: '#eee',
                             borderWidth: 1, 
                             flexDirection: 'column',
                             width: 30,
                             alignItems: 'center',
                             justifyContent: 'space-between'
-                        }}>
+                        }}
+                        >
                             <Text>+</Text>
-                            <Text style={{color: '#FF5700'}}>2</Text>
+                            <Text style={{ color: '#FF5700' }}>2</Text>
                             <Text>-</Text>
                         </View>
                     </View>
                     <View style={styles.Item}>
-                        <View style={{width: 100, height: 80, backgroundColor: '#eee'}}></View>
-                        <View style={{ width: width-190}}>
-                            <Text style={{fontWeight: 'bold', marginBottom: 10}}>Wine Bottle Holder</Text>
-                            <Text style={{color: '#FF5700'}}>$500</Text>
+                        <View style={{ width: 100, height: 80, backgroundColor: '#eee' }} />
+                        <View style={{ width: width - 190 }}>
+                            <Text 
+                                style={{ fontWeight: 'bold', marginBottom: 10 }}
+                            >
+                                Wine Bottle Holder
+                            </Text>
+                            <Text style={{ color: '#FF5700' }}>$500</Text>
                         </View>
-                        <View style={{
+                        <View
+style={{
                             borderColor: '#eee',
                             borderWidth: 1, 
                             flexDirection: 'column',
                             width: 30,
                             alignItems: 'center',
                             justifyContent: 'space-between'
-                        }}>
+                        }}
+                        >
                             <Text>+</Text>
-                            <Text style={{color: '#FF5700'}}>2</Text>
+                            <Text style={{ color: '#FF5700' }}>2</Text>
                             <Text>-</Text>
                         </View>
                     </View>
@@ -89,7 +104,7 @@ class Checkout extends Component {
                     />
                 </View>
             </View>
-        )
+        );
     }
 }
 
@@ -104,7 +119,7 @@ const styles = StyleSheet.create({
     },
     sectionHead: {
         padding: 15,
-        width: width,
+        width,
         alignItems: 'center',
         borderBottomWidth: 1,
         borderBottomColor: '#ddd'
@@ -112,15 +127,15 @@ const styles = StyleSheet.create({
     listProduct: {
         backgroundColor: '#fff',
     },
-    Item : {
+    Item: {
         backgroundColor: '#fff',
-        width: width,
+        width,
         padding: 15,
         borderBottomWidth: 1,
         borderBottomColor: '#ddd',
         flexDirection: 'row',
         justifyContent: 'space-between'
     }
-})
+});
 
-export default Checkout
+export default Checkout;

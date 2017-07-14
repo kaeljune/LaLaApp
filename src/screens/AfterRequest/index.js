@@ -11,7 +11,7 @@ import { Icon, Button } from 'react-native-elements';
 
 import avatar from '../../../assets/images/avatar.png';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 class AfterRequest extends Component {
     static navigationOptions = ({ navigation }) => ({
