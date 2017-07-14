@@ -16,7 +16,9 @@ import SignupScreen from './screens/AuthScreen/SignUpScreen';
 import ProfileScreen from './screens/AuthScreen/ProfileScreen';
 import GiftSelection from './screens/GiftSelection';
 import AfterRequest from './screens/AfterRequest';
-
+import FindAGift from './screens/FindAGift';
+import Checkout from './screens/Checkout';
+import WriteANote from './screens/WriteANote';
 
 injectTapEventPlugin();
 
@@ -76,12 +78,14 @@ class App extends Component {
         }[transition];
       }
     });
-    const MainNavigator = StackNavigator({
-      default: { screen: DefaultScreen },
-      signin: { screen: SigninScreen },
-      signup: { screen: SignupScreen },
-      giftselection: { screen: GiftSelection },
+    const MainNavigator = StackNavigator({ 
+      writeanote: { screen: WriteANote },
+      checkout: { screen: Checkout },
+      findagift: { screen: FindAGift },
       afterrequest: { screen: AfterRequest },
+      signup: { screen: SignupScreen }, 
+      signin: { screen: SigninScreen },  
+      giftselection: { screen: GiftSelection },
       welcome: { screen: WelcomeScreen },
       profile: { screen: ProfileScreen },
       main: { screen: MainScreen },

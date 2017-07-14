@@ -62,15 +62,15 @@ class GiftSelection extends Component {
 						</View>
 
 						<View
-style={{
-							display: 'flex',
-flexDirection: 'column',
-justifyContent: 'center',
-							alignItems: 'center',
-							width: '100%',
-							paddingTop: 15,
-							paddingBottom: 15
-						}}
+							style={{
+								display: 'flex',
+								flexDirection: 'column',
+								justifyContent: 'center',
+								alignItems: 'center',
+								width: '100%',
+								paddingTop: 15,
+								paddingBottom: 15
+							}}
 						>
 							<ScrollView horizontal showsHorizontalScrollIndicator={false}>
 								<ButtonSeclect>Professional</ButtonSeclect>
@@ -102,51 +102,51 @@ justifyContent: 'center',
 
 						<ScrollView horizontal showsHorizontalScrollIndicator={false}>
 							<View
-style={{
-								height: 120,
-width: 120,
-								borderRadius: 3,
-								display: 'flex',
-								flexDirection: 'column',
-								justifyContent: 'center',
-								backgroundColor: 'pink',
-								alignItems: 'center',
-								margin: 7
-							}}
+								style={{
+									height: 120,
+									width: 120,
+									borderRadius: 3,
+									display: 'flex',
+									flexDirection: 'column',
+									justifyContent: 'center',
+									backgroundColor: 'pink',
+									alignItems: 'center',
+									margin: 7
+								}}
 							>
 								<Text>
 									Anniversary
 							</Text>
 							</View>
 							<View
-style={{
-								height: 120,
-width: 120,
-								borderRadius: 3,
-								display: 'flex',
-								flexDirection: 'column',
-								justifyContent: 'center',
-								backgroundColor: 'pink',
-								alignItems: 'center',
-								margin: 7
-							}}
+								style={{
+									height: 120,
+									width: 120,
+									borderRadius: 3,
+									display: 'flex',
+									flexDirection: 'column',
+									justifyContent: 'center',
+									backgroundColor: 'pink',
+									alignItems: 'center',
+									margin: 7
+								}}
 							>
 								<Text>
 									Anniversary
 							</Text>
 							</View>
 							<View
-style={{
-								height: 120,
-width: 120,
-								borderRadius: 3,
-								display: 'flex',
-								flexDirection: 'column',
-								justifyContent: 'center',
-								backgroundColor: 'pink',
-								alignItems: 'center',
-								margin: 7
-							}}
+								style={{
+									height: 120,
+									width: 120,
+									borderRadius: 3,
+									display: 'flex',
+									flexDirection: 'column',
+									justifyContent: 'center',
+									backgroundColor: 'pink',
+									alignItems: 'center',
+									margin: 7
+								}}
 							>
 								<Text>
 									Anniversary
@@ -159,12 +159,12 @@ width: 120,
 						<Text style={{ textAlign: 'center' }}>Price</Text>
 
 						<Text
-style={{
-							fontSize: 20,
-							marginTop: 30,
-							marginBottom: 15,
-							textAlign: 'center'
-						}}
+							style={{
+								fontSize: 20,
+								marginTop: 30,
+								marginBottom: 15,
+								textAlign: 'center'
+							}}
 						>$200-500</Text>
 
 						<Slider minimumValue={0} maximumValue={100} />
@@ -174,135 +174,135 @@ style={{
 						<Text style={{ textAlign: 'center' }}>Recipient's Intersts</Text>
 
 						<View
-style={{
-							marginTop: 30,
-							marginBottom: 15,
-							flexDirection: 'row',
-flexWrap: 'wrap',
-							justifyContent: 'center'
-						}}
+							style={{
+								marginTop: 30,
+								marginBottom: 15,
+								flexDirection: 'row',
+								flexWrap: 'wrap',
+								justifyContent: 'center'
+							}}
 						>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>Dog</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>Dog</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>DIY</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>Cat</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>Tea</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>Coffee</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>Fitness</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
 
-							}}
+								}}
 							>Cat</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>Tea</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>Sport</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>Science</Text>
 
 						</View>
@@ -312,135 +312,135 @@ style={{
 						<Text style={{ textAlign: 'center' }}>Recipient's Style</Text>
 
 						<View
-style={{
-							marginTop: 30,
-							marginBottom: 15,
-							flexDirection: 'row',
-flexWrap: 'wrap',
-							justifyContent: 'center'
-						}}
+							style={{
+								marginTop: 30,
+								marginBottom: 15,
+								flexDirection: 'row',
+								flexWrap: 'wrap',
+								justifyContent: 'center'
+							}}
 						>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>Dog</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>Dog</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>DIY</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>Cat</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>Tea</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>Coffee</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>Fitness</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
 
-							}}
+								}}
 							>Cat</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>Tea</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>Sport</Text>
 							<Text
-style={{
-								padding: 7,
-								minWidth: 60,
-								textAlign: 'center',
-								borderColor: '#eee',
-								borderWidth: 1,
-								borderRadius: 20,
-								margin: 5
-							}}
+								style={{
+									padding: 7,
+									minWidth: 60,
+									textAlign: 'center',
+									borderColor: '#eee',
+									borderWidth: 1,
+									borderRadius: 20,
+									margin: 5
+								}}
 							>Science</Text>
 
 						</View>
@@ -459,9 +459,9 @@ style={{
 					</View>
 
 					<View
-style={{
-						marginBottom: 50
-					}}
+						style={{
+							marginBottom: 50
+						}}
 					>
 						<Button
 							onPress={() => console.log(123)}
@@ -485,8 +485,8 @@ const styles = StyleSheet.create({
 	},
 	sectionItem: {
 		display: 'flex',
-flexDirection: 'column',
-justifyContent: 'center',
+		flexDirection: 'column',
+		justifyContent: 'center',
 		alignItems: 'center',
 		borderBottomColor: '#eee',
 		borderBottomWidth: 1,
