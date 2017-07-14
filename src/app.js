@@ -20,6 +20,7 @@ import AfterRequest from './screens/AfterRequest';
 import FindAGift from './screens/FindAGift';
 import Checkout from './screens/Checkout';
 import WriteANote from './screens/WriteANote';
+import TermScreen from './screens/TermScreen';
 
 injectTapEventPlugin();
 
@@ -81,14 +82,15 @@ class App extends Component {
     });
     const MainNavigator = StackNavigator({ 
       default: { screen: DefaultScreen },
+      giftselection: { screen: GiftSelection },
       forgot: { screen: ForgotScreen },
       findagift: { screen: FindAGift },
-      giftselection: { screen: GiftSelection },
       afterrequest: { screen: AfterRequest },
       checkout: { screen: Checkout },
       writeanote: { screen: WriteANote },
       signup: { screen: SignupScreen }, 
-      signin: { screen: SigninScreen },  
+      signin: { screen: SigninScreen }, 
+      term: { screen: TermScreen }, 
       welcome: { screen: WelcomeScreen },
       profile: { screen: ProfileScreen },
       main: { screen: MainScreen },
