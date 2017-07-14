@@ -28,7 +28,7 @@ class DefaultScreen extends Component {
         this.props.navigation.navigate('welcome');
     }
     onSignIn = () => {
-        this.props.navigation.navigate('main', {
+        this.props.navigation.navigate('signin', {
             transition: 'flipTop',
             name: 'Lucy',
         });

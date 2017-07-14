@@ -7,6 +7,7 @@ import firebase from 'firebase';
 import { StackNavigator } from 'react-navigation';
 
 import store from './store';
+
 import WelcomeScreen from './screens/WelcomeScreen';
 import DefaultScreen from './screens/DefaultScreen';
 import MainScreen from './screens/MainScreen';
@@ -14,6 +15,7 @@ import SigninScreen from './screens/AuthScreen/SignInScreen';
 import SignupScreen from './screens/AuthScreen/SignUpScreen';
 import ProfileScreen from './screens/AuthScreen/ProfileScreen';
 import GiftSelection from './screens/GiftSelection';
+import AfterRequest from './screens/AfterRequest';
 
 
 injectTapEventPlugin();
@@ -74,10 +76,11 @@ class App extends Component {
         }[transition];
       }
     });
-    const MainNavigator = StackNavigator({ 
-      signup: { screen: SignupScreen }, 
-      signin: { screen: SigninScreen },  
+    const MainNavigator = StackNavigator({
+      signup: { screen: SignupScreen },
       giftselection: { screen: GiftSelection },
+      afterrequest: { screen: AfterRequest },
+      signin: { screen: SigninScreen },
       welcome: { screen: WelcomeScreen },
       default: { screen: DefaultScreen },
       profile: { screen: ProfileScreen },
