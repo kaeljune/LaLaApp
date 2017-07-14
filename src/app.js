@@ -76,18 +76,18 @@ class App extends Component {
         }[transition];
       }
     });
-    const MainNavigator = StackNavigator({
+    const MainNavigator = StackNavigator({ 
+      signup: { screen: SignupScreen }, 
+      signin: { screen: SigninScreen },  
       giftselection: { screen: GiftSelection },
       afterrequest: {screen: AfterRequest},
       welcome: { screen: WelcomeScreen },
       default: { screen: DefaultScreen },
-      signin: { screen: SigninScreen },
-      signup: { screen: SignupScreen },
       profile: { screen: ProfileScreen },
       main: { screen: MainScreen },
     }, {
         headerMode: 'screen',
-        transitionConfig: TransitionConfiguration
+        transitionConfig: TransitionConfiguration,
       });
     return (
       <Provider store={store}>
