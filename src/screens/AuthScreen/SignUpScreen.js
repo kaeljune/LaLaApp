@@ -7,9 +7,9 @@ import {
     KeyboardAvoidingView 
 } from 'react-native';
 import { FormLabel, FormInput, Icon, Button } from 'react-native-elements';
-import { Components } from 'expo';
+import { LinearGradient } from 'expo';
 
-const { LinearGradient } = Components;
+// const { LinearGradient } = Components;
 
 //import logo from '../../../assets/icons/logo.png';
 const { width, height } = Dimensions.get('window');
@@ -108,7 +108,14 @@ class SignupScreen extends Component {
                         />
                     </View>
                 </View>
-                <Text style={{ fontSize: 12, width: (width - 50), textAlign: 'center', paddingTop: 10, paddingBottom: 10 }}>
+                <Text 
+                    style={{ 
+                        fontSize: 12, 
+                        width: (width - 50), 
+                        textAlign: 'center', 
+                        paddingTop: 10, 
+                        paddingBottom: 10 }}
+                >
                     <Text>By pressing continue, you are agreeing to be bound by Airlala’s </Text>
                     <Text style={{ fontWeight: 'bold', color: '#11B8AB' }} onPress={this.onTerms}>
                         Terms of Use and Privacy Policy.
@@ -157,9 +164,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
         justifyContent: 'space-around'
-    },
-    textFormStyle: {
-
     },
     textStyle: {
         textAlign: 'center',
