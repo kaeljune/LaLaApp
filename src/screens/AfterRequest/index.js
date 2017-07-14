@@ -9,7 +9,7 @@ import {
 
 import { Icon, Button } from 'react-native-elements';
 
-import avatar from '../../../assets/images/avatar.png'
+import avatar from '../../../assets/images/avatar.png';
 
 const { width, height } = Dimensions.get('window');
 
@@ -128,8 +128,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center'
     }
-
-
 })
 
 export default AfterRequest
