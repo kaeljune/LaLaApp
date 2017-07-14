@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, Dimensions, Image} from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Image, ScrollView } from 'react-native';
 import { Icon, Button } from 'react-native-elements';
 
 import avatar from '../../../assets/images/avatar.png';
@@ -24,70 +24,85 @@ class FindAGift extends Component {
             <Text style={{ marginLeft: 5, color: '#FF5700' }}>Chat</Text>
         </View>
     })
-        render() {
-        const { wraper, sectionHead, sectionList, sectionContainer, marginB} = styles;
+    render() {
+        const { wraper, sectionHead, sectionList, sectionContainer, marginB } = styles;
         return (
-            <View style={wraper}>
-                <View style={[sectionContainer, marginB]}>
-                    <View style={sectionHead}>
-                        <Image style={{ width: 100, height: 100, marginBottom: 15 }} source={avatar} />
-                        <Text>Hai Nguyen</Text>
-                        <Text>Birthday | $200-500</Text>
-                    </View>
-                </View>
-
-                <View style={sectionContainer}>
-                    <View>
-                        <View style={sectionList}>
-                            <View style={{width: 1, backgroundColor: '#ddd'}}></View>
-                            <View style={styles.dot}></View>
-                            <View style={{paddingBottom: 15}}>
-                                <Text style={styles.listTitle}>LOOKING</Text>
-                                <Text>We’ll report back promptly with wonderful gifts for HAI NGUYEN.</Text>
-                            </View>
-                        </View>
-
-                        <View style={sectionList}>
-                            <View style={{width: 1, backgroundColor: '#ddd'}}></View>
-                            <View style={styles.dot}></View>
-                            <View style={{paddingBottom: 15}}>
-                                <Text style={styles.listTitle}>GIFTS READY</Text>
-                            </View>
-                        </View>
-
-                        <View style={sectionList}>
-                            <View style={{width: 1, backgroundColor: '#ddd'}}></View>
-                            <View style={styles.dot}></View>
-                            <View style={{paddingBottom: 15}}>
-                                 <Text style={styles.listTitle}>ORDERED</Text>
-                            </View>
-                        </View>
-
-                        <View style={sectionList}>
-                            <View style={{width: 1, backgroundColor: '#ddd'}}></View>
-                            <View style={styles.dot}></View>
-                            <View style={{paddingBottom: 15}}>
-                                 <Text style={styles.listTitle}>SHIPPED</Text>
-                            </View>
-                        </View>
-                        <View style={sectionList}>
-                            <View style={{width: 1, backgroundColor: '#ddd'}}></View>
-                            <View style={styles.dot}></View>
-                            <View style={{paddingBottom: 15}}>
-                                 <Text style={styles.listTitle}>DELEVERED</Text>
-                            </View>
+            <ScrollView>
+           
+                    <View style={[sectionContainer, marginB]}>
+                        <View style={sectionHead}>
+                            <Image style={{ width: 100, height: 100, marginBottom: 15 }} source={avatar} />
+                            <Text>Hai Nguyen</Text>
+                            <Text>Birthday | $200-500</Text>
                         </View>
                     </View>
-                   
-                </View>
-            </View>
+
+                    <View style={sectionContainer}>
+                        <View>
+                            <View style={sectionList}>
+                                <View style={{ width: 1, backgroundColor: '#ddd' }}></View>
+                                <View style={styles.dot}></View>
+                                <View style={{ paddingBottom: 15 }}>
+                                    <Text style={styles.listTitle}>LOOKING</Text>
+                                    <Text>We’ll report back promptly with wonderful gifts for HAI NGUYEN.</Text>
+                                </View>
+                            </View>
+
+                            <View style={sectionList}>
+                                <View style={{ width: 1, backgroundColor: '#ddd' }}></View>
+                                <View style={styles.dot}></View>
+                                <View style={{ paddingBottom: 15 }}>
+                                    <Text style={styles.listTitle}>GIFTS READY</Text>
+                                </View>
+                            </View>
+
+                            <View style={sectionList}>
+                                <View style={{ width: 1, backgroundColor: '#ddd' }}></View>
+                                <View style={styles.dot}></View>
+                                <View style={{ paddingBottom: 15 }}>
+                                    <Text style={styles.listTitle}>ORDERED</Text>
+                                </View>
+                            </View>
+
+                            <View style={sectionList}>
+                                <View style={{ width: 1, backgroundColor: '#ddd' }}></View>
+                                <View style={styles.dot}></View>
+                                <View style={{ paddingBottom: 15 }}>
+                                    <Text style={styles.listTitle}>SHIPPED</Text>
+                                </View>
+                            </View>
+                            <View style={sectionList}>
+                                <View style={{ width: 1, backgroundColor: '#ddd' }}></View>
+                                <View style={styles.dot}></View>
+                                <View style={{ paddingBottom: 15 }}>
+                                    <Text style={styles.listTitle}>DELEVERED</Text>
+                                </View>
+                            </View>
+                        </View>
+
+                    </View>
+
+                    <View style={{ alignItems: 'center' }}>
+                        <Button
+                            raise
+                            title="DONE"
+                            icon={{ name: 'done', size: 20 }}
+                            backgroundColor="#11b8ab"
+                            buttonStyle={{
+                                width: 150,
+                                height: 50,
+                                marginTop: 30,
+                                marginBottom: 20
+                            }}
+                        />
+                    </View>
+            </ScrollView>
         )
     }
 }
 
 const styles = StyleSheet.create({
     wraper: {
-        flex: 1,
         padding: 15
     },
 
@@ -96,22 +111,22 @@ const styles = StyleSheet.create({
     },
 
     sectionContainer: {
-        display: 'flex', 
-        marginTop: height/30,
-        flexDirection: 'row', 
+        display: 'flex',
+        marginTop: 15,
+        flexDirection: 'row',
         justifyContent: 'center'
     },
 
     sectionHead: {
         padding: 15,
-        width: width-100,
+        width: width - 100,
         backgroundColor: '#fff',
         alignItems: 'center',
-    }, 
+    },
     sectionList: {
         paddingLeft: 5,
         paddingRight: 5,
-        width: width-100,
+        width: width - 100,
         flexDirection: 'row',
 
     },

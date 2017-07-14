@@ -17,7 +17,8 @@ import ProfileScreen from './screens/AuthScreen/ProfileScreen';
 import GiftSelection from './screens/GiftSelection';
 import AfterRequest from './screens/AfterRequest';
 import FindAGift from './screens/FindAGift';
-
+import Checkout from './screens/Checkout';
+import WriteANote from './screens/WriteANote';
 
 injectTapEventPlugin();
 
@@ -78,6 +79,8 @@ class App extends Component {
       }
     });
     const MainNavigator = StackNavigator({ 
+      writeanote: { screen: WriteANote },
+      checkout: { screen: Checkout },
       findagift: { screen: FindAGift },
       afterrequest: { screen: AfterRequest },
       signup: { screen: SignupScreen }, 
