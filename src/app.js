@@ -20,7 +20,10 @@ import AfterRequest from './screens/AfterRequest';
 import FindAGift from './screens/FindAGift';
 import Checkout from './screens/Checkout';
 import WriteANote from './screens/WriteANote';
+import DeliveryBlank from './screens/DeliveryBlank';
 import TermScreen from './screens/TermScreen';
+import Delivery from './screens/Delivery';
+import Payment from './screens/Payment';
 
 injectTapEventPlugin();
 
@@ -81,7 +84,14 @@ class App extends Component {
       }
     });
     const MainNavigator = StackNavigator({ 
+      profile: { screen: ProfileScreen },
+      
+      
       default: { screen: DefaultScreen },
+      payment: { screen: Payment },
+      delivery: { screen: Delivery },
+      deliveryblank: { screen: DeliveryBlank },
+
       giftselection: { screen: GiftSelection },
       forgot: { screen: ForgotScreen },
       findagift: { screen: FindAGift },
@@ -92,7 +102,7 @@ class App extends Component {
       signin: { screen: SigninScreen }, 
       term: { screen: TermScreen }, 
       welcome: { screen: WelcomeScreen },
-      profile: { screen: ProfileScreen },
+      // profile: { screen: ProfileScreen },
       main: { screen: MainScreen },
     }, {
         headerMode: 'screen',
@@ -112,7 +122,7 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F8F8F8',
     // alignItems: 'center',
     justifyContent: 'space-around',
   },

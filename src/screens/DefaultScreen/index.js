@@ -11,7 +11,7 @@ import { } from 'react-native-elements';
 import _ from 'lodash';
 import { AppLoading, LinearGradient } from 'expo';
 
-import logo from '../../../assets/images/logo.png';
+import logo from '../../../assets/images/logolarge.png';
 import backgroundImage from '../../../assets/images/bg.png';
 
 const { width, height } = Dimensions.get('window');
@@ -91,6 +91,7 @@ class DefaultScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         alignItems: 'center',
         width,
         height
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
     desStyle: {
         textAlign: 'center',
         fontSize: 18,
-        fontWeight: '400',
+        fontWeight: '600',
         backgroundColor: 'transparent',
         marginTop: 100,
         width: width - 50
