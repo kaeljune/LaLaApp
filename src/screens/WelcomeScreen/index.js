@@ -32,6 +32,9 @@ class WelcomeScreen extends Component {
     onSlidesComplete = () => {
         this.props.navigation.navigate('signup');
     }
+    onRefreshSlide = () => {
+        this.props.navigation.navigate('signin');
+    }
     render() {
         if (_.isNull(this.state.token)) {
             return <AppLoading />;

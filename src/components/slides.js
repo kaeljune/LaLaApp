@@ -8,6 +8,7 @@ import backgroundImage from '../../assets/images/bg.png';
 const { width, height } = Dimensions.get('window');
 
 class Slides extends Component {
+    state = { }
     renderLastSlide(index) {
         if (index === this.props.data.length - 1) {
             return (
