@@ -14,12 +14,15 @@ import MainScreen from './screens/MainScreen';
 import SigninScreen from './screens/AuthScreen/SignInScreen';
 import SignupScreen from './screens/AuthScreen/SignUpScreen';
 import ProfileScreen from './screens/AuthScreen/ProfileScreen';
+import ForgotScreen from './screens/AuthScreen/ForgotScreen';
 import GiftSelection from './screens/GiftSelection';
 import AfterRequest from './screens/AfterRequest';
 import FindAGift from './screens/FindAGift';
 import Checkout from './screens/Checkout';
 import WriteANote from './screens/WriteANote';
 import DeliveryBlank from './screens/DeliveryBlank';
+import TermScreen from './screens/TermScreen';
+import Delivery from './screens/Delivery';
 
 injectTapEventPlugin();
 
@@ -80,19 +83,19 @@ class App extends Component {
       }
     });
     const MainNavigator = StackNavigator({ 
-      
+      delivery: { screen: Delivery },
+      default: { screen: DefaultScreen },
+      giftselection: { screen: GiftSelection },
+      forgot: { screen: ForgotScreen },
       deliveryblank: { screen: DeliveryBlank },
-      writeanote: { screen: WriteANote },
-      checkout: { screen: Checkout },
       findagift: { screen: FindAGift },
       afterrequest: { screen: AfterRequest },
-      signup: { screen: SignupScreen }, 
-      signin: { screen: SigninScreen },  
-      giftselection: { screen: GiftSelection },
-      
-      signin: { screen: SigninScreen },
+      checkout: { screen: Checkout },
+      writeanote: { screen: WriteANote },
+     
+      signin: { screen: SigninScreen }, 
+      term: { screen: TermScreen }, 
       welcome: { screen: WelcomeScreen },
-      default: { screen: DefaultScreen },
       profile: { screen: ProfileScreen },
       main: { screen: MainScreen },
     }, {

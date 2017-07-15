@@ -9,10 +9,10 @@ const { width, height } = Dimensions.get('window');
 
 const heightHeader = (height * 50) / 667;
 
-class SigninScreen extends Component {
+class ForgotScreen extends Component {
 
     static navigationOptions = ({ navigation }) => ({
-        title: 'Sign in',
+        title: 'Reset Password',
         headerTintColor: '#313131',
         headerLeft: <Icon
             name='chevron-left'
@@ -32,21 +32,17 @@ class SigninScreen extends Component {
         },
     })
     state = { email: 'Your email address', password: '' };
-
     onSignUp = () => {
         this.props.navigation.navigate('signup');
-    }
-    onForgot = () => {
-        this.props.navigation.navigate('forgot');
     }
     render() {
         return (
             <View style={styles.container}>
                 <Image source={logo} style={styles.logoStyle} />
                 <Text style={styles.desStyle}>
-                    Empowering global artisans & small businesses by artificial intelligent
+                    Can't sign in? Forget your password? Enter your email address below and we'll help log you in
                 </Text>
-                <View style={{ marginTop: 30 }}>
+                <View style={{ marginTop: 60 }}>
                     <View style={{ width, marginBottom: 10 }}>
                         <FormLabel 
                             labelStyle={{ fontWeight: '300', color: '#313131' }}
@@ -62,45 +58,13 @@ class SigninScreen extends Component {
                             onChangeText={email => this.setState({ email })}
                         />
                     </View>
-                    <View style={{ width, marginBottom: 10 }}>
-                        <FormLabel 
-                            labelStyle={{ fontWeight: '300', color: '#313131' }}
-                        >
-                            PASSWORD
-                        </FormLabel>
-                        <FormInput
-                            secureTextEntry
-                            placeholder="What’s your password"
-                            placeholderTextColor='#A8A8A8'
-                            keyboardType='default'
-                            inputStyle={{ fontSize: 14 }}
-                            value={this.state.password}
-                            onChangeText={password => this.setState({ password })}
-                        />
-                    </View>
-                </View>
-                <View 
-                    style={{ flexDirection: 'row', alignSelf: 'flex-end', marginRight: 20 }}
-                >
-                    <Icon
-                        name='info-outline'
-                        color='#11b8ab'
-                        size={15}
-                        onPress={this.onForgot}
-                    />
-                    <Text 
-                        onPress={this.onForgot} 
-                        style={{ color: '#11b8ab', fontSize: 12, fontWeight: '300' }}
-                    > 
-                        Forgot password?
-                    </Text>
                 </View>
                 <View 
                     style={{ 
                         flex: 1, 
                         justifyContent: 'space-around', 
                         alignItems: 'center', 
-                        marginTop: 20 }}
+                        marginTop: 80 }}
                 >
                     <LinearGradient
                         colors={['#11B8AB', '#65C5B9']}
@@ -115,7 +79,7 @@ class SigninScreen extends Component {
                             color: '#FFFFFF',
                             }}
                         >
-                            SIGN IN
+                            REQUEST
                         </Text>
                     </LinearGradient>
                     <Text style={{ marginTop: 10, marginBottom: 10 }}>Or sign in with</Text>
@@ -152,7 +116,7 @@ const styles = StyleSheet.create({
     desStyle: {
         textAlign: 'center',
         fontSize: 14,
-        fontWeight: '400',
+        fontWeight: '300',
         backgroundColor: 'transparent',
         width: width - 100,
         lineHeight: 25
@@ -162,4 +126,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default SigninScreen;
+export default ForgotScreen;

@@ -1,17 +1,17 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
     View,
     Text,
     Image,
     Dimensions,
     StyleSheet
-} from 'react-native'
+} from 'react-native';
 
 import { Icon, Button } from 'react-native-elements';
 
 import avatar from '../../../assets/images/avatar.png';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 class AfterRequest extends Component {
     static navigationOptions = ({ navigation }) => ({
@@ -35,9 +35,11 @@ class AfterRequest extends Component {
         const { wraper, sectionHead, sectionChat, chatText, cirleIcon } = styles;
         return (
             <View style={wraper}>
-                <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                     <View style={sectionHead}>
-                        <Image style={{ width: 100, height: 100, marginBottom: 15 }} source={avatar} />
+                        <Image 
+                            style={{ width: 100, height: 100, marginBottom: 15 }} source={avatar} 
+                        />
                         <Text>Hai Nguyen</Text>
                         <Text style={{ marginBottom: 30 }}>Birthday | $200-500</Text>
                     </View>
@@ -88,7 +90,7 @@ class AfterRequest extends Component {
                     />
                 </View>
             </View>
-        )
+        );
     }
 }
 
@@ -100,7 +102,7 @@ const styles = StyleSheet.create({
 
     sectionHead: {
         padding: 15,
-        width: width-100,
+        width: width - 100,
         backgroundColor: '#fff',
         alignItems: 'center',
         // justifyContent: 'center'
@@ -128,6 +130,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center'
     }
-})
 
-export default AfterRequest
+
+});
+
+export default AfterRequest;

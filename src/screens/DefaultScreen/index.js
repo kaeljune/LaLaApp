@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
-import { Text, Animated, AsyncStorage, StyleSheet, Image, View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { 
+    Text, 
+    Animated, 
+    AsyncStorage, 
+    StyleSheet, 
+    Image, 
+    Dimensions, 
+    TouchableOpacity } from 'react-native';
+import { } from 'react-native-elements';
 import _ from 'lodash';
-import { AppLoading } from 'expo';
+import { AppLoading, LinearGradient } from 'expo';
 
-import logo from '../../../assets/icons/logo.png';
+import logo from '../../../assets/images/logo.png';
+import backgroundImage from '../../../assets/images/bg.png';
 
+const { width, height } = Dimensions.get('window');
 
 class DefaultScreen extends Component {
     static navigationOptions = () => ({
@@ -14,7 +23,7 @@ class DefaultScreen extends Component {
     state = {
         token: null,
     }
-    
+
     async componentWillMount() {
         const token = await AsyncStorage.getItem('fb_token');
         if (token) {
@@ -38,38 +47,75 @@ class DefaultScreen extends Component {
             return <AppLoading />;
         }
         return (
-            <Animated.View style={styles.container}>
-                <Image source={logo} style={{ alignSelf: 'center' }} />
-                <Text style={styles.textStyle}>
+            <Animated.Image
+                style={styles.container}
+                source={backgroundImage}
+            >
+                <Image source={logo} style={styles.logoStyle} />
+                <Text style={styles.desStyle}>
                     Empowering global artisans & small businesses by artificial intelligent
                 </Text>
-                <Button
-                    title="START NOW"
-                    raised
-                    onPress={this.onGetStarted}
-                />
-                <View style={{ display: 'flex', flexDirection: 'row' }}>
-                    <Text>Already have an account?</Text>
-                    <Text style={{ fontWeight: 'bold' }} onPress={this.onSignIn}>
+                <TouchableOpacity onPress={this.onGetStarted}>
+                    <LinearGradient
+                        colors={['#11B8AB', '#65C5B9']}
+                        start={[0, 0.5]}
+                        end={[1, 0.5]}
+                        style={{ 
+                            width: 200, 
+                            height: 50, 
+                            padding: 17, 
+                            alignItems: 'center', 
+                            marginTop: 100 }}
+                    >
+                        <Text
+                            style={{
+                                backgroundColor: 'transparent',
+                                fontSize: 14,
+                                color: '#FFFFFF',
+                            }}
+                        >
+                            START NOW
+                        </Text>
+                    </LinearGradient>
+                </TouchableOpacity>
+                <Text style={styles.textStyle}>
+                    <Text>Already have an account? </Text>
+                    <Text style={{ fontWeight: '600' }} onPress={this.onSignIn}>
                         Sign in
                     </Text>
-                </View>
-            </Animated.View>
+                </Text>
+            </Animated.Image>
         );
     }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  textStyle: {
-      textAlign: 'center',     
-  }
+    container: {
+        alignItems: 'center',
+        width,
+        height
+    },
+    logoStyle: {
+        resizeMode: 'contain',
+        width: 275,
+        //height: 40,
+        marginTop: 120,
+    },
+    desStyle: {
+        textAlign: 'center',
+        fontSize: 18,
+        fontWeight: '400',
+        backgroundColor: 'transparent',
+        marginTop: 100,
+        width: width - 50
+    },
+    textStyle: {
+        textAlign: 'center',
+        fontSize: 18,
+        fontWeight: '100',
+        backgroundColor: 'transparent',
+        marginTop: 30
+    }
 });
 
 export default DefaultScreen;
