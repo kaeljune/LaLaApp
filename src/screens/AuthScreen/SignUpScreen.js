@@ -49,10 +49,10 @@ class SignupScreen extends Component {
     }
     render() {
         return (
-            <ScrollView style={{ flex: 1, backgroundColor: '#F8F8F8' }}>
-                <KeyboardAvoidingView behavior="padding" style={styles.container}>           
-                    <View style={{ alignItems: 'center', marginTop: 30 }}>
-                        <View style={{ width, marginBottom: 5 }}>
+            <ScrollView style={{ height, backgroundColor: '#f8f8f8' }}>
+                <KeyboardAvoidingView behavior={'padding'}>           
+                    <View>
+                        <View>
                             <FormLabel 
                                 labelStyle={{ fontWeight: '300', color: '#313131' }}
                             >
@@ -62,11 +62,11 @@ class SignupScreen extends Component {
                                 value={this.state.name}
                                 placeholder="What's your name?"
                                 placeholderTextColor='#A8A8A8'
-                                inputStyle={{ fontSize: 14 }}
+                                inputStyle={{ fontSize: 14, paddingLeft: 3, width: width - 30 }}
                                 onChangeText={name => this.setState({ name })}
                             />
                         </View>
-                        <View style={{ width, marginBottom: 10 }}>
+                        <View>
                             <FormLabel 
                                 labelStyle={{ fontWeight: '300', color: '#313131' }}
                             >
@@ -77,11 +77,11 @@ class SignupScreen extends Component {
                                 placeholder="What's your email?"
                                 placeholderTextColor='#A8A8A8'
                                 keyboardType='email-address'
-                                inputStyle={{ fontSize: 14 }}
+                                inputStyle={{ fontSize: 14, paddingLeft: 3, width: width - 30 }}
                                 onChangeText={email => this.setState({ email })}
                             />
                         </View>
-                        <View style={{ width, marginBottom: 10 }}>
+                        <View>
                             <FormLabel 
                                 labelStyle={{ fontWeight: '300', color: '#313131' }}
                             >
@@ -92,11 +92,11 @@ class SignupScreen extends Component {
                                 placeholder="What’s your mobile number"
                                 placeholderTextColor='#A8A8A8'
                                 keyboardType='numeric'
-                                inputStyle={{ fontSize: 14 }}
+                                inputStyle={{ fontSize: 14, paddingLeft: 3, width: width - 30 }}
                                 onChangeText={phone => this.setState({ phone })}
                             />
                         </View>
-                        <View style={{ width, marginBottom: 10 }}>
+                        <View >
                             <FormLabel 
                                 labelStyle={{ fontWeight: '300', color: '#313131' }}
                             >
@@ -107,63 +107,78 @@ class SignupScreen extends Component {
                                 placeholder="What’s your password"
                                 placeholderTextColor='#A8A8A8'
                                 keyboardType='default'
-                                inputStyle={{ fontSize: 14 }}
+                                inputStyle={{ fontSize: 14, paddingLeft: 3, width: width - 30 }}
                                 value={this.state.password}
                                 onChangeText={password => this.setState({ password })}
                             />
                         </View>
                     </View>
-                    <Text 
-                        style={{ 
-                            fontSize: 12,                   
-                            width: (width - 50), 
-                            textAlign: 'center', 
-                            paddingTop: 10, 
-                            paddingBottom: 10,
-                            lineHeight: 20 
+                    <View 
+                        style={{
+                            paddingLeft: 15,
+                            paddingRight: 15,
+                            flexDirection: 'column',
+                            alignItems: 'center'
                         }}
                     >
-                        <Text style={{ color: '#5A5A5A' }}>
-                            By pressing continue, you are agreeing to be bound by Airlala’s 
-                        </Text>
                         <Text 
-                            style={{ fontWeight: 'bold', color: '#11B8AB' }} 
-                            onPress={this.onTerms}
-                        >
-                            Terms of Use and Privacy Policy.
-                        </Text>
-                    </Text>
-                    <LinearGradient
-                        colors={['#11B8AB', '#65C5B9']}
-                        start={[0, 0.5]}
-                        end={[1, 0.5]}
-                        style={{ width: 200, height: 50, padding: 17, alignItems: 'center' }}
-                    >
-                        <Text
-                            style={{
-                            backgroundColor: 'transparent',
-                            fontSize: 14,
-                            color: '#FFFFFF',
+                            style={{ 
+                                fontSize: 12,                   
+                                width: (width - 50), 
+                                textAlign: 'center', 
+                                paddingBottom: 15,
+                                paddingTop: 15
                             }}
-                            onPress={() => { }}
                         >
-                            CREATE NOW
+                            <Text style={{ color: '#5A5A5A' }}>
+                                By pressing continue, you are agreeing to be bound by Airlala’s 
+                            </Text>
+                            <Text 
+                                style={{ fontWeight: 'bold', color: '#11B8AB' }} 
+                                onPress={this.onTerms}
+                            >
+                                Terms of Use and Privacy Policy.
+                            </Text>
                         </Text>
-                    </LinearGradient>
-                    <Text style={{ marginTop: 10, marginBottom: 10 }}>Or sign in with</Text>
-                    <Button
-                        title='FACEBOOK'
-                        onPress={() => { }}
-                        backgroundColor='#3B5998'
-                        fontSize={14}
-                        buttonStyle={{ width: 200, height: 50 }}
-                    />
-                    <View style={{ display: 'flex', flexDirection: 'row' }}>
-                        <Text>Already have an account?</Text>
-                        <Text style={{ fontWeight: 'bold' }} onPress={this.onSignIn}>
-                            Sign in
-                        </Text>
+                        <LinearGradient
+                            colors={['#11B8AB', '#65C5B9']}
+                            start={[0, 0.5]}
+                            end={[1, 0.5]}
+                            style={{ width: 200, height: 50, padding: 17, alignItems: 'center' }}
+                        >
+                            <Text
+                                style={{
+                                backgroundColor: 'transparent',
+                                fontSize: 14,
+                                color: '#FFFFFF',
+                                }}
+                                onPress={() => { }}
+                            >
+                                CREATE NOW
+                            </Text>
+                        </LinearGradient>
+                        
+                        <Text style={{ marginTop: 15, marginBottom: 15 }}>Or sign in with</Text>
+
+                        <Button
+                            title='FACEBOOK'
+                            onPress={() => { }}
+                            backgroundColor='#3B5998'
+                            fontSize={14}
+                            buttonStyle={{ width: 200, height: 50 }}
+                        />
+
+                        <View style={{ display: 'flex', flexDirection: 'row', marginTop: 15 }}>
+                            <Text style={{ color: '#95989A' }}>Already have an account?</Text>
+                            <Text 
+                                style={{ fontWeight: 'bold', marginLeft: 5 }} 
+                                onPress={this.onSignIn}
+                            >
+                                Sign in
+                            </Text>
+                        </View>
                     </View>
+                    
                 </KeyboardAvoidingView>
             </ScrollView>
         );
@@ -171,12 +186,6 @@ class SignupScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        flexDirection: 'column',
-        justifyContent: 'space-around',
-    },
     textStyle: {
         textAlign: 'center',
     }

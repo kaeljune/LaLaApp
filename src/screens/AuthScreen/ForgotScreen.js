@@ -42,7 +42,7 @@ class ForgotScreen extends Component {
                 <Text style={styles.desStyle}>
                     Can't sign in? Forget your password? Enter your email address below and we'll help log you in
                 </Text>
-                <View style={{ marginTop: 60 }}>
+                <View style={{ marginTop: 30 }}>
                     <View style={{ width, marginBottom: 10 }}>
                         <FormLabel 
                             labelStyle={{ fontWeight: '300', color: '#313131' }}
@@ -54,7 +54,7 @@ class ForgotScreen extends Component {
                             placeholder="What's your email?"
                             placeholderTextColor='#A8A8A8'
                             keyboardType='email-address'
-                            inputStyle={{ fontSize: 14 }}
+                            inputStyle={{ fontSize: 14, paddingLeft: 3, width: width - 30 }}
                             onChangeText={email => this.setState({ email })}
                         />
                     </View>
@@ -64,7 +64,9 @@ class ForgotScreen extends Component {
                         flex: 1, 
                         justifyContent: 'space-around', 
                         alignItems: 'center', 
-                        marginTop: 80 }}
+                        marginTop: 20,
+                        marginBottom: 20
+                    }}
                 >
                     <LinearGradient
                         colors={['#11B8AB', '#65C5B9']}
@@ -82,7 +84,7 @@ class ForgotScreen extends Component {
                             REQUEST
                         </Text>
                     </LinearGradient>
-                    <Text style={{ marginTop: 10, marginBottom: 10 }}>Or sign in with</Text>
+                    <Text>Or sign in with</Text>
                     <Button
                         title='FACEBOOK'
                         onPress={() => { }}
@@ -110,8 +112,10 @@ const styles = StyleSheet.create({
         //justifyContent: 'space-around',
     },
     logoStyle: {
-        resizeMode: 'contain',
-        width: 170,
+        // resizeMode: 'contain',
+        // width: 170,
+        marginTop: 50,
+        marginBottom: 50,
     },
     desStyle: {
         textAlign: 'center',

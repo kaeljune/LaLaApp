@@ -46,8 +46,8 @@ class SigninScreen extends Component {
                 <Text style={styles.desStyle}>
                     Empowering global artisans & small businesses by artificial intelligent
                 </Text>
-                <View style={{ marginTop: 30 }}>
-                    <View style={{ width, marginBottom: 10 }}>
+                <View style={{ marginTop: 10 }}>
+                    <View style={{ width }}>
                         <FormLabel 
                             labelStyle={{ fontWeight: '300', color: '#313131' }}
                         >
@@ -58,7 +58,7 @@ class SigninScreen extends Component {
                             placeholder="What's your email?"
                             placeholderTextColor='#A8A8A8'
                             keyboardType='email-address'
-                            inputStyle={{ fontSize: 14 }}
+                            inputStyle={{ fontSize: 14, paddingLeft: 3, width: width - 30 }}
                             onChangeText={email => this.setState({ email })}
                         />
                     </View>
@@ -73,7 +73,7 @@ class SigninScreen extends Component {
                             placeholder="What’s your password"
                             placeholderTextColor='#A8A8A8'
                             keyboardType='default'
-                            inputStyle={{ fontSize: 14 }}
+                            inputStyle={{ fontSize: 14, paddingLeft: 3, width: width - 30 }}
                             value={this.state.password}
                             onChangeText={password => this.setState({ password })}
                         />
@@ -85,28 +85,36 @@ class SigninScreen extends Component {
                     <Icon
                         name='info-outline'
                         color='#11b8ab'
-                        size={15}
+                        size={14}
                         onPress={this.onForgot}
                     />
                     <Text 
                         onPress={this.onForgot} 
-                        style={{ color: '#11b8ab', fontSize: 12, fontWeight: '300' }}
+                        style={{ color: '#11b8ab', fontSize: 12, fontWeight: '300', marginLeft: 5 }}
                     > 
                         Forgot password?
                     </Text>
                 </View>
+               
                 <View 
                     style={{ 
                         flex: 1, 
                         justifyContent: 'space-around', 
                         alignItems: 'center', 
-                        marginTop: 20 }}
+                        marginTop: 20,
+                        marginBottom: 20
+                    }}
                 >
                     <LinearGradient
                         colors={['#11B8AB', '#65C5B9']}
                         start={[0, 0.5]}
                         end={[1, 0.5]}
-                        style={{ width: 200, height: 50, padding: 17, alignItems: 'center' }}
+                        style={{ 
+                            width: 200, 
+                            height: 50, 
+                            alignItems: 'center', 
+                            justifyContent: 'center'
+                         }}
                     >
                         <Text
                             style={{
@@ -118,7 +126,7 @@ class SigninScreen extends Component {
                             SIGN IN
                         </Text>
                     </LinearGradient>
-                    <Text style={{ marginTop: 10, marginBottom: 10 }}>Or sign in with</Text>
+                    <Text >Or sign in with</Text>
                     <Button
                         title='FACEBOOK'
                         onPress={() => { }}
@@ -141,13 +149,14 @@ class SigninScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        //justifyContent: 'space-around',
+        backgroundColor: '#f8f8f8',
+        alignItems: 'center'
     },
     logoStyle: {
-        resizeMode: 'contain',
-        width: 170,
+        // resizeMode: 'contain',
+        // width: 170,
+        marginTop: 30,
+        marginBottom: 20,
     },
     desStyle: {
         textAlign: 'center',

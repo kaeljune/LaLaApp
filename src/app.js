@@ -84,21 +84,25 @@ class App extends Component {
       }
     });
     const MainNavigator = StackNavigator({ 
+      profile: { screen: ProfileScreen },
+      
+      
+      default: { screen: DefaultScreen },
       payment: { screen: Payment },
       delivery: { screen: Delivery },
       deliveryblank: { screen: DeliveryBlank },
-      default: { screen: DefaultScreen },
+
       giftselection: { screen: GiftSelection },
       forgot: { screen: ForgotScreen },
-      
       findagift: { screen: FindAGift },
       afterrequest: { screen: AfterRequest },
       checkout: { screen: Checkout },
       writeanote: { screen: WriteANote },
+      signup: { screen: SignupScreen }, 
       signin: { screen: SigninScreen }, 
       term: { screen: TermScreen }, 
       welcome: { screen: WelcomeScreen },
-      profile: { screen: ProfileScreen },
+      // profile: { screen: ProfileScreen },
       main: { screen: MainScreen },
     }, {
         headerMode: 'screen',
@@ -118,7 +122,7 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F8F8F8',
     // alignItems: 'center',
     justifyContent: 'space-around',
   },
