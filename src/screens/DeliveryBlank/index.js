@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-import { View, Text, StyleSheet, Dimensions, Image, TextInput } from 'react-native'
-import { Icon, Button, CheckBox } from 'react-native-elements';
-const { width, height } = Dimensions.get('window');
+import React, { Component } from 'react';
+import { View, Text, StyleSheet, Dimensions, TextInput } from 'react-native';
+import { Icon, CheckBox } from 'react-native-elements';
+
+const { width } = Dimensions.get('window');
 class DeliveryBlank extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'Delivery',
@@ -15,21 +16,24 @@ class DeliveryBlank extends Component {
     render() {
         return (
             <View style={styles.wraper}>
-                <Text>SHIP TO:</Text>
+                <Text style={{ marginBottom: 10 }}>SHIP TO:</Text>
                 <View style={{ backgroundColor: '#fff' }}>
                     <View>
-                        <CheckBox 
-                            checkedIcon='done' 
-                            iconType='material' 
-                            uncheckedIcon='' checked={true} 
-                            textStyle={{fontWeight:'normal', fontSize: 14}} 
-                            title='48th Floor, Bitexco Financial Tower, 02 Hai Trieu street, Ben Nghe Ward, Distrcit 1, Ho Chi Minh City.'/>
+                        <CheckBox
+                            checkedIcon='done'
+                            iconType='material'
+                            uncheckedIcon='' checked
+                            textStyle={{ fontWeight: 'normal', fontSize: 14 }}
+                            title='48th Floor, Bitexco Financial Tower, 02 Hai Trieu street, Ben Nghe Ward, Distrcit 1, Ho Chi Minh City.'
+                        />
 
-                        <CheckBox checkedIcon='done' 
-                            iconType='material' 
-                            uncheckedIcon='' checked={true} 
-                            textStyle={{fontWeight:'normal', fontSize: 14}} 
-                            title='48th Floor, Bitexco Financial Tower, 02 Hai Trieu street, Ben Nghe Ward, Distrcit 1, Ho Chi Minh City.'/>
+                        <CheckBox 
+                            checkedIcon='done'
+                            iconType='material'
+                            uncheckedIcon='' checked
+                            textStyle={{ fontWeight: 'normal', fontSize: 14 }}
+                            title='48th Floor, Bitexco Financial Tower, 02 Hai Trieu street, Ben Nghe Ward, Distrcit 1, Ho Chi Minh City.'
+                        />
                     </View>
                     <View style={styles.addLocation}>
                         <Icon
@@ -38,11 +42,17 @@ class DeliveryBlank extends Component {
                             color='#ddd'
                         />
 
-                        <TextInput style={{width: width-90, marginLeft: 15}} placeholder="Add new location" />
+                        <TextInput
+                            style={{ 
+                                width: width - 90, 
+                                marginLeft: 15 
+                            }} 
+                            placeholder="Add new location"
+                        />
                     </View>
                 </View>
             </View>
-        )
+        );
     }
 }
 
@@ -60,6 +70,6 @@ const styles = StyleSheet.create({
     listAddress: {
         color: 'pink'
     }
-})
+});
 
-export default DeliveryBlank
+export default DeliveryBlank;

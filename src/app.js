@@ -23,6 +23,7 @@ import WriteANote from './screens/WriteANote';
 import DeliveryBlank from './screens/DeliveryBlank';
 import TermScreen from './screens/TermScreen';
 import Delivery from './screens/Delivery';
+import Payment from './screens/Payment';
 
 injectTapEventPlugin();
 
@@ -83,16 +84,17 @@ class App extends Component {
       }
     });
     const MainNavigator = StackNavigator({ 
+      payment: { screen: Payment },
       delivery: { screen: Delivery },
+      deliveryblank: { screen: DeliveryBlank },
       default: { screen: DefaultScreen },
       giftselection: { screen: GiftSelection },
       forgot: { screen: ForgotScreen },
-      deliveryblank: { screen: DeliveryBlank },
+      
       findagift: { screen: FindAGift },
       afterrequest: { screen: AfterRequest },
       checkout: { screen: Checkout },
       writeanote: { screen: WriteANote },
-     
       signin: { screen: SigninScreen }, 
       term: { screen: TermScreen }, 
       welcome: { screen: WelcomeScreen },
