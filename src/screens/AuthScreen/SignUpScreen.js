@@ -10,9 +10,6 @@ import {
 import { FormLabel, FormInput, Icon, Button } from 'react-native-elements';
 import { LinearGradient } from 'expo';
 
-// const { LinearGradient } = Components;
-
-//import logo from '../../../assets/icons/logo.png';
 const { width, height } = Dimensions.get('window');
 
 const heightHeader = (height * 50) / 667;

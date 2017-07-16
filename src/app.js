@@ -84,14 +84,11 @@ class App extends Component {
       }
     });
     const MainNavigator = StackNavigator({ 
-      profile: { screen: ProfileScreen },
-      
-      
       default: { screen: DefaultScreen },
+      profile: { screen: ProfileScreen },
       payment: { screen: Payment },
       delivery: { screen: Delivery },
       deliveryblank: { screen: DeliveryBlank },
-
       giftselection: { screen: GiftSelection },
       forgot: { screen: ForgotScreen },
       findagift: { screen: FindAGift },
@@ -102,7 +99,6 @@ class App extends Component {
       signin: { screen: SigninScreen }, 
       term: { screen: TermScreen }, 
       welcome: { screen: WelcomeScreen },
-      // profile: { screen: ProfileScreen },
       main: { screen: MainScreen },
     }, {
         headerMode: 'screen',
