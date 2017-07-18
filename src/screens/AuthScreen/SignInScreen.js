@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import { FormLabel, FormInput, Icon, Button } from 'react-native-elements';
 import { LinearGradient } from 'expo';
 
+import { widthScreen, heightScreen, heightHeader } from '../../config/config'; 
 import logo from '../../../assets/images/logo.png';
 
-const { width, height } = Dimensions.get('window');
-
-const heightHeader = (height * 50) / 667;
-
 class SigninScreen extends Component {
-
     static navigationOptions = ({ navigation }) => ({
         title: 'Sign in',
         headerTintColor: '#313131',
@@ -47,7 +43,7 @@ class SigninScreen extends Component {
                     Empowering global artisans & small businesses by artificial intelligent
                 </Text>
                 <View style={{ marginTop: 10 }}>
-                    <View style={{ width }}>
+                    <View style={{ widthScreen }}>
                         <FormLabel 
                             labelStyle={{ fontWeight: '300', color: '#313131' }}
                         >
@@ -62,7 +58,7 @@ class SigninScreen extends Component {
                             onChangeText={email => this.setState({ email })}
                         />
                     </View>
-                    <View style={{ width, marginBottom: 10 }}>
+                    <View style={{ widthScreen, marginBottom: 10 }}>
                         <FormLabel 
                             labelStyle={{ fontWeight: '300', color: '#313131' }}
                         >
@@ -73,7 +69,7 @@ class SigninScreen extends Component {
                             placeholder="What’s your password"
                             placeholderTextColor='#A8A8A8'
                             keyboardType='default'
-                            inputStyle={{ fontSize: 14, paddingLeft: 3, width: width - 30 }}
+                            inputStyle={{ fontSize: 14, paddingLeft: 3, width: widthScreen - 30 }}
                             value={this.state.password}
                             onChangeText={password => this.setState({ password })}
                         />
@@ -163,7 +159,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '400',
         backgroundColor: 'transparent',
-        width: width - 100,
+        width: widthScreen - 100,
         lineHeight: 25
     },
     textStyle: {

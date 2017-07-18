@@ -84,6 +84,7 @@ class App extends Component {
       }
     });
     const MainNavigator = StackNavigator({ 
+      afterrequest: { screen: AfterRequest },
       default: { screen: DefaultScreen },
       profile: { screen: ProfileScreen },
       payment: { screen: Payment },
@@ -92,7 +93,6 @@ class App extends Component {
       giftselection: { screen: GiftSelection },
       forgot: { screen: ForgotScreen },
       findagift: { screen: FindAGift },
-      afterrequest: { screen: AfterRequest },
       checkout: { screen: Checkout },
       writeanote: { screen: WriteANote },
       signup: { screen: SignupScreen }, 
