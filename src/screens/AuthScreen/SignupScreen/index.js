@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { StyleSheet, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import { HEIGHT_SCREEN, COLOR, headerStyle, headerTitleStyle } from '../../../config/config';
 import SignupForm from './SignupForm';
 import FacebookLogin from '../../../components/FacebookLogin';
+import SigninLink from './SigninLink';
 
 class SignupScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
@@ -27,26 +28,15 @@ class SignupScreen extends Component {
         this.props.navigation.navigate('signin');
     }
     render() {
-        const { containerStyle, wrapSigninLink } = styles;
+        const { containerStyle } = styles;
         return (
             <ScrollView style={containerStyle}>
                 <KeyboardAvoidingView behavior={'padding'}>
                     <SignupForm />
                     <FacebookLogin />
-                    <View style={wrapSigninLink}>
-                        
-                        <View style={{ display: 'flex', flexDirection: 'row', marginTop: 15 }}>
-                            <Text style={{ color: '#95989A' }}>Already have an account?</Text>
-                            <Text 
-                                style={{ fontWeight: 'bold', marginLeft: 5 }} 
-                                onPress={this.onSignIn}
-                            >
-                                Sign in
-                        </Text>
-                        </View>
-                    </View>
+                    <SigninLink />
                 </KeyboardAvoidingView>
-            </ScrollView > 
+            </ScrollView> 
         ); 
     }
 }
@@ -56,15 +46,6 @@ const styles = StyleSheet.create({
         height: HEIGHT_SCREEN, 
         backgroundColor: '#f8f8f8'
     },
-    wrapSigninLink: {
-        paddingLeft: 15,
-        paddingRight: 15,
-        flexDirection: 'column',
-        alignItems: 'center'
-    },
-    textStyle: {
-        textAlign: 'center',
-    }
 });
 
 export default SignupScreen;
