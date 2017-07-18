@@ -5,7 +5,7 @@ import { Icon } from 'react-native-elements';
 import { COLOR, headerTitleStyle, headerStyle } from '../../../config/config';
 import Brand from './Brand';
 import SigninForm from './SigninForm';
-import FacebookLogin from './FacebookLogin';
+import FacebookLogin from '../../../components/FacebookLogin';
 import SignupLink from './SignupLink';
 
 class SigninScreen extends Component {
