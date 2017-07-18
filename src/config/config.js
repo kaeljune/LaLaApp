@@ -7,6 +7,11 @@ const HEIGHT_HEADER = (HEIGHT_SCREEN * 50) / 667;
 const COLOR = {
     primary: '#11B8AB',
     secondary: '#FF5700',
+    primaryFont: '#313131',
+    secondaryFont: '#FFFFFF',
+    placeholderFont: '#A8A8A8',
+    background: '#F8F8F8',
+
 };
 
 const headerTitleStyle = {

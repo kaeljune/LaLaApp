@@ -8,13 +8,15 @@ import {
 import { Icon } from 'react-native-elements';
 import { LinearGradient } from 'expo';
 
+import { COLOR } from '../config/config';
+
 class GradientButton extends Component {
     renderIcon() {
         if (this.props.icon) {
             return (
                 <Icon
                     name={this.props.icon}
-                    color='#FFFFFF'
+                    color={COLOR.secondaryFont}
                     size={16}
                     containerStyle={{ marginRight: 5 }}
                 />
@@ -55,7 +57,6 @@ const styles = StyleSheet.create({
         height: 50,
         padding: 15,
         alignItems: 'center',
-        marginTop: 100
     },
     wraperStyle: {
         flexDirection: 'row'
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
     textStyle: {
         backgroundColor: 'transparent',
         fontSize: 16,
-        color: '#FFFFFF',
+        color: COLOR.secondaryFont,
     }
 });
 export default GradientButton;

@@ -15,7 +15,7 @@ import { COLOR, headerStyle, headerTitleStyle } from '../../config/config';
 class AfterRequest extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'After Request',
-        headerTintColor: '#313131',
+        headerTintColor: COLOR.primaryFont,
         headerLeft: <Icon
             name='chevron-left'
             color={COLOR.primary}

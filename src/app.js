@@ -11,7 +11,7 @@ import store from './store';
 import WelcomeScreen from './screens/WelcomeScreen';
 import DefaultScreen from './screens/DefaultScreen';
 import MainScreen from './screens/MainScreen';
-import SigninScreen from './screens/AuthScreen/SignInScreen';
+import SigninScreen from './screens/AuthScreen/SigninScreen';
 import SignupScreen from './screens/AuthScreen/SignUpScreen';
 import ProfileScreen from './screens/AuthScreen/ProfileScreen';
 import ForgotScreen from './screens/AuthScreen/ForgotScreen';
@@ -84,19 +84,19 @@ class App extends Component {
       }
     });
     const MainNavigator = StackNavigator({ 
+      signin: { screen: SigninScreen }, 
+      profile: { screen: ProfileScreen },
+      forgot: { screen: ForgotScreen },
       afterrequest: { screen: AfterRequest },
       default: { screen: DefaultScreen },
-      profile: { screen: ProfileScreen },
       payment: { screen: Payment },
       delivery: { screen: Delivery },
       deliveryblank: { screen: DeliveryBlank },
       giftselection: { screen: GiftSelection },
-      forgot: { screen: ForgotScreen },
       findagift: { screen: FindAGift },
       checkout: { screen: Checkout },
       writeanote: { screen: WriteANote },
       signup: { screen: SignupScreen }, 
-      signin: { screen: SigninScreen }, 
       term: { screen: TermScreen }, 
       welcome: { screen: WelcomeScreen },
       main: { screen: MainScreen },
