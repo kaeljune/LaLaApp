@@ -5,7 +5,6 @@ import {
     AsyncStorage, 
     StyleSheet, 
     Image, 
-    Dimensions, 
     TouchableOpacity } from 'react-native';
 import { } from 'react-native-elements';
 import _ from 'lodash';
@@ -13,8 +12,7 @@ import { AppLoading, LinearGradient } from 'expo';
 
 import logo from '../../../assets/images/logolarge.png';
 import backgroundImage from '../../../assets/images/bg.png';
-
-const { width, height } = Dimensions.get('window');
+import { WIDTH_SCREEN, HEIGHT_SCREEN } from '../../config/config';
 
 class DefaultScreen extends Component {
     static navigationOptions = () => ({
@@ -28,7 +26,7 @@ class DefaultScreen extends Component {
         const token = await AsyncStorage.getItem('fb_token');
         if (token) {
             this.setState({ token });
-            this.props.navigation.navigate('map');
+            this.props.navigation.navigate('main');
         } else {
             this.setState({ token: false });
         }
@@ -93,8 +91,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        width,
-        height
+        width: WIDTH_SCREEN,
+        height: HEIGHT_SCREEN,
     },
     logoStyle: {
         resizeMode: 'contain',
@@ -108,7 +106,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         backgroundColor: 'transparent',
         marginTop: 100,
-        width: width - 50
+        width: WIDTH_SCREEN - 50
     },
     textStyle: {
         textAlign: 'center',

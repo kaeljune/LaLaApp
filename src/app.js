@@ -8,8 +8,8 @@ import { StackNavigator } from 'react-navigation';
 
 import store from './store';
 
-import WelcomeScreen from './screens/WelcomeScreen';
 import DefaultScreen from './screens/DefaultScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
 import MainScreen from './screens/MainScreen';
 import SigninScreen from './screens/AuthScreen/SigninScreen';
 import SignupScreen from './screens/AuthScreen/SignupScreen';
@@ -84,18 +84,18 @@ class App extends Component {
       }
     });
     const MainNavigator = StackNavigator({ 
+      default: { screen: DefaultScreen },
+      checkout: { screen: Checkout },
       signup: { screen: SignupScreen }, 
       signin: { screen: SigninScreen }, 
       profile: { screen: ProfileScreen },
       forgot: { screen: ForgotScreen },
       afterrequest: { screen: AfterRequest },
-      default: { screen: DefaultScreen },
       payment: { screen: Payment },
       delivery: { screen: Delivery },
       deliveryblank: { screen: DeliveryBlank },
       giftselection: { screen: GiftSelection },
       findagift: { screen: FindAGift },
-      checkout: { screen: Checkout },
       writeanote: { screen: WriteANote },
       term: { screen: TermScreen }, 
       welcome: { screen: WelcomeScreen },
