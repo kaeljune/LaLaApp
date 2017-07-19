@@ -84,15 +84,15 @@ class App extends Component {
       }
     });
     const MainNavigator = StackNavigator({ 
-      default: { screen: DefaultScreen },
-      checkout: { screen: Checkout },
       signup: { screen: SignupScreen }, 
+      default: { screen: DefaultScreen },
+      delivery: { screen: Delivery },
+      checkout: { screen: Checkout },
       signin: { screen: SigninScreen }, 
       profile: { screen: ProfileScreen },
       forgot: { screen: ForgotScreen },
       afterrequest: { screen: AfterRequest },
       payment: { screen: Payment },
-      delivery: { screen: Delivery },
       deliveryblank: { screen: DeliveryBlank },
       giftselection: { screen: GiftSelection },
       findagift: { screen: FindAGift },

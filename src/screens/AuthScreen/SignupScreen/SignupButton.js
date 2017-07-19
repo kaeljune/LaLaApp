@@ -18,6 +18,7 @@ class SignupButton extends Component {
                     colors={['#11B8AB', '#65C5B9']}
                     start={[0, 0.5]}
                     end={[1, 0.5]}
+                    onPress={this.props.onPress}
                 />
             </View>
         );

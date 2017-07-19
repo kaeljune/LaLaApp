@@ -5,8 +5,6 @@ import {
     StyleSheet
 } from 'react-native';
 
-import { HEIGHT_SCREEN } from '../../../config/config';
-
 class SigninLink extends Component {
     render() {
         const { wrapSigninLink, textStyle } = styles;
@@ -16,8 +14,8 @@ class SigninLink extends Component {
                     <Text>Already have an account?</Text>
                     <Text 
                         style={{ fontWeight: 'bold' }}
-                        onPress={this.onSignIn}
-                    >Sign in</Text>
+                        onPress={this.props.onSignIn}
+                    >&nbsp;Sign in</Text>
                 </Text>
             </View>
         );

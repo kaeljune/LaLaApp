@@ -24,4 +24,8 @@ const headerStyle = {
     justifyContent: 'center',
 };
 
-export { WIDTH_SCREEN, HEIGHT_SCREEN, HEIGHT_HEADER, COLOR, headerTitleStyle, headerStyle };
+const API_URL = 'https://us-central1-airlala-7b1b2.cloudfunctions.net/';
+
+export { 
+    API_URL, WIDTH_SCREEN, HEIGHT_SCREEN, HEIGHT_HEADER, COLOR, 
+    headerTitleStyle, headerStyle };

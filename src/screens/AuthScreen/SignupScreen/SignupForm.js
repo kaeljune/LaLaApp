@@ -10,7 +10,9 @@ import SignupButton from './SignupButton';
 
 class SignupForm extends Component {
     state = { name: '', email: '', phone: '', password: '' };
+    
     render() {
+        console.log(this.props.onTerms);
         return (
             <View>
                 <View>
@@ -18,7 +20,7 @@ class SignupForm extends Component {
                         labelStyle={{ fontWeight: '300', color: '#313131' }}
                     >
                         FULL NAME
-                            </FormLabel>
+                    </FormLabel>
                     <FormInput
                         value={this.state.name}
                         placeholder="What's your name?"
@@ -73,8 +75,8 @@ class SignupForm extends Component {
                         onChangeText={password => this.setState({ password })}
                     />
                 </View>
-                <LinkTerm />
-                <SignupButton />
+                <LinkTerm onTerms={this.props.onTerms} />
+                <SignupButton onPress={this.props.onPress} />
             </View>
         );
     }

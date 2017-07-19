@@ -1,3 +1,10 @@
+export const EMAIL_LOGIN = 'email_login';
+export const EMAIL_LOGIN_SUCCESS = 'email_login_success';
+export const EMAIL_LOGIN_FAIL = 'email_login_fail';
+export const EMAIL_CHANGED = 'email_changed';
+export const PASSWORD_CHANGED = 'password_changed';
+export const PHONE_CHANGED = 'phone_changed';
+export const NAME_CHANGED = 'name_changed';
 export const FACEBOOK_LOGIN_SUCCESS = 'facebook_login_success';
 export const FACEBOOK_LOGIN_FAIL = 'facebook_login_fail';
 export const FETCH_JOBS = 'fetch_jobs';

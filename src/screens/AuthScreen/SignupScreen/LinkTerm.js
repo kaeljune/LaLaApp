@@ -28,13 +28,13 @@ class LinkTerm extends Component {
                 >
                     <Text style={{ color: '#5A5A5A' }}>
                         By pressing continue, you are agreeing to be bound by Airlala’s
-                            </Text>
+                    </Text>
                     <Text
                         style={{ fontWeight: 'bold', color: '#11B8AB' }}
-                        onPress={this.onTerms}
+                        onPress={this.props.onTerms}
                     >
-                        Terms of Use and Privacy Policy.
-                            </Text>
+                        &nbsp;Terms of Use and Privacy Policy.
+                    </Text>
                 </Text>
             </View>
         );
