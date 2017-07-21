@@ -18,41 +18,57 @@ import {
 // AsyncStorage.setItem('fb_token', token);
 // AsyncStorage.getItem('fb_token');
 export const emailChanged = (text) => ({
-    type: EMAIL_CHANGED,
-    payload: text
-  });
+  type: EMAIL_CHANGED,
+  payload: text
+});
 
 export const passwordChanged = (text) => ({
-    type: PASSWORD_CHANGED,
-    payload: text
-  });
+  type: PASSWORD_CHANGED,
+  payload: text
+});
 export const phoneChanged = (text) => ({
-    type: PHONE_CHANGED,
-    payload: text
-  });
+  type: PHONE_CHANGED,
+  payload: text
+});
 export const nameChanged = (text) => ({
-    type: NAME_CHANGED,
-    payload: text
-  });
-export const emailLogin = ({ name, email, phone, password }) => async dispatch => {
-  await firebase.auth().signInWithEmailAndPassword(email, password)
-    .then(user => emailLoginSuccess(dispatch, user))
-    .catch((error) => {
+  type: NAME_CHANGED,
+  payload: text
+});
+
+export const emailLogin = ({ email, password, phone, name }) => async (dispatch) => {
+  dispatch({ type: EMAIL_LOGIN });
+  try {
+    const userSignin = await firebase.auth().signInWithEmailAndPassword(email, password);
+    await AsyncStorage.setItem('@userLogin', userSignin);
+    await emailLoginSuccess(dispatch, userSignin);
+  } catch (e) {
+    try {
+      const userSignup = await firebase.auth().createUserWithEmailAndPassword(email, password);
+      await AsyncStorage.setItem('@userLogin', JSON.stringify(userSignup));
+      await emailLoginSuccess(dispatch, userSignup);
+    } catch (error) {
       console.log(error);
+      emailLoginFail(dispatch);
+    }
+  }
+};
+
+export const emailLogin1 = ({ email, password, phone, name }) => (dispatch) => {
+  dispatch({ type: EMAIL_LOGIN });
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(user => emailLoginSuccess(dispatch, user))
+    .catch(() => {
+      //console.log(error);
       firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(user => emailLoginSuccess(dispatch, user))
-        .then(user => user.updateProfile({
-          name,
-          phone,
-        }).then(() => {
-          // Update successful.
-        }, (error1) => {
-          console.log(error1);
-        })
-        )
+        .then((user) => firebase.database().ref(`users/${user.uid}`)
+                        .update({ name, phone }, () => {
+                            AsyncStorage.setItem('userLogin', user);
+                        })
+        .then(() => {
+            emailLoginSuccess(dispatch, user);
+        }))
         .catch(() => emailLoginFail(dispatch));
     });
-  dispatch({ type: EMAIL_LOGIN });
 };
 export const emailLoginFail = (dispatch) => {
   dispatch({ type: EMAIL_LOGIN_FAIL });

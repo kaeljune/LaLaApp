@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import { Icon, FormInput, FormLabel } from 'react-native-elements';
 import {
     emailLogin, emailChanged, passwordChanged,
-    phoneChanged, nameChanged
+    phoneChanged, nameChanged,
 } from '../../../actions';
 
 import GradientButton from '../../../components/GradientButton';
+import { Spinner } from '../../../components/Spinner';
 import {
     WIDTH_SCREEN, HEIGHT_SCREEN, COLOR,
     headerStyle, headerTitleStyle
@@ -43,7 +44,6 @@ class SignupScreen extends Component {
     onNameChange = (text) => {
         this.props.nameChanged(text);
     }
-    //state = { name: '', email: '', phone: '', password: '' };
     onTerms = () => {
         this.props.navigation.navigate('term');
     }
@@ -53,11 +53,29 @@ class SignupScreen extends Component {
     onButtonPress = async () => {
         const { email, password, phone, name } = this.props;
         await this.props.emailLogin({ email, password, phone, name });
-        this.props.navigation.navigate('term');
-  }
+        this.props.navigation.navigate('profile');
+    }
+    renderButton = () => {
+        if (this.props.loading) {
+            return <Spinner size="large" />;
+        }
+        return (
+            <View
+                style={styles.containerStyle1}
+            >
+                <GradientButton
+                    title='SIGN IN'
+                    colors={['#11B8AB', '#65C5B9']}
+                    start={[0, 0.5]}
+                    end={[1, 0.5]}
+                    onPress={this.onButtonPress}
+                />
+            </View>
+        );
+    }
 
     render() {
-        const { containerStyle, containerStyle1 } = styles;
+        const { containerStyle } = styles;
         return (
             <ScrollView style={containerStyle}>
                 <KeyboardAvoidingView behavior={'padding'}>
@@ -123,17 +141,7 @@ class SignupScreen extends Component {
                             />
                         </View>
                         <LinkTerm onTerms={this.props.onTerms} />
-                        <View
-                            style={containerStyle1}
-                        >
-                            <GradientButton
-                                title='SIGN IN'
-                                colors={['#11B8AB', '#65C5B9']}
-                                start={[0, 0.5]}
-                                end={[1, 0.5]}
-                                onPress={this.onButtonPress}
-                            />
-                        </View>
+                        {this.renderButton()}
                     </View>
                     <FacebookLogin />
                     <SigninLink onSignIn={this.onSignIn} />
@@ -157,9 +165,9 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({ auth }) => {
-    const { email, password, error, loading } = auth;
-    return { email, password, error, loading };
+    const { email, password, error, loading, phone, name } = auth;
+    return { email, password, error, loading, phone, name };
 };
 
-export default connect(mapStateToProps, 
+export default connect(mapStateToProps,
     { emailLogin, emailChanged, passwordChanged, phoneChanged, nameChanged })(SignupScreen);

@@ -19,16 +19,16 @@ class DefaultScreen extends Component {
         header: null,
     })
     state = {
-        token: null,
+        userData: null,
     }
 
     async componentWillMount() {
-        const token = await AsyncStorage.getItem('fb_token');
-        if (token) {
-            this.setState({ token });
+        const userData = await AsyncStorage.getItem('@userLogin');
+        if (userData) {
             this.props.navigation.navigate('main');
+            this.setState({ userData });
         } else {
-            this.setState({ token: false });
+            this.setState({ userData: false });
         }
     }
     onGetStarted = () => {
@@ -41,7 +41,7 @@ class DefaultScreen extends Component {
         });
     }
     render() {
-        if (_.isNull(this.state.token)) {
+        if (_.isNull(this.state.userData)) {
             return <AppLoading />;
         }
         return (

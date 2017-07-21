@@ -4,6 +4,7 @@ import {
     EMAIL_LOGIN,
     EMAIL_LOGIN_SUCCESS,
     EMAIL_LOGIN_FAIL,
+    PROFILE_UPDATED,
     PASSWORD_CHANGED,
     PHONE_CHANGED,
     EMAIL_CHANGED,
@@ -36,6 +37,8 @@ export default function (state = INITIAL_STATE, action) {
             return { ...state, ...INITIAL_STATE, user: action.payload };
         case EMAIL_LOGIN_FAIL:
             return { ...state, error: 'Authentication Failed.', password: '', loading: false };
+        case PROFILE_UPDATED:
+            return { ...state, user: action.payload };
         case FACEBOOK_LOGIN_SUCCESS:
             return { token: action.payload };
         case FACEBOOK_LOGIN_FAIL:

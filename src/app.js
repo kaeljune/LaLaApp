@@ -4,7 +4,7 @@ import { StyleSheet, View, StatusBar, Animated } from 'react-native';
 import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import firebase from 'firebase';
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 
 import store from './store';
 
@@ -84,22 +84,26 @@ class App extends Component {
       }
     });
     const MainNavigator = StackNavigator({ 
-      signup: { screen: SignupScreen }, 
       default: { screen: DefaultScreen },
+      signup: { screen: SignupScreen }, 
       delivery: { screen: Delivery },
       checkout: { screen: Checkout },
       signin: { screen: SigninScreen }, 
-      profile: { screen: ProfileScreen },
       forgot: { screen: ForgotScreen },
       afterrequest: { screen: AfterRequest },
       payment: { screen: Payment },
-      deliveryblank: { screen: DeliveryBlank },
-      giftselection: { screen: GiftSelection },
+      deliveryblank: { screen: DeliveryBlank },   
       findagift: { screen: FindAGift },
       writeanote: { screen: WriteANote },
       term: { screen: TermScreen }, 
       welcome: { screen: WelcomeScreen },
-      main: { screen: MainScreen },
+      main: { 
+          screen: TabNavigator({
+          profile: { screen: ProfileScreen },
+          mainGift: { screen: MainScreen },
+          giftselection: { screen: GiftSelection },
+        })
+      }
     }, {
         headerMode: 'screen',
         transitionConfig: TransitionConfiguration,

@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
+    AsyncStorage
 } from 'react-native';
+import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 
 import { COLOR, headerTitleStyle, headerStyle } from '../../../config/config';
@@ -42,6 +44,7 @@ class ProfileScreen extends Component {
         headerTitleStyle,
         headerStyle,
     })
+    
     render() {
         return (
             <View>
@@ -54,5 +57,6 @@ class ProfileScreen extends Component {
     }
 }
 
+const mapStateToProps = auth => ({ libraries: auth });
 
-export default ProfileScreen;
+export default connect(mapStateToProps)(ProfileScreen);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 
 
@@ -20,6 +21,9 @@ class MainScreen extends Component {
         />
     })
     render() {
+        if (this.props.libraries.auth.user) {
+        console.log(this.props.libraries.auth.user); 
+}
         return (
             <View style={styles.container}>
             <Icon
@@ -55,4 +59,7 @@ const styles = StyleSheet.create({
       textAlign: 'center',     
   }
 });
-export default MainScreen;
+
+const mapStateToProps = auth => ({ libraries: auth });
+
+export default connect(mapStateToProps)(MainScreen);
