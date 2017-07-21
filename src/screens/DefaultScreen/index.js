@@ -20,13 +20,13 @@ class DefaultScreen extends Component {
     })
     state = {
         userData: null,
-    }
-
+    };
     async componentWillMount() {
         const userData = await AsyncStorage.getItem('@userLogin');
         if (userData) {
-            this.props.navigation.navigate('main');
             this.setState({ userData });
+            this.props.navigation.navigate('isSignedIn');
+            
         } else {
             this.setState({ userData: false });
         }

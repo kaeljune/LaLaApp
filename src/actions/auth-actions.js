@@ -44,6 +44,10 @@ export const emailLogin = ({ email, password, phone, name }) => async (dispatch)
   } catch (e) {
     try {
       const userSignup = await firebase.auth().createUserWithEmailAndPassword(email, password);
+      await userSignup.updateProfile({
+        displayName: name,
+        phoneNumber: phone
+      });
       await AsyncStorage.setItem('@userLogin', JSON.stringify(userSignup));
       await emailLoginSuccess(dispatch, userSignup);
     } catch (error) {
@@ -84,8 +88,6 @@ export const facebookLogin = () => async dispatch => {
   const token = await AsyncStorage.getItem('fb_token');
 
   if (token) {
-    // Dispatch an action saying FB login is done
-    AsyncStorage.removeItem('fb_token');
     dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
   } else {
     // Start up FB Login process

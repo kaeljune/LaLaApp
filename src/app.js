@@ -1,6 +1,6 @@
 import Expo from 'expo';
 import React, { Component } from 'react';
-import { StyleSheet, View, StatusBar, Animated } from 'react-native';
+import { StyleSheet, View, StatusBar, Animated, AsyncStorage } from 'react-native';
 import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import firebase from 'firebase';
@@ -24,6 +24,8 @@ import DeliveryBlank from './screens/DeliveryBlank';
 import TermScreen from './screens/TermScreen';
 import Delivery from './screens/Delivery';
 import Payment from './screens/Payment';
+import SetLocation from './screens/FindGiftScreen/SetLocation';
+import SetFormRequest from './screens/FindGiftScreen/SetFormRequest';
 
 injectTapEventPlugin();
 
@@ -83,28 +85,49 @@ class App extends Component {
         }[transition];
       }
     });
-    const MainNavigator = StackNavigator({ 
-      default: { screen: DefaultScreen },
-      signup: { screen: SignupScreen }, 
-      delivery: { screen: Delivery },
-      checkout: { screen: Checkout },
-      signin: { screen: SigninScreen }, 
-      forgot: { screen: ForgotScreen },
-      afterrequest: { screen: AfterRequest },
-      payment: { screen: Payment },
-      deliveryblank: { screen: DeliveryBlank },   
-      findagift: { screen: FindAGift },
-      writeanote: { screen: WriteANote },
-      term: { screen: TermScreen }, 
-      welcome: { screen: WelcomeScreen },
-      main: { 
+    const MainNavigator = TabNavigator({
+      isSignedOut: { 
+        screen: StackNavigator({
+          default: { screen: DefaultScreen },
+          welcome: { screen: WelcomeScreen },
+          signup: { screen: SignupScreen },
+          signin: { screen: SigninScreen },
+          forgot: { screen: ForgotScreen },
+          term: { screen: TermScreen },  
+        })
+      },     
+      isSignedIn: { 
           screen: TabNavigator({
-          profile: { screen: ProfileScreen },
-          mainGift: { screen: MainScreen },
-          giftselection: { screen: GiftSelection },
+            profile: { 
+              screen: StackNavigator({
+                profile: { screen: ProfileScreen },
+                term: { screen: TermScreen },
+              })
+            },   
+            main: { 
+              screen: StackNavigator({
+                mainGift: { screen: MainScreen },
+                setFormRequest: { screen: SetFormRequest },
+                setLocation: { screen: SetLocation },
+                giftselection: { screen: GiftSelection },
+                checkout: { screen: Checkout },
+              })
+            },
+          
+          
+          delivery: { screen: Delivery },
+          
+          afterrequest: { screen: AfterRequest },
+          payment: { screen: Payment },
+          deliveryblank: { screen: DeliveryBlank },   
+          findagift: { screen: FindAGift },
+          writeanote: { screen: WriteANote },  
         })
       }
     }, {
+        navigationOptions: {
+          tabBarVisible: false
+        },
         headerMode: 'screen',
         transitionConfig: TransitionConfiguration,
       });
