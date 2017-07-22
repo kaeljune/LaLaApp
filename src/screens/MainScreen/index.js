@@ -8,7 +8,7 @@ class MainScreen extends Component {
     static navigationOptions = () => ({
         title: 'Gifts',
         headerLeft: <View>
-                        <View style={{ display: 'plex', flexDirection: 'row' }}>
+                        <View style={{ flexDirection: 'row' }}>
                             <Text>0</Text>
                             <Text>total</Text>
                         </View>
