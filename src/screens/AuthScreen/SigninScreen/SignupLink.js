@@ -1,26 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
     Text,
     StyleSheet
 } from 'react-native';
 
-class SignupLink extends Component {
-    render() {
-        const { containerStyle } = styles;
-        return (
-            <Text style={containerStyle}>
-                <Text>Do not have an account? </Text>
-                <Text style={{ fontWeight: 'bold' }} onPress={this.onSignUp}>
-                    Sign up
-                </Text>
+const SignupLink = ({ onSignUp }) => {
+    const { containerStyle } = styles;
+    return (
+        <Text style={containerStyle}>
+            <Text>Do not have an account? </Text>
+            <Text style={{ fontWeight: 'bold' }} onPress={onSignUp}>
+                Sign up
             </Text>
-        );
-    }
-}
+        </Text>
+    );
+};
 
 const styles = StyleSheet.create({
     containerStyle: { 
-        marginBottom: 20,
+        marginVertical: 20
     }
 });
 

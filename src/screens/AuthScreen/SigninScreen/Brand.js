@@ -25,7 +25,6 @@ class Brand extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: COLOR.background,
         alignItems: 'center'
     },
@@ -40,6 +39,7 @@ const styles = StyleSheet.create({
         width: WIDTH_SCREEN - 100,
         lineHeight: 25,
         marginTop: 20,
+        marginBottom: 30,
     },
 });
 

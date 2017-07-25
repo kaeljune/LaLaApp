@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import { COLOR, headerTitleStyle, headerStyle } from '../../../config/config';
@@ -32,12 +32,14 @@ class SigninScreen extends Component {
     }
     render() {
         return (
-            <View style={styles.container}>
-                <Brand />
-                <SigninForm />
-                <FacebookLogin />
-                <SignupLink />
-            </View>
+            <ScrollView style={{ flex: 1, backgroundColor: '#f8f8f8', }}>
+                <View style={styles.container}>
+                    <Brand />
+                    <SigninForm />
+                    <FacebookLogin />
+                    <SignupLink onSignUp={this.onSignUp} />
+                </View>
+            </ScrollView>
         );
     }
 }
@@ -45,9 +47,8 @@ class SigninScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f8f8f8',
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'space-around'
     },
 });
 

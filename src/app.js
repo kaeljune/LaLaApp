@@ -88,6 +88,8 @@ class App extends Component {
     const MainNavigator = TabNavigator({
       isSignedOut: {
         screen: StackNavigator({
+          delivery: { screen: Delivery },
+          
           default: { screen: DefaultScreen },
           welcome: { screen: WelcomeScreen },
           signup: { screen: SignupScreen },
@@ -153,7 +155,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F8F8F8',
     // alignItems: 'center',
-    justifyContent: 'space-around',
+    // justifyContent: 'space-around',
   },
 });
 

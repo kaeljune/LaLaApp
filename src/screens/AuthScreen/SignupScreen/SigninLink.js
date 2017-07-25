@@ -23,8 +23,7 @@ class SigninLink extends Component {
 }
 const styles = StyleSheet.create({
     wrapSigninLink: {
-        paddingLeft: 15,
-        paddingRight: 15,
+        paddingVertical: 15,
         flexDirection: 'column',
         alignItems: 'center'
     },

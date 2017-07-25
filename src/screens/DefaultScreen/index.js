@@ -23,10 +23,10 @@ class DefaultScreen extends Component {
     };
     async componentWillMount() {
         const userData = await AsyncStorage.getItem('@userLogin');
+        
         if (userData) {
             this.setState({ userData });
             this.props.navigation.navigate('isSignedIn');
-            
         } else {
             this.setState({ userData: false });
         }
@@ -69,6 +69,7 @@ class DefaultScreen extends Component {
                             style={{
                                 backgroundColor: 'transparent',
                                 fontSize: 14,
+                                fontWeight: '500',
                                 color: '#FFFFFF',
                             }}
                         >
@@ -91,21 +92,22 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        width: WIDTH_SCREEN,
-        height: HEIGHT_SCREEN,
+        resizeMode: 'cover',
+        width: WIDTH_SCREEN
     },
     logoStyle: {
         resizeMode: 'contain',
         width: 275,
         //height: 40,
-        marginTop: 120,
+        marginTop: HEIGHT_SCREEN / 5,
+        marginBottom: HEIGHT_SCREEN / 6,
     },
     desStyle: {
         textAlign: 'center',
         fontSize: 18,
-        fontWeight: '600',
+        lineHeight: 30,
+        fontWeight: '400',
         backgroundColor: 'transparent',
-        marginTop: 100,
         width: WIDTH_SCREEN - 50
     },
     textStyle: {

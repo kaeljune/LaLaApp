@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Dimensions, TextInput, Switch } from 'react-native';
-import { Icon, Button } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
+
+import Btn from '../../components/Btn';
 
 const { width } = Dimensions.get('window');
 
@@ -27,6 +29,7 @@ class DeliveryBlank extends Component {
                             <TextInput
                                 style={{ width: width - 160 }}
                                 value="Hai Nguyen"
+                                underlineColorAndroid="transparent"
                             />
                         </View>
 
@@ -38,6 +41,7 @@ class DeliveryBlank extends Component {
                             <TextInput
                                 style={{ width: width - 155 }}
                                 value="(+84) 935 38 39 40"
+                                underlineColorAndroid="transparent"
                             />
                         </View>
 
@@ -49,6 +53,7 @@ class DeliveryBlank extends Component {
                             <TextInput
                                 style={{ width: width - 155 }}
                                 value="Ho Chi Minh City"
+                                underlineColorAndroid="transparent"
                             />
                         </View>
                         <View style={styles.rowStyle}>
@@ -59,6 +64,7 @@ class DeliveryBlank extends Component {
                             <TextInput
                                 style={{ width: width - 155 }}
                                 value="TAIWAN"
+                                underlineColorAndroid="transparent"
                             />
                         </View>
                         <View style={styles.rowStyle}>
@@ -69,6 +75,7 @@ class DeliveryBlank extends Component {
                             <TextInput
                                 style={{ width: width - 155 }}
                                 value="TAIPEI"
+                                underlineColorAndroid="transparent"
                             />
                         </View>
                         <View style={styles.rowStyle}>
@@ -79,6 +86,7 @@ class DeliveryBlank extends Component {
                             <TextInput
                                 style={{ width: width - 155 }}
                                 value="7000"
+                                underlineColorAndroid="transparent"
                             />
                         </View>
 
@@ -94,17 +102,11 @@ class DeliveryBlank extends Component {
 
 
                 <View style={{ alignItems: 'center', flex: 0.2 }}>
-                    <Button
-                        raise
-                        title="CHECKOUT"
-                        backgroundColor="#11b8ab"
-                        buttonStyle={{
-                            width: 150,
-                            height: 50,
-                            marginTop: 30,
-                            marginBottom: 20
-                        }}
-                    />
+                    <Btn 
+                        colors={['#11B8AB', '#65C5B9']}
+                        start={[0, 0.5]}
+                        end={[1, 0.5]}
+                    >CHECKOUT</Btn>
                 </View>
             </View>
         );

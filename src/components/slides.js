@@ -9,23 +9,25 @@ const { width, height } = Dimensions.get('window');
 
 class Slides extends Component {
     state = { }
+    
     renderLastSlide(index) {
-        if (index === this.props.data.length - 1) {
+        const { data, onComplete } = this.props;
+        if (index === data.length - 1) {
             return (
                 <Button
                     title='START'
-                    onPress={this.props.onComplete}
+                    onPress={onComplete}
                     backgroundColor='#11B8AB'
                     fontSize={14}
                     buttonStyle={{ width, height: 50 }}
                 />
             );
         }
-        if (index !== this.props.data.length - 1) {
+        if (index !== data.length - 1) {
             return (
                 <Button
                     title='SKIP'
-                    onPress={this.props.onComplete}
+                    onPress={onComplete}
                     backgroundColor='#11B8AB'
                     fontSize={14}
                     buttonStyle={{ width, height: 50 }}

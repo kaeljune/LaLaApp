@@ -8,6 +8,9 @@ import { Icon } from 'react-native-elements';
 class SetFormRequest extends Component {
     static navigationOptions = ({ navigation }) => ({
     title: 'Give a Gift',
+    headerTitleStyle: {
+        alignSelf: 'center'
+    },
     headerLeft: <Icon
             name='chevron-left'
             color='#11b8ab'
@@ -25,7 +28,7 @@ class SetFormRequest extends Component {
     render() {
         return (
             <View>
-                Set Form
+                <Text>Set Form</Text>
             </View>
         );
     }

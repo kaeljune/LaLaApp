@@ -2,49 +2,64 @@ import React, { Component } from 'react';
 import {
 	View,
 	Text,
-	Image,
 	ScrollView,
+	TouchableOpacity,
 	KeyboardAvoidingView,
-	TextInput, Slider,
+	TextInput,
 	StyleSheet
 } from 'react-native';
-import { Button, Icon } from 'react-native-elements';
+import { Avatar, Button, Icon, Slider, FormInput } from 'react-native-elements';
+import { COLOR } from '../../config/config';
 
+import Btn from '../../components/Btn';
 import ButtonSeclect from './ButtonSelect';
-
+import TagSelect from './TagSelect';
+import BoxSelect from './BoxSelect';
 import avatar from '../../../assets/images/avatar.png';
 
 class GiftSelection extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		title: 'Gift selection',
+		headerStyle: {
+			paddingLeft: 5
+		},
+		headerTitleStyle: {
+			alignSelf: 'center'
+		},
 		headerLeft: <Icon
 			name='chevron-left'
-			color='#11b8ab'
+			color={COLOR.primary}
 			onPress={() => navigation.goBack()}
 		/>,
 		headerRight: <View style={{ flexDirection: 'row', alignItems: 'center', paddingRight: 15 }}>
 			<Icon
 				size={15}
 				name='create'
-				color='#11b8ab'
+				color={COLOR.primary}
 				onPress={() => navigation.goBack()}
 			/>
 			<Text style={{ marginLeft: 5 }}>Edit</Text>
 		</View>
 	})
 	render() {
-		const { section, sectionItem, sectionPad } = styles;
+		const { section, sectionItem, sectionPad, sectionTag, sectionTitle } = styles;
 		return (
-			<ScrollView style={{ padding: 15, flex: 1 }}>
+			<ScrollView contentContainerStyle={{ padding: 15 }}>
 				<KeyboardAvoidingView behavior={'padding'} style={{ flex: 1 }}>
 					<View style={section}>
 						<View style={sectionItem}>
-							<Image style={{ width: 100, height: 100, marginBottom: 15 }} source={avatar} />
-							<Text>Hai Nguyen</Text>
+							<Avatar
+								height={120}
+								width={120}
+								rounded
+								source={avatar}
+							/>
+
+							<Text style={{ marginTop: 15, fontSize: 18, fontWeight: '600' }}>Hai Nguyen</Text>
 						</View>
 						<View style={sectionItem}>
 							<ScrollView horizontal>
-								<ButtonSeclect>FeMale</ButtonSeclect>
+								<ButtonSeclect>Female</ButtonSeclect>
 								<ButtonSeclect>Male</ButtonSeclect>
 								<ButtonSeclect>Other</ButtonSeclect>
 							</ScrollView>
@@ -86,11 +101,12 @@ class GiftSelection extends Component {
 					</View>
 
 					<View style={sectionPad}>
-						<Text style={{ textAlign: 'center' }}>Location</Text>
+						<Text style={sectionTitle}>Location</Text>
 						<View>
 							<TextInput
 								style={{
-									height: 60
+									height: 60,
+									
 								}}
 								placeholder="Location..."
 							/>
@@ -98,65 +114,20 @@ class GiftSelection extends Component {
 					</View>
 
 					<View style={section}>
-						<Text style={{ textAlign: 'center', margin: 15 }}>Occasion</Text>
+						<Text style={[sectionTitle, { margin: 15 }]}>Occasion</Text>
 
 						<ScrollView horizontal showsHorizontalScrollIndicator={false}>
-							<View
-								style={{
-									height: 120,
-									width: 120,
-									borderRadius: 3,
-									display: 'flex',
-									flexDirection: 'column',
-									justifyContent: 'center',
-									backgroundColor: 'pink',
-									alignItems: 'center',
-									margin: 7
-								}}
-							>
-								<Text>
-									Anniversary
-							</Text>
-							</View>
-							<View
-								style={{
-									height: 120,
-									width: 120,
-									borderRadius: 3,
-									display: 'flex',
-									flexDirection: 'column',
-									justifyContent: 'center',
-									backgroundColor: 'pink',
-									alignItems: 'center',
-									margin: 7
-								}}
-							>
-								<Text>
-									Anniversary
-							</Text>
-							</View>
-							<View
-								style={{
-									height: 120,
-									width: 120,
-									borderRadius: 3,
-									display: 'flex',
-									flexDirection: 'column',
-									justifyContent: 'center',
-									backgroundColor: 'pink',
-									alignItems: 'center',
-									margin: 7
-								}}
-							>
-								<Text>
-									Anniversary
-							</Text>
-							</View>
+							<BoxSelect color="#FF3D7F">Anniversary</BoxSelect>
+							<BoxSelect color="#B23DFF">Apology</BoxSelect>
+							<BoxSelect color="#B1068F">Baby</BoxSelect>
+							<BoxSelect color="#FF3D7F">Anniversary</BoxSelect>
+							<BoxSelect color="#B23DFF">Apology</BoxSelect>
+							<BoxSelect color="#B1068F">Baby</BoxSelect>
 						</ScrollView>
 					</View>
 
 					<View style={sectionPad}>
-						<Text style={{ textAlign: 'center' }}>Price</Text>
+						<Text style={sectionTitle}>Price</Text>
 
 						<Text
 							style={{
@@ -167,307 +138,85 @@ class GiftSelection extends Component {
 							}}
 						>$200-500</Text>
 
-						<Slider minimumValue={0} maximumValue={100} />
+						<Slider 	
+							minimumValue={0} 
+							maximumValue={100} 
+							minimumTrackTintColor={COLOR.primary}
+							maximumTrackTintColor='#eee'
+							thumbTintColor={COLOR.primary}
+							thumbTouchSize={{
+								width: 100,
+								height: 100,
+							}}
+							thumbStyle={{
+								borderColor: '#fff',
+								borderWidth: 2
+							}}
+							
+						/>
 					</View>
 
 					<View style={sectionPad}>
-						<Text style={{ textAlign: 'center' }}>Recipient's Intersts</Text>
+						<Text style={sectionTitle}>Recipient's Intersts</Text>
 
-						<View
-							style={{
-								marginTop: 30,
-								marginBottom: 15,
-								flexDirection: 'row',
-								flexWrap: 'wrap',
-								justifyContent: 'center'
-							}}
-						>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>Dog</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>Dog</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>DIY</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>Cat</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>Tea</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>Coffee</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>Fitness</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-
-								}}
-							>Cat</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>Tea</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>Sport</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>Science</Text>
+						<View style={sectionTag}>
+							<TagSelect>Dog</TagSelect>
+							<TagSelect>DIY</TagSelect>
+							<TagSelect>Cat</TagSelect>
+							<TagSelect>Tea</TagSelect>
+							<TagSelect>Coffee</TagSelect>
+							<TagSelect>Fitness</TagSelect>
+							<TagSelect>Cat</TagSelect>
+							<TagSelect>Tea</TagSelect>
+							<TagSelect>Sport</TagSelect>
+							<TagSelect>Science</TagSelect>
 
 						</View>
 					</View>
 
 					<View style={sectionPad}>
-						<Text style={{ textAlign: 'center' }}>Recipient's Style</Text>
+						<Text style={sectionTitle}>Recipient's Style</Text>
 
-						<View
-							style={{
-								marginTop: 30,
-								marginBottom: 15,
-								flexDirection: 'row',
-								flexWrap: 'wrap',
-								justifyContent: 'center'
-							}}
-						>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>Dog</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>Dog</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>DIY</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>Cat</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>Tea</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>Coffee</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>Fitness</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-
-								}}
-							>Cat</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>Tea</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>Sport</Text>
-							<Text
-								style={{
-									padding: 7,
-									minWidth: 60,
-									textAlign: 'center',
-									borderColor: '#eee',
-									borderWidth: 1,
-									borderRadius: 20,
-									margin: 5
-								}}
-							>Science</Text>
+						<View style={sectionTag}>
+							<TagSelect>Dog</TagSelect>
+							<TagSelect>DIY</TagSelect>
+							<TagSelect>Cat</TagSelect>
+							<TagSelect>Tea</TagSelect>
+							<TagSelect>Coffee</TagSelect>
+							<TagSelect>Fitness</TagSelect>
+							<TagSelect>Cat</TagSelect>
+							<TagSelect>Tea</TagSelect>
+							<TagSelect>Sport</TagSelect>
+							<TagSelect>Science</TagSelect>
 
 						</View>
 					</View>
 
 					<View style={sectionPad}>
-						<Text style={{ textAlign: 'center' }}>Other interests or thoughts optional</Text>
+						<Text style={sectionTitle}>Other interests or thoughts optional</Text>
 						<View>
 							<TextInput
 								style={{
-									height: 60
+									height: 60,
+									paddingLeft: 3,
+									textAlign: 'center'
 								}}
-								placeholder="Location..."
+								underlineColorAndroid={'transparent'}
+								multiline
+								placeholder="Dogs, going the beach, pampering, barware, etc"
 							/>
-						</View>
+						</View> 
 					</View>
 
-					<View
-						style={{
-							marginBottom: 50
-						}}
-					>
-						<Button
-							onPress={() => console.log(123)}
-							title="SUBMIT REQUESTS"
-							backgroundColor="#11B8AB"
-						/>
+					<View style={{ marginVertical: 30 }}>
+						<Btn
+							colors={['#11B8AB', '#65C5B9']}
+							start={[0, 0.5]}
+							end={[1, 0.5]}
+							onPress={this.props.onPress}
+						>
+							SUBMIT REQUESTS
+						</Btn>
 					</View>
 				</KeyboardAvoidingView>
 			</ScrollView>
@@ -480,9 +229,23 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		marginBottom: 15
 	},
-	sectionPad: {
-		backgroundColor: '#fff', padding: 15, marginBottom: 15
+	avatarStyle: {
+		flexDirection: 'row', 
+		alignItems: 'center', 
+		paddingRight: 15 
 	},
+	sectionPad: {
+		backgroundColor: '#fff', 
+		padding: 15, 
+		marginBottom: 15
+	},
+
+	sectionTitle: {
+		textAlign: 'center',
+		color: '#636363',
+		fontWeight: '600'
+	},
+
 	sectionItem: {
 		display: 'flex',
 		flexDirection: 'column',
@@ -493,6 +256,21 @@ const styles = StyleSheet.create({
 		width: '100%',
 		paddingTop: 15,
 		paddingBottom: 15
+	},
+
+	sectionTag: {
+		marginTop: 30,
+		marginBottom: 15,
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		justifyContent: 'center'
+	},
+	btn: {
+		backgroundColor: COLOR.primary,
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center',
+		height: 50,
 	}
 });
 

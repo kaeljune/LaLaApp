@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
+    ScrollView,
     AsyncStorage
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -64,12 +65,12 @@ class ProfileScreen extends Component {
     }
     render() {
         return (
-            <View>
+            <ScrollView>
                 <TitleStyle />
                 <UserInfo />
                 <Services />
                 <SignoutButton />
-            </View>
+            </ScrollView>
         );
     }
 }

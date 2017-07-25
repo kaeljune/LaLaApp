@@ -11,7 +11,7 @@ import { WIDTH_SCREEN } from '../../../config/config';
 import ForgotLink from './ForgotLink';
 
 class SigninForm extends Component {
-    state = { email: 'Your email address', password: '' };
+    state = { email: '', password: '' };
     render() {
         const { container } = styles;
         return (

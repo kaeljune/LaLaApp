@@ -7,6 +7,9 @@ import {
 import { Icon } from 'react-native-elements';
 
 class ForgotLink extends Component {
+    onForgot = () => {
+     
+    }
     render() {
         const { containerStyle, textStyle } = styles;
         return (

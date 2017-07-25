@@ -1,25 +1,30 @@
-import React, { Component } from 'react'
-import { Text, StyleSheet, View } from 'react-native'
-import { Button } from 'react-native-elements'
+import React, { Component } from 'react';
+import { Text, StyleSheet } from 'react-native';
 
 class ButtonSeclect extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             active: false
-        }
+        };
     }
 
-    changeActive = () => {
-        console.log(123231)
+    onPress = () => {
+        this.setState(previousState => {
+            return { active: !previousState.active };
+        });
     }
     render() {
-        const { children } = this.props
-        return (
-            <View>
-                <Text style={this.state.active ? styles.active : styles.normal}>{children}</Text>
-            </View>
-        )
+        const { children } = this.props;
+        const styleBtn = this.state.active ? [styles.normal, styles.active] : styles.normal;
+        return ( 
+            <Text 
+                onPress={this.onPress}
+                style={styleBtn}
+            >
+                {children}
+            </Text>
+        );
     }
 }
 
@@ -33,21 +38,12 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         padding: 10,
         minWidth: 60,
-        textAlign: 'center',
-        fontSize: 12
+        textAlign: 'center'
     },
     active: {
-        borderWidth: 1,
         backgroundColor: '#11b8ab',
-        borderColor: '#eee',
-        marginLeft: 5,
-        marginRight: 5,
-        borderRadius: 0,
-        padding: 10,
-        minWidth: 60,
-        textAlign: 'center',
-        fontSize: 12
+        color: '#fff',
     }
-})
+});
 
-export default ButtonSeclect
+export default ButtonSeclect;

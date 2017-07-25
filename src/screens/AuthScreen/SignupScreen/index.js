@@ -16,6 +16,7 @@ import {
 import FacebookLogin from '../../../components/FacebookLogin';
 import SigninLink from './SigninLink';
 import LinkTerm from './LinkTerm';
+import TextField from '../../../components/TextField';
 
 class SignupScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
@@ -80,17 +81,48 @@ class SignupScreen extends Component {
             <ScrollView style={containerStyle}>
                 <KeyboardAvoidingView behavior={'padding'}>
                     <View>
-                        <View>
-                            <FormLabel
-                                labelStyle={{ fontWeight: '300', color: '#313131' }}
-                            >
+                        <TextField 
+                            label="FULL NAME"
+                            value={this.props.name}
+                            placeholder="What's your name?"
+                            onChangeText={this.onNameChange}
+                        />
+                        <TextField 
+                            label="EMAIL"
+                            value={this.props.email}
+                            placeholder="What's your email?"
+                            keyboardType='email-address'
+                            onChangeText={this.onEmailChange}
+                        />
+                        <TextField 
+                            label="PHONE NUMBER"
+                            value={this.props.phone}
+                            placeholder="What’s your mobile number"
+                            keyboardType='numeric'
+                            onChangeText={this.onPhoneChange}
+                        />
+                        <TextField 
+                            label="PASSWORD"
+                            secureTextEntry
+                            placeholder="What’s your password"
+
+                            keyboardType='default'
+                            value={this.props.password}
+                            onChangeText={this.onPasswordChange}
+                        />
+
+                        {/* <View>
+                            <FormLabel labelStyle={{ fontWeight: '300', color: '#313131' }}>
                                 FULL NAME
-                    </FormLabel>
+                            </FormLabel>
                             <FormInput
                                 value={this.props.name}
                                 placeholder="What's your name?"
                                 placeholderTextColor='#A8A8A8'
-                                inputStyle={{ fontSize: 14, paddingLeft: 3, width: WIDTH_SCREEN - 30 }}
+                                inputStyle={{ 
+                                    fontSize: 14, 
+                                    paddingLeft: 3, 
+                                    width: WIDTH_SCREEN - 30 }}
                                 onChangeText={this.onNameChange}
                             />
                         </View>
@@ -139,7 +171,7 @@ class SignupScreen extends Component {
                                 value={this.props.password}
                                 onChangeText={this.onPasswordChange}
                             />
-                        </View>
+                        </View> */}
                         <LinkTerm onTerms={this.props.onTerms} />
                         {this.renderButton()}
                     </View>

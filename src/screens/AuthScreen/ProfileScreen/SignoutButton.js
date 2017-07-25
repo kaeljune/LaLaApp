@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
-import { List, ListItem } from 'react-native-elements';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
-class SignoutButton extends Component {
-    render() {
-        return (
-            <List>
-                <ListItem title="Sign Out" />
-            </List>
-        );
+const SignoutButton = () => 
+    <TouchableOpacity>        
+        <View style={styles.wrapBtn}>
+            <Text>Sign Out</Text>
+        </View>
+    </TouchableOpacity>;
+
+const styles = StyleSheet.create({
+    wrapBtn: {
+        backgroundColor: '#fff',
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 20,
+        borderColor: '#ddd',
+        borderTopWidth: 1,
+        borderBottomWidth: 1
     }
-}
+});
 
 export default SignoutButton;
