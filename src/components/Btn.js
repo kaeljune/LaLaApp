@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     },
     btnText: {
         color: '#fff',
+        backgroundColor: 'transparent',
         fontWeight: '500'
     }
 });

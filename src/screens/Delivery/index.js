@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions, TextInput, Switch } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Switch } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import Btn from '../../components/Btn';
+import { WIDTH_SCREEN } from '../../config/config';
 
-const { width } = Dimensions.get('window');
 
 class DeliveryBlank extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'Delivery',
+        headerStyle: {
+            paddingLeft: 10
+        },
         headerLeft: <Icon
             name='chevron-left'
             color='#11b8ab'
@@ -19,7 +22,7 @@ class DeliveryBlank extends Component {
     render() {
         return (
             <View style={styles.wraper}>
-                <View style={{ flex: 0.8 }}>
+                <View style={{ flex: 8 }}>
                     <Text style={{ marginBottom: 10 }}>SHIP TO:</Text>
                     <View style={{ backgroundColor: '#fff' }}>
                         <View style={styles.rowStyle}>
@@ -27,7 +30,7 @@ class DeliveryBlank extends Component {
                                 <Text style={styles.labelStyle}>FULLNAME</Text>
                             </View>
                             <TextInput
-                                style={{ width: width - 160 }}
+                                style={{ width: WIDTH_SCREEN - 160 }}
                                 value="Hai Nguyen"
                                 underlineColorAndroid="transparent"
                             />
@@ -39,7 +42,7 @@ class DeliveryBlank extends Component {
                             </View>
 
                             <TextInput
-                                style={{ width: width - 155 }}
+                                style={{ width: WIDTH_SCREEN - 155 }}
                                 value="(+84) 935 38 39 40"
                                 underlineColorAndroid="transparent"
                             />
@@ -51,7 +54,7 @@ class DeliveryBlank extends Component {
                             </View>
 
                             <TextInput
-                                style={{ width: width - 155 }}
+                                style={{ width: WIDTH_SCREEN - 155 }}
                                 value="Ho Chi Minh City"
                                 underlineColorAndroid="transparent"
                             />
@@ -62,7 +65,7 @@ class DeliveryBlank extends Component {
                             </View>
 
                             <TextInput
-                                style={{ width: width - 155 }}
+                                style={{ width: WIDTH_SCREEN - 155 }}
                                 value="TAIWAN"
                                 underlineColorAndroid="transparent"
                             />
@@ -73,7 +76,7 @@ class DeliveryBlank extends Component {
                             </View>
 
                             <TextInput
-                                style={{ width: width - 155 }}
+                                style={{ width: WIDTH_SCREEN - 155 }}
                                 value="TAIPEI"
                                 underlineColorAndroid="transparent"
                             />
@@ -84,7 +87,7 @@ class DeliveryBlank extends Component {
                             </View>
 
                             <TextInput
-                                style={{ width: width - 155 }}
+                                style={{ width: WIDTH_SCREEN - 155 }}
                                 value="7000"
                                 underlineColorAndroid="transparent"
                             />
@@ -101,7 +104,7 @@ class DeliveryBlank extends Component {
                 </View>
 
 
-                <View style={{ alignItems: 'center', flex: 0.2 }}>
+                <View style={{ flex: 2 }}>
                     <Btn 
                         colors={['#11B8AB', '#65C5B9']}
                         start={[0, 0.5]}

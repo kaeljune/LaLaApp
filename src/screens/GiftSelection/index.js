@@ -3,12 +3,11 @@ import {
 	View,
 	Text,
 	ScrollView,
-	TouchableOpacity,
 	KeyboardAvoidingView,
 	TextInput,
 	StyleSheet
 } from 'react-native';
-import { Avatar, Button, Icon, Slider, FormInput } from 'react-native-elements';
+import { Avatar, Icon, Slider } from 'react-native-elements';
 import { COLOR } from '../../config/config';
 
 import Btn from '../../components/Btn';

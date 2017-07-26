@@ -8,18 +8,17 @@ class LookingButton extends Component {
     render() {
         return (
             <View style={{ alignItems: 'center' }}>
-                    <Button
-                        title="LOOKING"
-                        onPress={this.onGetStarted}
-                        backgroundColor={COLOR.primary}
-                        buttonStyle={{
-                            width: 150,
-                            height: 35,
-                            top: -48,
-                            marginTop: 30
-                        }}
-                    />
-                </View>
+                <Button
+                    title="LOOKING"
+                    onPress={this.onGetStarted}
+                    backgroundColor={COLOR.primary}
+                    buttonStyle={{
+                        width: 100,
+                        height: 35,
+                        top: -17
+                    }}
+                />
+            </View>
         );
     }
 }

@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import { Icon, Button } from 'react-native-elements';
+
+import { WIDTH_SCREEN } from '../../config/config';
+
 import visa from '../../../assets/images/visa.png';
+
 
 const { width } = Dimensions.get('window');
 
@@ -33,7 +37,7 @@ class Payment extends Component {
                                 <View style={{ width: 130 }}>
                                     <Text style={styles.labelStyle}>CARD NUMBER</Text>
                                 </View>
-                                <View style={{ width: width - 160 }}>
+                                <View style={{ width: WIDTH_SCREEN - 160 }}>
                                     <Text style={styles.valueStyle}>4688 2356 5536 6767</Text>
                                 </View>
                             </View>
@@ -42,7 +46,7 @@ class Payment extends Component {
                                     <View style={{ width: 130 }}>
                                         <Text style={styles.labelStyle}>EXPIRATION DATE</Text>
                                     </View>
-                                    <View style={{ width: width / 5, marginRight: 15 }}>
+                                    <View style={{ width: WIDTH_SCREEN / 5, marginRight: 15 }}>
                                         <Text style={styles.valueStyle}>01/20</Text>
                                     </View>
                                 </View>
@@ -57,7 +61,7 @@ class Payment extends Component {
                                 <View style={{ width: 130 }}>
                                     <Text style={styles.labelStyle}>CARDHOLDER NAME</Text>
                                 </View>
-                                <View style={{ width: width - 160 }}>
+                                <View style={{ width: WIDTH_SCREEN - 160 }}>
                                     <Text style={styles.valueStyle}>TAN DAO DUY</Text>
                                 </View>
                             </View>
