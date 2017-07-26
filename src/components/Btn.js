@@ -4,7 +4,7 @@ import { Icon, Button } from 'react-native-elements';
 import { LinearGradient } from 'expo';
 
 const Btn = (props) => {
-    const { wrapBtn, linearStyle, btnText } = styles;
+    const { wrapBtn } = styles;
     return (
         <View style={wrapBtn}>
             {/* <TouchableOpacity onPress={props.onPress}>
@@ -25,7 +25,6 @@ const Btn = (props) => {
                     title={props.title}
                     backgroundColor={props.bgColor}
                     fontWeight="600"
-                    borderRadius={3}
                     buttonStyle={styles.btnStyle}
                     onPress={props.onPress}
                 />

@@ -99,7 +99,7 @@ class GiftSelection extends Component {
 						</View>
 					</View>
 
-					<View style={sectionPad}>
+					{/* <View style={sectionPad}>
 						<Text style={sectionTitle}>Location</Text>
 						<View>
 							<TextInput
@@ -110,7 +110,7 @@ class GiftSelection extends Component {
 								placeholder="Location..."
 							/>
 						</View>
-					</View>
+					</View> */}
 
 					<View style={section}>
 						<Text style={[sectionTitle, { margin: 15 }]}>Occasion</Text>
