@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { View, StyleSheet, KeyboardAvoidingView, ScrollView, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
-import { Icon, FormInput, FormLabel } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import {
     emailLogin, emailChanged, passwordChanged,
     phoneChanged, nameChanged,
@@ -10,7 +10,7 @@ import {
 import GradientButton from '../../../components/GradientButton';
 import { Spinner } from '../../../components/Spinner';
 import {
-    WIDTH_SCREEN, HEIGHT_SCREEN, COLOR,
+    HEIGHT_SCREEN, COLOR,
     headerStyle, headerTitleStyle
 } from '../../../config/config';
 import FacebookLogin from '../../../components/FacebookLogin';
@@ -32,6 +32,18 @@ class SignupScreen extends Component {
         headerTitleStyle,
         headerStyle,
     })
+    state = {
+        userData: null,
+    };
+    async componentWillMount() {
+        const userData = await AsyncStorage.getItem('@userLogin');
+        if (userData) {
+            this.setState({ userData });
+            this.props.navigation.navigate('isSignedIn');
+        } else {
+            this.setState({ userData: false });
+        }
+    }
     onEmailChange = (text) => {
         this.props.emailChanged(text);
     }
@@ -74,7 +86,7 @@ class SignupScreen extends Component {
             </View>
         );
     }
-
+    
     render() {
         const { containerStyle } = styles;
         return (

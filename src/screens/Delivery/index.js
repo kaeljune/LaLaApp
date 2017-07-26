@@ -94,7 +94,7 @@ class DeliveryBlank extends Component {
                             <View style={{ width: 200 }}>
                                 <Text style={styles.labelStyle}>SAVE FOR FUTURE PURCHASES</Text>
                             </View>
-                            <Switch value={true} />
+                            <Switch value />
                         </View>
 
                     </View>

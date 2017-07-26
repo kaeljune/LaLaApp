@@ -1,6 +1,6 @@
 import Expo from 'expo';
 import React, { Component } from 'react';
-import { StyleSheet, View, StatusBar, Animated, AsyncStorage } from 'react-native';
+import { StyleSheet, View, StatusBar, Animated } from 'react-native';
 import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import firebase from 'firebase';
@@ -88,13 +88,12 @@ class App extends Component {
     const MainNavigator = TabNavigator({
       isSignedOut: {
         screen: StackNavigator({
-          delivery: { screen: Delivery },
-          
           default: { screen: DefaultScreen },
-          welcome: { screen: WelcomeScreen },
           signup: { screen: SignupScreen },
-          signin: { screen: SigninScreen },
           forgot: { screen: ForgotScreen },
+          welcome: { screen: WelcomeScreen },
+          delivery: { screen: Delivery },   
+          signin: { screen: SigninScreen },
           term: { screen: TermScreen },
         })
       },
