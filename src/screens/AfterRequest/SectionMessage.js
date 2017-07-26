@@ -9,20 +9,20 @@ class SectionMessage extends Component {
         const { sectionChat, cirleIcon, chatText } = styles;
         return (
             <View style={sectionChat}>
-                    <View style={cirleIcon}>
-                        <Icon
-                            size={15}
-                            name='more'
-                            color='#fff'
-                        />
-                    </View>
-                    <View style={chatText}>
-                        <Text>We are on it.</Text>
-                        <Text>
-                            We’ll report back promptly with wonderful with wonderfull gifts for HAI NGUYEN. Maenwhile, chat with us should you have any questions.
-                        </Text>
-                    </View>
+                <View style={cirleIcon}>
+                    <Icon
+                        size={15}
+                        name='chat'
+                        color='#fff'
+                    />
                 </View>
+                <View style={chatText}>
+                    <Text style={{ fontWeight: '600', marginBottom: 5 }}>We are on it.</Text>
+                    <Text style={{ lineHeight: 25 }}>
+                        We’ll report back promptly with wonderful with wonderfull gifts for HAI NGUYEN. Maenwhile, chat with us should you have any questions.
+                    </Text>
+                </View>
+            </View>
         );
     }
 }
@@ -30,13 +30,13 @@ class SectionMessage extends Component {
 const styles = StyleSheet.create({
     sectionChat: {
         flexDirection: 'row',
-        alignItems: 'flex-end'
+        alignItems: 'flex-end',
+        marginVertical: 30
     },
     chatText: {
         width: WIDTH_SCREEN - 75,
         padding: 15,
-        backgroundColor: '#fff',
-        marginBottom: 30
+        backgroundColor: '#fff'
     },
     cirleIcon: {
         width: 30,

@@ -8,7 +8,7 @@ const SignupLink = ({ onSignUp }) => {
     const { containerStyle } = styles;
     return (
         <Text style={containerStyle}>
-            <Text>Do not have an account? </Text>
+            <Text style={{ color: '#95989A' }}>Do not have an account? </Text>
             <Text style={{ fontWeight: 'bold' }} onPress={onSignUp}>
                 Sign up
             </Text>

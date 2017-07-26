@@ -35,14 +35,15 @@ const styles = StyleSheet.create({
         borderColor: '#eee',
         marginLeft: 5,
         marginRight: 5,
-        borderRadius: 0,
+        borderRadius: 3,
+        fontSize: 18,
         padding: 10,
         minWidth: 60,
         textAlign: 'center'
     },
     active: {
         backgroundColor: '#11b8ab',
-        color: '#fff',
+        color: '#fff'
     }
 });
 

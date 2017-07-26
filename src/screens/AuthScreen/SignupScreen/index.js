@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView, ScrollView, AsyncStorage } from 'react-native';
+import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import { Icon } from 'react-native-elements';
+import { Icon, FormLabel, FormInput } from 'react-native-elements';
 import {
     emailLogin, emailChanged, passwordChanged,
     phoneChanged, nameChanged,
@@ -17,6 +17,7 @@ import FacebookLogin from '../../../components/FacebookLogin';
 import SigninLink from './SigninLink';
 import LinkTerm from './LinkTerm';
 import TextField from '../../../components/TextField';
+import Btn from '../../../components/Btn';
 
 class SignupScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
@@ -73,122 +74,66 @@ class SignupScreen extends Component {
             return <Spinner size="large" />;
         }
         return (
-            <View
-                style={styles.containerStyle1}
-            >
-                <GradientButton
-                    title='SIGN IN'
-                    colors={['#11B8AB', '#65C5B9']}
-                    start={[0, 0.5]}
-                    end={[1, 0.5]}
-                    onPress={this.onButtonPress}
-                />
-            </View>
+            <Btn 
+                title="SIGN IN"
+                bgColor="#11b8ab"
+                onPress={this.onButtonPress}
+            />
         );
     }
     
     render() {
         const { containerStyle } = styles;
         return (
-            <ScrollView style={containerStyle}>
+            <ScrollView contentContainerStyle={containerStyle}>
                 <KeyboardAvoidingView behavior={'padding'}>
-                    <View>
-                        <TextField 
-                            label="FULL NAME"
-                            value={this.props.name}
-                            placeholder="What's your name?"
-                            onChangeText={this.onNameChange}
-                        />
-                        <TextField 
-                            label="EMAIL"
-                            value={this.props.email}
-                            placeholder="What's your email?"
-                            keyboardType='email-address'
-                            onChangeText={this.onEmailChange}
-                        />
-                        <TextField 
-                            label="PHONE NUMBER"
-                            value={this.props.phone}
-                            placeholder="What’s your mobile number"
-                            keyboardType='numeric'
-                            onChangeText={this.onPhoneChange}
-                        />
-                        <TextField 
-                            label="PASSWORD"
-                            secureTextEntry
-                            placeholder="What’s your password"
-
-                            keyboardType='default'
-                            value={this.props.password}
-                            onChangeText={this.onPasswordChange}
-                        />
-
-                        {/* <View>
-                            <FormLabel labelStyle={{ fontWeight: '300', color: '#313131' }}>
-                                FULL NAME
-                            </FormLabel>
-                            <FormInput
+                    <View style={{ }}>
+                        <View>
+                            <TextField 
+                                label="FULL NAME"
                                 value={this.props.name}
                                 placeholder="What's your name?"
-                                placeholderTextColor='#A8A8A8'
-                                inputStyle={{ 
-                                    fontSize: 14, 
-                                    paddingLeft: 3, 
-                                    width: WIDTH_SCREEN - 30 }}
                                 onChangeText={this.onNameChange}
                             />
-                        </View>
-                        <View>
-                            <FormLabel
-                                labelStyle={{ fontWeight: '300', color: '#313131' }}
-                            >
-                                EMAIL
-                            </FormLabel>
-                            <FormInput
+                            <TextField 
+                                label="EMAIL"
                                 value={this.props.email}
                                 placeholder="What's your email?"
-                                placeholderTextColor='#A8A8A8'
                                 keyboardType='email-address'
-                                inputStyle={{ fontSize: 14, paddingLeft: 3, width: WIDTH_SCREEN - 30 }}
                                 onChangeText={this.onEmailChange}
                             />
-                        </View>
-                        <View>
-                            <FormLabel
-                                labelStyle={{ fontWeight: '300', color: '#313131' }}
-                            >
-                                PHONE NUMBER
-                            </FormLabel>
-                            <FormInput
+                            <TextField 
+                                label="PHONE NUMBER"
                                 value={this.props.phone}
                                 placeholder="What’s your mobile number"
-                                placeholderTextColor='#A8A8A8'
                                 keyboardType='numeric'
-                                inputStyle={{ fontSize: 14, paddingLeft: 3, width: WIDTH_SCREEN - 30 }}
                                 onChangeText={this.onPhoneChange}
                             />
-                        </View>
-                        <View >
-                            <FormLabel
-                                labelStyle={{ fontWeight: '300', color: '#313131' }}
-                            >
-                                PASSWORD
-                            </FormLabel>
-                            <FormInput
+                            <TextField 
+                                label="PASSWORD"
                                 secureTextEntry
                                 placeholder="What’s your password"
-                                placeholderTextColor='#A8A8A8'
+
                                 keyboardType='default'
-                                inputStyle={{ fontSize: 14, paddingLeft: 3, width: WIDTH_SCREEN - 30 }}
                                 value={this.props.password}
                                 onChangeText={this.onPasswordChange}
                             />
-                        </View> */}
+                        </View>
+
                         <LinkTerm onTerms={this.props.onTerms} />
-                        {this.renderButton()}
+
+                        <View style={{ alignItems: 'center' }}>
+                            {this.renderButton()}
+                            <Text style={{ marginVertical: 15 }}>Or sign in with</Text>
+                            <Btn 
+                                title="FACEBOOK"
+                                bgColor="#3B5998"
+                                onPress={() => { alert('loginface'); }}
+                            />
+                            <SigninLink onSignIn={this.onSignIn} />
+                        </View>
                     </View>
-                    <FacebookLogin />
-                    <SigninLink onSignIn={this.onSignIn} />
+
                 </KeyboardAvoidingView>
             </ScrollView>
         );
@@ -198,13 +143,7 @@ class SignupScreen extends Component {
 const styles = StyleSheet.create({
     containerStyle: {
         height: HEIGHT_SCREEN,
-        backgroundColor: '#f8f8f8'
-    },
-    containerStyle1: {
-        paddingLeft: 15,
-        paddingRight: 15,
-        flexDirection: 'column',
-        alignItems: 'center'
+        padding: 20
     }
 });
 

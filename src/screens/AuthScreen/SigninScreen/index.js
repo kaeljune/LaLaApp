@@ -5,7 +5,6 @@ import { Icon } from 'react-native-elements';
 import { COLOR, headerTitleStyle, headerStyle } from '../../../config/config';
 import Brand from './Brand';
 import SigninForm from './SigninForm';
-import FacebookLogin from '../../../components/FacebookLogin';
 import SignupLink from './SignupLink';
 
 class SigninScreen extends Component {
@@ -23,7 +22,6 @@ class SigninScreen extends Component {
         headerStyle,
     })
 
-
     onSignUp = () => {
         this.props.navigation.navigate('signup');
     }
@@ -32,12 +30,13 @@ class SigninScreen extends Component {
     }
     render() {
         return (
-            <ScrollView style={{ flex: 1, backgroundColor: '#f8f8f8', }}>
-                <View style={styles.container}>
+            <ScrollView contentContainerStyle={styles.ContainerStyle}>
+                <View>
                     <Brand />
-                    <SigninForm />
-                    <FacebookLogin />
-                    <SignupLink onSignUp={this.onSignUp} />
+                    <View style={{ alignItems: 'center', }}>
+                        <SigninForm onForgot={this.onForgot} />
+                        <SignupLink onSignUp={this.onSignUp} /> 
+                    </View>
                 </View>
             </ScrollView>
         );
@@ -45,11 +44,10 @@ class SigninScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around'
-    },
+    ContainerStyle: {
+        backgroundColor: '#f8f8f8', 
+        padding: 20
+    }
 });
 
 export default SigninScreen;

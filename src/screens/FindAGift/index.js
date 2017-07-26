@@ -1,27 +1,26 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import { Icon, Button } from 'react-native-elements';
 
 import avatar from '../../../assets/images/avatar.png';
-
-const { width } = Dimensions.get('window');
+import { WIDTH_SCREEN, COLOR } from '../../config/config';
 
 class FindAGift extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'Find a Gift',
         headerLeft: <Icon
             name='chevron-left'
-            color='#11b8ab'
+            color={COLOR.primary}
             onPress={() => navigation.goBack()}
         />,
         headerRight: <View style={{ flexDirection: 'row', alignItems: 'center', paddingRight: 15 }}>
             <Icon
                 size={15}
                 name='chat'
-                color='#FF5700'
+                color={COLOR.secondary}
                 onPress={() => navigation.goBack()}
             />
-            <Text style={{ marginLeft: 5, color: '#FF5700' }}>Chat</Text>
+            <Text style={{ marginLeft: 5, color: COLOR.secondary }}>Chat</Text>
         </View>
     })
     render() {
@@ -35,15 +34,15 @@ class FindAGift extends Component {
                             style={{ width: 100, height: 100, marginBottom: 15 }} 
                             source={avatar} 
                         />
-                        <Text>Hai Nguyen</Text>
-                        <Text>Birthday | $200-500</Text>
+                        <Text style={{ fontWeight: '600', marginBottom: 5 }}>Hai Nguyen</Text>
+                        <Text style={{ fontSize: 14 }}>Birthday | $200-500</Text>
                     </View>
                 </View>
 
                 <View style={sectionContainer}>
                     <View>
                         <View style={sectionList}>
-                            <View style={{ width: 1, backgroundColor: '#ddd' }} />
+                            <View style={styles.line} />
                             <View style={styles.dot} />
                             <View style={{ paddingBottom: 15 }}>
                                 <Text style={styles.listTitle}>LOOKING</Text>
@@ -54,7 +53,7 @@ class FindAGift extends Component {
                         </View>
 
                         <View style={sectionList}>
-                            <View style={{ width: 1, backgroundColor: '#ddd' }} />
+                            <View style={styles.line} />
                             <View style={styles.dot} />
                             <View style={{ paddingBottom: 15 }}>
                                 <Text style={styles.listTitle}>GIFTS READY</Text>
@@ -62,7 +61,7 @@ class FindAGift extends Component {
                         </View>
 
                         <View style={sectionList}>
-                            <View style={{ width: 1, backgroundColor: '#ddd' }} />
+                            <View style={styles.line} />
                             <View style={styles.dot} />
                             <View style={{ paddingBottom: 15 }}>
                                 <Text style={styles.listTitle}>ORDERED</Text>
@@ -70,14 +69,14 @@ class FindAGift extends Component {
                         </View>
 
                         <View style={sectionList}>
-                            <View style={{ width: 1, backgroundColor: '#ddd' }} />
+                            <View style={styles.line} />
                             <View style={styles.dot} />
                             <View style={{ paddingBottom: 15 }}>
                                 <Text style={styles.listTitle}>SHIPPED</Text>
                             </View>
                         </View>
                         <View style={sectionList}>
-                            <View style={{ width: 1, backgroundColor: '#ddd' }} />
+                            <View style={styles.line} />
                             <View style={styles.dot} />
                             <View style={{ paddingBottom: 15 }}>
                                 <Text style={styles.listTitle}>DELEVERED</Text>
@@ -97,7 +96,8 @@ class FindAGift extends Component {
                             width: 150,
                             height: 50,
                             marginTop: 30,
-                            marginBottom: 20
+                            marginBottom: 20,
+                            borderRadius: 3
                         }}
                     />
                 </View>
@@ -124,22 +124,26 @@ const styles = StyleSheet.create({
 
     sectionHead: {
         padding: 15,
-        width: width - 100,
+        width: WIDTH_SCREEN - 100,
         backgroundColor: '#fff',
         alignItems: 'center',
     },
     sectionList: {
         paddingLeft: 5,
         paddingRight: 5,
-        width: width - 100,
-        flexDirection: 'row',
-
+        width: WIDTH_SCREEN - 100,
+        flexDirection: 'row'
     },
 
     listTitle: {
         paddingBottom: 10,
-        fontWeight: 'bold',
-        color: '#11b8ab'
+        fontWeight: '600',
+        color: COLOR.primary
+    },
+
+    line: {
+        width: 1, 
+        backgroundColor: '#ddd'
     },
 
     dot: {

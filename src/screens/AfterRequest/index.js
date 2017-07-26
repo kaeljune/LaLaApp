@@ -7,9 +7,9 @@ import {
 import { Icon } from 'react-native-elements';
 
 import SectionHead from './SectionHead';
-import DoneButton from './DoneButton';
 import SectionMessage from './SectionMessage';
 import LookingButton from './LookingButton';
+import Btn from '../../components/Btn';
 import { COLOR, headerStyle, headerTitleStyle } from '../../config/config';
 
 class AfterRequest extends Component {
@@ -42,7 +42,14 @@ class AfterRequest extends Component {
                 <SectionHead />
                 <LookingButton />
                 <SectionMessage />
-                <DoneButton /> 
+                <Btn
+                    colors={['#11B8AB', '#65C5B9']}
+                    start={[0, 0.5]}
+                    end={[1, 0.5]}
+                    onPress={this.onPress}    
+                >
+                    DONE
+                </Btn>
             </View>
         );
     }
