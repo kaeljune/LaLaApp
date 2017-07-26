@@ -1,23 +1,24 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { FormLabel, FormInput } from 'react-native-elements';
-import { COLOR, WIDTH_SCREEN } from '../config/config';
+import { View, TextInput, Text, StyleSheet } from 'react-native';
+import { COLOR } from '../config/config';
 
 
 const TextField = (props) => (
-    <View>
+    <View style={{ marginBottom: 15 }}>
         {props.label ? (
-             <FormLabel labelStyle={styles.labelStyle}>
-                {props.label}
-            </FormLabel>
+            <Text style={styles.labelStyle}>{props.label}</Text>
         ) : (
             null
         )}
-
-        <FormInput 
+        <TextInput 
             {...props}
-            placeholderTextColor='#A8A8A8'  
-            inputStyle={{ fontSize: 14 }}  
+            style={{ 
+                borderBottomColor: '#ddd',
+                borderBottomWidth: 1,
+                paddingVertical: 5
+            }}
+            placeholderTextColor='#A8A8A8'
+            underlineColorAndroid="transparent"
         />
     </View>
 );

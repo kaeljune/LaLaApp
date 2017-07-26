@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { 
     Text, 
+    View,
     Animated, 
     AsyncStorage, 
     StyleSheet, 
     Image, 
     TouchableOpacity } from 'react-native';
-import { } from 'react-native-elements';
+import { Icon, Button } from 'react-native-elements';
 import _ from 'lodash';
 import { AppLoading, LinearGradient } from 'expo';
+
+import Btn from '../../components/Btn';
 
 import logo from '../../../assets/images/logolarge.png';
 import backgroundImage from '../../../assets/images/bg.png';
@@ -49,40 +52,29 @@ class DefaultScreen extends Component {
                 style={styles.container}
                 source={backgroundImage}
             >
-                <Image source={logo} style={styles.logoStyle} />
-                <Text style={styles.desStyle}>
-                    Empowering global artisans & small businesses by artificial intelligent
-                </Text>
-                <TouchableOpacity onPress={this.onGetStarted}>
-                    <LinearGradient
-                        colors={['#11B8AB', '#65C5B9']}
-                        start={[0, 0.5]}
-                        end={[1, 0.5]}
-                        style={{ 
-                            width: 200, 
-                            height: 50, 
-                            padding: 17, 
-                            alignItems: 'center', 
-                            marginTop: 100 }}
-                    >
-                        <Text
-                            style={{
-                                backgroundColor: 'transparent',
-                                fontSize: 14,
-                                fontWeight: '500',
-                                color: '#FFFFFF',
-                            }}
-                        >
-                            START NOW
-                        </Text>
-                    </LinearGradient>
-                </TouchableOpacity>
-                <Text style={styles.textStyle}>
-                    <Text>Already have an account? </Text>
-                    <Text style={{ fontWeight: '600' }} onPress={this.onSignIn}>
-                        Sign in
+                <View>
+                    <Image source={logo} style={styles.logoStyle} />
+                </View>
+                <View>
+                    <Text style={styles.desStyle}>
+                        Empowering global artisans & small businesses by artificial intelligent
                     </Text>
-                </Text>
+                </View>
+                
+                <View style={{ marginBottom: HEIGHT_SCREEN / 6, }}>
+                    <Btn 
+                        title="START NOW"
+                        bgColor="#11b8ab"
+                        onPress={this.onGetStarted}
+                    />
+
+                     <Text style={styles.textStyle}>
+                        <Text>Already have an account? </Text>
+                        <Text style={{ fontWeight: '600' }} onPress={this.onSignIn}>
+                            Sign in
+                        </Text>
+                    </Text>
+                </View>
             </Animated.Image>
         );
     }
@@ -93,6 +85,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         resizeMode: 'cover',
+        justifyContent: 'space-between',
         width: WIDTH_SCREEN
     },
     logoStyle: {
@@ -100,7 +93,7 @@ const styles = StyleSheet.create({
         width: 275,
         //height: 40,
         marginTop: HEIGHT_SCREEN / 5,
-        marginBottom: HEIGHT_SCREEN / 6,
+        // marginBottom: HEIGHT_SCREEN / 6,
     },
     desStyle: {
         textAlign: 'center',

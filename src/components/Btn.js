@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Icon, Button } from 'react-native-elements';
 import { LinearGradient } from 'expo';
 
 const Btn = (props) => {
     const { wrapBtn, linearStyle, btnText } = styles;
     return (
         <View style={wrapBtn}>
-            <TouchableOpacity onPress={props.onPress}>
+            {/* <TouchableOpacity onPress={props.onPress}>
                 <LinearGradient 
                     colors={props.colors}
                     start={props.start}
@@ -15,7 +16,20 @@ const Btn = (props) => {
                 >
                     <Text style={btnText}>{props.children}</Text>
                 </LinearGradient>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+
+            <View style={styles.wrapBtn}>
+                <Button 
+                    raise
+                    icon={props.icon ? props.icon : null}
+                    title={props.title}
+                    backgroundColor={props.bgColor}
+                    fontWeight="600"
+                    borderRadius={3}
+                    buttonStyle={styles.btnStyle}
+                    onPress={props.onPress}
+                />
+            </View>
         </View>
     );
 };
@@ -27,13 +41,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    linearStyle: {
+    btnStyle: {
         minWidth: 150,
         height: 50,
-        flexDirection: 'column',
         justifyContent: 'center',
         paddingHorizontal: 20,
-        alignItems: 'center',
+        alignItems: 'center'
     },
     btnText: {
         color: '#fff',

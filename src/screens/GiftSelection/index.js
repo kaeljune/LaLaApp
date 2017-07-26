@@ -105,7 +105,7 @@ class GiftSelection extends Component {
 							<TextInput
 								style={{
 									height: 60,
-									
+									textAlign: 'center'
 								}}
 								placeholder="Location..."
 							/>
@@ -208,14 +208,11 @@ class GiftSelection extends Component {
 					</View>
 
 					<View style={{ marginVertical: 30 }}>
-						<Btn
-							colors={['#11B8AB', '#65C5B9']}
-							start={[0, 0.5]}
-							end={[1, 0.5]}
+						<Btn 
+							title="SUBMIT REQUESTS"
+							bgColor="#11b8ab"
 							onPress={this.props.onPress}
-						>
-							SUBMIT REQUESTS
-						</Btn>
+						/>
 					</View>
 				</KeyboardAvoidingView>
 			</ScrollView>

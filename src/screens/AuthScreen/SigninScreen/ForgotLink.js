@@ -6,9 +6,11 @@ import {
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 
+import { COLOR } from '../../../config/config';
+
 class ForgotLink extends Component {
     onForgot = () => {
-     
+        this.props.onForgot();
     }
     render() {
         const { containerStyle, textStyle } = styles;
@@ -16,7 +18,7 @@ class ForgotLink extends Component {
             <View style={containerStyle}>
                 <Icon
                     name='info-outline'
-                    color='#11b8ab'
+                    color={COLOR.primary}
                     size={14}
                     onPress={this.onForgot}
                 />
@@ -34,12 +36,11 @@ class ForgotLink extends Component {
 const styles = StyleSheet.create({
     containerStyle: {
         flexDirection: 'row', 
-        alignSelf: 'flex-end', 
-        marginRight: 20, 
-        marginTop: 10
+        alignSelf: 'flex-end',
+        marginBottom: 30
     },
     textStyle: {
-        color: '#11b8ab',
+        color: COLOR.primary,
          fontSize: 12, 
          fontWeight: '300', 
          marginLeft: 5
