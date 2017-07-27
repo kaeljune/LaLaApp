@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { View, Text, 
+    StyleSheet, KeyboardAvoidingView, ScrollView, AsyncStorage, Alert } from 'react-native';
 import { connect } from 'react-redux';
-import { Icon, FormLabel, FormInput } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import {
     emailLogin, emailChanged, passwordChanged,
     phoneChanged, nameChanged,
 } from '../../../actions';
 
-import GradientButton from '../../../components/GradientButton';
 import { Spinner } from '../../../components/Spinner';
 import {
     HEIGHT_SCREEN, COLOR,
     headerStyle, headerTitleStyle
 } from '../../../config/config';
-import FacebookLogin from '../../../components/FacebookLogin';
 import SigninLink from './SigninLink';
 import LinkTerm from './LinkTerm';
 import TextField from '../../../components/TextField';
@@ -128,7 +127,7 @@ class SignupScreen extends Component {
                             <Btn 
                                 title="FACEBOOK"
                                 bgColor="#3B5998"
-                                onPress={() => { alert('loginface'); }}
+                                onPress={() => { Alert('loginface'); }}
                             />
                             <SigninLink onSignIn={this.onSignIn} />
                         </View>

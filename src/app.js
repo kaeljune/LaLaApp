@@ -89,7 +89,6 @@ class App extends Component {
       isSignedOut: {
         screen: StackNavigator({    
           giftselection: { screen: GiftSelection },
-
           default: { screen: DefaultScreen },
           signup: { screen: SignupScreen },
           forgot: { screen: ForgotScreen },

@@ -6,10 +6,9 @@ import {
     AsyncStorage, 
     StyleSheet, 
     Image, 
-    TouchableOpacity } from 'react-native';
-import { Icon, Button } from 'react-native-elements';
+} from 'react-native';
 import _ from 'lodash';
-import { AppLoading, LinearGradient } from 'expo';
+import { AppLoading } from 'expo';
 
 import Btn from '../../components/Btn';
 
