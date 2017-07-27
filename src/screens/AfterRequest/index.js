@@ -7,7 +7,7 @@ import {
 import { Icon } from 'react-native-elements';
 
 import SectionHead from './SectionHead';
-import SectionMessage from './SectionMessage';
+import SectionMessage from '../../components/SectionMessage';
 import LookingButton from './LookingButton';
 import Btn from '../../components/Btn';
 import { COLOR, headerStyle, headerTitleStyle } from '../../config/config';

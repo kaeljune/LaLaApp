@@ -15,6 +15,7 @@ import SigninScreen from './screens/AuthScreen/SigninScreen';
 import SignupScreen from './screens/AuthScreen/SignupScreen';
 import ProfileScreen from './screens/AuthScreen/ProfileScreen';
 import ForgotScreen from './screens/AuthScreen/ForgotScreen';
+import GiveAGift from './screens/GiveAGift';
 import GiftSelection from './screens/GiftSelection';
 import AfterRequest from './screens/AfterRequest';
 import FindAGift from './screens/FindAGift';
@@ -88,8 +89,8 @@ class App extends Component {
     const MainNavigator = TabNavigator({
       isSignedOut: {
         screen: StackNavigator({    
-          mainGift: { screen: MainScreen },
           giftselection: { screen: GiftSelection },
+          giveagift: { screen: GiveAGift },
 
           default: { screen: DefaultScreen },
           welcome: { screen: WelcomeScreen },
@@ -112,6 +113,7 @@ class App extends Component {
               mainGift: { screen: MainScreen },
               setFormRequest: { screen: SetFormRequest },
               setLocation: { screen: SetLocation },
+              giveagift: { screen: GiveAGift },
               giftselection: { screen: GiftSelection },
               checkout: { screen: Checkout },
             })

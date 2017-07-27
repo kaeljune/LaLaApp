@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-import { WIDTH_SCREEN } from '../../config/config';
+import { WIDTH_SCREEN } from '../config/config';
 
 class SectionMessage extends Component {
     render() {
