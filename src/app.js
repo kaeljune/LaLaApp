@@ -15,6 +15,7 @@ import SigninScreen from './screens/AuthScreen/SigninScreen';
 import SignupScreen from './screens/AuthScreen/SignupScreen';
 import ProfileScreen from './screens/AuthScreen/ProfileScreen';
 import ForgotScreen from './screens/AuthScreen/ForgotScreen';
+import GiveAGift from './screens/GiveAGift';
 import GiftSelection from './screens/GiftSelection';
 import AfterRequest from './screens/AfterRequest';
 import FindAGift from './screens/FindAGift';
@@ -89,6 +90,11 @@ class App extends Component {
       isSignedOut: {
         screen: StackNavigator({    
           giftselection: { screen: GiftSelection },
+<<<<<<< HEAD
+=======
+          giveagift: { screen: GiveAGift },
+
+>>>>>>> b542720630d5fe3298509acda139cba12463d5da
           default: { screen: DefaultScreen },
           signup: { screen: SignupScreen },
           forgot: { screen: ForgotScreen },
@@ -111,6 +117,7 @@ class App extends Component {
               mainGift: { screen: MainScreen },
               setFormRequest: { screen: SetFormRequest },
               setLocation: { screen: SetLocation },
+              giveagift: { screen: GiveAGift },
               giftselection: { screen: GiftSelection },
               checkout: { screen: Checkout },
             })
