@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
-import { Icon, Button } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
+
+import Btn from '../../components/Btn';
 
 import avatar from '../../../assets/images/avatar.png';
-import { WIDTH_SCREEN, COLOR } from '../../config/config';
+import { WIDTH_SCREEN, COLOR, headerStyle, headerTitleStyle } from '../../config/config';
 
 class FindAGift extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'Find a Gift',
-        headerLeft: <Icon
-            name='chevron-left'
-            color={COLOR.primary}
-            onPress={() => navigation.goBack()}
-        />,
+        headerStyle, 
+        headerTitleStyle,
+        // headerLeft: <Icon
+        //     name='chevron-left'
+        //     color={COLOR.primary}
+        //     onPress={() => navigation.goBack()}
+        // />,
         headerRight: <View style={{ flexDirection: 'row', alignItems: 'center', paddingRight: 15 }}>
             <Icon
                 size={15}
@@ -86,19 +90,10 @@ class FindAGift extends Component {
 
                 </View>
 
-                <View style={{ alignItems: 'center' }}>
-                    <Button
-                        raise
+                <View style={{ alignItems: 'center', marginVertical: 30 }}>
+                    <Btn 
                         title="DONE"
-                        icon={{ name: 'done', size: 20 }}
-                        backgroundColor="#11b8ab"
-                        buttonStyle={{
-                            width: 150,
-                            height: 50,
-                            marginTop: 30,
-                            marginBottom: 20,
-                            borderRadius: 3
-                        }}
+                        bgColor={COLOR.primary}
                     />
                 </View>
             </ScrollView>

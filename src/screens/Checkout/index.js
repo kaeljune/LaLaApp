@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-import { COLOR, headerStyle, headerTitleStyle } from '../../config/config';
+import { COLOR, WIDTH_SCREEN , headerStyle, headerTitleStyle } from '../../config/config';
 
 import Feature from './Feature';
 import CheckoutButton from './CheckoutButton';
 import ProductList from './ProductList';
-import Btn from '../../components/Btn';
 
 class Checkout extends Component {
     static navigationOptions = ({ navigation }) => ({
@@ -37,19 +36,42 @@ class Checkout extends Component {
     })
     render() {
         return (
-            <ScrollView style={styles.wraper}>
-                <Feature />
-                <ProductList />
-                <CheckoutButton /> 
-            </ScrollView>
+            <View>
+                <ScrollView contentContainerStyle={styles.wraper}>
+                    <Feature />
+                    <ProductList />
+                    
+                </ScrollView>
+                <View style={styles.bottomCheckout}>
+                    <View style={{ marginLeft: 15 }}>
+                         <Text style={{ fontWeight: '100', fontSize: 10, marginBottom: 3 }}>Total</Text> 
+                        <Text style={{ fontSize: 18, fontWeight: '900', color: COLOR.secondary }}>$90000</Text>
+                    </View>
+                    <CheckoutButton />
+                </View>
+            </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
     wraper: {
-        flex: 1
+        // flex: 1,
+        paddingBottom: 69
     },
+    bottomCheckout: {
+        position: 'absolute', 
+        bottom: 0, 
+        left: 0, 
+        backgroundColor: '#fff', 
+        width: WIDTH_SCREEN,
+        borderTopColor: '#ddd',
+        borderTopWidth: 1,
+        height: 70,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    }
 });
 
 export default Checkout;

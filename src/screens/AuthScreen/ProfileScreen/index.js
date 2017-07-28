@@ -18,14 +18,14 @@ import SignoutButton from './SignoutButton';
 class ProfileScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'Account',
-        headerTintColor: COLOR.primaryFont,
-        headerLeft: <Icon
-            name='chevron-left'
-            color={COLOR.primary}
-            size={24}
-            style={{ marginLeft: 15 }}
-            onPress={() => navigation.goBack()}
-        />,
+        headerTintColor: COLOR.primary,
+        // headerLeft: <Icon
+        //     name='chevron-left'
+        //     color={COLOR.primary}
+        //     size={24}
+        //     style={{ marginLeft: 15 }}
+        //     onPress={() => navigation.goBack()}
+        // />,
         headerRight:
         <View 
             style={{ 
@@ -38,10 +38,10 @@ class ProfileScreen extends Component {
             <Icon
                 name='create'
                 size={15}
-                color='#FF5700'
+                color={COLOR.secondary}
                 onPress={() => navigation.goBack()}
             />
-            <Text style={{ marginLeft: 5, color: '#FF5700' }}>Edit</Text>
+            <Text style={{ marginLeft: 5, color: COLOR.secondary }}>Edit</Text>
         </View>,
         headerTitleStyle,
         headerStyle,

@@ -1,60 +1,66 @@
 import React, { Component } from 'react';
-import {
-    View,
-    Text,
-    StyleSheet
-} from 'react-native';
+import { FlatList } from 'react-native';
 
 import ProductItem from './ProductItem';
 
-import { WIDTH_SCREEN, HEIGHT_SCREEN } from '../../config/config';
+const items = [
+    {
+        name: 'Wine bittle holder',
+        price: '500',
+        total: '1',
+    },
+    {
+        name: 'Wine bittle holder',
+        price: '500',
+        total: '1',
+    },
+    {
+        name: 'Wine bittle holder',
+        price: '500',
+        total: '1',
+    },
+    {
+        name: 'Wine bittle holder',
+        price: '500',
+        total: '1',
+    },
+    {
+        name: 'Wine bittle holder',
+        price: '500',
+        total: '1',
+    },
+    {
+        name: 'Wine bittle holder',
+        price: '500',
+        total: '1',
+    },
+    {
+        name: 'Wine bittle holder',
+        price: '500',
+        total: '1',
+    },
+];
 
 class ProductList extends Component {
+
+    renderItem = () => (
+        <ProductItem
+            name="Wine bittle holder"
+            price="500"
+            total="1"
+        />
+    )
+    
     render() {
-        const { listProduct } = styles;
         return (
-            <View style={listProduct}>
-            
-                <ProductItem
-                    name="Wine bittle holder"
-                    price="500"
-                    total="1"
-                />
-                <ProductItem
-                    name="Wine bittle holder"
-                    price="500"
-                    total="1"
-                />
-                <ProductItem
-                    name="Wine bittle holder"
-                    price="500"
-                    total="1"
-                />
-                <ProductItem
-                    name="Wine bittle holder"
-                    price="500"
-                    total="1"
-                />
-                <ProductItem
-                    name="Wine bittle holder"
-                    price="500"
-                    total="1"
-                />
-                <ProductItem
-                    name="Wine bittle holder"
-                    price="500"
-                    total="1"
-                />
-                
-            </View>
+            <FlatList 
+                showsVerticalScrollIndicator={false}
+                data={items}
+                keyExtractor={(item) => items.indexOf(item)}
+                renderItem={this.renderItem}
+            />
         );
     }
 }
-
-const styles = StyleSheet.create({
-    listProduct: {
-        backgroundColor: '#fff',
-    }
-});
 
 export default ProductList;

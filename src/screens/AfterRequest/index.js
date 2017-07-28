@@ -42,14 +42,10 @@ class AfterRequest extends Component {
                 <SectionHead />
                 <LookingButton />
                 <SectionMessage />
-                <Btn
-                    colors={['#11B8AB', '#65C5B9']}
-                    start={[0, 0.5]}
-                    end={[1, 0.5]}
-                    onPress={this.onPress}    
-                >
-                    DONE
-                </Btn>
+                <Btn 
+                    title="DONE"
+                    bgColor={COLOR.primary}
+                />
             </View>
         );
     }

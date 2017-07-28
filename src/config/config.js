@@ -16,11 +16,13 @@ const COLOR = {
 
 const headerTitleStyle = {
     fontSize: 17,
+    // alignSelf: 'center',
+    color: '#313113'
 };
 const headerStyle = {
-    paddingTop: 'auto',
+    // paddingTop: 'auto',
+    // paddingHorizontal: 10,
     height: HEIGHT_HEADER,
-    backgroundColor: '#FFFFFF',
     justifyContent: 'center',
 };
 

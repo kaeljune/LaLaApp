@@ -10,14 +10,12 @@ import SignupLink from './SignupLink';
 class SigninScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'Sign in',
-        headerTintColor: COLOR.primaryFont,
-        headerLeft: <Icon
-            name='chevron-left'
-            color={COLOR.primary}
-            size={24}
-            style={{ marginLeft: 15 }}
-            onPress={() => navigation.goBack()}
-        />,
+        headerTintColor: COLOR.primary,
+        // headerLeft: <Icon
+        //     name='chevron-left'
+        //     color={COLOR.primary}
+        //     onPress={() => navigation.goBack()}
+        // />,
         headerTitleStyle,
         headerStyle,
     })

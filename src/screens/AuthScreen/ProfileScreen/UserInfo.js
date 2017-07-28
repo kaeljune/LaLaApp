@@ -14,7 +14,7 @@ const listProfile = [
 ];
 
 const UserInfo = () => (
-    <List>
+    <List containerStyle={styles.list}>
         {
             listProfile.map((item, i) => (
                 <ListItem
@@ -23,7 +23,7 @@ const UserInfo = () => (
                     subtitle={
                         <View style={styles.row}>
                             <Text style={styles.label}>{item.title}</Text>
-                            <Text>{item.rightTitle}</Text>
+                            <Text style={{ fontSize: 18 }}>{item.rightTitle}</Text>
                         </View>
                     }
                 />
@@ -33,9 +33,13 @@ const UserInfo = () => (
 );
 
 const styles = StyleSheet.create({
+    list: {
+    },
     row: {
+        padding: 10,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     label: {
         fontSize: 12,
