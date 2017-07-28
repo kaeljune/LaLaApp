@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions, Image, TextInput } from 'react-native';
-import { Icon, Button } from 'react-native-elements';
+import { View, Text, StyleSheet, Image, TextInput } from 'react-native';
+import { Icon, Avatar } from 'react-native-elements';
+import Btn from '../../components/Btn';
+import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';
 import avatar from '../../../assets/images/avatar.png';
-
-const { width, height } = Dimensions.get('window');
 
 class WriteANote extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'Write a Note',
-        headerLeft: <Icon
-            name='chevron-left'
-            color='#11b8ab'
-            onPress={() => navigation.goBack()}
-        />
+        headerStyle, 
+        headerTitleStyle,
+        // headerLeft: <Icon
+        //     name='chevron-left'
+        //     color='#11b8ab'
+        //     onPress={() => navigation.goBack()}
+        // />
     })
 
     render() {
@@ -20,8 +22,14 @@ class WriteANote extends Component {
             <View style={styles.wraper}>
                 <View style={[styles.sectionContainer]}>
                     <View style={styles.sectionHead}>
-                        <Image style={{ width: 100, height: 100, marginBottom: 15 }} source={avatar} />
-                        <Text>Hai Nguyen</Text>
+                        <Avatar
+                            height={120}
+                            width={120}
+                            rounded
+                            containerStyle={{ marginBottom: 15 }}
+                            source={avatar}
+                        />
+                        <Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 10 }}>Hai Nguyen</Text>
                         <Text>for Birthday</Text>
                     </View>
 
@@ -35,36 +43,31 @@ class WriteANote extends Component {
                        
                     </View>
 
-                    <View
-style={{
-                        top: -17,
-                        padding: 15,
-                        width: width - 60,
-                        alignItems: 'center',
-                        backgroundColor: '#fff'
-                    }}
+                    <View 
+                        style={{
+                            top: -17,
+                            padding: 15,
+                            width: WIDTH_SCREEN - 60,
+                            alignItems: 'center',
+                            backgroundColor: '#fff'
+                        }}
                     >
                         <Text style={{ color: '#11b8ab', marginTop: 30 }}>HANDWRITTEN NOTE</Text>
                         <TextInput 
                             multiline
-                            style={{ textAlign: 'center', width: width - 90 }}
+                            style={{ textAlign: 'center', width: WIDTH_SCREEN - 90 }}
                             numberOfLines={7}
+                            underlineColorAndroid="transparent"
                             placeholder="Why are you giving this gift?"
                         />
                     </View>
                 </View>
 
-                <View style={{ alignItems: 'center' }}>
-                    <Button
-                        raise
+                <View style={{ alignItems: 'center', marginTop: 30 }}>
+                        
+                    <Btn 
                         title="NEXT"
-                        backgroundColor="#11b8ab"
-                        buttonStyle={{
-                            width: 150,
-                            height: 50,
-                            marginTop: 20,
-                            marginBottom: 20
-                        }}
+                        bgColor={COLOR.primary}
                     />
                 </View>
 
@@ -85,7 +88,7 @@ const styles = StyleSheet.create({
     },
     sectionHead: {
         padding: 15,
-        width,
+        width: WIDTH_SCREEN,
         alignItems: 'center'
     },
 });

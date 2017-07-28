@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { Icon, CheckBox } from 'react-native-elements';
 
-const { width } = Dimensions.get('window');
+import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';
+
 class DeliveryBlank extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'Delivery',
-        headerLeft: <Icon
-            name='chevron-left'
-            color='#11b8ab'
-            onPress={() => navigation.goBack()}
-        />
+        headerStyle, 
+        headerTitleStyle
+        // headerLeft: <Icon
+        //     name='chevron-left'
+        //     color='#11b8ab'
+        //     onPress={() => navigation.goBack()}
+        // />
     })
 
     render() {
@@ -24,7 +27,7 @@ class DeliveryBlank extends Component {
                             iconType='material'
                             uncheckedIcon='' checked
                             textStyle={{ fontWeight: 'normal', fontSize: 14 }}
-                            containerStyle={{ borderColor: 'transparent', padding: 0, backgroundColor: 'transparent' }}
+                            containerStyle={{ borderColor: 'transparent', backgroundColor: 'transparent' }}
                             title='48th Floor, Bitexco Financial Tower, 02 Hai Trieu street, Ben Nghe Ward, Distrcit 1, Ho Chi Minh City.'
                         />
 
@@ -45,7 +48,7 @@ class DeliveryBlank extends Component {
 
                         <TextInput
                             style={{ 
-                                width: width - 90, 
+                                width: WIDTH_SCREEN - 90, 
                                 marginLeft: 15 
                             }} 
                             placeholder="Add new location"

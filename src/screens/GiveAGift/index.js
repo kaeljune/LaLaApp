@@ -12,7 +12,6 @@ import { COLOR, headerStyle, headerTitleStyle } from '../../config/config';
 
 import SlideSelect from './SlideSelect';
 import Btn from '../../components/Btn';
-import ButtonSeclect from './ButtonSelect';
 import TagSelect from './TagSelect';
 import BoxSelect from './BoxSelect';
 import avatar from '../../../assets/images/avatar.png';

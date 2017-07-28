@@ -9,9 +9,6 @@ import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config
 class DeliveryBlank extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'Delivery',
-        headerStyle: {
-            paddingLeft: 10
-        },
         headerStyle, 
         headerTitleStyle
         // headerLeft: <Icon
