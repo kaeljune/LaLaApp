@@ -88,9 +88,15 @@ class App extends Component {
     });
     const MainNavigator = TabNavigator({
       isSignedOut: {
+<<<<<<< HEAD
         screen: StackNavigator({   
           giveagift: { screen: GiveAGift },
           giftselection: { screen: GiftSelection },
+=======
+        screen: StackNavigator({    
+          // deliveryblank: { screen: DeliveryBlank },
+
+>>>>>>> 60b62c8bb8726139af2a4461e35293ce8caed8ec
           default: { screen: DefaultScreen },
           signup: { screen: SignupScreen },
           forgot: { screen: ForgotScreen },

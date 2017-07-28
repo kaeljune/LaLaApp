@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TextInput, Switch } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import Btn from '../../components/Btn';
-import { WIDTH_SCREEN } from '../../config/config';
+import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';
 
 
 class DeliveryBlank extends Component {
@@ -12,11 +12,13 @@ class DeliveryBlank extends Component {
         headerStyle: {
             paddingLeft: 10
         },
-        headerLeft: <Icon
-            name='chevron-left'
-            color='#11b8ab'
-            onPress={() => navigation.goBack()}
-        />
+        headerStyle, 
+        headerTitleStyle
+        // headerLeft: <Icon
+        //     name='chevron-left'
+        //     color={COLOR.primary}
+        //     onPress={() => navigation.goBack()}
+        // />
     })
 
     render() {
@@ -106,10 +108,9 @@ class DeliveryBlank extends Component {
 
                 <View style={{ flex: 2 }}>
                     <Btn 
-                        colors={['#11B8AB', '#65C5B9']}
-                        start={[0, 0.5]}
-                        end={[1, 0.5]}
-                    >CHECKOUT</Btn>
+                        title="CHECKOUT"
+                        bgColor={COLOR.primary}
+                    />
                 </View>
             </View>
         );
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
     },
     labelStyle: {
         color: '#454553',
-        fontSize: 12,
+        fontSize: 10,
         marginRight: 10
     }
 });

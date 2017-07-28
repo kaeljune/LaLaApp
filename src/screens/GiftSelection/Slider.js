@@ -5,8 +5,7 @@ import {
     ScrollView, 
     Text, 
     Image, 
-    StyleSheet,
-    Button
+    StyleSheet
 } from 'react-native';
 
 import Btn from '../../components/Btn';
@@ -31,11 +30,6 @@ class Slider extends Component {
     onLayout = (index) => {
         this.flatListRef.scrollToIndex({ animated: true, index  });
     }
-
-    // scrollToIndex = () => {
-    //     const randomIndex = 6;
-    //      this.flatListRef.scrollToIndex({ animated: true, index: randomIndex });
-    // }
 
     renderItem = ({ item }) => (
             <View 
@@ -65,23 +59,18 @@ class Slider extends Component {
             </View>
         )
 
-    
-
     render() {
         const { items } = this.props;
         
         return (
             <View onChanged={() => this.onLayout(this.props.index)} style={{ flex: 1, width: WIDTH_SCREEN }}>
                 <FlatList 
-
-                    onTest={this.TestCai}
-
+                    showsVerticalScrollIndicator={false}
                     ref={(ref) => { this.flatListRef = ref; }}
                     horizontal
                     pagingEnabled
                     data={items}
                     keyExtractor={(item) => items.indexOf(item)}
-                    onMomentumScrollEnd={this.onScrollEnd}
                     renderItem={this.renderItem}
                 />
             </View>

@@ -8,28 +8,29 @@ import {
 	StyleSheet
 } from 'react-native';
 import { Avatar, Icon, Slider } from 'react-native-elements';
-import { COLOR } from '../../config/config';
+import { COLOR, headerStyle, headerTitleStyle } from '../../config/config';
 
+import SlideSelect from './SlideSelect';
 import Btn from '../../components/Btn';
 import ButtonSeclect from './ButtonSelect';
 import TagSelect from './TagSelect';
 import BoxSelect from './BoxSelect';
 import avatar from '../../../assets/images/avatar.png';
 
+const sex = ['Female', 'Male', 'Other'];
+const age = ['1-3', '4-6', '7-9', '10-12', '13-15', '16-18'];
+const popular = ['Friend', 'Professional', 'Spouse / Partner', 'Friend', 'Professional', 'Spouse / Partner'];
+
 class GiftSelection extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		title: 'Give a Gifts',
-		headerStyle: {
-			paddingLeft: 5
-		},
-		headerTitleStyle: {
-			alignSelf: 'center'
-		},
-		headerLeft: <Icon
-			name='chevron-left'
-			color={COLOR.primary}
-			onPress={() => navigation.goBack()}
-		/>,
+		headerStyle,
+		headerTitleStyle,
+		// headerLeft: <Icon
+		// 	name='chevron-left'
+		// 	color={COLOR.primary}
+		// 	onPress={() => navigation.goBack()}
+		// />,
 		headerRight: <View style={{ flexDirection: 'row', alignItems: 'center', paddingRight: 15 }}>
 			<Icon
 				size={15}
@@ -56,47 +57,10 @@ class GiftSelection extends Component {
 
 							<Text style={{ marginTop: 15, fontSize: 18, fontWeight: '600' }}>Hai Nguyen</Text>
 						</View>
-						<View style={sectionItem}>
-							<ScrollView horizontal>
-								<ButtonSeclect>Female</ButtonSeclect>
-								<ButtonSeclect>Male</ButtonSeclect>
-								<ButtonSeclect>Other</ButtonSeclect>
-							</ScrollView>
-						</View>
 
-						<View style={sectionItem}>
-							<ScrollView horizontal showsHorizontalScrollIndicator={false}>
-								<ButtonSeclect>1-3</ButtonSeclect>
-								<ButtonSeclect>4-6</ButtonSeclect>
-								<ButtonSeclect>7-9</ButtonSeclect>
-								<ButtonSeclect>10-12</ButtonSeclect>
-								<ButtonSeclect>13-15</ButtonSeclect>
-								<ButtonSeclect>16-18</ButtonSeclect>
-							</ScrollView>
-						</View>
-
-						<View
-							style={{
-								display: 'flex',
-								flexDirection: 'column',
-								justifyContent: 'center',
-								alignItems: 'center',
-								width: '100%',
-								paddingTop: 15,
-								paddingBottom: 15
-							}}
-						>
-							<ScrollView horizontal showsHorizontalScrollIndicator={false}>
-								<ButtonSeclect>Professional</ButtonSeclect>
-								<ButtonSeclect>Friend</ButtonSeclect>
-								<ButtonSeclect>Spouse / Partner</ButtonSeclect>
-								<ButtonSeclect>Professional</ButtonSeclect>
-								<ButtonSeclect>Friend</ButtonSeclect>
-								<ButtonSeclect>Spouse / Partner</ButtonSeclect>
-								<ButtonSeclect>Professional</ButtonSeclect>
-								<ButtonSeclect>Friend</ButtonSeclect>
-							</ScrollView>
-						</View>
+						<SlideSelect sex={sex} />
+						<SlideSelect sex={age} />
+						<SlideSelect sex={popular} />
 					</View>
 
 					{/* <View style={sectionPad}>
@@ -210,7 +174,7 @@ class GiftSelection extends Component {
 					<View style={{ marginVertical: 30 }}>
 						<Btn 
 							title="SUBMIT REQUESTS"
-							bgColor="#11b8ab"
+							bgColor={COLOR.primary}
 							onPress={this.props.onPress}
 						/>
 					</View>

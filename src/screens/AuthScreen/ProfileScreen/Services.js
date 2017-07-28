@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { List, ListItem } from 'react-native-elements';
 
+import { COLOR } from '../../../config/config';
+
 const listLink = [
     {
         title: 'Payment',
@@ -25,6 +27,7 @@ class Services extends Component {
                         <ListItem
                             key={i}
                             title={item.title}
+                            chevronColor={COLOR.secondary}
                         //leftIcon={{ name: item.icon }}
                         //rightIcon={{ name: 'play-arrow' }}
                         />

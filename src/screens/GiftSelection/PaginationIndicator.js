@@ -50,15 +50,14 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around', 
     },
     base: {
-        paddingTop: 5,
-        width: 30, 
-        height: 30,
+        width: 20, 
+        height: 20,
         textAlign: 'center',
         borderRadius: 20    
     },
     number: {
         textAlign: 'center',
-        fontWeight: '500'
+        fontSize: 10
     },
     selected: {
         color: '#fff',

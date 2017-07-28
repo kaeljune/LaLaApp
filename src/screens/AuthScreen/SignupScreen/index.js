@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, 
     StyleSheet, KeyboardAvoidingView, ScrollView, AsyncStorage, Alert } from 'react-native';
 import { connect } from 'react-redux';
-import { Icon } from 'react-native-elements';
 import {
     emailLogin, emailChanged, passwordChanged,
     phoneChanged, nameChanged,
@@ -21,14 +20,12 @@ import Btn from '../../../components/Btn';
 class SignupScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'Sign up',
-        headerTintColor: '#313131',
-        headerLeft: <Icon
-            name='chevron-left'
-            color={COLOR.primary}
-            size={24}
-            style={{ marginLeft: 15 }}
-            onPress={() => navigation.goBack()}
-        />,
+        headerTintColor: COLOR.primary,
+        // headerLeft: <Icon
+        //     name='chevron-left'
+        //     color={COLOR.primary}
+        //     onPress={() => navigation.goBack()}
+        // />,
         headerTitleStyle,
         headerStyle,
     })
@@ -51,6 +48,10 @@ class SignupScreen extends Component {
     onPasswordChange = (text) => {
         this.props.passwordChanged(text);
     }
+    onPasswordConfirm = (text) => {
+        this.props.passwordChanged(text);
+    }
+    
     onPhoneChange = (text) => {
         this.props.phoneChanged(text);
     }
@@ -75,7 +76,7 @@ class SignupScreen extends Component {
         return (
             <Btn 
                 title="SIGN IN"
-                bgColor="#11b8ab"
+                bgColor={COLOR.primary}
                 onPress={this.onButtonPress}
             />
         );
@@ -86,7 +87,7 @@ class SignupScreen extends Component {
         return (
             <ScrollView contentContainerStyle={containerStyle}>
                 <KeyboardAvoidingView behavior={'padding'}>
-                    <View style={{ }}>
+                    <View>
                         <View>
                             <TextField 
                                 label="FULL NAME"
@@ -117,6 +118,16 @@ class SignupScreen extends Component {
                                 value={this.props.password}
                                 onChangeText={this.onPasswordChange}
                             />
+
+                            <TextField 
+                                label="CONFIRM PASSWORD"
+                                secureTextEntry
+                                placeholder="Confirm your password"
+
+                                keyboardType='default'
+                                value={this.props.password}
+                                onChangeText={this.onPasswordChange}
+                            />
                         </View>
 
                         <LinkTerm onTerms={this.props.onTerms} />
@@ -141,7 +152,7 @@ class SignupScreen extends Component {
 
 const styles = StyleSheet.create({
     containerStyle: {
-        height: HEIGHT_SCREEN,
+        minHeight: HEIGHT_SCREEN,
         padding: 20
     }
 });

@@ -1,26 +1,28 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, Image, StyleSheet } from 'react-native';
-import { Icon, Button } from 'react-native-elements';
-
-import GradientButton from '../../components/GradientButton';
+import { Icon } from 'react-native-elements';
 import TextField from '../../components/TextField';
 import Btn from '../../components/Btn';
 
 import logo from '../../../assets/images/logo.png';
-import { COLOR, WIDTH_SCREEN, HEIGHT_SCREEN,  headerStyle, headerTitleStyle } from '../../config/config';
+import { 
+    COLOR, 
+    WIDTH_SCREEN, 
+    HEIGHT_SCREEN, 
+    headerStyle, 
+    headerTitleStyle 
+} from '../../config/config';
 
 class ForgotScreen extends Component {
 
     static navigationOptions = ({ navigation }) => ({
         title: 'Reset Password',
-        headerTintColor: COLOR.primaryFont,
-        headerLeft: <Icon
-            name='chevron-left'
-            color={COLOR.primary}
-            size={24}
-            style={{ marginLeft: 15 }}
-            onPress={() => navigation.goBack()}
-        />,
+        headerTintColor: COLOR.primary,
+        // headerLeft: <Icon
+        //     name='chevron-left'
+        //     color={COLOR.primary}
+        //     onPress={() => navigation.goBack()}
+        // />,
         headerTitleStyle,
         headerStyle,
     })
@@ -88,7 +90,6 @@ const styles = StyleSheet.create({
     container: {
         // flex: 1,
         minHeight: HEIGHT_SCREEN - 90,
-        backgroundColor: COLOR.background,
         alignItems: 'center',
     },
     section: {

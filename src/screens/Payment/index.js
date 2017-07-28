@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { Icon, Button } from 'react-native-elements';
 
-import { WIDTH_SCREEN } from '../../config/config';
+import { WIDTH_SCREEN, COLOR, headerStyle, headerTitleStyle } from '../../config/config';
 
 import visa from '../../../assets/images/visa.png';
-
-
-const { width } = Dimensions.get('window');
 
 class Payment extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'Add  a Credit card',
-        headerLeft: <Icon
-            name='chevron-left'
-            color='#11b8ab'
-            onPress={() => navigation.goBack()}
-        />
+        headerStyle, 
+        headerTitleStyle, 
+        // headerLeft: <Icon
+        //     name='chevron-left'
+        //     color='#11b8ab'
+        //     onPress={() => navigation.goBack()}
+        // />
     })
     render() {
         return (
@@ -52,7 +51,7 @@ class Payment extends Component {
                                 </View>
                                 <View style={styles.rowStyle}>
                                     <View><Text style={styles.labelStyle}>CVV</Text></View>
-                                    <View style={{ width: width / 5, marginLeft: 10 }}>
+                                    <View style={{ width: WIDTH_SCREEN / 5, marginLeft: 10 }}>
                                         <Text style={styles.valueStyle}>567</Text>
                                     </View>
                                 </View>
@@ -73,7 +72,7 @@ class Payment extends Component {
                     <Button
                         raise
                         title="PURCHASES"
-                        backgroundColor="#11b8ab"
+                        backgroundColor={COLOR.primary}
                         buttonStyle={{
                             width: 150,
                             height: 50
@@ -107,9 +106,9 @@ const styles = StyleSheet.create({
     },
     labelStyle: {
         color: '#454553',
-        fontSize: 12,
+        fontSize: 10,
         marginRight: 10,
-        marginTop: 2
+        marginTop: 5
     },
     valueStyle: {
         borderBottomColor: '#ddd',
