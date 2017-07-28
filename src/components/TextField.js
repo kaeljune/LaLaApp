@@ -15,7 +15,8 @@ const TextField = (props) => (
             style={{ 
                 borderBottomColor: '#ddd',
                 borderBottomWidth: 1,
-                paddingVertical: 5
+                paddingVertical: 5,
+                height: 35,
             }}
             placeholderTextColor='#A8A8A8'
             underlineColorAndroid="transparent"

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, Switch } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { } from 'react-native-elements';
 
 import Btn from '../../components/Btn';
 import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';
@@ -9,9 +9,6 @@ import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config
 class DeliveryBlank extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'Delivery',
-        headerStyle: {
-            paddingLeft: 10
-        },
         headerStyle, 
         headerTitleStyle
         // headerLeft: <Icon

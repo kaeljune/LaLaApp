@@ -12,14 +12,14 @@ import { COLOR, headerStyle, headerTitleStyle } from '../../config/config';
 
 import SlideSelect from './SlideSelect';
 import Btn from '../../components/Btn';
-import ButtonSeclect from './ButtonSelect';
 import TagSelect from './TagSelect';
 import BoxSelect from './BoxSelect';
 import avatar from '../../../assets/images/avatar.png';
 
 const sex = ['Female', 'Male', 'Other'];
 const age = ['1-3', '4-6', '7-9', '10-12', '13-15', '16-18'];
-const popular = ['Friend', 'Professional', 'Spouse / Partner', 'Friend', 'Professional', 'Spouse / Partner'];
+const popular = ['Friend', 'Professional', 
+	'Spouse / Partner', 'Friend', 'Professional', 'Spouse / Partner'];
 
 class GiftSelection extends Component {
 	static navigationOptions = ({ navigation }) => ({
@@ -41,6 +41,7 @@ class GiftSelection extends Component {
 			<Text style={{ marginLeft: 5 }}>Edit</Text>
 		</View>
 	})
+	state = { price: null }
 	render() {
 		const { section, sectionItem, sectionPad, sectionTag, sectionTitle } = styles;
 		return (
@@ -99,7 +100,7 @@ class GiftSelection extends Component {
 								marginBottom: 15,
 								textAlign: 'center'
 							}}
-						>$200-500</Text>
+						>${this.state.price ? this.state.price : 0}-${this.state.price + 100}</Text>
 
 						<Slider 	
 							minimumValue={0} 
@@ -115,7 +116,9 @@ class GiftSelection extends Component {
 								borderColor: '#fff',
 								borderWidth: 2
 							}}
-							
+							value={this.state.price}
+							onValueChange={(price) => this.setState({ price })}
+							step={1}
 						/>
 					</View>
 

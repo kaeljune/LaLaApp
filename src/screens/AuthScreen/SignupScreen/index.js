@@ -33,6 +33,7 @@ class SignupScreen extends Component {
         userData: null,
     };
     async componentWillMount() {
+        //await AsyncStorage.removeItem('@userLogin');
         const userData = await AsyncStorage.getItem('@userLogin');
         if (userData) {
             this.setState({ userData });

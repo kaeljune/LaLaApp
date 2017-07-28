@@ -20,7 +20,7 @@ const headerTitleStyle = {
     color: '#313113'
 };
 const headerStyle = {
-    // paddingTop: 'auto',
+    paddingTop: 'auto',
     // paddingHorizontal: 10,
     height: HEIGHT_HEADER,
     justifyContent: 'center',

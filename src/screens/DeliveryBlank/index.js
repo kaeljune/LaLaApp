@@ -24,7 +24,10 @@ class DeliveryBlank extends Component {
                             iconType='material'
                             uncheckedIcon='' checked
                             textStyle={{ fontWeight: 'normal', fontSize: 14 }}
-                            containerStyle={{ borderColor: 'transparent', padding: 0, backgroundColor: 'transparent' }}
+                            containerStyle={{ 
+                                borderColor: 'transparent',
+                                padding: 0, 
+                                backgroundColor: 'transparent' }}
                             title='48th Floor, Bitexco Financial Tower, 02 Hai Trieu street, Ben Nghe Ward, Distrcit 1, Ho Chi Minh City.'
                         />
 

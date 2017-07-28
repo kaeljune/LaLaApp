@@ -88,21 +88,21 @@ class App extends Component {
     });
     const MainNavigator = TabNavigator({
       isSignedOut: {
-<<<<<<< HEAD
-        screen: StackNavigator({   
-          giveagift: { screen: GiveAGift },
+        screen: StackNavigator({  
+          giveagift: { screen: GiveAGift }, 
+          mainGift: { screen: MainScreen },
+          findagift: { screen: FindAGift },
           giftselection: { screen: GiftSelection },
-=======
-        screen: StackNavigator({    
-          // deliveryblank: { screen: DeliveryBlank },
-
->>>>>>> 60b62c8bb8726139af2a4461e35293ce8caed8ec
-          default: { screen: DefaultScreen },
           signup: { screen: SignupScreen },
-          forgot: { screen: ForgotScreen },
-          welcome: { screen: WelcomeScreen },
-          delivery: { screen: Delivery },   
           signin: { screen: SigninScreen },
+          delivery: { screen: Delivery },
+          welcome: { screen: WelcomeScreen }, 
+          default: { screen: DefaultScreen },
+          writeanote: { screen: WriteANote },
+          payment: { screen: Payment },
+          afterrequest: { screen: AfterRequest },
+          deliveryblank: { screen: DeliveryBlank },
+          forgot: { screen: ForgotScreen },
           term: { screen: TermScreen },
         })
       },
@@ -124,10 +124,7 @@ class App extends Component {
               checkout: { screen: Checkout },
             })
           },
-
-
           delivery: { screen: Delivery },
-
           afterrequest: { screen: AfterRequest },
           payment: { screen: Payment },
           deliveryblank: { screen: DeliveryBlank },
