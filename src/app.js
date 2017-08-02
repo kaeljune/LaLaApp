@@ -9,8 +9,8 @@ import { StackNavigator, TabNavigator } from 'react-navigation';
 import store from './store';
 
 import DefaultScreen from './screens/DefaultScreen';
-import WelcomeScreen from './screens/WelcomeScreen';
 import MainScreen from './screens/MainScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
 import SigninScreen from './screens/AuthScreen/SigninScreen';
 import SignupScreen from './screens/AuthScreen/SignupScreen';
 import ProfileScreen from './screens/AuthScreen/ProfileScreen';
@@ -47,7 +47,7 @@ class App extends Component {
       const inputRange = [index - 1, index, index + 1];
       const scaleX = position.interpolate({
         inputRange,
-        outputRange: ([1000, 0, 0]),
+        outputRange: ([1000, 500, 0]),
       });
       return {
         transform: [
@@ -59,7 +59,7 @@ class App extends Component {
       const inputRange = [index - 1, index, index + 1];
       const scaleY = position.interpolate({
         inputRange,
-        outputRange: ([1000, 0, 0]),
+        outputRange: ([1000, 500, 0]),
       });
       return {
         transform: [
@@ -89,19 +89,19 @@ class App extends Component {
     const MainNavigator = TabNavigator({
       isSignedOut: {
         screen: StackNavigator({  
-          giveagift: { screen: GiveAGift }, 
+          deliveryblank: { screen: DeliveryBlank },
+          afterrequest: { screen: AfterRequest },
+          writeanote: { screen: WriteANote },
+          delivery: { screen: Delivery },
+          default: { screen: DefaultScreen },
           mainGift: { screen: MainScreen },
+          giveagift: { screen: GiveAGift }, 
           findagift: { screen: FindAGift },
           giftselection: { screen: GiftSelection },
           signup: { screen: SignupScreen },
           signin: { screen: SigninScreen },
-          delivery: { screen: Delivery },
           welcome: { screen: WelcomeScreen }, 
-          default: { screen: DefaultScreen },
-          writeanote: { screen: WriteANote },
           payment: { screen: Payment },
-          afterrequest: { screen: AfterRequest },
-          deliveryblank: { screen: DeliveryBlank },
           forgot: { screen: ForgotScreen },
           term: { screen: TermScreen },
         })
