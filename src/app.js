@@ -88,17 +88,14 @@ class App extends Component {
     });
     const MainNavigator = TabNavigator({
       isSignedOut: {
-        screen: StackNavigator({  
+        screen: StackNavigator({    
+          signup: { screen: SignupScreen },
           deliveryblank: { screen: DeliveryBlank },
-          afterrequest: { screen: AfterRequest },
-          writeanote: { screen: WriteANote },
-          delivery: { screen: Delivery },
           default: { screen: DefaultScreen },
           mainGift: { screen: MainScreen },
           giveagift: { screen: GiveAGift }, 
           findagift: { screen: FindAGift },
           giftselection: { screen: GiftSelection },
-          signup: { screen: SignupScreen },
           signin: { screen: SigninScreen },
           welcome: { screen: WelcomeScreen }, 
           payment: { screen: Payment },
@@ -159,9 +156,7 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F8F8',
-    // alignItems: 'center',
-    // justifyContent: 'space-around',
+    backgroundColor: '#F8F8F8'
   },
 });
 

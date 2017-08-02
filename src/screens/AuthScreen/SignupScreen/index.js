@@ -154,7 +154,8 @@ class SignupScreen extends Component {
 const styles = StyleSheet.create({
     containerStyle: {
         minHeight: HEIGHT_SCREEN,
-        padding: 20
+        padding: 20,
+        backgroundColor: '#f8f8f8'
     }
 });
 
