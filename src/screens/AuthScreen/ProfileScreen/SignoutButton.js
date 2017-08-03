@@ -1,24 +1,25 @@
-import React, { Component } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import Btn from '../../../components/Btn';
 
-const SignoutButton = () => 
-    <TouchableOpacity>        
-        <View style={styles.wrapBtn}>
-            <Text>Sign Out</Text>
-        </View>
-    </TouchableOpacity>;
+import { COLOR } from '../../../config/config';
+
+function SignoutButton() {
+	return (<View style={styles.wrapBtn}>
+			<Btn
+				bgColor={COLOR.primary}
+				title="Sign Out"
+			/>
+		</View>);
+}
 
 const styles = StyleSheet.create({
-    wrapBtn: {
-        backgroundColor: '#fff',
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 20,
-        borderColor: '#ddd',
-        borderTopWidth: 1,
-        borderBottomWidth: 1
-    }
+	wrapBtn: {
+		height: 50,
+		alignItems: 'center',
+		justifyContent: 'center',
+		marginTop: 20
+	}
 });
 
 export default SignoutButton;

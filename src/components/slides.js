@@ -56,7 +56,6 @@ class Slides extends Component {
                 pagingEnabled
             >
                 {this.renderSlides()}
-                
             </ScrollView>
         );
     }

@@ -88,10 +88,8 @@ class App extends Component {
     });
     const MainNavigator = TabNavigator({
       isSignedOut: {
-        screen: StackNavigator({    
-          signup: { screen: SignupScreen },
-          deliveryblank: { screen: DeliveryBlank },
-          signup: { screen: SignupScreen },
+        screen: StackNavigator({   
+          giveagift: { screen: GiveAGift },
 
           default: { screen: DefaultScreen },
           welcome: { screen: WelcomeScreen },
@@ -119,7 +117,6 @@ class App extends Component {
               checkout: { screen: Checkout },
             })
           },
-
 
           delivery: { screen: Delivery },
 

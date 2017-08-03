@@ -10,7 +10,7 @@ const CheckoutButton = (props) =>
         title="CHECKOUT"
         bgColor="#11B8AB"
         onPress={props.onPress}
-    />
+    />;
     
 
 export default CheckoutButton;

@@ -11,14 +11,22 @@ import { Avatar, Icon, Slider } from 'react-native-elements';
 import { COLOR, headerStyle, headerTitleStyle } from '../../config/config';
 
 import SlideSelect from './SlideSelect';
+import SlideBox from './SlideBox';
 import Btn from '../../components/Btn';
 import TagSelect from './TagSelect';
-import BoxSelect from './BoxSelect';
 import avatar from '../../../assets/images/avatar.png';
 
 const sex = ['Female', 'Male', 'Other'];
 const age = ['1-3', '4-6', '7-9', '10-12', '13-15', '16-18'];
 const popular = ['Friend', 'Professional', 'Spouse / Partner', 'Friend', 'Professional', 'Spouse / Partner'];
+const occasion = [
+	{ id: 1, text: 'Anniversary', color: '#FF3D7F' }, 
+	{ id: 2, text: 'Apology', color: '#B23DFF' }, 
+	{ id: 3, text: 'Baby', color: '#B1068F' },
+	{ id: 4, text: 'Anniversary', color: '#FF3D7F' }, 
+	{ id: 5, text: 'Apology', color: '#B23DFF' }, 
+	{ id: 6, text: 'Baby', color: '#B1068F' }
+];
 
 class GiftSelection extends Component {
 	static navigationOptions = ({ navigation }) => ({
@@ -57,9 +65,9 @@ class GiftSelection extends Component {
 							<Text style={{ marginTop: 15, fontSize: 18, fontWeight: '600' }}>Hai Nguyen</Text>
 						</View>
 
-						<SlideSelect sex={sex} />
-						<SlideSelect sex={age} />
-						<SlideSelect sex={popular} />
+						<SlideSelect items={sex} />
+						<SlideSelect items={age} />
+						<SlideSelect items={popular} />
 					</View>
 
 					{/* <View style={sectionPad}>
@@ -77,15 +85,7 @@ class GiftSelection extends Component {
 
 					<View style={section}>
 						<Text style={[sectionTitle, { margin: 15 }]}>Occasion</Text>
-
-						<ScrollView horizontal showsHorizontalScrollIndicator={false}>
-							<BoxSelect color="#FF3D7F">Anniversary</BoxSelect>
-							<BoxSelect color="#B23DFF">Apology</BoxSelect>
-							<BoxSelect color="#B1068F">Baby</BoxSelect>
-							<BoxSelect color="#FF3D7F">Anniversary</BoxSelect>
-							<BoxSelect color="#B23DFF">Apology</BoxSelect>
-							<BoxSelect color="#B1068F">Baby</BoxSelect>
-						</ScrollView>
+						<SlideBox occasion={occasion} />
 					</View>
 
 					<View style={sectionPad}>
@@ -105,14 +105,14 @@ class GiftSelection extends Component {
 							maximumValue={100} 
 							minimumTrackTintColor={COLOR.primary}
 							maximumTrackTintColor='#eee'
-							thumbTintColor={COLOR.primary}
+							thumbTintColor="#fff"
 							thumbTouchSize={{
 								width: 100,
 								height: 100,
 							}}
 							thumbStyle={{
-								borderColor: '#fff',
-								borderWidth: 2
+								borderColor: COLOR.primary,
+								borderWidth: 1
 							}}
 							
 						/>

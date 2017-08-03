@@ -11,8 +11,9 @@ const COLOR = {
     secondaryFont: '#FFFFFF',
     placeholderFont: '#A8A8A8',
     background: '#F8F8F8',
-
 };
+
+const spaceNumber = 15;
 
 const headerTitleStyle = {
     fontSize: 17,
@@ -20,14 +21,14 @@ const headerTitleStyle = {
     color: '#313113'
 };
 const headerStyle = {
-    // paddingTop: 'auto',
+    paddingTop: 'auto',
     // paddingHorizontal: 10,
-    height: HEIGHT_HEADER,
+    // height: HEIGHT_HEADER,
     justifyContent: 'center',
 };
 
 const API_URL = 'https://us-central1-airlala-7b1b2.cloudfunctions.net/';
 
 export { 
-    API_URL, WIDTH_SCREEN, HEIGHT_SCREEN, HEIGHT_HEADER, COLOR, 
+    API_URL, WIDTH_SCREEN, HEIGHT_SCREEN, HEIGHT_HEADER, COLOR, spaceNumber,
     headerTitleStyle, headerStyle };

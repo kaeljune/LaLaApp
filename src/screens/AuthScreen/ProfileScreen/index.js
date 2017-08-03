@@ -10,7 +10,7 @@ import firebase from 'firebase';
 import { Icon } from 'react-native-elements';
 
 import { COLOR, headerTitleStyle, headerStyle } from '../../../config/config';
-import TitleStyle from './TitleAvatar';
+import TitleAvatar from './TitleAvatar';
 import UserInfo from './UserInfo';
 import Services from './Services';
 import SignoutButton from './SignoutButton';
@@ -52,21 +52,21 @@ class ProfileScreen extends Component {
         const user = firebase.auth().currentUser;
 
         if (user != null) {
-        user.providerData.forEach((profile) => {
-            console.log(`Sign-in provider: ${profile.providerId}`);
-            console.log(`  Provider-specific UID: ${profile.uid}`);
-            console.log(`  Name: ${profile.displayName}`);
-            console.log(`  Email: ${profile.email}`);
-            console.log(`  Photo URL: ${profile.photoURL}`);
-        });
+            user.providerData.forEach((profile) => {
+                console.log(`Sign-in provider: ${profile.providerId}`);
+                console.log(`  Provider-specific UID: ${profile.uid}`);
+                console.log(`  Name: ${profile.displayName}`);
+                console.log(`  Email: ${profile.email}`);
+                console.log(`  Photo URL: ${profile.photoURL}`);
+            });
         } else {
-        console.log('koco');
-    }
+            console.log('koco');
+        }
     }
     render() {
         return (
-            <ScrollView>
-                <TitleStyle />
+            <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
+                <TitleAvatar />
                 <UserInfo />
                 <Services />
                 <SignoutButton />
