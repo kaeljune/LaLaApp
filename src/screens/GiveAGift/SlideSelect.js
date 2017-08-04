@@ -15,11 +15,11 @@ class SlideSelect extends Component {
     }
 
     render() {
-        const { sex } = this.props;
+        const { items } = this.props;
         return (
             <View style={styles.sectionItem}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                    {sex.map((item, i) => 
+                    {items.map((item, i) => 
                         <ButtonSeclect 
                             onActive={this.onActive} 
                             id={i} key={i}

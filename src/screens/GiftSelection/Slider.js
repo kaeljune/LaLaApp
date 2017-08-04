@@ -14,9 +14,6 @@ import { COLOR, WIDTH_SCREEN } from '../../config/config';
 
 
 class Slider extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     onScrollEnd = (e) => {
         const contentOffset = e.nativeEvent.contentOffset;
@@ -27,15 +24,14 @@ class Slider extends Component {
         }
     }
 
-    onLayout = (index) => {
-        this.flatListRef.scrollToIndex({ animated: true, index  });
-    }
-
     renderItem = ({ item }) => (
             <View 
                 style={styles.section}
             >
-                <ScrollView pagingEnabled contentContainerStyle={{ paddingHorizontal: 15 }}>
+                <ScrollView 
+                    pagingEnabled 
+                    contentContainerStyle={{ paddingHorizontal: 15 }}
+                >
                     <View style={{ alignItems: 'center' }}>
                         <Image 
                             style={{ width: 150, height: 200 }}
@@ -63,10 +59,11 @@ class Slider extends Component {
         const { items } = this.props;
         
         return (
-            <View onChanged={() => this.onLayout(this.props.index)} style={{ flex: 1, width: WIDTH_SCREEN }}>
+            <View style={{ flex: 1, width: WIDTH_SCREEN }}>
                 <FlatList 
                     showsVerticalScrollIndicator={false}
                     ref={(ref) => { this.flatListRef = ref; }}
+                    onMomentumScrollEnd={this.onScrollEnd}
                     horizontal
                     pagingEnabled
                     data={items}

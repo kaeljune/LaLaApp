@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-import { COLOR, headerTitleStyle, headerStyle } from '../../../config/config';
+import { COLOR, HEIGHT_SCREEN, headerTitleStyle, headerStyle } from '../../../config/config';
 import Brand from './Brand';
 import SigninForm from './SigninForm';
 import SignupLink from './SignupLink';
@@ -43,8 +43,8 @@ class SigninScreen extends Component {
 
 const styles = StyleSheet.create({
     ContainerStyle: {
-        backgroundColor: '#f8f8f8', 
-        padding: 20
+        backgroundColor: '#f8f8f8',
+        minHeight: HEIGHT_SCREEN - 56
     }
 });
 

@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import { View, Text, StyleSheet, TextInput, Switch } from 'react-native';
 import { } from 'react-native-elements';
+=======
+import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { Icon } from 'react-native-elements';
+>>>>>>> 02523b172bdb9ba43c15abe4e39a5771e34cfa24
 
 import Btn from '../../components/Btn';
+import Switch from '../../components/Switch';
 import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';
 
 
@@ -93,15 +99,29 @@ class DeliveryBlank extends Component {
                         </View>
 
                         <View style={styles.rowStyle}>
+<<<<<<< HEAD
                             <View style={{ width: 200 }}>
                                 <Text style={styles.labelStyle}>SAVE FOR FUTURE PURCHASES</Text>
                             </View>
                             <Switch value />
+=======
+                            
+                            <Switch 
+                                text="SAVE FOR FUTURE PURCHASES"
+                                value
+                                color={COLOR.primary}
+                                styleText={{
+                                    color: '#454553',
+                                    fontSize: 10
+                                }}
+                                height={30}
+                                width={45}
+                            />    
+>>>>>>> 02523b172bdb9ba43c15abe4e39a5771e34cfa24
                         </View>
 
                     </View>
                 </View>
-
 
                 <View style={{ flex: 2 }}>
                     <Btn 

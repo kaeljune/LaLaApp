@@ -83,17 +83,17 @@ const items = [
 class GiftSelection extends Component {
     static navigationOptions = ({ navigation }) => ({
 		title: 'Gift selection',
-		headerStyle: {
-			paddingLeft: 5
-		},
-		headerTitleStyle: {
-			alignSelf: 'center'
-		},
-		headerLeft: <Icon
-			name='chevron-left'
-			color={COLOR.primary}
-			onPress={() => navigation.goBack()}
-		/>,
+		// headerStyle: {
+		// 	paddingLeft: 5
+		// },
+		// headerTitleStyle: {
+		// 	alignSelf: 'center'
+		// },
+		// headerLeft: <Icon
+		// 	name='chevron-left'
+		// 	color={COLOR.primary}
+		// 	onPress={() => navigation.goBack()}
+		// />,
 		headerRight: <View style={{ flexDirection: 'row', alignItems: 'center', paddingRight: 15 }}>
 			<Icon
 				size={15}
