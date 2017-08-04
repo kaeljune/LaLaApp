@@ -66,7 +66,7 @@ export const emailLogin1 = ({ email, password, phone, name }) => (dispatch) => {
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((user) => firebase.database().ref(`users/${user.uid}`)
                         .update({ name, phone }, () => {
-                            AsyncStorage.setItem('userLogin', user);
+                            AsyncStorage.setItem('@userLogin', user);
                         })
         .then(() => {
             emailLoginSuccess(dispatch, user);

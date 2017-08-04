@@ -8,6 +8,7 @@ import {
     Image, 
 } from 'react-native';
 import _ from 'lodash';
+
 import { AppLoading } from 'expo';
 
 import Btn from '../../components/Btn';
@@ -24,7 +25,9 @@ class DefaultScreen extends Component {
         userData: null,
     };
     async componentWillMount() {
+        //await AsyncStorage.removeItem('@userLogin');
         const userData = await AsyncStorage.getItem('@userLogin');
+            //this.props.navigation.navigate('isSignedIn');
         
         if (userData) {
             this.setState({ userData });
