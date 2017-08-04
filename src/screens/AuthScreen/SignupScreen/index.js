@@ -72,7 +72,7 @@ class SignupScreen extends Component {
     render() {
         const { containerStyle } = styles;
         return (
-            <ScrollView contentContainerStyle={containerStyle}>
+            <ScrollView contentContainerStyle={{ padding: 20 }} style={containerStyle}>
                 <KeyboardAvoidingView behavior={'padding'}>
                     <View>
                         <View>
@@ -139,8 +139,7 @@ class SignupScreen extends Component {
 
 const styles = StyleSheet.create({
     containerStyle: {
-        minHeight: HEIGHT_SCREEN,
-        padding: 20,
+        flex: 1,
         backgroundColor: '#f8f8f8'
     }
 });

@@ -82,9 +82,8 @@ class BoxSelect extends Component {
 
 const styles = StyleSheet.create({
 	box: {
-		height: 120,
-		width: 100,
-		borderRadius: 3,
+		height: 150,
+		width: 120,
 		flexDirection: 'column',
 		justifyContent: 'center',
 		alignItems: 'center',

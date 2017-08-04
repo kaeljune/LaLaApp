@@ -28,16 +28,16 @@ class Checkout extends Component {
         headerRight: <View style={{ flexDirection: 'row', paddingRight: 5 }}>
             <Icon
                 size={15}
-                name='queue'
-                color='#FF5700'
+                name="queue"
+                color={COLOR.secondary}
                 onPress={() => navigation.goBack()}
             />
-            <Text style={{ marginLeft: 5, color: '#FF5700' }}>Chat</Text>
+            <Text style={{ marginLeft: 5, color: COLOR.secondary }}>Chat</Text>
         </View>
     })
     render() {
         return (
-            <View>
+            <View style={{ flex: 1 }}>
                 <ScrollView contentContainerStyle={styles.wraper}>
                     <Feature />
                     <ProductList />
@@ -58,7 +58,7 @@ class Checkout extends Component {
                     <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row' }}>
                         <Btn 
                             title="CHECKOUT"
-                            bgColor="#11B8AB"
+                            bgColor={COLOR.primary}
                         />
                     </View>
                 </View>
@@ -69,8 +69,7 @@ class Checkout extends Component {
 
 const styles = StyleSheet.create({
     wraper: {
-        // flex: 1,
-        paddingBottom: 69
+        paddingBottom: 90
     },
     bottomCheckout: {
         position: 'absolute', 
@@ -80,7 +79,7 @@ const styles = StyleSheet.create({
         width: WIDTH_SCREEN,
         borderTopColor: '#eee',
         borderTopWidth: 1,
-        height: 70,
+        height: 80,
         flexDirection: 'row',
         alignItems: 'center'
     }

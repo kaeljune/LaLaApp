@@ -18,7 +18,7 @@ const SignupLink = ({ onSignUp }) => {
 
 const styles = StyleSheet.create({
     containerStyle: { 
-        marginVertical: 20
+        marginTop: 20
     }
 });
 

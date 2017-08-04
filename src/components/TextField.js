@@ -9,7 +9,7 @@ function TextField(props) {
       <View style={styles.inputWrap}>
         <TextInput
           {...props}
-          style={{ height: 50 }}
+          style={{ height: 40 }}
           placeholderTextColor={COLOR.placeholderTextColor}
           underlineColorAndroid="transparent"
         />
@@ -20,7 +20,7 @@ function TextField(props) {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 15
+    marginBottom: 20
   },
   inputWrap: {
     borderBottomColor: '#ddd',

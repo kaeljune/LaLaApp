@@ -62,7 +62,13 @@ class GiftSelection extends Component {
 								source={avatar}
 							/>
 
-							<Text style={{ marginTop: 15, fontSize: 18, fontWeight: '600' }}>Hai Nguyen</Text>
+							<Text 
+								style={{ 
+								marginTop: 15, 
+								fontSize: 18, 
+								fontWeight: '600' 
+								}}
+							>Hai Nguyen</Text>
 						</View>
 
 						<SlideSelect items={sex} />
