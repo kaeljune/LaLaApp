@@ -18,10 +18,6 @@ import avatar from '../../../assets/images/avatar.png';
 
 const sex = ['Female', 'Male', 'Other'];
 const age = ['1-3', '4-6', '7-9', '10-12', '13-15', '16-18'];
-<<<<<<< HEAD
-const popular = ['Friend', 'Professional', 
-	'Spouse / Partner', 'Friend', 'Professional', 'Spouse / Partner'];
-=======
 const popular = ['Friend', 'Professional', 'Spouse / Partner', 'Friend', 'Professional', 'Spouse / Partner'];
 const occasion = [
 	{ id: 1, text: 'Anniversary', color: '#FF3D7F' }, 
@@ -31,7 +27,6 @@ const occasion = [
 	{ id: 5, text: 'Apology', color: '#B23DFF' }, 
 	{ id: 6, text: 'Baby', color: '#B1068F' }
 ];
->>>>>>> 02523b172bdb9ba43c15abe4e39a5771e34cfa24
 
 class GiftSelection extends Component {
 	static navigationOptions = ({ navigation }) => ({

@@ -72,11 +72,7 @@ class ProfileScreen extends Component {
                 console.log(`  Photo URL: ${profile.photoURL}`);
             });
         } else {
-<<<<<<< HEAD
-        console.log('koco');
-=======
             console.log('koco');
->>>>>>> 02523b172bdb9ba43c15abe4e39a5771e34cfa24
         }
     }
     render() {
