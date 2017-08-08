@@ -33,11 +33,10 @@ function UserInfo() {
 const styles = StyleSheet.create({
 	list: {
 		backgroundColor: '#fff',
-		borderRadius: 3
 	},
 	row: {
 		paddingVertical: 15, 
-		paddingHorizontal: 10,
+		paddingHorizontal: 20,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',

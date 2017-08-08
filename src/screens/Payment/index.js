@@ -21,17 +21,17 @@ class Payment extends Component {
         return (
             <View style={styles.wraper}>
                 <View style={{ flex: 0.8 }}>
-                    <Text style={{ padding: 15 }}>SELECT A CREDIT:</Text>
+                    <Text style={styles.labelSection}>SELECT A CREDIT:</Text>
                     <View style={styles.sectionStyle}>
                         <View style={{ alignItems: 'center' }}>
                             <Image source={visa} />
                             <Text style={{ fontSize: 8, marginTop: 5 }}>CREDIT/ DEBIT CARD</Text>
                         </View>
                     </View>
+
+                    <Text style={styles.labelSection}>PAYMENT DETAILS</Text>
                     <View style={styles.sectionStyle}>
                         <View>
-                            <Text style={{ marginBottom: 30, marginTop: 10 }}>PAYMENT DETAILS</Text>
-
                             <View style={styles.rowStyle}>
                                 <View style={{ width: 130 }}>
                                     <Text style={styles.labelStyle}>CARD NUMBER</Text>
@@ -90,11 +90,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#F8F8F8',
         alignContent: 'space-between'
     },
+    labelSection: {
+        padding: 15,
+        fontWeight: '600',
+        color: '#aaa',
+        
+    },
     sectionStyle: {
         flexDirection: 'row', 
         backgroundColor: '#fff',  
         padding: 15,
-        borderColor: '#ddd',
+        borderColor: '#eee',
         borderBottomWidth: 1,
         borderTopWidth: 1,
         marginBottom: 20
@@ -102,10 +108,11 @@ const styles = StyleSheet.create({
     rowStyle: {
         flexDirection: 'row',
         alignItems: 'flex-start',
-        marginBottom: 15
+        marginVertical: 10
     },
     labelStyle: {
         color: '#454553',
+        fontWeight: '600',
         fontSize: 10,
         marginRight: 10,
         marginTop: 5

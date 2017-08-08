@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import { COLOR, HEIGHT_SCREEN, headerTitleStyle, headerStyle } from '../../../config/config';

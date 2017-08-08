@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { View, Text, 
+    StyleSheet, KeyboardAvoidingView, ScrollView, AsyncStorage, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import {
     emailLogin, emailChanged, passwordChanged,
@@ -28,6 +29,19 @@ class SignupScreen extends Component {
         headerTitleStyle,
         headerStyle,
     })
+    state = {
+        userData: null,
+    };
+    async componentWillMount() {
+        //await AsyncStorage.removeItem('@userLogin');
+        const userData = await AsyncStorage.getItem('@userLogin');
+        if (userData) {
+            this.setState({ userData });
+            this.props.navigation.navigate('isSignedIn');
+        } else {
+            this.setState({ userData: false });
+        }
+    }
     onEmailChange = (text) => {
         this.props.emailChanged(text);
     }
@@ -68,7 +82,7 @@ class SignupScreen extends Component {
             />
         );
     }
-
+    
     render() {
         const { containerStyle } = styles;
         return (
@@ -125,7 +139,7 @@ class SignupScreen extends Component {
                             <Btn 
                                 title="FACEBOOK"
                                 bgColor="#3B5998"
-                                onPress={() => { alert('loginface'); }}
+                                onPress={() => { Alert('loginface'); }}
                             />
                             <SigninLink onSignIn={this.onSignIn} />
                         </View>

@@ -12,6 +12,8 @@ function TextField(props) {
           style={{ height: 40 }}
           placeholderTextColor={COLOR.placeholderTextColor}
           underlineColorAndroid="transparent"
+          tintColor={"#313131"}
+          selectionColor={'#777'}
         />
       </View>
     </View>

@@ -6,7 +6,6 @@ import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config
 
 import Btn from '../../components/Btn';
 import Feature from './Feature';
-import CheckoutButton from './CheckoutButton';
 import ProductList from './ProductList';
 
 class Checkout extends Component {
@@ -52,7 +51,7 @@ class Checkout extends Component {
                             flex: 1
                         }}
                     >
-                        <Text style={{ fontSize: 18, fontWeight: '700', color: '#454553', marginRight: 15 }}>TOTAL :</Text> 
+                        <Text style={{ fontSize: 14, fontWeight: '100', color: '#454553', marginRight: 15 }}>TOTAL :</Text> 
                         <Text style={{ fontSize: 20, fontWeight: '700', color: COLOR.secondary }}>$ 900</Text>
                     </View>
                     <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row' }}>
@@ -69,7 +68,8 @@ class Checkout extends Component {
 
 const styles = StyleSheet.create({
     wraper: {
-        paddingBottom: 90
+        paddingBottom: 90,
+        backgroundColor: '#f8f8f8',
     },
     bottomCheckout: {
         position: 'absolute', 

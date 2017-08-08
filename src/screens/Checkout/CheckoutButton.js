@@ -1,16 +1,14 @@
 import React from 'react';
-import { View } from 'react-native';
-
+import { COLOR } from '../../config/config';
 import Btn from '../../components/Btn';
 
-const CheckoutButton = (props) => 
-    
-    
-    <Btn 
-        title="CHECKOUT"
-        bgColor="#11B8AB"
-        onPress={props.onPress}
-    />;
-    
-
+function CheckoutButton(props) {
+    return (
+        <Btn 
+            title="CHECKOUT"
+            bgColor={COLOR.primary}
+            onPress={props.onPress}
+        />
+    );
+}
 export default CheckoutButton;

@@ -49,7 +49,9 @@ class WriteANote extends Component {
                             padding: 15,
                             width: WIDTH_SCREEN - 60,
                             alignItems: 'center',
-                            backgroundColor: '#fff'
+                            backgroundColor: '#fff',
+                            borderColor: '#eee',
+                            borderWidth: 1
                         }}
                     >
                         <Text style={{ color: '#11b8ab', marginTop: 30 }}>HANDWRITTEN NOTE</Text>
@@ -79,7 +81,8 @@ class WriteANote extends Component {
 
 const styles = StyleSheet.create({
     wraper: {
-        flex: 1
+        flex: 1,
+        backgroundColor: '#f8f8f8'
     },
     sectionContainer: {
         display: 'flex',

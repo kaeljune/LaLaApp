@@ -17,16 +17,7 @@ class MainScreen extends Component {
 		headerLeft: <View>
 			<View style={{ flexDirection: 'row' }}>
 				<Text
-					style={{
-						backgroundColor: COLOR.secondary,
-						paddingHorizontal: 5,
-						paddingVertical: 1,
-						borderRadius: 20,
-						minWidth: 20,
-						textAlign: 'center',
-						color: '#fff',
-						marginRight: 5
-					}}
+					style={styles.box}
 				>
 					01
                 </Text>
@@ -78,67 +69,71 @@ class MainScreen extends Component {
 		]
 	}
 
+	renderItem = ({item}) => {
+		return (
+			<View 
+				style={{
+					padding: 10,
+					backgroundColor: '#fff',
+					borderRadius: 3,
+					borderColor: '#eee',
+					borderWidth: 1,
+					marginHorizontal: 8,
+					width: (WIDTH_SCREEN / 2) - 24,
+				}}
+			>
+				<View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center' }}>
+					<Avatar
+						icon={{ name: 'person' }}
+						overlayContainerStyle={{ backgroundColor: COLOR.primary }}
+						rounded
+						height={50}
+						width={50}
+					/>
+					<Text style={{ fontSize: 18, marginTop: 7 }}>{item.name}</Text>
+					<Text style={{ fontSize: 14, marginVertical: 7, color: '#d3d5d8' }}>for {item.purpose}</Text>
+					<Text style={{ fontSize: 14, fontWeight: '600' }}>{item.price}</Text>
+					<Text
+						style={{
+							backgroundColor: COLOR.secondary,
+							fontSize: 12,
+							color: '#fff',
+							marginTop: 7,
+							paddingVertical: 3,
+							paddingHorizontal: 7,
+							borderRadius: 2
+						}}
+					>{item.status}</Text>
+				</View>
+				<View style={{ justifyContent: 'center', alignItems: 'center' }}>
+					<Icon
+						reverse
+						raised
+						reverseColor={COLOR.primary}
+						name="chevron-right"
+						size={16}
+						color="#fff"
+					/>
+				</View>
+			</View>			
+		)
+	}
+
 	renderList = () => {
 		const { items } = this.state;
 		if (items.length > 0) {
 			return (
-				<View style={{ flex: 1, paddingBottom: 40 }}>
-					<ScrollView contentContainerStyle={{ padding: 8 }}>
-
-						<View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', paddingBottom: 50 }}>
-
-							{items.map((item, i) => (
-								<View
-									key={i}
-									style={{
-										backgroundColor: '#fff',
-										borderRadius: 3,
-										borderColor: '#ddd',
-										borderWidth: 1,
-										margin: 8,
-										width: (WIDTH_SCREEN / 2) - 24,
-									}}
-								>
-									<View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center' }}>
-										<Avatar
-											icon={{ name: 'person' }}
-											overlayContainerStyle={{ backgroundColor: COLOR.primary }}
-											rounded
-											height={50}
-											width={50}
-										/>
-										<Text style={{ fontSize: 18, marginTop: 7 }}>{item.name}</Text>
-										<Text style={{ fontSize: 14, marginVertical: 7, color: '#838478' }}>for {item.purpose}</Text>
-										<Text style={{ fontSize: 14, fontWeight: '600' }}>{item.price}</Text>
-										<Text
-											style={{
-												backgroundColor: COLOR.secondary,
-												fontSize: 12,
-												color: '#fff',
-												marginTop: 7,
-												paddingVertical: 3,
-												paddingHorizontal: 7,
-												borderRadius: 2
-											}}
-										>{item.status}</Text>
-									</View>
-									<View style={{ justifyContent: 'center', alignItems: 'center' }}>
-										<Icon
-											reverse
-											raised
-											reverseColor={COLOR.primary}
-											name="chevron-right"
-											size={16}
-											color="#fff"
-										/>
-									</View>
-								</View>
-							))}
-						</View>
-					</ScrollView>
+				<View style={{ flex: 1, paddingBottom: 60 }}>
+            <FlatList
+								numColumns={2}
+								contentContainerStyle={{ paddingVertical: 15 }}
+								columnWrapperStyle={{ paddingVertical: 8, paddingHorizontal: 8 }}
+                data={items}
+                keyExtractor={(item) => items.indexOf(item)}
+                renderItem={this.renderItem}
+            />
 
 					<View style={styles.bottomView}>
-
 						<Icon
 							size={25}
 							reverse
@@ -194,14 +189,24 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: COLOR.background,
 	},
+	box: {
+		backgroundColor: COLOR.secondary,
+		paddingHorizontal: 5,
+		paddingVertical: 1,
+		borderRadius: 20,
+		minWidth: 20,
+		textAlign: 'center',
+		color: '#fff',
+		marginRight: 5
+	},
 	bottomView: {
 		position: 'absolute',
 		bottom: 0,
 		width: WIDTH_SCREEN,
 		alignItems: 'center',
-		backgroundColor: '#fff',
+		borderTopColor: '#eee',
 		borderTopWidth: 1,
-		borderTopColor: '#ddd'
+		backgroundColor: '#fff',
 	}
 });
 

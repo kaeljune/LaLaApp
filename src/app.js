@@ -1,6 +1,6 @@
 import Expo from 'expo';
 import React, { Component } from 'react';
-import { StyleSheet, View, StatusBar, Animated, AsyncStorage } from 'react-native';
+import { StyleSheet, View, StatusBar, Animated } from 'react-native';
 import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import firebase from 'firebase';
@@ -9,8 +9,8 @@ import { StackNavigator, TabNavigator } from 'react-navigation';
 import store from './store';
 
 import DefaultScreen from './screens/DefaultScreen';
-import WelcomeScreen from './screens/WelcomeScreen';
 import MainScreen from './screens/MainScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
 import SigninScreen from './screens/AuthScreen/SigninScreen';
 import SignupScreen from './screens/AuthScreen/SignupScreen';
 import ProfileScreen from './screens/AuthScreen/ProfileScreen';
@@ -47,7 +47,7 @@ class App extends Component {
       const inputRange = [index - 1, index, index + 1];
       const scaleX = position.interpolate({
         inputRange,
-        outputRange: ([1000, 0, 0]),
+        outputRange: ([1000, 500, 0]),
       });
       return {
         transform: [
@@ -59,7 +59,7 @@ class App extends Component {
       const inputRange = [index - 1, index, index + 1];
       const scaleY = position.interpolate({
         inputRange,
-        outputRange: ([1000, 0, 0]),
+        outputRange: ([1000, 500, 0]),
       });
       return {
         transform: [
@@ -89,15 +89,16 @@ class App extends Component {
     const MainNavigator = TabNavigator({
       isSignedOut: {
         screen: StackNavigator({   
-
-          delivery: { screen: Delivery },
-
-              checkout: { screen: Checkout },
-        
           default: { screen: DefaultScreen },
-          welcome: { screen: WelcomeScreen },
+          giveagift: { screen: GiveAGift },
           signup: { screen: SignupScreen },
+          deliveryblank: { screen: DeliveryBlank },
+          mainGift: { screen: MainScreen },
+          findagift: { screen: FindAGift },
+          giftselection: { screen: GiftSelection },
           signin: { screen: SigninScreen },
+          welcome: { screen: WelcomeScreen }, 
+          payment: { screen: Payment },
           forgot: { screen: ForgotScreen },
           term: { screen: TermScreen },
         })
@@ -120,9 +121,7 @@ class App extends Component {
               checkout: { screen: Checkout },
             })
           },
-
           delivery: { screen: Delivery },
-
           afterrequest: { screen: AfterRequest },
           payment: { screen: Payment },
           deliveryblank: { screen: DeliveryBlank },

@@ -23,8 +23,20 @@ class Services extends Component {
 	render() {
 		return (
 			<View>
-				<Text style={{ marginTop: 20, textAlign: 'center', fontSize: 18 }}>Other settings</Text>
-				<List containerStyle={{ marginHorizontal: 20, borderRadius: 3, borderColor: 'transparent', borderWidth: 0 }}>
+				<Text
+					style={{ 
+						marginTop: 20, 
+						textAlign: 'center', 
+						fontSize: 18
+					}}
+				>Other settings</Text>
+				<List 
+					containerStyle={{ 
+						marginHorizontal: 20, 
+						borderColor: 'transparent', 
+						borderBottomWidth: 0, 
+					}}
+				>
 					{
 						listLink.map((item, i) => (
 							<ListItem

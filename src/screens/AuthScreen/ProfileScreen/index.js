@@ -49,7 +49,19 @@ class ProfileScreen extends Component {
     async componentWillMount() {
         const aa = await AsyncStorage.getItem('@userLogin');
         console.log(aa);
-        const user = firebase.auth().currentUser;
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in.
+                const displayName = user.displayName;
+                console.log(`  Name: ${displayName}`);
+                // ...
+            } else {
+                // User is signed out.
+                // ...
+                console.log('hixhix');
+            }
+            });
+        const user = await firebase.auth().currentUser;
 
         if (user != null) {
             user.providerData.forEach((profile) => {

@@ -18,7 +18,7 @@ import avatar from '../../../assets/images/avatar.png';
 
 const sex = ['Female', 'Male', 'Other'];
 const age = ['1-3', '4-6', '7-9', '10-12', '13-15', '16-18'];
-const popular = ['Friend', 'Professional', 'Spouse / Partner', 'Friend', 'Professional', 'Spouse / Partner'];
+const popular = ['Friend', 'Professional', 'Spouse / Partner', 'Girl Friend', 'Company'];
 const occasion = [
 	{ id: 1, text: 'Anniversary', color: '#FF3D7F' }, 
 	{ id: 2, text: 'Apology', color: '#B23DFF' }, 
@@ -48,10 +48,11 @@ class GiftSelection extends Component {
 			<Text style={{ marginLeft: 5 }}>Edit</Text>
 		</View>
 	})
+	state = { price: null }
 	render() {
 		const { section, sectionItem, sectionPad, sectionTag, sectionTitle } = styles;
 		return (
-			<ScrollView contentContainerStyle={{ padding: 15 }}>
+			<ScrollView contentContainerStyle={{ padding: 0 }}>
 				<KeyboardAvoidingView behavior={'padding'} style={{ flex: 1 }}>
 					<View style={section}>
 						<View style={sectionItem}>
@@ -64,7 +65,7 @@ class GiftSelection extends Component {
 
 							<Text 
 								style={{ 
-								marginTop: 15, 
+								marginVertical: 15, 
 								fontSize: 18, 
 								fontWeight: '600' 
 								}}
@@ -104,7 +105,7 @@ class GiftSelection extends Component {
 								marginBottom: 15,
 								textAlign: 'center'
 							}}
-						>$200-500</Text>
+						>${this.state.price ? this.state.price : 0}-${this.state.price + 100}</Text>
 
 						<Slider 	
 							minimumValue={0} 
@@ -120,7 +121,9 @@ class GiftSelection extends Component {
 								borderColor: COLOR.primary,
 								borderWidth: 1
 							}}
-							
+							value={this.state.price}
+							onValueChange={(price) => this.setState({ price })}
+							step={1}
 						/>
 					</View>
 
@@ -192,6 +195,7 @@ class GiftSelection extends Component {
 const styles = StyleSheet.create({
 	section: {
 		backgroundColor: '#fff',
+		paddingVertical: 15,
 		marginBottom: 15
 	},
 	avatarStyle: {

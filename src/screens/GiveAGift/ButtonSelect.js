@@ -20,10 +20,11 @@ const styles = StyleSheet.create({
     normal: {
         borderWidth: 1,
         backgroundColor: '#fff',
-        borderColor: '#d9d9d9',
+        borderColor: '#eee',
         marginLeft: 5,
         marginRight: 5,
-        padding: 15,
+        paddingVertical: 10,
+        paddingHorizontal: 15,
         minWidth: 70,
         textAlign: 'center',
     },

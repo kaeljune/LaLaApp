@@ -33,17 +33,15 @@ class ProductList extends Component {
         const { name, price } = this.props;
         return (
             <View style={styles.itemStyle}>
-
-
                 <View style={{ width: 90, height: 90, backgroundColor: '#eee' }} />
                 <View style={{ marginHorizontal: 15, flex: 1, justifyContent: 'space-around' }}>
                     <View>
-                        <Text style={{ fontWeight: '500', fontSize: 16 }}>
+                        <Text style={{ fontWeight: '500'}}>
                             {name}
                         </Text>
 
-                        <Text style={{ marginVertical: 5, color: '#777', fontSize: 14 }}>
-                            by <Text style={{ fontWeight: '600' }}>Maria</Text>
+                        <Text style={{ marginVertical: 5, color: '#888', fontSize: 14 }}>
+                            by <Text style={{ fontWeight: '500' }}>Maria</Text>
                         </Text>
                     </View>
 
@@ -58,9 +56,9 @@ class ProductList extends Component {
                     <View>
                         <Text 
                             style={{ 
-                            fontWeight: '600', 
-                            color: COLOR.primary, 
-                            fontSize: 20, 
+                                fontWeight: '300', 
+                                color: COLOR.primary, 
+                                fontSize: 20, 
                             }}
                         >{this.state.total}</Text>
                     </View>
@@ -78,10 +76,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         width: WIDTH_SCREEN - 30,
         marginHorizontal: 15,
-        marginVertical: 7,
+        marginVertical: 2,
         borderRadius: 3,
         borderWidth: 1,
-        borderColor: '#ddd',
+        borderColor: '#eee',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around'

@@ -5,13 +5,11 @@ import {
     StyleSheet
 } from 'react-native';
 
-import GradientButton from '../../../components/GradientButton';
 import { WIDTH_SCREEN } from '../../../config/config';
 
 import TextField from '../../../components/TextField';
 import ForgotLink from './ForgotLink';
 import Btn from '../../../components/Btn';
-
 
 class SigninForm extends Component {
     state = { email: '', password: '' };
