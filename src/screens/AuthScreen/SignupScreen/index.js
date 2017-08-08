@@ -3,8 +3,8 @@ import { View, Text,
     StyleSheet, KeyboardAvoidingView, ScrollView, AsyncStorage, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import {
-    emailLogin, emailChanged, passwordChanged,
-    phoneChanged, nameChanged,
+    emailSignup, signupEmailChanged, signupPasswordChanged,
+    signupConfirmPasswordChanged, signinNameChanged, signinPhoneChanged,
 } from '../../../actions';
 
 import { Spinner } from '../../../components/Spinner';
@@ -43,21 +43,21 @@ class SignupScreen extends Component {
         }
     }
     onEmailChange = (text) => {
-        this.props.emailChanged(text);
+        this.props.signupEmailChanged(text);
     }
 
     onPasswordChange = (text) => {
-        this.props.passwordChanged(text);
+        this.props.signupPasswordChanged(text);
     }
-    onPasswordConfirm = (text) => {
-        this.props.passwordChanged(text);
+    onConfirmPasswordChange = (text) => {
+        this.props.signupConfirmPasswordChanged(text);
     }
     
     onPhoneChange = (text) => {
-        this.props.phoneChanged(text);
+        this.props.signinPhoneChanged(text);
     }
     onNameChange = (text) => {
-        this.props.nameChanged(text);
+        this.props.signinNameChanged(text);
     }
     onTerms = () => {
         this.props.navigation.navigate('term');
@@ -66,9 +66,25 @@ class SignupScreen extends Component {
         this.props.navigation.navigate('signin');
     }
     onButtonPress = async () => {
-        const { email, password, phone, name } = this.props;
-        await this.props.emailLogin({ email, password, phone, name });
-        this.props.navigation.navigate('profile');
+        const { email, password, phone, name } = this.props; 
+        try {
+            await this.props.emailSignup({ email, password, phone, name });
+            if (this.props.error) {
+                Alert.alert(
+                    this.props.error.name,
+                    this.props.error.message,
+                    [
+                        { text: 'Cancel', onPress: () => {}, style: 'cancel' },
+                        { text: 'OK', onPress: () => {} },
+                    ],
+                    { cancelable: false }
+                );
+            } else {
+                await this.props.navigation.navigate('profile');
+            }   
+        } catch (err) {
+            //
+        }        
     }
     renderButton = () => {
         if (this.props.loading) {
@@ -114,7 +130,6 @@ class SignupScreen extends Component {
                                 label="PASSWORD"
                                 secureTextEntry
                                 placeholder="What’s your password"
-
                                 keyboardType='default'
                                 value={this.props.password}
                                 onChangeText={this.onPasswordChange}
@@ -124,10 +139,9 @@ class SignupScreen extends Component {
                                 label="CONFIRM PASSWORD"
                                 secureTextEntry
                                 placeholder="Confirm your password"
-
                                 keyboardType='default'
                                 value={this.props.password}
-                                onChangeText={this.onPasswordChange}
+                                onChangeText={this.onConfirmPasswordChange}
                             />
                         </View>
 
@@ -159,10 +173,16 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapStateToProps = ({ auth }) => {
-    const { email, password, error, loading, phone, name } = auth;
+const mapStateToProps = ({ signupState }) => {
+    const { email, password, error, loading, phone, name } = signupState;
     return { email, password, error, loading, phone, name };
 };
 
 export default connect(mapStateToProps,
-    { emailLogin, emailChanged, passwordChanged, phoneChanged, nameChanged })(SignupScreen);
+    {   
+        emailSignup, 
+        signupEmailChanged, 
+        signupPasswordChanged, 
+        signupConfirmPasswordChanged, 
+        signinNameChanged, 
+        signinPhoneChanged, })(SignupScreen);

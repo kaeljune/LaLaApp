@@ -8,6 +8,7 @@ import {
     Image, 
 } from 'react-native';
 import _ from 'lodash';
+import firebase from 'firebase';
 
 import { AppLoading } from 'expo';
 
@@ -26,9 +27,9 @@ class DefaultScreen extends Component {
     };
     async componentWillMount() {
         //await AsyncStorage.removeItem('@userLogin');
-        const userData = await AsyncStorage.getItem('@userLogin');
-            //this.props.navigation.navigate('isSignedIn');
         
+        const userData = await AsyncStorage.getItem('@userLogin');
+        console.log(userData);
         if (userData) {
             this.setState({ userData });
             this.props.navigation.navigate('isSignedIn');

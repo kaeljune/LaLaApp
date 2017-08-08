@@ -18,6 +18,7 @@ const INITIAL_STATE = {
   phone: '',
   user: null,
   error: '',
+  account: '',
   loading: false
 };
 
