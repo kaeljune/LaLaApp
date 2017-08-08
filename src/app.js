@@ -90,13 +90,13 @@ class App extends Component {
       isSignedOut: {
         screen: StackNavigator({   
           default: { screen: DefaultScreen },
-          giveagift: { screen: GiveAGift },
+          signin: { screen: SigninScreen },
           signup: { screen: SignupScreen },
+          giveagift: { screen: GiveAGift },
           deliveryblank: { screen: DeliveryBlank },
           mainGift: { screen: MainScreen },
           findagift: { screen: FindAGift },
           giftselection: { screen: GiftSelection },
-          signin: { screen: SigninScreen },
           welcome: { screen: WelcomeScreen }, 
           payment: { screen: Payment },
           forgot: { screen: ForgotScreen },
@@ -140,6 +140,8 @@ class App extends Component {
           tabBarVisible: false
         },
         headerMode: 'screen',
+        swipeEnabled: false,
+        lazy: true,
         transitionConfig: TransitionConfiguration,
       });
     return (

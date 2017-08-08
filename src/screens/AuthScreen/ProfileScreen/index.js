@@ -8,6 +8,10 @@ import {
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import { Icon } from 'react-native-elements';
+import _ from 'lodash';
+
+//import { accountFetch } from '../../../actions/auth-actions';
+import { accountFetch } from '../../../actions';
 
 import { COLOR, headerTitleStyle, headerStyle } from '../../../config/config';
 import TitleAvatar from './TitleAvatar';
@@ -47,9 +51,20 @@ class ProfileScreen extends Component {
         headerStyle,
     })
     async componentWillMount() {
+        await this.props.accountFetch();
+        //await this.props.employeesFetch();
+        console.log(this.props);
+    }
+    
+    async componentDidMount() {
         const aa = await AsyncStorage.getItem('@userLogin');
         console.log(aa);
-        firebase.auth().onAuthStateChanged((user) => {
+        // firebase.auth().signOut().then(() => {
+        //     // Sign-out successful.
+        //     }).catch((error) => {
+        //     // An error happened.
+        // });
+        await firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 // User is signed in.
                 const displayName = user.displayName;
@@ -61,19 +76,20 @@ class ProfileScreen extends Component {
                 console.log('hixhix');
             }
             });
-        const user = await firebase.auth().currentUser;
-
-        if (user != null) {
-            user.providerData.forEach((profile) => {
-                console.log(`Sign-in provider: ${profile.providerId}`);
-                console.log(`  Provider-specific UID: ${profile.uid}`);
-                console.log(`  Name: ${profile.displayName}`);
-                console.log(`  Email: ${profile.email}`);
-                console.log(`  Photo URL: ${profile.photoURL}`);
-            });
-        } else {
-            console.log('koco');
-        }
+        // await firebase.auth().signOut().then(() => {
+        //     // Sign-out successful.
+        //     }).catch((error) => {
+        //     // An error happened.
+        //     });
+        // this.props.accountFetch();
+        // console.log(this.props.account);
+    }
+    componentWillReceiveProps(nextProps) {
+    // nextProps are the next set of props that this component
+    // will be rendered with
+    // this.props is still the old set of props
+        console.log(nextProps);
+    //this.createDataSource(nextProps);
     }
     render() {
         return (
@@ -87,6 +103,11 @@ class ProfileScreen extends Component {
     }
 }
 
-const mapStateToProps = auth => ({ libraries: auth });
+const mapStateToProps = ({ fetchAcc }) => {
+  //const account = _.map(state.account, (val, uid) => ({ ...val, uid }));
+  const { account } = fetchAcc;
+  return { account };
+};
 
-export default connect(mapStateToProps)(ProfileScreen);
+
+export default connect(mapStateToProps, { accountFetch })(ProfileScreen);
