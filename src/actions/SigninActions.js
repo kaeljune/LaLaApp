@@ -25,7 +25,6 @@ export const emailSignin = ({ emailSF, passwordSF }) => async (dispatch) => {
   try {
     await firebase.auth().signInWithEmailAndPassword(emailSF, passwordSF)
     .then(user => {
-      AsyncStorage.setItem('@userLogin', JSON.stringify(user));
       emailSigninSuccess(dispatch, user);
     })
     .catch((error) => {

@@ -9,8 +9,12 @@ import {
 } from 'react-native';
 import _ from 'lodash';
 import firebase from 'firebase';
-
+import Reactotron from 'reactotron-react-native';
+import { connect } from 'react-redux';
 import { AppLoading } from 'expo';
+
+import { accountFetch } from '../../actions';
+
 
 import Btn from '../../components/Btn';
 
@@ -23,20 +27,29 @@ class DefaultScreen extends Component {
         header: null,
     })
     state = {
-        userData: null,
+        userLogin: null,
+        isLogin: null
     };
     async componentWillMount() {
-        //await AsyncStorage.removeItem('@userLogin');
-        
-        const userData = await AsyncStorage.getItem('@userLogin');
-        console.log(userData);
-        if (userData) {
-            this.setState({ userData });
-            this.props.navigation.navigate('isSignedIn');
+        //await AsyncStorage.removeItem('reduxPersist:fetchAcc');
+        await this.props.accountFetch();
+        const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
+        Reactotron.log(JSON.parse(fetchAcc));
+        if (JSON.parse(fetchAcc).isLogin) {
+            this.setState({ isLogin: JSON.parse(fetchAcc).isLogin });
+            this.props.navigation.navigate('isSignedIn', { userLogin: JSON.parse(fetchAcc).userLogin });
         } else {
-            this.setState({ userData: false });
+            this.setState({ isLogin: false });
         }
     }
+    async componentDidMount() {
+        //await AsyncStorage.removeItem('@userLogin');
+    }
+    componentWillReceiveProps(nextProps) {
+        // nextProps are the next set of props that this component
+        // will be rendered with
+        // this.props is still the old set of props
+      }
     onGetStarted = () => {
         this.props.navigation.navigate('welcome');
     }
@@ -47,7 +60,7 @@ class DefaultScreen extends Component {
         });
     }
     render() {
-        if (_.isNull(this.state.userData)) {
+        if (_.isNull(this.state.isLogin)) {
             return <AppLoading />;
         }
         return (
@@ -114,5 +127,8 @@ const styles = StyleSheet.create({
         marginTop: 30
     }
 });
-
-export default DefaultScreen;
+const mapStateToProps = ({ fetchAcc }) => {
+    const { account } = fetchAcc;
+    return { account };
+  };
+export default connect(mapStateToProps, { accountFetch })(DefaultScreen);

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, StyleSheet, KeyboardAvoidingView, Alert } from 'react-native';
+import { View, ScrollView, StyleSheet, Alert, AsyncStorage } from 'react-native';
 
 import { connect } from 'react-redux';
 import {
-    emailSignin1, emailSignin, signinEmailChanged, signinPasswordChanged,
+    accountFetch, emailSignin, signinEmailChanged, signinPasswordChanged,
 } from '../../../actions';
 
 import { COLOR, WIDTH_SCREEN, HEIGHT_SCREEN, 
@@ -31,6 +31,17 @@ class SigninScreen extends Component {
     async componentWillMount() {
         console.log('hehe');
     }
+    componentWillReceiveProps(nextProps) {
+        this.onAuthComplete(nextProps);
+    }
+    
+    async onAuthComplete(props) {
+        await props.accountFetch();
+        const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
+        if (JSON.parse(fetchAcc).isLogin) {
+            this.props.navigation.navigate('isSignedIn', { });
+        }
+    }
     onSignUp = () => {
         this.props.navigation.navigate('signup');
     }
@@ -52,7 +63,7 @@ class SigninScreen extends Component {
                     { cancelable: false }
                 );
             } else {
-                await this.props.navigation.navigate('profile');
+                this.onAuthComplete(this.props);   
             }   
         } catch (err) {
             //
@@ -89,4 +100,4 @@ const mapStateToProps = ({ signinState }) => {
 };
 
 export default connect(mapStateToProps,
-    { emailSignin, emailSignin1, signinEmailChanged, signinPasswordChanged })(SigninScreen);
+    { emailSignin, accountFetch, signinEmailChanged, signinPasswordChanged })(SigninScreen);

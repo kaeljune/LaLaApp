@@ -3,28 +3,47 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import { COLOR } from '../../../config/config';
+import { Spinner } from '../../../components/Spinner';
 
-function TitleAvatar() {
+
+const TitleAvatar = ({ data }) => {
     const { wraperStyle, textStyle, avatarStyle } = styles;
+    console.log(data);
+    if (!data.userLogin.email) {
+        return (
+            <View style={wraperStyle}>
+                <View
+                    style={avatarStyle}
+                >
+                    <Icon
+                        reverse
+                        reverseColor="#11b8ab"
+                        name='person-outline'
+                        color='#fff'
+                        size={45}
+                    />
+                </View>
+                <Spinner size="small" />
+            </View>
+        );
+    }
     return (
         <View style={wraperStyle}>
-            <View
-                style={avatarStyle}
-            >
-                <Icon
-                    reverse
-                    reverseColor="#11b8ab"
-                    name='person-outline'
-                    color='#fff'
-                    size={45}
-                />
-            </View>
-
-            <Text style={textStyle}>John Doe</Text>
-
+        <View
+            style={avatarStyle}
+        >
+            <Icon
+                reverse
+                reverseColor="#11b8ab"
+                name='person-outline'
+                color='#fff'
+                size={45}
+            />
         </View>
+        <Text style={textStyle}>{data.userLogin.name}</Text>
+    </View>       
     );
-}
+};
 
 const styles = StyleSheet.create({
     wraperStyle: { 

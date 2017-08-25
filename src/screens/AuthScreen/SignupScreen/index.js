@@ -32,16 +32,16 @@ class SignupScreen extends Component {
     state = {
         userData: null,
     };
-    async componentWillMount() {
-        //await AsyncStorage.removeItem('@userLogin');
-        const userData = await AsyncStorage.getItem('@userLogin');
-        if (userData) {
-            this.setState({ userData });
-            this.props.navigation.navigate('isSignedIn');
-        } else {
-            this.setState({ userData: false });
-        }
-    }
+    // async componentWillMount() {
+    //     //await AsyncStorage.removeItem('@userLogin');
+    //     const userData = await AsyncStorage.getItem('@userLogin');
+    //     if (userData) {
+    //         this.setState({ userData });
+    //         this.props.navigation.navigate('isSignedIn');
+    //     } else {
+    //         this.setState({ userData: false });
+    //     }
+    // }
     onEmailChange = (text) => {
         this.props.signupEmailChanged(text);
     }

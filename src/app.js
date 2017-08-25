@@ -3,9 +3,11 @@ import React, { Component } from 'react';
 import { StyleSheet, View, StatusBar, Animated } from 'react-native';
 import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import firebase from 'firebase';
+
 import { StackNavigator, TabNavigator } from 'react-navigation';
 
+import './config/firebase-config';
+import '../ReactotronConfig';
 import store from './store';
 
 import DefaultScreen from './screens/DefaultScreen';
@@ -27,21 +29,17 @@ import Delivery from './screens/Delivery';
 import Payment from './screens/Payment';
 import SetLocation from './screens/FindGiftScreen/SetLocation';
 import SetFormRequest from './screens/FindGiftScreen/SetFormRequest';
-
+  
 injectTapEventPlugin();
 
 class App extends Component {
-  componentDidMount() {
-    const config = {
-      apiKey: 'AIzaSyD3943z3AHYq6svO850thQNjTgdwf-4AqI',
-      authDomain: 'airlala-7b1b2.firebaseapp.com',
-      databaseURL: 'https://airlala-7b1b2.firebaseio.com',
-      projectId: 'airlala-7b1b2',
-      storageBucket: 'airlala-7b1b2.appspot.com',
-      messagingSenderId: '1002936018143'
-    };
-    firebase.initializeApp(config);
-  }
+  constructor() {
+    super();
+    //Hide warning "Setting a time on android simulator.."
+    console.ignoredYellowBox = [
+        'Setting a timer'
+    ];
+}
   render() {
     const flipLeft = (index, position) => {
       const inputRange = [index - 1, index, index + 1];
@@ -132,6 +130,9 @@ class App extends Component {
             navigationOptions: {
               tabBarVisible: false
             },
+            swipeEnabled: false,
+            lazy: true,
+            transitionConfig: TransitionConfiguration,
           }
         )
       }

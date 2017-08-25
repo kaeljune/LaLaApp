@@ -17,3 +17,4 @@ export const FACEBOOK_LOGIN_SUCCESS = 'facebook_login_success';
 export const FACEBOOK_LOGIN_FAIL = 'facebook_login_fail';
 
 export const ACCOUNT_FETCH_SUCCESS = 'account_fetch_success';
+export const ACCOUNT_FETCH_FAIL = 'account_fetch_fail';

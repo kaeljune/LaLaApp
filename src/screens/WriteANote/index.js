@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { Icon, Avatar } from 'react-native-elements';
 import Btn from '../../components/Btn';
 import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';

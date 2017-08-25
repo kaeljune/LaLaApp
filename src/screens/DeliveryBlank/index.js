@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, FlatList, StyleSheet, TextInput } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TextInput } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import ListRadio from '../../components/ListRadio';
-
-import CheckBox from '../../components/CheckBox';
-import Radio from '../../components/Radio';
-import Switch from '../../components/Switch';
 import Btn from '../../components/Btn';
 
 import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';
