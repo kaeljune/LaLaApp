@@ -8,12 +8,12 @@ import {
     Image, 
 } from 'react-native';
 import _ from 'lodash';
-import firebase from 'firebase';
 import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
 import { AppLoading } from 'expo';
 
-import { accountFetch } from '../../actions';
+
+import { accountFetch, isLogin } from '../../actions';
 
 
 import Btn from '../../components/Btn';
@@ -30,14 +30,16 @@ class DefaultScreen extends Component {
         userLogin: null,
         isLogin: null
     };
-    async componentWillMount() {
+    async componentWillMount() {;
         //await AsyncStorage.removeItem('reduxPersist:fetchAcc');
         await this.props.accountFetch();
         const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
         Reactotron.log(JSON.parse(fetchAcc));
         if (JSON.parse(fetchAcc).isLogin) {
             this.setState({ isLogin: JSON.parse(fetchAcc).isLogin });
-            this.props.navigation.navigate('isSignedIn', { userLogin: JSON.parse(fetchAcc).userLogin });
+            this.props.isLogin();
+            //dispatch({ type: ACCOUNT_FETCH_SUCCESS });
+            //this.props.navigation.navigate('isSignedIn', { userLogin: JSON.parse(fetchAcc).userLogin });
         } else {
             this.setState({ isLogin: false });
         }
@@ -131,4 +133,4 @@ const mapStateToProps = ({ fetchAcc }) => {
     const { account } = fetchAcc;
     return { account };
   };
-export default connect(mapStateToProps, { accountFetch })(DefaultScreen);
+export default connect(mapStateToProps, { accountFetch, isLogin })(DefaultScreen);

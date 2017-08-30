@@ -1,4 +1,3 @@
-import { AsyncStorage } from 'react-native';
 import firebase from 'firebase';
 
 import {

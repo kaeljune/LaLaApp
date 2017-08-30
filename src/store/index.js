@@ -16,6 +16,6 @@ const store = Reactotron.createStore(
   )
 );
 
-persistStore(store, { storage: AsyncStorage, whitelist: ['fetchAcc'] });
+persistStore(store, { storage: AsyncStorage, whitelist: ['fetchAcc'], blacklist: ['nav'] });
 
 export default store;

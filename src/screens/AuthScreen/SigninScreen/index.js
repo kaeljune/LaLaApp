@@ -30,16 +30,13 @@ class SigninScreen extends Component {
     };
     async componentWillMount() {
         console.log('hehe');
-    }
-    componentWillReceiveProps(nextProps) {
-        this.onAuthComplete(nextProps);
-    }
-    
+    }    
     async onAuthComplete(props) {
         await props.accountFetch();
         const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
         if (JSON.parse(fetchAcc).isLogin) {
-            this.props.navigation.navigate('isSignedIn', { });
+            // this.props.navigation.navigate('isSignedIn', { });
+            console.log('ton tai');
         }
     }
     onSignUp = () => {
