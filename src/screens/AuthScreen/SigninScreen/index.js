@@ -66,7 +66,7 @@ class SigninScreen extends Component {
     render() {
         return (
             <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.ContainerStyle}>
-                <View style={{ minHeight: HEIGHT_SCREEN - 95 }}>
+                <View style={{ minHeight: HEIGHT_SCREEN }}>
                     <Brand />
                     <View style={{ alignItems: 'center', }}>
                         <SigninForm onButtonPress={this.onButtonPress} />
@@ -81,7 +81,7 @@ class SigninScreen extends Component {
 const styles = StyleSheet.create({
     ContainerStyle: {
         backgroundColor: '#f8f8f8',
-        minHeight: HEIGHT_SCREEN - 56
+        minHeight: HEIGHT_SCREEN - 60
     },
     section: {
         width: WIDTH_SCREEN - 40
