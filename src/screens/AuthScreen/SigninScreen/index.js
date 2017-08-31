@@ -27,17 +27,14 @@ class SigninScreen extends Component {
     })
     state = {
         userData: null,
-    };
-    async componentWillMount() {
-        console.log('hehe');
-    }    
+    };   
     async onAuthComplete(props) {
-        await props.accountFetch();
-        const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
-        if (JSON.parse(fetchAcc).isLogin) {
-            // this.props.navigation.navigate('isSignedIn', { });
-            console.log('ton tai');
-        }
+        // await props.accountFetch();
+        // const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
+        // if (JSON.parse(fetchAcc).isLogin) {
+        //     // this.props.navigation.navigate('isSignedIn', { });
+        //     console.log('ton tai');
+        // }
     }
     onSignUp = () => {
         this.props.navigation.navigate('signup');

@@ -20,6 +20,7 @@ import DeliveryBlank from '../screens/DeliveryBlank';
 import TermScreen from '../screens/TermScreen';
 import Delivery from '../screens/Delivery';
 import Payment from '../screens/Payment';
+import SplashScreen from '../screens/SplashScreen';
 
 const isSignedOut = StackNavigator({
     default: { screen: DefaultScreen },
@@ -46,8 +47,8 @@ const isFindGift = StackNavigator({
     payment: { screen: Payment },
 });
 const isSignedIn = TabNavigator({
-    isProfile: { screen: isProfile },
     isFindGift: { screen: isFindGift },
+    isProfile: { screen: isProfile },
     afterrequest: { screen: AfterRequest }, 
 },
     {
@@ -59,6 +60,7 @@ const isSignedIn = TabNavigator({
     }
 );
 export const AppNavigator = TabNavigator({
+    isLoading: { screen: SplashScreen },
     isSignedOut: { screen: isSignedOut },
     isSignedIn: { screen: isSignedIn }
 },

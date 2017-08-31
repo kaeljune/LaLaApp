@@ -34,7 +34,6 @@ class DefaultScreen extends Component {
         //await AsyncStorage.removeItem('reduxPersist:fetchAcc');
         await this.props.accountFetch();
         const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
-        Reactotron.log(JSON.parse(fetchAcc));
         if (JSON.parse(fetchAcc).isLogin) {
             this.setState({ isLogin: JSON.parse(fetchAcc).isLogin });
             //this.props.navLogin();

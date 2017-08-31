@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { FlatList, ScrollView, View, Text, StyleSheet } from 'react-native';
+import { FlatList, View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { Avatar, Icon } from 'react-native-elements';
+import Reactotron from 'reactotron-react-native';
+
+import { accountFetch } from '../../actions';
 import { COLOR, WIDTH_SCREEN } from '../../config/config';
 
 class MainScreen extends Component {
-	static navigationOptions = () => ({
+	static navigationOptions = ({ navigation }) => ({
 		title: 'Gifts',
 		headerStyle: {
 			paddingHorizontal: 10
@@ -24,15 +27,15 @@ class MainScreen extends Component {
 				<Text>total</Text>
 			</View>
 		</View>,
-		headerRight: <Avatar
-			width={37}
-			height={37}
-			overlayContainerStyle={{ backgroundColor: COLOR.primary }}
-			rounded
-			title="HN"
-		/>
+		// headerRight: <Avatar
+		// 	width={37}
+		// 	height={37}
+		// 	overlayContainerStyle={{ backgroundColor: COLOR.primary }}
+		// 	rounded
+		// 	title="HN"
+		// />
+		headerRight: <Text>{navigation.state.params ? navigation.state.params.name : ''}</Text>
 	})
-
 	state = {
 		items: [
 			{
@@ -69,69 +72,67 @@ class MainScreen extends Component {
 		]
 	}
 
-	renderItem = ({item}) => {
-		return (
-			<View 
-				style={{
-					padding: 10,
-					backgroundColor: '#fff',
-					borderRadius: 3,
-					borderColor: '#eee',
-					borderWidth: 1,
-					marginHorizontal: 8,
-					width: (WIDTH_SCREEN / 2) - 24,
-				}}
-			>
-				<View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center' }}>
-					<Avatar
-						icon={{ name: 'person' }}
-						overlayContainerStyle={{ backgroundColor: COLOR.primary }}
-						rounded
-						height={50}
-						width={50}
-					/>
-					<Text style={{ fontSize: 18, marginTop: 7 }}>{item.name}</Text>
-					<Text style={{ fontSize: 14, marginVertical: 7, color: '#d3d5d8' }}>for {item.purpose}</Text>
-					<Text style={{ fontSize: 14, fontWeight: '600' }}>{item.price}</Text>
-					<Text
-						style={{
-							backgroundColor: COLOR.secondary,
-							fontSize: 12,
-							color: '#fff',
-							marginTop: 7,
-							paddingVertical: 3,
-							paddingHorizontal: 7,
-							borderRadius: 2
-						}}
-					>{item.status}</Text>
-				</View>
-				<View style={{ justifyContent: 'center', alignItems: 'center' }}>
-					<Icon
-						reverse
-						raised
-						reverseColor={COLOR.primary}
-						name="chevron-right"
-						size={16}
-						color="#fff"
-					/>
-				</View>
-			</View>			
-		)
-	}
+	renderItem = ({ item }) => (
+		<View
+			style={{
+				padding: 10,
+				backgroundColor: '#fff',
+				borderRadius: 3,
+				borderColor: '#eee',
+				borderWidth: 1,
+				marginHorizontal: 8,
+				width: (WIDTH_SCREEN / 2) - 24,
+			}}
+		>
+			<View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center' }}>
+				<Avatar
+					icon={{ name: 'person' }}
+					overlayContainerStyle={{ backgroundColor: COLOR.primary }}
+					rounded
+					height={50}
+					width={50}
+				/>
+				<Text style={{ fontSize: 18, marginTop: 7 }}>{item.name}</Text>
+				<Text style={{ fontSize: 14, marginVertical: 7, color: '#d3d5d8' }}>for {item.purpose}</Text>
+				<Text style={{ fontSize: 14, fontWeight: '600' }}>{item.price}</Text>
+				<Text
+					style={{
+						backgroundColor: COLOR.secondary,
+						fontSize: 12,
+						color: '#fff',
+						marginTop: 7,
+						paddingVertical: 3,
+						paddingHorizontal: 7,
+						borderRadius: 2
+					}}
+				>{item.status}</Text>
+			</View>
+			<View style={{ justifyContent: 'center', alignItems: 'center' }}>
+				<Icon
+					reverse
+					raised
+					reverseColor={COLOR.primary}
+					name="chevron-right"
+					size={16}
+					color="#fff"
+				/>
+			</View>
+		</View>
+	)
 
 	renderList = () => {
 		const { items } = this.state;
 		if (items.length > 0) {
 			return (
 				<View style={{ flex: 1, paddingBottom: 60 }}>
-            <FlatList
-								numColumns={2}
-								contentContainerStyle={{ paddingVertical: 15 }}
-								columnWrapperStyle={{ paddingVertical: 8, paddingHorizontal: 8 }}
-                data={items}
-                keyExtractor={(item) => items.indexOf(item)}
-                renderItem={this.renderItem}
-            />
+					<FlatList
+						numColumns={2}
+						contentContainerStyle={{ paddingVertical: 15 }}
+						columnWrapperStyle={{ paddingVertical: 8, paddingHorizontal: 8 }}
+						data={items}
+						keyExtractor={(item) => items.indexOf(item)}
+						renderItem={this.renderItem}
+					/>
 
 					<View style={styles.bottomView}>
 						<Icon
@@ -173,9 +174,7 @@ class MainScreen extends Component {
 	};
 
 	render() {
-		if (this.props.libraries.auth.user) {
-			console.log(this.props.libraries.auth.user);
-		}
+		Reactotron.log(this.props.navigation);
 		return (
 			<View style={styles.container}>
 				{this.renderList()}
@@ -210,6 +209,6 @@ const styles = StyleSheet.create({
 	}
 });
 
-const mapStateToProps = auth => ({ libraries: auth });
+const mapStateToProps = ({ fetchAcc }) => ({ account: fetchAcc });
 
-export default connect(mapStateToProps)(MainScreen);
+export default connect(mapStateToProps, { accountFetch })(MainScreen);
