@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     logoStyle: {
-        //marginTop: 30,
+        marginTop: 30,
     },
     desStyle: {
         textAlign: 'center',
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         width: WIDTH_SCREEN - 100,
         lineHeight: 25,
-        marginTop: 20,
+        marginTop: 10,
         marginBottom: 30,
     },
 });

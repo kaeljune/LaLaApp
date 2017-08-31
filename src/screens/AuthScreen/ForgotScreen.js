@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     logoStyle: {
-        marginVertical: 30
+        marginVertical: 20
     },
     wrapButtons: {
         flex: 1,
