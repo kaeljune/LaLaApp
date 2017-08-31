@@ -17,9 +17,9 @@ class SplashScreen extends Component {
         await this.props.accountFetch();
         const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
         if (JSON.parse(fetchAcc).isLogin) {
-            this.setState({ isLogin: JSON.parse(fetchAcc).isLogin });
+            await this.setState({ isLogin: JSON.parse(fetchAcc).isLogin });
         } else {
-            this.setState({ isLogin: false });
+            await this.setState({ isLogin: false });
         }
     }
 	render() {
@@ -44,6 +44,6 @@ const styles = StyleSheet.create({
 const mapStateToProps = ({ fetchAcc }) => {
     const { account } = fetchAcc;
     return { account };
-};
+  };
 
 export default connect(mapStateToProps, { accountFetch, navLogin, navLogout })(SplashScreen);

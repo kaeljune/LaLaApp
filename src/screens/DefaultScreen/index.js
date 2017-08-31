@@ -26,21 +26,6 @@ class DefaultScreen extends Component {
     static navigationOptions = () => ({
         header: null,
     })
-    state = {
-        userLogin: null,
-        isLogin: null
-    };
-    async componentWillMount() {
-        //await AsyncStorage.removeItem('reduxPersist:fetchAcc');
-        await this.props.accountFetch();
-        const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
-        if (JSON.parse(fetchAcc).isLogin) {
-            this.setState({ isLogin: JSON.parse(fetchAcc).isLogin });
-            //this.props.navLogin();
-        } else {
-            this.setState({ isLogin: false });
-        }
-    }
     async componentDidMount() {
         //await AsyncStorage.removeItem('@userLogin');
     }
@@ -54,9 +39,6 @@ class DefaultScreen extends Component {
         });
     }
     render() {
-        if (_.isNull(this.state.isLogin)) {
-            return <AppLoading />;
-        }
         return (
             <Animated.Image
                 style={styles.container}
