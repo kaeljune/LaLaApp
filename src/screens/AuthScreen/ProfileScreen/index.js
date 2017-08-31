@@ -54,17 +54,6 @@ class ProfileScreen extends Component {
     async componentWillMount() {
         //await this.props.accountFetch();
         const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
-        // if (JSON.parse(fetchAcc).isLogin) {
-        //     this.setState({ isLogin: JSON.parse(fetchAcc).isLogin });
-        // } else {
-        //     this.setState({ isLogin: false });
-        // }
-        // Reactotron.log(this.state.userLogin);
-        // // firebase.auth().signOut().then(() => {
-        // //     // Sign-out successful.
-        // //     }).catch((error) => {
-        // //     // An error happened.
-        // // });
         if (JSON.parse(fetchAcc).isLogin) {
             this.setState({ userLogin: JSON.parse(fetchAcc) });
         } else {

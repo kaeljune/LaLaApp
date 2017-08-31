@@ -18,12 +18,6 @@ const initialNavState = AppNavigator.router.getStateForAction(
 export default function nav(state = initialNavState, action) {
   let nextState;
   switch (action.type) {
-    // case 'Login':
-    //   nextState = AppNavigator.router.getStateForAction(
-    //     NavigationActions.back(),
-    //     state
-    //   );
-    //   break;
     case ACCOUNT_FETCH_SUCCESS:
     nextState = AppNavigator.router.getStateForAction(
       NavigationActions.navigate({ routeName: 'isSignedIn' }),
