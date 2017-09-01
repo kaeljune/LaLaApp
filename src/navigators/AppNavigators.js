@@ -23,7 +23,6 @@ import Payment from '../screens/Payment';
 import SplashScreen from '../screens/SplashScreen';
 
 const isSignedOut = StackNavigator({
-    isLoading: { screen: SplashScreen },
 
     default: { screen: DefaultScreen },
     signin: { screen: SigninScreen },

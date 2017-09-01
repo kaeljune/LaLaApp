@@ -8,22 +8,6 @@ import { accountFetch, navLogin, navLogout } from '../../actions';
 import { COLOR, WIDTH_SCREEN, HEIGHT_SCREEN } from '../../config/config';
 
 class SplashScreen extends Component {
-<<<<<<< HEAD
-    state = {
-        userLogin: null,
-        isLogin: null
-    };
-    async componentWillMount() {
-        //await AsyncStorage.removeItem('reduxPersist:fetchAcc');
-        await this.props.accountFetch();
-        const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
-        if (JSON.parse(fetchAcc).isLogin) {
-            await this.setState({ isLogin: JSON.parse(fetchAcc).isLogin });
-        } else {
-            await this.setState({ isLogin: false });
-        }
-    }
-=======
 	static navigationOptions = {
 		header: null
 	}
@@ -85,7 +69,6 @@ class SplashScreen extends Component {
 		).start();
 	}
 
->>>>>>> 57f8868fa9e13510e8151e9b164d805b141314ce
 	render() {
 		const animateStyle = {
 			transform: [
@@ -188,14 +171,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({ fetchAcc }) => {
-<<<<<<< HEAD
-    const { account } = fetchAcc;
-    return { account };
-  };
-=======
 	const { account } = fetchAcc;
 	return { account };
 };
->>>>>>> 57f8868fa9e13510e8151e9b164d805b141314ce
 
 export default connect(mapStateToProps, { accountFetch, navLogin, navLogout })(SplashScreen);
