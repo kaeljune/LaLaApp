@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, TabNavigator, StackNavigator } from 'react-navigation';
 
+import HocLoading from '../../src/components/hoc/Loadding';
+
 import DefaultScreen from '../screens/DefaultScreen';
 import MainScreen from '../screens/MainScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
@@ -23,7 +25,7 @@ import Payment from '../screens/Payment';
 import SplashScreen from '../screens/SplashScreen';
 
 const isSignedOut = StackNavigator({
-    isLoading: { screen: SplashScreen },
+    deliveryblank: { screen: DeliveryBlank },
 
     default: { screen: DefaultScreen },
     signin: { screen: SigninScreen },
@@ -89,4 +91,4 @@ const mapStateToProps = state => ({
   nav: state.nav,
 });
 
-export default connect(mapStateToProps)(AppWithNavigationState);
+export default connect(mapStateToProps)(HocLoading(AppWithNavigationState));
