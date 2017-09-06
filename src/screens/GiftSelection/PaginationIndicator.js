@@ -4,10 +4,6 @@ import { View, Text, StyleSheet } from 'react-native';
 import { COLOR } from '../../config/config';
 
 class PaginationIndicator extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     renderItem = (index, selected) => {
         const style = [styles.base];
    
@@ -16,6 +12,7 @@ class PaginationIndicator extends Component {
             
             return (
                 <Text 
+                    onPress={() => this.props.scrollTo(index)}
                     key={index} 
                     style={style}
                 >
@@ -23,6 +20,7 @@ class PaginationIndicator extends Component {
                 </Text>
             );
     }
+
     renderIndicators = () => {
         const length = this.props.length;
         const current = this.props.current;

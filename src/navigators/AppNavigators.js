@@ -25,7 +25,8 @@ import Payment from '../screens/Payment';
 import SplashScreen from '../screens/SplashScreen';
 
 const isSignedOut = StackNavigator({
-    deliveryblank: { screen: DeliveryBlank },
+    // signin: { screen: SigninScreen },
+    giftselection: { screen: GiftSelection },
 
     default: { screen: DefaultScreen },
     signin: { screen: SigninScreen },
@@ -51,6 +52,8 @@ const isFindGift = StackNavigator({
     payment: { screen: Payment },
 });
 const isSignedIn = TabNavigator({
+    giveagift: { screen: GiveAGift }, 
+
     isFindGift: { screen: isFindGift },
     isProfile: { screen: isProfile },
     afterrequest: { screen: AfterRequest }, 
