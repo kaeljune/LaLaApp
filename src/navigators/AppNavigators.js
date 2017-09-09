@@ -24,9 +24,13 @@ import Delivery from '../screens/Delivery';
 import Payment from '../screens/Payment';
 import SplashScreen from '../screens/SplashScreen';
 
+// add detail Gift
+import DetailGift from '../screens/DetailGift';
+
+
 const isSignedOut = StackNavigator({
-    // signin: { screen: SigninScreen },
     giftselection: { screen: GiftSelection },
+    detailgift: { screen: DetailGift },
 
     default: { screen: DefaultScreen },
     signin: { screen: SigninScreen },

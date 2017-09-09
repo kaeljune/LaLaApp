@@ -2,7 +2,7 @@ import Expo from 'expo';
 import React, { Component } from 'react';
 import { StyleSheet, View, StatusBar, Animated } from 'react-native';
 import { Provider } from 'react-redux';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+// import injectTapEventPlugin from 'react-tap-event-plugin';
 
 
 import './config/firebase-config';
@@ -10,7 +10,7 @@ import '../ReactotronConfig';
 import store from './store';
 import AppWithNavigationState from './navigators/AppNavigators';
 
-injectTapEventPlugin();
+// injectTapEventPlugin();
 
 class App extends Component {
   constructor() {
