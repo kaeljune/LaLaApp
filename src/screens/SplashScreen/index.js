@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AsyncStorage, View, StyleSheet, ActivityIndicator, Animated } from 'react-native';
+import { AsyncStorage, Text, View, StyleSheet, ActivityIndicator, Animated } from 'react-native';
 import { connect } from 'react-redux';
 import { AppLoading } from 'expo';
 import _ from 'lodash';
@@ -93,7 +93,7 @@ class SplashScreen extends Component {
 		};
 
 		if (_.isNull(this.state.isLogin)) {
-			return <AppLoading />;
+			return <Text>Loading</Text>;
 		}
 		return (
 			<View style={styles.container}>

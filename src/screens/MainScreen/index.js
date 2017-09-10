@@ -185,7 +185,6 @@ class MainScreen extends Component {
 	};
 
 	render() {
-		Reactotron.log(this.props.navigation);
 		return (
 			<View style={styles.container}>
 				{this.renderList()}

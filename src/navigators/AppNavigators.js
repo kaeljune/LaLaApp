@@ -29,9 +29,6 @@ import DetailGift from '../screens/DetailGift';
 
 
 const isSignedOut = StackNavigator({
-    giftselection: { screen: GiftSelection },
-    detailgift: { screen: DetailGift },
-
     default: { screen: DefaultScreen },
     signin: { screen: SigninScreen },
     signup: { screen: SignupScreen },
@@ -44,11 +41,12 @@ const isProfile = StackNavigator({
     term: { screen: TermScreen },
 });
 const isFindGift = StackNavigator({
-    mainGift: { screen: MainScreen },
     giveagift: { screen: GiveAGift }, 
+    mainGift: { screen: MainScreen },
 
     findagift: { screen: FindAGift },
     giftselection: { screen: GiftSelection },
+    detailgift: { screen: DetailGift },
     checkout: { screen: Checkout },
     writeanote: { screen: WriteANote },
     deliveryblank: { screen: DeliveryBlank },
@@ -56,8 +54,6 @@ const isFindGift = StackNavigator({
     payment: { screen: Payment },
 });
 const isSignedIn = TabNavigator({
-    giveagift: { screen: GiveAGift }, 
-
     isFindGift: { screen: isFindGift },
     isProfile: { screen: isProfile },
     afterrequest: { screen: AfterRequest }, 
@@ -67,6 +63,7 @@ const isSignedIn = TabNavigator({
       tabBarVisible: false
     },
     swipeEnabled: false,
+    animationEnabled: false,
     lazy: true,
     }
 );
@@ -81,6 +78,7 @@ export const AppNavigator = TabNavigator({
         },
         headerMode: 'screen',
         swipeEnabled: false,
+        animationEnabled: false,
         lazy: true,
     }
 );
