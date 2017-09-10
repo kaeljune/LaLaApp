@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, TabNavigator, StackNavigator } from 'react-navigation';
 
+import HocLoading from '../../src/components/hoc/LoaderHOC';
 import DefaultScreen from '../screens/DefaultScreen';
 import MainScreen from '../screens/MainScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
