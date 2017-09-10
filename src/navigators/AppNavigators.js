@@ -3,12 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, TabNavigator, StackNavigator } from 'react-navigation';
 
-<<<<<<< HEAD
-import HocLoading from '../../src/components/hoc/LoaderHOC';
-=======
 import HocLoading from '../../src/components/hoc/Loadding';
 
->>>>>>> 2e7033ec13a6cfb7e78d02dd40e3e7abedb24a04
 import DefaultScreen from '../screens/DefaultScreen';
 import MainScreen from '../screens/MainScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
@@ -33,11 +29,8 @@ import DetailGift from '../screens/DetailGift';
 
 
 const isSignedOut = StackNavigator({
-<<<<<<< HEAD
-=======
     giftselection: { screen: GiftSelection },
     detailgift: { screen: DetailGift },
->>>>>>> 2e7033ec13a6cfb7e78d02dd40e3e7abedb24a04
 
     default: { screen: DefaultScreen },
     signin: { screen: SigninScreen },
