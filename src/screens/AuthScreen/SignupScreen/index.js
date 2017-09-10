@@ -94,6 +94,7 @@ class SignupScreen extends Component {
             <Btn 
                 title="SIGN IN"
                 bgColor={COLOR.primary}
+                style={{ width: 150 }}
                 onPress={this.onButtonPress}
             />
         );
@@ -153,6 +154,7 @@ class SignupScreen extends Component {
                             <Btn 
                                 title="FACEBOOK"
                                 bgColor="#3B5998"
+                                style={{ width: 150 }}
                                 onPress={() => { Alert('loginface'); }}
                             />
                             <SigninLink onSignIn={this.onSignIn} />

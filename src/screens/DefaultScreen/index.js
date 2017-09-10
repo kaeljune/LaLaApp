@@ -57,6 +57,7 @@ class DefaultScreen extends Component {
                     <Btn 
                         title="START NOW"
                         bgColor="#11b8ab"
+                        style={{ width: 150 }}
                         onPress={this.onGetStarted}
                     />
 

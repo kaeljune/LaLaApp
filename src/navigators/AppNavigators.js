@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, TabNavigator, StackNavigator } from 'react-navigation';
 
+<<<<<<< HEAD
 import HocLoading from '../../src/components/hoc/LoaderHOC';
+=======
+import HocLoading from '../../src/components/hoc/Loadding';
+
+>>>>>>> 2e7033ec13a6cfb7e78d02dd40e3e7abedb24a04
 import DefaultScreen from '../screens/DefaultScreen';
 import MainScreen from '../screens/MainScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
@@ -23,7 +28,16 @@ import Delivery from '../screens/Delivery';
 import Payment from '../screens/Payment';
 import SplashScreen from '../screens/SplashScreen';
 
+// add detail Gift
+import DetailGift from '../screens/DetailGift';
+
+
 const isSignedOut = StackNavigator({
+<<<<<<< HEAD
+=======
+    giftselection: { screen: GiftSelection },
+    detailgift: { screen: DetailGift },
+>>>>>>> 2e7033ec13a6cfb7e78d02dd40e3e7abedb24a04
 
     default: { screen: DefaultScreen },
     signin: { screen: SigninScreen },
@@ -49,6 +63,8 @@ const isFindGift = StackNavigator({
     payment: { screen: Payment },
 });
 const isSignedIn = TabNavigator({
+    giveagift: { screen: GiveAGift }, 
+
     isFindGift: { screen: isFindGift },
     isProfile: { screen: isProfile },
     afterrequest: { screen: AfterRequest }, 
@@ -89,4 +105,4 @@ const mapStateToProps = state => ({
   nav: state.nav,
 });
 
-export default connect(mapStateToProps)(AppWithNavigationState);
+export default connect(mapStateToProps)(HocLoading(AppWithNavigationState));

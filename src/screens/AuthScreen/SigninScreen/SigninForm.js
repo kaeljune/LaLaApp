@@ -46,6 +46,7 @@ class SigninForm extends Component {
                 title="SIGN IN"
                 bgColor={COLOR.primary}
                 onPress={this.onButtonPress}
+                style={{ width: 150 }}
             />
         );
     }
@@ -79,6 +80,7 @@ class SigninForm extends Component {
                 <Btn 
                     title="FACEBOOK"
                     bgColor="#3B5998"
+                    style={{ width: 150 }}
                     onPress={() => { Alert('loginface'); }}
                 />
             </View>
