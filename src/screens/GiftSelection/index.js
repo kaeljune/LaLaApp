@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, ScrollView, Image, TouchableWithoutFeedback, Animated } from 'react-native';
+import { View, Text, StyleSheet, TouchableWithoutFeedback, Animated } from 'react-native';
 import { Icon } from 'react-native-elements';
 import * as config from '../../config/config';
 
@@ -87,7 +87,6 @@ class GiftSelection extends Component {
   }
 
   render() {
-
     return (
       <View style={styles.container}>
 

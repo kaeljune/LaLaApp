@@ -57,11 +57,21 @@ class Services extends Component {
 					</View>
 					<View>
 						<TouchableWithoutFeedback>
-							<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+							<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15, borderBottomColor: '#ddd', borderBottomWidth: 1 }}>
 								<Text style={{ fontSize: 17, color: '#313131' }}>
 									Terms &amp; Privacy
 								</Text>
 								<Icon name="assignment" color={COLOR.primary} />
+							</View>
+						</TouchableWithoutFeedback>
+					</View>
+					<View>
+						<TouchableWithoutFeedback>
+							<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+								<Text style={{ fontSize: 17, color: '#313131' }}>
+									Sign out
+								</Text>
+								<Icon name="exit-to-app" color={COLOR.primary} />
 							</View>
 						</TouchableWithoutFeedback>
 					</View>

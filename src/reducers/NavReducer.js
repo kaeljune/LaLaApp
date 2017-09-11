@@ -1,7 +1,7 @@
 import { NavigationActions } from 'react-navigation';
 
 import { AppNavigator } from '../navigators/AppNavigators';
-import {  
+import {
   ACCOUNT_FETCH_SUCCESS,
   ACCOUNT_FETCH_FAIL
 } from '../actions/types.js';
@@ -19,21 +19,21 @@ export default function nav(state = initialNavState, action) {
   let nextState;
   switch (action.type) {
     case ACCOUNT_FETCH_SUCCESS:
-    nextState = AppNavigator.router.getStateForAction(
-      NavigationActions.navigate({ 
-        routeName: 'isSignedIn',
-        params: {},
-        action: NavigationActions.navigate({ routeName: 'mainGift', params: { name: 'foo' } }) 
-      }),
-      state
-    );
-    break;
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({
+          routeName: 'isSignedIn',
+          params: {},
+          action: NavigationActions.navigate({ routeName: 'mainGift', params: {} })
+        }),
+        state
+      );
+      break;
     case ACCOUNT_FETCH_FAIL:
-    nextState = AppNavigator.router.getStateForAction(
-      NavigationActions.navigate({ routeName: 'isSignedOut' }),
-      state
-    );
-    break;
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'isSignedOut' }),
+        state
+      );
+      break;
     case 'Logout':
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'isSignedOut' }),

@@ -90,7 +90,6 @@ class ProfileScreen extends Component {
 
 						{this.renderUserInfo()}
 						<Services />
-						<SignoutButton />
 					</View>
 				</KeyboardAvoidingView>
 			</ScrollView>

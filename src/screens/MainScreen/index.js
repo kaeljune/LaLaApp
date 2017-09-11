@@ -1,87 +1,71 @@
 import React, { Component } from 'react';
-import { FlatList, View, Text, StyleSheet, Animated } from 'react-native';
+import { FlatList, View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Avatar, Icon } from 'react-native-elements';
-import Reactotron from 'reactotron-react-native';
 import firebase from 'firebase';
 
-import { accountFetch } from '../../actions';
-import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';
+import { accountFetch, fetchRequest } from '../../actions';
+import { COLOR, WIDTH_SCREEN } from '../../config/config';
 
 class MainScreen extends Component {
-	static navigationOptions = ({ navigation }) => ({
-		title: 'Main Gifts',
-		headerStyle,
-		headerTitleStyle,
+	static navigationOptions = ({ navigation }) => {
+		const { state } = navigation;
+		if (state.params !== undefined) {
+			return {
+				title: 'Gifts',
+				headerStyle: {
+					paddingHorizontal: 10
+				},
+				headerTitleStyle: {
+					alignSelf: 'center'
+				},
 
-		// headerLeft: <View>
-		// 	<View style={{ flexDirection: 'row' }}>
-		// 		<Text
-		// 			style={styles.box}
-		// 		>
-		// 			01
-    //             </Text>
-		// 		<Text>total</Text>
-		// 	</View>
-		// </View>,
-		headerRight: <Avatar
-			width={37}
-			height={37}
-			overlayContainerStyle={{ backgroundColor: COLOR.primary }}
-			rounded
-			title="HN"
-		/>
-		// headerRight: <Text>{navigation.state.params ? navigation.state.params.name : ''}</Text>
-	})
-	state = {
-		items: [
-			{
-				name: 'Hai Nguyen',
-				purpose: 'Birthday',
-				price: '$500',
-				status: 'Gift ready'
-			},
-			{
-				name: 'Hai Nguyen',
-				purpose: 'Birthday',
-				price: '$500',
-				status: 'Gift ready'
-			},
-			{
-				name: 'Hai Nguyen',
-				purpose: 'Birthday',
-				price: '$500',
-				status: 'Gift ready'
-			},
-			{
-				name: 'Hai Nguyen',
-				purpose: 'Birthday',
-				price: '$500',
-				status: 'Gift ready'
-			},
-
-			{
-				name: 'Hai Nguyen',
-				purpose: 'Birthday',
-				price: '$500',
-				status: 'Gift ready'
-			},
-		]
+				headerLeft: <View>
+					<View style={{ flexDirection: 'row' }}>
+						<Text
+							style={styles.box}
+						>
+							{state.params ? state.params.items : '0'}
+						</Text>
+						<Text>total</Text>
+					</View>
+				</View>,
+				headerRight: <TouchableWithoutFeedback onPress={() => navigation.navigate('profile')}>
+					<Avatar
+						width={37}
+						height={37}
+						overlayContainerStyle={{ backgroundColor: COLOR.primary }}
+						rounded
+						title={state.params ? state.params.name : ''}
+					/>
+				</TouchableWithoutFeedback>
+			};
+		}
 	}
+
+	async componentWillMount() {
+		await this.props.fetchRequest();
+		const { setParams } = this.props.navigation;
+		const { auth, items } = this.props;
+		const name = auth.userLogin.name;
+		setParams({ name: _.toUpper(name.substr(0, 2)), items: items.length });
+	}
+
 	componentDidMount() {
+		//console.log(this.props.state);
 		firebase.auth().currentUser.getIdToken(true)
 		.then((idToken) => {
-			Reactotron.log(idToken);
+			console.log(idToken);
 			// Send token to your backend via HTTPS
 			// ...
 		}).catch((error) => {
 			// Handle error
-			Reactotron.log(error);
+			console.log(error);
 		});
 	}
 	renderItem = ({ item }) => (
-		<Animated.View
-
+		<View
 			style={{
 				padding: 10,
 				backgroundColor: '#fff',
@@ -99,11 +83,12 @@ class MainScreen extends Component {
 					rounded
 					height={50}
 					width={50}
-					onPress={() => this.props.navigation.navigate('profile')}
 				/>
-				<Text style={{ fontSize: 18, marginTop: 7 }}>{item.name}</Text>
-				<Text style={{ fontSize: 14, marginVertical: 7, color: '#555' }}>for {item.purpose}</Text>
-				<Text style={{ fontSize: 14, fontWeight: '600' }}>{item.price}</Text>
+				<Text style={{ fontSize: 18, marginTop: 7 }}>{item.receiverName}</Text>
+				<Text style={{ fontSize: 14, marginVertical: 7, color: '#d3d5d8' }}>
+					for {item.occasion}
+				</Text>
+				<Text style={{ fontSize: 14, fontWeight: '600' }}>{item.priceRange}</Text>
 				<Text
 					style={{
 						backgroundColor: COLOR.secondary,
@@ -116,15 +101,24 @@ class MainScreen extends Component {
 					}}
 				>{item.status}</Text>
 			</View>
-		
-		</Animated.View>
+			<View style={{ justifyContent: 'center', alignItems: 'center' }}>
+				<Icon
+					reverse
+					raised
+					reverseColor={COLOR.primary}
+					name="chevron-right"
+					size={16}
+					color="#fff"
+				/>
+			</View>
+		</View>
 	)
 
 	renderList = () => {
-		const { items } = this.state;
+		const { items } = this.props;
 		if (items.length > 0) {
 			return (
-				<View style={{ flex: 1 }}>
+				<View style={{ flex: 1, paddingBottom: 60 }}>
 					<FlatList
 						numColumns={2}
 						contentContainerStyle={{ paddingVertical: 15 }}
@@ -161,15 +155,14 @@ class MainScreen extends Component {
 			>
 
 				<Icon
-					raised
 					reverse
+					raised
 					reverseColor="white"
 					name='add'
 					color={COLOR.primary}
-					onPress={() => console.log(12)}
 				/>
 
-				<Text style={{ marginTop: 10, fontWeight: '700' }}>Find a Gift</Text>
+				<Text style={{ marginTop: 10, fontWeight: 'bold' }}>FIND A GIFT</Text>
 			</View>
 		);
 	};
@@ -196,21 +189,23 @@ const styles = StyleSheet.create({
 		minWidth: 20,
 		textAlign: 'center',
 		color: '#fff',
-		marginRight: 5,
-		borderColor: '#ddd',
-		borderWidth: 1
+		marginRight: 5
 	},
 	bottomView: {
 		position: 'absolute',
 		bottom: 0,
 		width: WIDTH_SCREEN,
 		alignItems: 'center',
-		// borderTopColor: '#eee',
-		// borderTopWidth: 1,
-		// backgroundColor: '#fff',
+		borderTopColor: '#eee',
+		borderTopWidth: 1,
+		backgroundColor: '#fff',
 	}
 });
 
-const mapStateToProps = ({ fetchAcc }) => ({ account: fetchAcc });
+const mapStateToProps = state => {
+	const items = _.map(state.listRequest, (val, uid) => ({ ...val, uid }));
+	const auth = state.fetchAcc;
+	return { items, auth };
+};
 
-export default connect(mapStateToProps, { accountFetch })(MainScreen);
+export default connect(mapStateToProps, { accountFetch, fetchRequest })(MainScreen);

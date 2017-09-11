@@ -1,5 +1,7 @@
 import { Dimensions } from 'react-native';
 
+const RootAPI = 'https://us-central1-airlala-7b1b2.cloudfunctions.net';
+
 const WIDTH_SCREEN = Dimensions.get('window').width;
 const HEIGHT_SCREEN = Dimensions.get('window').height;
 const HEIGHT_HEADER = (HEIGHT_SCREEN * 50) / 667;
@@ -31,4 +33,5 @@ const API_URL = 'https://us-central1-airlala-7b1b2.cloudfunctions.net/';
 
 export { 
     API_URL, WIDTH_SCREEN, HEIGHT_SCREEN, HEIGHT_HEADER, COLOR, spaceNumber,
-    headerTitleStyle, headerStyle };
+    headerTitleStyle, headerStyle,
+    RootAPI };
