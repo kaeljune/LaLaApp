@@ -23,7 +23,7 @@ export default function nav(state = initialNavState, action) {
         NavigationActions.navigate({
           routeName: 'isSignedIn',
           params: {},
-          action: NavigationActions.navigate({ routeName: 'mainGift', params: { name: 'foo' } })
+          action: NavigationActions.navigate({ routeName: 'mainGift', params: {} })
         }),
         state
       );

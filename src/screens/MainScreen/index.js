@@ -8,39 +8,47 @@ import { accountFetch, fetchRequest } from '../../actions';
 import { COLOR, WIDTH_SCREEN } from '../../config/config';
 
 class MainScreen extends Component {
-	static navigationOptions = ({ navigation }) => ({
-		title: 'Gifts',
-		headerStyle: {
-			paddingHorizontal: 10
-		},
-		headerTitleStyle: {
-			alignSelf: 'center'
-		},
+	static navigationOptions = ({ navigation }) => {
+		const { state } = navigation;
+		if (state.params !== undefined) {
+			return {
+				title: 'Gifts',
+				headerStyle: {
+					paddingHorizontal: 10
+				},
+				headerTitleStyle: {
+					alignSelf: 'center'
+				},
 
-		headerLeft: <View>
-			<View style={{ flexDirection: 'row' }}>
-				<Text
-					style={styles.box}
-				>
-					01
-                </Text>
-				<Text>total</Text>
-			</View>
-		</View>,
-		// headerRight: <Avatar
-		// 	width={37}
-		// 	height={37}
-		// 	overlayContainerStyle={{ backgroundColor: COLOR.primary }}
-		// 	rounded
-		// 	title="HN"
-		// />
-		headerRight: <Text>{navigation.state.params ? navigation.state.params.name : ''}</Text>
-	})
+				headerLeft: <View>
+					<View style={{ flexDirection: 'row' }}>
+						<Text
+							style={styles.box}
+						>
+							{state.params ? state.params.items : '0'}
+						</Text>
+						<Text>total</Text>
+					</View>
+				</View>,
+				headerRight: <Avatar
+					width={37}
+					height={37}
+					overlayContainerStyle={{ backgroundColor: COLOR.primary }}
+					rounded
+					title={state.params ? state.params.name : ''}
+				/>
+			};
+		}
+	}
 
 	async componentWillMount() {
 		await this.props.fetchRequest();
+		const { setParams } = this.props.navigation;
+		const { auth, items } = this.props;
+		const name = auth.userLogin.name;
+		setParams({ name: _.toUpper(name.substr(0, 2)), items: items.length });
 	}
-	
+
 	componentDidMount() {
 		//Reactotron.log(this.props.state);
 		// firebase.auth().currentUser.getIdToken(true)
@@ -74,7 +82,9 @@ class MainScreen extends Component {
 					width={50}
 				/>
 				<Text style={{ fontSize: 18, marginTop: 7 }}>{item.receiverName}</Text>
-				<Text style={{ fontSize: 14, marginVertical: 7, color: '#d3d5d8' }}>for {item.occasion}</Text>
+				<Text style={{ fontSize: 14, marginVertical: 7, color: '#d3d5d8' }}>
+					for {item.occasion}
+				</Text>
 				<Text style={{ fontSize: 14, fontWeight: '600' }}>{item.priceRange}</Text>
 				<Text
 					style={{
@@ -153,7 +163,7 @@ class MainScreen extends Component {
 			</View>
 		);
 	};
-	
+
 	render() {
 		return (
 			<View style={styles.container}>
@@ -191,7 +201,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
 	const items = _.map(state.listRequest, (val, uid) => ({ ...val, uid }));
-	return { items };
+	const auth = state.fetchAcc;
+	return { items, auth };
 };
 
 export default connect(mapStateToProps, { accountFetch, fetchRequest })(MainScreen);
