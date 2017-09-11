@@ -3,6 +3,7 @@ import { FlatList, View, Text, StyleSheet } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Avatar, Icon } from 'react-native-elements';
+import firebase from 'firebase';
 
 import { accountFetch, fetchRequest } from '../../actions';
 import { COLOR, WIDTH_SCREEN } from '../../config/config';
@@ -50,16 +51,16 @@ class MainScreen extends Component {
 	}
 
 	componentDidMount() {
-		//Reactotron.log(this.props.state);
-		// firebase.auth().currentUser.getIdToken(true)
-		// .then((idToken) => {
-		// 	Reactotron.log(idToken);
-		// 	// Send token to your backend via HTTPS
-		// 	// ...
-		// }).catch((error) => {
-		// 	// Handle error
-		// 	Reactotron.log(error);
-		// });
+		//console.log(this.props.state);
+		firebase.auth().currentUser.getIdToken(true)
+		.then((idToken) => {
+			console.log(idToken);
+			// Send token to your backend via HTTPS
+			// ...
+		}).catch((error) => {
+			// Handle error
+			console.log(error);
+		});
 	}
 	renderItem = ({ item }) => (
 		<View
