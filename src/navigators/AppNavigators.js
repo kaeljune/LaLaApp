@@ -39,10 +39,12 @@ const isProfile = StackNavigator({
     profile: { screen: ProfileScreen },
     term: { screen: TermScreen },
 });
-const isFindGift = StackNavigator({
-    giveagift: { screen: GiveAGift }, 
-    mainGift: { screen: MainScreen },
 
+const isFindGift = StackNavigator({
+    profile: { screen: ProfileScreen },
+    
+    mainGift: { screen: MainScreen },
+    giveagift: { screen: GiveAGift }, 
     findagift: { screen: FindAGift },
     giftselection: { screen: GiftSelection },
     detailgift: { screen: DetailGift },
@@ -52,6 +54,7 @@ const isFindGift = StackNavigator({
     delivery: { screen: Delivery },
     payment: { screen: Payment },
 });
+
 const isSignedIn = TabNavigator({
     isFindGift: { screen: isFindGift },
     isProfile: { screen: isProfile },

@@ -18,16 +18,20 @@ class TextField extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.props.label ? <Text style={styles.labelStyle}>{this.props.label}</Text> : null}
+        {this.props.label && <Text style={this.props.labelStyle ? [styles.labelStyle, this.props.labelStyle] : styles.labelStyle}>{this.props.label}</Text>}
         <View style={styles.inputWrap}>
           <TextInput
+            value={this.props.value}
             secureTextEntry={this.props.secureTextEntry && !this.state.isShowPass}
-            style={{ height: 40 }}
+            style={{ paddingBottom: 10, lineHeight: 25, fontSize: 16 }}
             placeholder={this.props.placeholder}
             placeholderTextColor={COLOR.placeholderTextColor}
             underlineColorAndroid="transparent"
             tintColor={'#313131'}
             selectionColor={'#777'}
+            onChangeText={this.props.onChangeText}
+            multiline={this.props.multiline}
+            numberOfLines={this.props.numberOfLines && 4}
           />
 
           {this.props.secureTextEntry && (<Icon 
@@ -50,7 +54,7 @@ const styles = StyleSheet.create({
   },
   inputWrap: {
     borderBottomColor: '#ccc',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   labelStyle: {
     fontWeight: '300',

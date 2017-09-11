@@ -6,36 +6,32 @@ import Reactotron from 'reactotron-react-native';
 import firebase from 'firebase';
 
 import { accountFetch } from '../../actions';
-import { COLOR, WIDTH_SCREEN } from '../../config/config';
+import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';
 
 class MainScreen extends Component {
 	static navigationOptions = ({ navigation }) => ({
-		title: 'Gifts',
-		headerStyle: {
-			paddingHorizontal: 10
-		},
-		headerTitleStyle: {
-			alignSelf: 'center'
-		},
+		title: 'Main Gifts',
+		headerStyle,
+		headerTitleStyle,
 
-		headerLeft: <View>
-			<View style={{ flexDirection: 'row' }}>
-				<Text
-					style={styles.box}
-				>
-					01
-                </Text>
-				<Text>total</Text>
-			</View>
-		</View>,
-		// headerRight: <Avatar
-		// 	width={37}
-		// 	height={37}
-		// 	overlayContainerStyle={{ backgroundColor: COLOR.primary }}
-		// 	rounded
-		// 	title="HN"
-		// />
-		headerRight: <Text>{navigation.state.params ? navigation.state.params.name : ''}</Text>
+		// headerLeft: <View>
+		// 	<View style={{ flexDirection: 'row' }}>
+		// 		<Text
+		// 			style={styles.box}
+		// 		>
+		// 			01
+    //             </Text>
+		// 		<Text>total</Text>
+		// 	</View>
+		// </View>,
+		headerRight: <Avatar
+			width={37}
+			height={37}
+			overlayContainerStyle={{ backgroundColor: COLOR.primary }}
+			rounded
+			title="HN"
+		/>
+		// headerRight: <Text>{navigation.state.params ? navigation.state.params.name : ''}</Text>
 	})
 	state = {
 		items: [
@@ -103,6 +99,7 @@ class MainScreen extends Component {
 					rounded
 					height={50}
 					width={50}
+					onPress={() => this.props.navigation.navigate('profile')}
 				/>
 				<Text style={{ fontSize: 18, marginTop: 7 }}>{item.name}</Text>
 				<Text style={{ fontSize: 14, marginVertical: 7, color: '#555' }}>for {item.purpose}</Text>
@@ -199,7 +196,9 @@ const styles = StyleSheet.create({
 		minWidth: 20,
 		textAlign: 'center',
 		color: '#fff',
-		marginRight: 5
+		marginRight: 5,
+		borderColor: '#ddd',
+		borderWidth: 1
 	},
 	bottomView: {
 		position: 'absolute',

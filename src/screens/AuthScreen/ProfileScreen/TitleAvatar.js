@@ -49,15 +49,15 @@ const styles = StyleSheet.create({
     wraperStyle: { 
         flexDirection: 'column', 
         alignItems: 'center', 
-        justifyContent: 'center',
+        // justifyContent: 'center',
         backgroundColor: COLOR.primary,
         paddingVertical: 40,
-        marginBottom: 20
+        marginBottom: 20,
     },
     textStyle: {
         color: '#fff',
         marginTop: 15,
-        fontSize: 18,
+        fontSize: 25,
         fontWeight: '600'
     },
     avatarStyle: {

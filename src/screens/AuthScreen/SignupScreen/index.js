@@ -104,7 +104,7 @@ class SignupScreen extends Component {
         const { containerStyle } = styles;
         return (
             <ScrollView contentContainerStyle={{ padding: 20 }} style={containerStyle}>
-                <KeyboardAvoidingView behavior={'padding'}>
+                <KeyboardAvoidingView behavior={'position'}>
                     <View>
                         <View>
                             <TextField 
