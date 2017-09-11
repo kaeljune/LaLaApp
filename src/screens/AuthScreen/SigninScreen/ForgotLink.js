@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
         marginBottom: 30
     },
     textStyle: {
-        color: '#999',
-         fontSize: 16, 
+        color: '#858585',
+         fontSize: 14, 
          fontWeight: '300', 
          marginLeft: 5
     }

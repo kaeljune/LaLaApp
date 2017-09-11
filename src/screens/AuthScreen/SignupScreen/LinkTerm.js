@@ -4,7 +4,7 @@ import {
     Text,
 } from 'react-native';
 
-import { WIDTH_SCREEN } from '../../../config/config';
+import * as config from '../../../config/config';
 
 class LinkTerm extends Component {
     render() {
@@ -20,8 +20,9 @@ class LinkTerm extends Component {
                 <Text
                     style={{
                         fontSize: 12,
-                        width: (WIDTH_SCREEN - 50),
+                        width: (config.WIDTH_SCREEN - 50),
                         textAlign: 'center',
+                        lineHeight: 20,
                         paddingBottom: 15,
                         paddingTop: 15
                     }}
@@ -30,10 +31,10 @@ class LinkTerm extends Component {
                         By pressing continue, you are agreeing to be bound by Airlala’s
                     </Text>
                     <Text
-                        style={{ fontWeight: 'bold', color: '#11B8AB' }}
+                        style={{ fontWeight: '700', color: config.COLOR.primary }}
                         onPress={this.props.onTerms}
                     >
-                        &nbsp;Terms of Use and Privacy Policy.
+                        &nbsp; Terms of Use and Privacy Policy.
                     </Text>
                 </Text>
             </View>

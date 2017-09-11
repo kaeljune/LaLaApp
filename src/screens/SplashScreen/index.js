@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { AsyncStorage, View, Text, StyleSheet, ActivityIndicator, Animated } from 'react-native';
+import { AsyncStorage, Text, View, StyleSheet, ActivityIndicator, Animated } from 'react-native';
 import { connect } from 'react-redux';
 import { AppLoading } from 'expo';
 import _ from 'lodash';
 
 import { accountFetch, navLogin, navLogout } from '../../actions';
-import { COLOR, WIDTH_SCREEN, HEIGHT_SCREEN } from '../../config/config';
+import { COLOR } from '../../config/config';
 
 class SplashScreen extends Component {
 	static navigationOptions = {
@@ -93,7 +93,7 @@ class SplashScreen extends Component {
 		};
 
 		if (_.isNull(this.state.isLogin)) {
-			return <AppLoading />;
+			return <Text>Loading</Text>;
 		}
 		return (
 			<View style={styles.container}>

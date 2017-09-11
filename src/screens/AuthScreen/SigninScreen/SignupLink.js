@@ -4,12 +4,14 @@ import {
     StyleSheet
 } from 'react-native';
 
+import * as config from '../../../config/config';
+
 const SignupLink = ({ onSignUp }) => {
     const { containerStyle } = styles;
     return (
         <Text style={containerStyle}>
-            <Text style={{ color: '#95989A' }}>Do not have an account? </Text>
-            <Text style={{ fontWeight: 'bold' }} onPress={onSignUp}>
+            <Text style={{ color: '#858585' }}>New user? </Text>
+            <Text style={{ fontWeight: '700', color: config.COLOR.primary }} onPress={onSignUp}>
                 Sign up
             </Text>
         </Text>

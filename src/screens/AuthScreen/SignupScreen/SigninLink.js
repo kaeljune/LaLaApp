@@ -5,14 +5,16 @@ import {
     StyleSheet
 } from 'react-native';
 
+import * as config from '../../../config/config';
+
 const SigninLink = (props) => {
     const { wrapSigninLink, textStyle } = styles;
     return (
         <View style={wrapSigninLink}>
             <Text style={textStyle}>
-                <Text style={{ color: '#95989A' }}>Already have an account?</Text>
+                <Text style={{ color: '#858585' }}>Already have an account?</Text>
                 <Text 
-                    style={{ fontWeight: '600' }}
+                    style={{ fontWeight: '600', color: config.COLOR.primary }}
                     onPress={props.onSignIn}
                 >&nbsp;Sign in</Text>
             </Text>
