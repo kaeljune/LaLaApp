@@ -20,8 +20,10 @@ import ForgotLink from './ForgotLink';
 import Btn from '../../../components/Btn';
 
 class SigninForm extends Component {
-    state = { email: '', password: '' };
-
+    state = { 
+        email: '', password: '',
+    };
+    
     onEmailChange = (text) => {
         this.props.signinEmailChanged(text);
     }
@@ -36,6 +38,7 @@ class SigninForm extends Component {
     
     onForgot = () => {
         this.props.onForgot();
+        // console.log(12)
     }
     renderButton = () => {
         if (this.props.loadingSF) {
@@ -55,6 +58,7 @@ class SigninForm extends Component {
         return (
             <View>
                 <View style={section}>
+                    
                     <TextField 
                         label="EMAIL"
                         value={this.props.emailSF}
@@ -62,16 +66,16 @@ class SigninForm extends Component {
                         keyboardType='email-address'
                         onChangeText={this.onEmailChange}
                     />
-
+                
                     <TextField 
                         label="PASSWORD"
-                        secureTextEntry
                         placeholder="What’s your password"
                         secureTextEntry
                         keyboardType='default'
                         value={this.props.passwordSF}
                         onChangeText={this.onPasswordChange}
                     />
+                    
                 </View>
 
                 <ForgotLink onForgot={this.onForgot} />

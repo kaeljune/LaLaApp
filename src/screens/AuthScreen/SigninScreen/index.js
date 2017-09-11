@@ -9,6 +9,8 @@ import {
 import { COLOR, WIDTH_SCREEN, HEIGHT_SCREEN, 
     headerTitleStyle, headerStyle } from '../../../config/config';
 
+// import WrapAnimation from '../../../components/hoc/WrapAnimation';
+
 import Brand from './Brand';
 import SigninForm from './SigninForm';
 import SignupLink from './SignupLink';
@@ -69,7 +71,7 @@ class SigninScreen extends Component {
                 <View style={{ minHeight: HEIGHT_SCREEN }}>
                     <Brand />
                     <View style={{ alignItems: 'center', }}>
-                        <SigninForm onButtonPress={this.onButtonPress} />
+                        <SigninForm onButtonPress={this.onButtonPress} onForgot={this.onForgot} />
                         <SignupLink onSignUp={this.onSignUp} /> 
                     </View>
                 </View>
@@ -80,8 +82,7 @@ class SigninScreen extends Component {
 
 const styles = StyleSheet.create({
     ContainerStyle: {
-        backgroundColor: '#f8f8f8',
-        minHeight: HEIGHT_SCREEN - 60
+        backgroundColor: '#f8f8f8'
     },
     section: {
         width: WIDTH_SCREEN - 40

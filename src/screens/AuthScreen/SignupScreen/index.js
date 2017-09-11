@@ -92,7 +92,7 @@ class SignupScreen extends Component {
         }
         return (
             <Btn 
-                title="SIGN IN"
+                title="SIGN UP"
                 bgColor={COLOR.primary}
                 style={{ width: 150 }}
                 onPress={this.onButtonPress}

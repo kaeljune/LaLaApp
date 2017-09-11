@@ -61,12 +61,14 @@ class ForgotScreen extends Component {
                     <View >
                         <Btn 
                             title="REQUEST"
+                            style={{ width: 150 }}
                             bgColor={COLOR.primary}
                             onPress={this.onButtonPress}
                         />
                         <Text style={{ marginVertical: 15, textAlign: 'center' }}>Or sign in with</Text>
                         <Btn 
                             title="FACEBOOK"
+                            style={{ width: 150 }}
                             bgColor="#3B5998"
                             onPress={() => { alert('loginface'); }}
                         />

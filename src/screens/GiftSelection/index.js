@@ -71,12 +71,12 @@ class GiftSelection extends Component {
             outputRange: [0.6, 1, 0.6],
           })
         },
-        {
-          rotateY: this.state.xOffset.interpolate({
-            inputRange: [(index - 1) * config.WIDTH_SCREEN, index * config.WIDTH_SCREEN, (index + 1) * config.WIDTH_SCREEN],
-            outputRange: ['10deg', '0deg', '-10deg']
-          }),
-        }
+        // {
+        //   rotateY: this.state.xOffset.interpolate({
+        //     inputRange: [(index - 1) * config.WIDTH_SCREEN, index * config.WIDTH_SCREEN, (index + 1) * config.WIDTH_SCREEN],
+        //     outputRange: ['10deg', '0deg', '-10deg']
+        //   }),
+        // }
       ],
 
       opacity: this.state.xOffset.interpolate({

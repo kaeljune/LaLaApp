@@ -39,7 +39,7 @@ class DetailGift extends Component {
   }
 
   render() {
-    const heightImg = config.HEIGHT_SCREEN * 2 / 3;
+    const heightImg = (config.HEIGHT_SCREEN * 2) / 3;
 
     const translateY = this.state.yOffset.interpolate({
       inputRange: [0, (heightImg - config.HEIGHT_HEADER - 50)],
@@ -60,7 +60,9 @@ class DetailGift extends Component {
           style={{
             position: 'absolute',
             backgroundColor: '#212121',
-            top: this.state.yTransform, left: 0, right: 0,
+            top: this.state.yTransform,
+            left: 0,
+            right: 0,
             transform: [{ translateY }]
           }}
         >
@@ -69,11 +71,13 @@ class DetailGift extends Component {
             style={{ height: heightImg, width: config.WIDTH_SCREEN, transform: [{ scale }], opacity }}
           />
         </Animated.View>
+       
         <Animated.ScrollView
           contentContainerStyle={{ paddingTop: heightImg }}
           onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.state.yOffset } } }],
           )}
         >
+        
           <View style={{}}>
             <View style={[styles.section, { alignItems: 'center', borderBottomColor: '#ddd', borderBottomWidth: 1 }]}>
               <Text
@@ -102,11 +106,12 @@ class DetailGift extends Component {
             </View>
           </View>
         </Animated.ScrollView>
-
         <View
           style={{
             position: 'absolute',
-            top: 0, left: 0, right: 0,
+            top: 0,
+            left: 0,
+            right: 0,
             height: config.HEIGHT_HEADER,
             flexDirection: 'row',
             alignItems: 'center',

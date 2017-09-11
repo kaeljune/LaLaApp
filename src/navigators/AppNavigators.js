@@ -27,10 +27,8 @@ import SplashScreen from '../screens/SplashScreen';
 // add detail Gift
 import DetailGift from '../screens/DetailGift';
 
-
 const isSignedOut = StackNavigator({
-    giftselection: { screen: GiftSelection },
-    detailgift: { screen: DetailGift },
+    // giftselection: { screen: GiftSelection },
 
     default: { screen: DefaultScreen },
     signin: { screen: SigninScreen },
@@ -49,6 +47,7 @@ const isFindGift = StackNavigator({
 
     findagift: { screen: FindAGift },
     giftselection: { screen: GiftSelection },
+    detailgift: { screen: DetailGift },
     checkout: { screen: Checkout },
     writeanote: { screen: WriteANote },
     deliveryblank: { screen: DeliveryBlank },

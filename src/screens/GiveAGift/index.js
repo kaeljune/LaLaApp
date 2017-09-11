@@ -52,7 +52,7 @@ class GiftSelection extends Component {
 	render() {
 		const { section, sectionItem, sectionPad, sectionTag, sectionTitle } = styles;
 		return (
-			<ScrollView contentContainerStyle={{ padding: 0 }}>
+			<ScrollView  style={{ flex: 1, backgroundColor: '#f8f8f8' }} contentContainerStyle={{ padding: 0 }}>
 				<KeyboardAvoidingView behavior={'padding'} style={{ flex: 1 }}>
 					<View style={section}>
 						<View style={sectionItem}>

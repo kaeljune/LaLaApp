@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, View, Text, StyleSheet } from 'react-native';
+import { FlatList, View, Text, StyleSheet, Animated } from 'react-native';
 import { connect } from 'react-redux';
 import { Avatar, Icon } from 'react-native-elements';
 import Reactotron from 'reactotron-react-native';
@@ -69,11 +69,12 @@ class MainScreen extends Component {
 				price: '$500',
 				status: 'Gift ready'
 			},
-		]
-	}
+		]	
+	}	
 
 	renderItem = ({ item }) => (
-		<View
+		<Animated.View
+
 			style={{
 				padding: 10,
 				backgroundColor: '#fff',
@@ -93,7 +94,7 @@ class MainScreen extends Component {
 					width={50}
 				/>
 				<Text style={{ fontSize: 18, marginTop: 7 }}>{item.name}</Text>
-				<Text style={{ fontSize: 14, marginVertical: 7, color: '#d3d5d8' }}>for {item.purpose}</Text>
+				<Text style={{ fontSize: 14, marginVertical: 7, color: '#555' }}>for {item.purpose}</Text>
 				<Text style={{ fontSize: 14, fontWeight: '600' }}>{item.price}</Text>
 				<Text
 					style={{
@@ -107,24 +108,15 @@ class MainScreen extends Component {
 					}}
 				>{item.status}</Text>
 			</View>
-			<View style={{ justifyContent: 'center', alignItems: 'center' }}>
-				<Icon
-					reverse
-					raised
-					reverseColor={COLOR.primary}
-					name="chevron-right"
-					size={16}
-					color="#fff"
-				/>
-			</View>
-		</View>
+		
+		</Animated.View>
 	)
 
 	renderList = () => {
 		const { items } = this.state;
 		if (items.length > 0) {
 			return (
-				<View style={{ flex: 1, paddingBottom: 60 }}>
+				<View style={{ flex: 1 }}>
 					<FlatList
 						numColumns={2}
 						contentContainerStyle={{ paddingVertical: 15 }}
@@ -161,14 +153,15 @@ class MainScreen extends Component {
 			>
 
 				<Icon
-					reverse
 					raised
+					reverse
 					reverseColor="white"
 					name='add'
 					color={COLOR.primary}
+					onPress={() => console.log(12)}
 				/>
 
-				<Text style={{ marginTop: 10, fontWeight: 'bold' }}>FIND A GIFT</Text>
+				<Text style={{ marginTop: 10, fontWeight: '700' }}>Find a Gift</Text>
 			</View>
 		);
 	};
@@ -203,9 +196,9 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		width: WIDTH_SCREEN,
 		alignItems: 'center',
-		borderTopColor: '#eee',
-		borderTopWidth: 1,
-		backgroundColor: '#fff',
+		// borderTopColor: '#eee',
+		// borderTopWidth: 1,
+		// backgroundColor: '#fff',
 	}
 });
 

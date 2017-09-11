@@ -30,8 +30,7 @@ class FindAGift extends Component {
     render() {
         const { sectionHead, sectionList, sectionContainer, marginB } = styles;
         return (
-            <ScrollView>
-
+            <ScrollView style={{ backgroundColor: '#f8f8f8' }}>
                 <View style={[sectionContainer, marginB]}>
                     <View style={sectionHead}>
                         <Image 
@@ -92,6 +91,7 @@ class FindAGift extends Component {
 
                 <View style={{ alignItems: 'center', marginVertical: 30 }}>
                     <Btn 
+                        style={{ width: 150 }}
                         title="DONE"
                         bgColor={COLOR.primary}
                     />

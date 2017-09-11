@@ -17,19 +17,36 @@ class BoxSelect extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		Animated.spring(
-			this.state.scale, {
-				toValue: nextProps.isActive ? 1 : 0,
-				bounciness: 0
-			}
-		).start();
 
-		Animated.spring(
-				this.state.top, {
-					toValue: nextProps.isActive ? -10 : 0
+		Animated.parallel([
+			Animated.timing(
+				this.state.scale, {
+					toValue: nextProps.isActive ? 1 : 0,
+					duration: 300
 				}
-			).start();
-		}
+			),	
+			Animated.spring(
+				this.state.top, {
+					toValue: nextProps.isActive ? -15 : 0
+				}
+			)
+
+		]).start();
+	}
+		// Animated.spring(
+
+		// 	this.state.scale, {
+		// 		toValue: nextProps.isActive ? 1 : 0,
+		// 		bounciness: 0
+		// 	}
+		// ).start();
+
+		// Animated.spring(
+		// 		this.state.top, {
+		// 			toValue: nextProps.isActive ? -15 : 0
+		// 		}
+		// 	).start();
+		// }
 
 	handlePress = (id) => {
 		this.props.onActive(id);
