@@ -16,6 +16,7 @@ class App extends Component {
   constructor() {
     super();
     //Hide warning "Setting a time on android simulator.."
+    console.disableYellowBox = true;
     console.ignoredYellowBox = [
         'Setting a timer'
     ];

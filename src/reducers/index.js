@@ -5,6 +5,7 @@ import signinReducer from './SigninReducer';
 import signupReducer from './SignupReducer';
 import fetchAccount from './fetch-account-reducer';
 import SelectionReducer from './SelectionReducer';
+import FetchRequestReducer from './FetchRequestReducer';
 
 export default combineReducers({
   selectedLibraryId: SelectionReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   nav,
   signupState: signupReducer,
   signinState: signinReducer,
-  fetchAcc: fetchAccount
+  fetchAcc: fetchAccount,
+  listRequest: FetchRequestReducer
 });

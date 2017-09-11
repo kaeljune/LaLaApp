@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, ScrollView, Image, TouchableWithoutFeedback, Animated } from 'react-native';
+import { View, Text, StyleSheet, TouchableWithoutFeedback, Animated } from 'react-native';
 import { Icon } from 'react-native-elements';
 import * as config from '../../config/config';
 
@@ -62,32 +62,29 @@ class GiftSelection extends Component {
     xOffset: new Animated.Value(1)
   }
 
-  rotateTransform = (index) => {
-    return {
-      transform: [
-        {
-          scale: this.state.xOffset.interpolate({
-            inputRange: [(index - 1) * config.WIDTH_SCREEN, index * config.WIDTH_SCREEN, (index + 1) * config.WIDTH_SCREEN],
-            outputRange: [0.6, 1, 0.6],
-          })
-        },
-        {
-          rotateY: this.state.xOffset.interpolate({
-            inputRange: [(index - 1) * config.WIDTH_SCREEN, index * config.WIDTH_SCREEN, (index + 1) * config.WIDTH_SCREEN],
-            outputRange: ['10deg', '0deg', '-10deg']
-          }),
-        }
-      ],
+  rotateTransform = (index) => ({
+    transform: [
+      {
+        scale: this.state.xOffset.interpolate({
+          inputRange: [(index - 1) * config.WIDTH_SCREEN, index * config.WIDTH_SCREEN, (index + 1) * config.WIDTH_SCREEN],
+          outputRange: [0.6, 1, 0.6],
+        })
+      },
+      {
+        rotateY: this.state.xOffset.interpolate({
+          inputRange: [(index - 1) * config.WIDTH_SCREEN, index * config.WIDTH_SCREEN, (index + 1) * config.WIDTH_SCREEN],
+          outputRange: ['10deg', '0deg', '-10deg']
+        }),
+      }
+    ],
 
-      opacity: this.state.xOffset.interpolate({
-        inputRange: [(index - 1) * config.WIDTH_SCREEN, index * config.WIDTH_SCREEN, (index + 1) * config.WIDTH_SCREEN],
-        outputRange: [0.6, 1, 0.6],
-      })
-    };
-  }
+    opacity: this.state.xOffset.interpolate({
+      inputRange: [(index - 1) * config.WIDTH_SCREEN, index * config.WIDTH_SCREEN, (index + 1) * config.WIDTH_SCREEN],
+      outputRange: [0.6, 1, 0.6],
+    })
+  })
 
   render() {
-
     return (
       <View style={styles.container}>
 

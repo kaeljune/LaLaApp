@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { FlatList, View, Text, StyleSheet } from 'react-native';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Avatar, Icon } from 'react-native-elements';
-import Reactotron from 'reactotron-react-native';
-import firebase from 'firebase';
 
-import { accountFetch } from '../../actions';
+import { accountFetch, fetchRequest } from '../../actions';
 import { COLOR, WIDTH_SCREEN } from '../../config/config';
 
 class MainScreen extends Component {
@@ -37,51 +36,22 @@ class MainScreen extends Component {
 		// />
 		headerRight: <Text>{navigation.state.params ? navigation.state.params.name : ''}</Text>
 	})
-	state = {
-		items: [
-			{
-				name: 'Hai Nguyen',
-				purpose: 'Birthday',
-				price: '$500',
-				status: 'Gift ready'
-			},
-			{
-				name: 'Hai Nguyen',
-				purpose: 'Birthday',
-				price: '$500',
-				status: 'Gift ready'
-			},
-			{
-				name: 'Hai Nguyen',
-				purpose: 'Birthday',
-				price: '$500',
-				status: 'Gift ready'
-			},
-			{
-				name: 'Hai Nguyen',
-				purpose: 'Birthday',
-				price: '$500',
-				status: 'Gift ready'
-			},
 
-			{
-				name: 'Hai Nguyen',
-				purpose: 'Birthday',
-				price: '$500',
-				status: 'Gift ready'
-			},
-		]
+	async componentWillMount() {
+		await this.props.fetchRequest();
 	}
+	
 	componentDidMount() {
-		firebase.auth().currentUser.getIdToken(true)
-		.then((idToken) => {
-			Reactotron.log(idToken);
-			// Send token to your backend via HTTPS
-			// ...
-		}).catch((error) => {
-			// Handle error
-			Reactotron.log(error);
-		});
+		//Reactotron.log(this.props.state);
+		// firebase.auth().currentUser.getIdToken(true)
+		// .then((idToken) => {
+		// 	Reactotron.log(idToken);
+		// 	// Send token to your backend via HTTPS
+		// 	// ...
+		// }).catch((error) => {
+		// 	// Handle error
+		// 	Reactotron.log(error);
+		// });
 	}
 	renderItem = ({ item }) => (
 		<View
@@ -103,9 +73,9 @@ class MainScreen extends Component {
 					height={50}
 					width={50}
 				/>
-				<Text style={{ fontSize: 18, marginTop: 7 }}>{item.name}</Text>
-				<Text style={{ fontSize: 14, marginVertical: 7, color: '#d3d5d8' }}>for {item.purpose}</Text>
-				<Text style={{ fontSize: 14, fontWeight: '600' }}>{item.price}</Text>
+				<Text style={{ fontSize: 18, marginTop: 7 }}>{item.receiverName}</Text>
+				<Text style={{ fontSize: 14, marginVertical: 7, color: '#d3d5d8' }}>for {item.occasion}</Text>
+				<Text style={{ fontSize: 14, fontWeight: '600' }}>{item.priceRange}</Text>
 				<Text
 					style={{
 						backgroundColor: COLOR.secondary,
@@ -132,7 +102,7 @@ class MainScreen extends Component {
 	)
 
 	renderList = () => {
-		const { items } = this.state;
+		const { items } = this.props;
 		if (items.length > 0) {
 			return (
 				<View style={{ flex: 1, paddingBottom: 60 }}>
@@ -183,7 +153,7 @@ class MainScreen extends Component {
 			</View>
 		);
 	};
-
+	
 	render() {
 		return (
 			<View style={styles.container}>
@@ -219,6 +189,9 @@ const styles = StyleSheet.create({
 	}
 });
 
-const mapStateToProps = ({ fetchAcc }) => ({ account: fetchAcc });
+const mapStateToProps = state => {
+	const items = _.map(state.listRequest, (val, uid) => ({ ...val, uid }));
+	return { items };
+};
 
-export default connect(mapStateToProps, { accountFetch })(MainScreen);
+export default connect(mapStateToProps, { accountFetch, fetchRequest })(MainScreen);

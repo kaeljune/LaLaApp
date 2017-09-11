@@ -41,11 +41,11 @@ const isProfile = StackNavigator({
     term: { screen: TermScreen },
 });
 const isFindGift = StackNavigator({
-    giveagift: { screen: GiveAGift }, 
-    mainGift: { screen: MainScreen },
-
-    findagift: { screen: FindAGift },
     giftselection: { screen: GiftSelection },
+    findagift: { screen: FindAGift },
+    mainGift: { screen: MainScreen },
+    giveagift: { screen: GiveAGift }, 
+
     detailgift: { screen: DetailGift },
     checkout: { screen: Checkout },
     writeanote: { screen: WriteANote },

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AsyncStorage, Text, View, StyleSheet, ActivityIndicator, Animated } from 'react-native';
+import { AsyncStorage, View, StyleSheet, ActivityIndicator, Animated } from 'react-native';
 import { connect } from 'react-redux';
 import { AppLoading } from 'expo';
 import _ from 'lodash';
@@ -14,7 +14,7 @@ class SplashScreen extends Component {
 	state = {
 		userLogin: null,
 		isLogin: null,
-	
+
 		scale1: new Animated.Value(1),
 		scale2: new Animated.Value(1),
 		scale3: new Animated.Value(1),
@@ -30,7 +30,7 @@ class SplashScreen extends Component {
 		}
 	}
 
-	componentDidMount() {	
+	componentDidMount() {
 		Animated.loop(
 			Animated.parallel([
 				Animated.sequence([
@@ -70,11 +70,11 @@ class SplashScreen extends Component {
 	}
 
 	render() {
-		const animateStyle = {
-			transform: [
-				{ scale: this.state.scale }
-			]
-		};
+		// const animateStyle = {
+		// 	transform: [
+		// 		{ scale: this.state.scale }
+		// 	]
+		// };
 
 		const animateStyle1 = {
 			transform: [
@@ -93,52 +93,52 @@ class SplashScreen extends Component {
 		};
 
 		if (_.isNull(this.state.isLogin)) {
-			return <Text>Loading</Text>;
+			return <AppLoading />;
 		}
 		return (
 			<View style={styles.container}>
-			
+
 				<View style={{ width: 150, height: 150 }}>
-					<Animated.View 
+					<Animated.View
 						style={[
-							styles.cirle, 
-							animateStyle1, 
+							styles.cirle,
+							animateStyle1,
 							{ width: 150, height: 150, borderRadius: 150, top: 0, left: 0 }
-						]} 
+						]}
 					/>
-					<Animated.View 
+					<Animated.View
 						style={[
-							styles.cirle, 
-							animateStyle2, 
+							styles.cirle,
+							animateStyle2,
 							{ width: 120, height: 120, borderRadius: 100, top: 15, left: 15 }
-						]} 
+						]}
 					/>
-					<Animated.View 
+					<Animated.View
 						style={[
-							styles.cirle, 
-							animateStyle3, 
+							styles.cirle,
+							animateStyle3,
 							{ width: 90, height: 90, borderRadius: 60, top: 30, left: 30 }
-						]} 
+						]}
 					/>
-					<View 
-						style={{ 
-							backgroundColor: '#fff', 
-							height: 30, 
-							width: 30, 
-							borderRadius: 30, 
+					<View
+						style={{
+							backgroundColor: '#fff',
+							height: 30,
+							width: 30,
+							borderRadius: 30,
 							justifyContent: 'center',
 							position: 'absolute',
-							top: 60, 
+							top: 60,
 							left: 60,
 							elevation: 2
 						}}
 					>
-						<ActivityIndicator 
+						<ActivityIndicator
 							color={COLOR.primary}
 						/>
-				</View>	
+					</View>
 				</View>
-				
+
 			</View>
 		);
 	}
