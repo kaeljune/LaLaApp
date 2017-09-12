@@ -102,6 +102,7 @@ class MainScreen extends Component {
 				>{item.status}</Text>
 			</View>
 			<View style={{ justifyContent: 'center', alignItems: 'center' }}>
+				
 				<Icon
 					reverse
 					raised
@@ -136,7 +137,7 @@ class MainScreen extends Component {
 							reverseColor="white"
 							name="add"
 							color={COLOR.primary}
-							onPress={() => console.log('Add me')}
+							onPress={() => this.props.navigation.navigate('address')}
 						/>
 
 					</View>
