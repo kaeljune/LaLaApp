@@ -27,6 +27,9 @@ import SplashScreen from '../screens/SplashScreen';
 // add detail Gift
 import DetailGift from '../screens/DetailGift';
 
+//add address
+import Address from '../screens/Address';
+
 const isSignedOut = StackNavigator({
     default: { screen: DefaultScreen },
     signin: { screen: SigninScreen },
@@ -41,6 +44,7 @@ const isProfile = StackNavigator({
 });
 
 const isFindGift = StackNavigator({
+    address: { screen: Address },
     giftselection: { screen: GiftSelection },
     findagift: { screen: FindAGift },
     mainGift: { screen: MainScreen },
