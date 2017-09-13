@@ -161,9 +161,12 @@ class MainScreen extends Component {
 					reverseColor="white"
 					name='add'
 					color={COLOR.primary}
+					onPress={() => this.props.navigation.navigate('address')}
 				/>
 
-				<Text style={{ marginTop: 10, fontWeight: 'bold' }}>FIND A GIFT</Text>
+				<Text 
+					style={{ marginTop: 10, fontWeight: 'bold' }}
+				>FIND A GIFT</Text>
 			</View>
 		);
 	};
