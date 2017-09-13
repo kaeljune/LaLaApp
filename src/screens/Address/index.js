@@ -40,8 +40,8 @@ class Address extends Component {
             <Text style={styles.titleSection}>RECENT SEARCHES</Text>
             <View>
               <View style={styles.row}>
-                <Icon name="access-time" size={18} />
-                <Text style={{ fontSize: 16, marginLeft: 20 }}>Ha Noi, Viet Nam</Text>
+                <Icon name="access-time" size={18} color="#454545" />
+                <Text style={styles.textLocation}>Ha Noi, Viet Nam</Text>
               </View>
             </View>
           </View> }
@@ -119,9 +119,9 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row', 
     alignItems: 'center', 
-    paddingVertical: 20, 
+    paddingVertical: 25, 
     borderBottomWidth: 1, 
-    borderBottomColor: '#ddd' 
+    borderBottomColor: '#eee' 
   },
   textLocation: {
     fontSize: 16, 

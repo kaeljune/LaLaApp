@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, Animated, TouchableOpacity, StyleSheet } from 'react-native';
+import { 
+	View,
+	Text, 
+	Animated, 
+	LayoutAnimation,
+	TouchableOpacity, 
+	Platform,
+	UIManager,
+	StyleSheet } from 'react-native';
 
 import { Icon } from 'react-native-elements';
-import { COLOR } from '../../config/config';
+import { COLOR, STYLES } from '../../config/config';
 
 class BoxSelect extends Component {
 	constructor(props) {
@@ -10,50 +18,33 @@ class BoxSelect extends Component {
 		this.state = {
 			id: this.props.id,
 			opacity: 0,
-			scale: new Animated.Value(0),
-			scaleB: new Animated.Value(1),
-			top: new Animated.Value(0)
+			scale: 0,
+			top: 0
 		};
+
+		if (Platform.OS === 'android') {
+			UIManager.setLayoutAnimationEnabledExperimental && 
+			UIManager.setLayoutAnimationEnabledExperimental(true);
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {
-
-		Animated.parallel([
-			Animated.timing(
-				this.state.scale, {
-					toValue: nextProps.isActive ? 1 : 0,
-					duration: 300
-				}
-			),	
-			Animated.spring(
-				this.state.top, {
-					toValue: nextProps.isActive ? -15 : 0
-				}
-			)
-
-		]).start();
+		this.setState({
+			opacity: nextProps.isActive ? 1 : 0,
+			top: nextProps.isActive ? -10 : 0
+		});
 	}
-		// Animated.spring(
-
-		// 	this.state.scale, {
-		// 		toValue: nextProps.isActive ? 1 : 0,
-		// 		bounciness: 0
-		// 	}
-		// ).start();
-
-		// Animated.spring(
-		// 		this.state.top, {
-		// 			toValue: nextProps.isActive ? -15 : 0
-		// 		}
-		// 	).start();
-		// }
+	
+	componentWillUpdate() {	
+		LayoutAnimation.spring();	
+	}
 
 	handlePress = (id) => {
 		this.props.onActive(id);
 	}
 
 	render() {
-		const { color, children, isActive, onActive, id } = this.props;
+		const { color, children, isActive, id } = this.props;
 		const styleBox = [styles.box, { backgroundColor: color }, { top: this.state.top }];
 		const opacity = isActive ? 1 : 0;
 
@@ -63,7 +54,7 @@ class BoxSelect extends Component {
 				style={{ paddingVertical: 10 }}
 				activeOpacity={0.9}
 			>
-				<Animated.View style={styleBox}>
+				<Animated.View style={[styleBox, STYLES.boxShadow]}>
 					<Text style={styles.text}>{children}</Text>
 
 					<Animated.View
@@ -81,7 +72,6 @@ class BoxSelect extends Component {
 							bottom: 10,
 							opacity,
 							transform: [{ scale: this.state.scale }]
-
 						}}
 					>
 						<Icon

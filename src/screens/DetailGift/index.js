@@ -95,6 +95,7 @@ class DetailGift extends Component {
                 title="Gift Now"
                 style={{ width: 150 }}
                 bgColor={config.COLOR.primary}
+                onPress={() => this.props.navigation.navigate('checkout')}
               />
             </View>
             <View style={styles.section}>

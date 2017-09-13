@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableWithoutFeedback, Animated } from 'react-native';
+import { View, Text, StyleSheet, TouchableWithoutFeedback, Animated, Image, Platform } from 'react-native';
 import { Icon } from 'react-native-elements';
+
+import Carousel, { Pagination, ParallaxImage } from 'react-native-snap-carousel';
+
 import * as config from '../../config/config';
 
 import Btn from '../../components/Btn';
@@ -55,132 +58,73 @@ const items = [
 
 class GiftSelection extends Component {
   static navigationOptions = () => ({
-    title: 'Gift selection'
+    header: null
+    // title: 'Gift selection'
   })
 
   state = {
-    xOffset: new Animated.Value(1)
+    entries: items,
+    activeSlide: 0
   }
 
-  rotateTransform = (index) => {
-    return {
-      transform: [
-        {
-          scale: this.state.xOffset.interpolate({
-            inputRange: [(index - 1) * config.WIDTH_SCREEN, index * config.WIDTH_SCREEN, (index + 1) * config.WIDTH_SCREEN],
-            outputRange: [0.6, 1, 0.6],
-          })
-        },
-        // {
-        //   rotateY: this.state.xOffset.interpolate({
-        //     inputRange: [(index - 1) * config.WIDTH_SCREEN, index * config.WIDTH_SCREEN, (index + 1) * config.WIDTH_SCREEN],
-        //     outputRange: ['10deg', '0deg', '-10deg']
-        //   }),
-        // }
-      ],
-
-      opacity: this.state.xOffset.interpolate({
-        inputRange: [(index - 1) * config.WIDTH_SCREEN, index * config.WIDTH_SCREEN, (index + 1) * config.WIDTH_SCREEN],
-        outputRange: [0.6, 1, 0.6],
-      })
-    };
+  _renderItem({ item, index }) {
+    return (
+      <View style={styles.slide}>
+        <Image
+          source={item.images}
+          style={styles.image}
+        /> 
+        <View style={{ alignItems: 'center', padding: 20 }}>
+          <Text style={{ fontSize: 16, fontWeight: '600', marginVertical: 10 }}>{item.name.toUpperCase()}</Text>
+          <Text style={{ color: '#777' }}>by Alex</Text>
+          <Text style={{ fontSize: 20, fontWeight: '700', marginTop: 20 }}>$109</Text>
+        </View>
+      </View>
+    );
   }
+  get pagination() {
+    const { entries, activeSlide } = this.state;
+    return (
+      <Pagination
+        dotsLength={entries.length}
+        activeDotIndex={activeSlide}
+        containerStyle={{}}
+        dotStyle={{
+          width: 10,
+          height: 10,
+          borderRadius: 5,
+          marginHorizontal: 8,
+          backgroundColor: 'rgba(255, 255, 255, 0.92)'
+        }}
+        inactiveDotStyle={{
+          // Define styles for inactive dots here
+        }}
+        inactiveDotOpacity={0.4}
+        inactiveDotScale={0.6}
 
+      />
+    );
+  }
   render() {
     return (
       <View style={styles.container}>
 
-        <Animated.ScrollView
-          horizontal
-          pagingEnabled
-          onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: this.state.xOffset } } }],
-            { useNativeDriver: true })}
-        >
-          {
-            items.map((item, index) => (
-              <Animated.View style={[styles.product, this.rotateTransform(index)]} key={index}>
-                <View>
-                  <View
-                    style={{
-                      marginBottom: 25,
-                      paddingTop: 60
-                    }}
-                  >
-
-                    <Animated.View
-                      style={{
-                        paddingTop: 250,
-                        paddingBottom: 15,
-                        alignItems: 'center',
-                        backgroundColor: '#fff',
-                        borderColor: '#ddd',
-                        borderWidth: 1,
-                        borderRadius: 5,
-                      }}
-                    >
-                      <Text style={{ fontWeight: '700', color: '#b79487', fontSize: 12 }}>BY ALEX</Text>
-                      <Text style={{ fontWeight: '700', fontSize: 20, color: '#313131', marginVertical: 5 }}>The 3xu love matchbox</Text>
-                      <Text style={{ fontWeight: '400', fontSize: 18, color: '#444', marginBottom: 20 }}>$ 2.0</Text>
-                    </Animated.View>
-                    <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('detailgift')}>
-
-                      <Animated.Image
-                        resizeMode='cover'
-                        style={{
-                          width: config.WIDTH_SCREEN - 72,
-                          height: 300,
-                          borderRadius: 5,
-                          position: 'absolute',
-                          zIndex: 999,
-                          left: 15,
-                          top: 0
-                        }}
-                        source={item.images}
-                      />
-                    </TouchableWithoutFeedback>
-
-                  </View>
-
-                  <Animated.View
-                    style={{
-                      position: 'absolute',
-                      bottom: 0,
-                      left: ((config.WIDTH_SCREEN - 40) / 2) - 90
-                    }}
-                  >
-                    <Btn
-                      title="Gift Now"
-                      style={{ width: 150 }}
-                      bgColor={config.COLOR.primary}
-                    />
-                  </Animated.View>
-                </View>
-              </Animated.View>
-            ))
-          }
-        </Animated.ScrollView>
-
-        <View style={{ height: 45, borderTopColor: '#ddd', backgroundColor: '#fff', borderTopWidth: 1 }} />
-        <View
-          style={{
-            position: 'absolute',
-            bottom: 2,
-            right: (config.WIDTH_SCREEN / 2) - 30,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-
-
-          <Icon
-            raised name="add" color={config.COLOR.primary}
-            containerStyle={{ backgroundColor: '#fff' }}
-            onPress={() => console.log(1)}
-          />
-
-
-        </View>
+        <Carousel
+          ref={(c) => { this._carousel = c; }}
+          data={items}
+          renderItem={this._renderItem}
+          sliderWidth={config.WIDTH_SCREEN}
+          itemWidth={config.WIDTH_SCREEN - 60}
+          onSnapToItem={(index) => this.setState({ activeSlide: index })}
+          inactiveSlideScale={0.95}
+          inactiveSlideOpacity={0.8}
+          enableMomentum={false}
+          slideStyle={{ paddingTop: 30, paddingHorizontal: 10, width: config.WIDTH_SCREEN - 60 }}
+         
+        />
+        {this.pagination}
       </View>
+
     );
   }
 }
@@ -188,13 +132,39 @@ class GiftSelection extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eee',
+    backgroundColor: config.COLOR.primary
   },
 
-  product: {
-    width: config.WIDTH_SCREEN - 40,
-    marginTop: 20,
-    marginHorizontal: 20,
+  slide: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+  },
+  boxShadow: {
+		...Platform.select({
+			ios: {
+				shadowColor: 'rgba(0,0,0, .7)',
+				shadowOffset: { height: 0, width: 0 },
+				shadowOpacity: 1,
+				shadowRadius: 10,
+			},
+			android: {
+				elevation: 10
+			},
+		}),
+	},
+  image: {
+    width: config.WIDTH_SCREEN - 60,
+    height: 300
+    // height: config.HEIGHT_SCREEN - 150
+  },
+  title: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    padding: 15,
   }
 });
 

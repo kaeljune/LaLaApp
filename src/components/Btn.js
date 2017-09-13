@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 
+
 function Btn(props) {
   return (
     <View style={props.containerStyle ? props.container : styles.wrapBtn}>
@@ -21,14 +22,15 @@ function Btn(props) {
 const styles = StyleSheet.create({
   wrapBtn: {
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    
   },
   btnStyle: {
     // minWidth: 150,
     height: 50,
     justifyContent: 'center',
     paddingHorizontal: 20,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   btnText: {
     color: '#fff',

@@ -6,7 +6,7 @@ import { Avatar, Icon } from 'react-native-elements';
 import firebase from 'firebase';
 
 import { accountFetch, fetchRequest } from '../../actions';
-import { COLOR, WIDTH_SCREEN } from '../../config/config';
+import { COLOR, WIDTH_SCREEN, STYLES} from '../../config/config';
 
 class MainScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -65,17 +65,7 @@ class MainScreen extends Component {
 		});
 	}
 	renderItem = ({ item }) => (
-		<View
-			style={{
-				padding: 10,
-				backgroundColor: '#fff',
-				borderRadius: 3,
-				borderColor: '#eee',
-				borderWidth: 1,
-				marginHorizontal: 8,
-				width: (WIDTH_SCREEN / 2) - 24,
-			}}
-		>
+		<View style={[styles.item, STYLES.boxShadow]}>
 			<View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center' }}>
 				<Avatar
 					icon={{ name: 'person' }}
@@ -85,7 +75,7 @@ class MainScreen extends Component {
 					width={50}
 				/>
 				<Text style={{ fontSize: 18, marginTop: 7 }}>{item.receiverName}</Text>
-				<Text style={{ fontSize: 14, marginVertical: 7, color: '#d3d5d8' }}>
+				<Text style={{ fontSize: 14, marginVertical: 7, color: '#ddd' }}>
 					for {item.occasion}
 				</Text>
 				<Text style={{ fontSize: 14, fontWeight: '600' }}>{item.priceRange}</Text>
@@ -101,17 +91,6 @@ class MainScreen extends Component {
 					}}
 				>{item.status}</Text>
 			</View>
-			<View style={{ justifyContent: 'center', alignItems: 'center' }}>
-				
-				<Icon
-					reverse
-					raised
-					reverseColor={COLOR.primary}
-					name="chevron-right"
-					size={16}
-					color="#fff"
-				/>
-			</View>
 		</View>
 	)
 
@@ -119,7 +98,7 @@ class MainScreen extends Component {
 		const { items } = this.props;
 		if (items.length > 0) {
 			return (
-				<View style={{ flex: 1, paddingBottom: 60 }}>
+				<View style={{ flex: 1 }}>
 					<FlatList
 						numColumns={2}
 						contentContainerStyle={{ paddingVertical: 15 }}
@@ -163,7 +142,7 @@ class MainScreen extends Component {
 					color={COLOR.primary}
 				/>
 
-				<Text style={{ marginTop: 10, fontWeight: 'bold' }}>FIND A GIFT</Text>
+				<Text style={{ marginTop: 10, fontWeight: '700' }}>FIND A GIFT</Text>
 			</View>
 		);
 	};
@@ -182,6 +161,12 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: COLOR.background,
 	},
+	item: {
+		padding: 10,
+		backgroundColor: '#fff',
+		marginHorizontal: 8,
+		width: (WIDTH_SCREEN / 2) - 24,
+	},
 	box: {
 		backgroundColor: COLOR.secondary,
 		paddingHorizontal: 5,
@@ -197,9 +182,9 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		width: WIDTH_SCREEN,
 		alignItems: 'center',
-		borderTopColor: '#eee',
-		borderTopWidth: 1,
-		backgroundColor: '#fff',
+		// borderTopColor: '#eee',
+		// borderTopWidth: 1,
+		// backgroundColor: '#fff',
 	}
 });
 

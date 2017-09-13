@@ -5,10 +5,10 @@ import {
 	ScrollView,
 	KeyboardAvoidingView,
 	TextInput,
-	StyleSheet
+	StyleSheet,
 } from 'react-native';
 import { Avatar, Icon, Slider } from 'react-native-elements';
-import { COLOR, headerStyle, headerTitleStyle } from '../../config/config';
+import { COLOR, headerStyle, headerTitleStyle, STYLES } from '../../config/config';
 
 import SlideSelect from './SlideSelect';
 import SlideBox from './SlideBox';
@@ -20,11 +20,11 @@ const sex = ['Female', 'Male', 'Other'];
 const age = ['1-3', '4-6', '7-9', '10-12', '13-15', '16-18'];
 const popular = ['Friend', 'Professional', 'Spouse / Partner', 'Girl Friend', 'Company'];
 const occasion = [
-	{ id: 1, text: 'Anniversary', color: '#FF3D7F' }, 
-	{ id: 2, text: 'Apology', color: '#B23DFF' }, 
+	{ id: 1, text: 'Anniversary', color: '#FF3D7F' },
+	{ id: 2, text: 'Apology', color: '#B23DFF' },
 	{ id: 3, text: 'Baby', color: '#B1068F' },
-	{ id: 4, text: 'Anniversary', color: '#FF3D7F' }, 
-	{ id: 5, text: 'Apology', color: '#B23DFF' }, 
+	{ id: 4, text: 'Anniversary', color: '#FF3D7F' },
+	{ id: 5, text: 'Apology', color: '#B23DFF' },
 	{ id: 6, text: 'Baby', color: '#B1068F' }
 ];
 
@@ -52,7 +52,7 @@ class GiftSelection extends Component {
 	render() {
 		const { section, sectionItem, sectionPad, sectionTag, sectionTitle } = styles;
 		return (
-			<ScrollView  style={{ flex: 1, backgroundColor: '#f8f8f8' }} contentContainerStyle={{ padding: 0 }}>
+			<ScrollView style={{ flex: 1, backgroundColor: '#f8f8f8' }} contentContainerStyle={{ padding: 0 }}>
 				<KeyboardAvoidingView behavior={'padding'} style={{ flex: 1 }}>
 					<View style={section}>
 						<View style={sectionItem}>
@@ -63,11 +63,11 @@ class GiftSelection extends Component {
 								source={avatar}
 							/>
 
-							<Text 
-								style={{ 
-								marginVertical: 15, 
-								fontSize: 18, 
-								fontWeight: '600' 
+							<Text
+								style={{
+									marginVertical: 15,
+									fontSize: 18,
+									fontWeight: '600'
 								}}
 							>Hai Nguyen</Text>
 						</View>
@@ -107,9 +107,10 @@ class GiftSelection extends Component {
 							}}
 						>${this.state.price ? this.state.price : 0}-${this.state.price + 100}</Text>
 
-						<Slider 	
-							minimumValue={0} 
-							maximumValue={100} 
+
+						<Slider
+							minimumValue={0}
+							maximumValue={100}
 							minimumTrackTintColor={COLOR.primary}
 							maximumTrackTintColor='#eee'
 							thumbTintColor="#fff"
@@ -121,10 +122,11 @@ class GiftSelection extends Component {
 								borderColor: COLOR.primary,
 								borderWidth: 1
 							}}
-							value={this.state.price}
-							onValueChange={(price) => this.setState({ price })}
 							step={1}
+							value={this.props.value}
+							onSlidingComplete={(price) => this.setState({ price })}	
 						/>
+
 					</View>
 
 					<View style={sectionPad}>
@@ -176,14 +178,14 @@ class GiftSelection extends Component {
 								multiline
 								placeholder="Dogs, going the beach, pampering, barware, etc"
 							/>
-						</View> 
+						</View>
 					</View>
 
 					<View style={{ marginVertical: 30 }}>
-						<Btn 
+						<Btn
 							title="SUBMIT REQUESTS"
 							bgColor={COLOR.primary}
-							onPress={this.props.onPress}
+							onPress={() => this.props.navigation.navigate('giftselection')}
 						/>
 					</View>
 				</KeyboardAvoidingView>
@@ -195,18 +197,18 @@ class GiftSelection extends Component {
 const styles = StyleSheet.create({
 	section: {
 		backgroundColor: '#fff',
-		paddingVertical: 15,
+		// paddingVertical: 15,
 		marginBottom: 15
 	},
 	avatarStyle: {
-		flexDirection: 'row', 
-		alignItems: 'center', 
-		paddingRight: 15 
+		flexDirection: 'row',
+		alignItems: 'center',
+		paddingRight: 15
 	},
 	sectionPad: {
-		backgroundColor: '#fff', 
-		padding: 15, 
-		marginBottom: 15
+		backgroundColor: '#fff',
+		padding: 15,
+		marginBottom: 20
 	},
 
 	sectionTitle: {

@@ -36,10 +36,10 @@ const STYLES = StyleSheet.create({
 				shadowColor: 'rgba(0,0,0, .7)',
 				shadowOffset: { height: 0, width: 0 },
 				shadowOpacity: 1,
-				shadowRadius: 5,
+				shadowRadius: 3,
 			},
 			android: {
-				elevation: 5
+				elevation: 3
 			},
 		}),
 	}

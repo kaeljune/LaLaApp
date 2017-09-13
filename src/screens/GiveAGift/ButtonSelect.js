@@ -1,38 +1,38 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
-import { COLOR } from '../../config/config';
+import { COLOR, STYLES } from '../../config/config';
 
 function ButtonSeclect(props) {
-    const styleBtn = props.isActive ? [styles.normal, styles.active] : styles.normal;
-    return (
+	const styleBtn = props.isActive ? [styles.normal, styles.active, STYLES.boxShadow] : styles.normal;
+	return (
 
-        <Text 
-            onPress={() => props.onActive(props.id)}
-            style={styleBtn}
-        >
-            {props.children}
-        </Text>
-    ) 
+		<Text style={styleBtn} onPress={() => props.onActive(props.id)} >
+			{props.children.toUpperCase()}
+		</Text>
+
+	)
 }
 
 const styles = StyleSheet.create({
-    normal: {
-        borderWidth: 1,
-        backgroundColor: '#fff',
-        borderColor: '#eee',
-        marginLeft: 5,
-        marginRight: 5,
-        paddingVertical: 10,
-        paddingHorizontal: 15,
-        minWidth: 70,
-        textAlign: 'center',
-    },
-    active: {
-        backgroundColor: COLOR.primary,
-        color: '#fff',
-        borderColor: COLOR.primary
-    }
+	normal: {
+		borderWidth: 1,
+		backgroundColor: '#fff',
+		borderColor: '#eee',
+		fontWeight: '600',
+		fontSize: 11,
+		color: '#555',
+		margin: 5,
+		paddingVertical: 10,
+		paddingHorizontal: 15,
+		minWidth: 70,
+		textAlign: 'center',
+	},
+	active: {
+		backgroundColor: COLOR.primary,
+		color: '#fff',
+		borderColor: COLOR.primary
+	}
 });
 
 export default ButtonSeclect;
