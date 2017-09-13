@@ -3,18 +3,27 @@ import { Text, StyleSheet } from 'react-native';
 import { COLOR } from '../../config/config';
 
 class TagSelect extends Component {
-    state = {
-        active: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            active: false
+        };
     }
-    onPress = () => {
-        this.setState(prevState => {
-            return { active: !prevState.active };
-        });
-    }
+    // onPress = (interest) => {
+    //     this.setState(prevState => ({ active: !prevState.active }));
+    //     this.props.onTagPress(interest);
+    // }
     render() {
         const styleTag = this.state.active ? [styles.tag, styles.active] : [styles.tag];
         return (
-            <Text style={styleTag} onPress={this.onPress}>
+            <Text
+                style={styleTag} 
+                onPress={() => {
+                    this.props.onTagPress(this.props.children);
+                    this.setState(prevState => ({ active: !prevState.active }));
+                    }
+                }
+            >
                 {this.props.children}
             </Text>
         );

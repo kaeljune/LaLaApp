@@ -23,12 +23,12 @@ class ProfileScreen extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		title: 'Profile Setting',
 		headerTintColor: COLOR.primary,
-		headerLeft: <TouchableWithoutFeedback onPress={() => navigation.navigate('profile')}><Icon
+		headerLeft: <TouchableWithoutFeedback onPress={() => navigation.navigate('isFindGift')}><Icon
 			name='clear'
 			color={COLOR.primary}
 			size={24}
 			style={{ marginLeft: 15 }}
-			onPress={() => navigation.navigate('mainGift')}
+			//onPress={() => navigation.navigate('mainGift')}
 		/></TouchableWithoutFeedback>,
 		headerRight:
 		<View

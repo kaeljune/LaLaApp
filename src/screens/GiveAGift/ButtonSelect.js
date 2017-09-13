@@ -13,7 +13,7 @@ function ButtonSeclect(props) {
         >
             {props.children}
         </Text>
-    ) 
+    ); 
 }
 
 const styles = StyleSheet.create({

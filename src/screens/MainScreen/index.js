@@ -31,7 +31,7 @@ class MainScreen extends Component {
 						<Text>total</Text>
 					</View>
 				</View>,
-				headerRight: <TouchableWithoutFeedback onPress={() => navigation.navigate('profile')}>
+				headerRight: <TouchableWithoutFeedback onPress={() => navigation.navigate('isProfile')}>
 					<Avatar
 						width={37}
 						height={37}
