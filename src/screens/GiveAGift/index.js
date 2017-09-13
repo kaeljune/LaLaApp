@@ -7,25 +7,52 @@ import {
 	TextInput,
 	StyleSheet,
 } from 'react-native';
+import firebase from 'firebase';
+import _ from 'lodash';
 import { Avatar, Icon, Slider } from 'react-native-elements';
+
+import { connect } from 'react-redux';
+import {
+	requestSexChanged,
+	requestAgeChanged,
+	requestReceiverNameChanged,
+	requestRelationshipChanged,
+	requestOccasionChanged,
+	requestPriceChanged,
+	requestInterestChanged,
+	requestStyleChanged,
+	requestOtherChanged,
+	requestGift
+} from '../../actions';
+
 import { COLOR, headerStyle, headerTitleStyle, STYLES } from '../../config/config';
 
+import { Spinner } from '../../components/Spinner';
 import SlideSelect from './SlideSelect';
 import SlideBox from './SlideBox';
 import Btn from '../../components/Btn';
 import TagSelect from './TagSelect';
 import avatar from '../../../assets/images/avatar.png';
 
-const sex = ['Female', 'Male', 'Other'];
-const age = ['1-3', '4-6', '7-9', '10-12', '13-15', '16-18'];
-const popular = ['Friend', 'Professional', 'Spouse / Partner', 'Girl Friend', 'Company'];
-const occasion = [
-	{ id: 1, text: 'Anniversary', color: '#FF3D7F' },
-	{ id: 2, text: 'Apology', color: '#B23DFF' },
-	{ id: 3, text: 'Baby', color: '#B1068F' },
-	{ id: 4, text: 'Anniversary', color: '#FF3D7F' },
-	{ id: 5, text: 'Apology', color: '#B23DFF' },
-	{ id: 6, text: 'Baby', color: '#B1068F' }
+const sexs = ['Female', 'Male', 'Other'];
+const ages = ['0,5', '6,10', '11,15', '15,18', '19,24', '25,34', '35,54', '55,64', '65,150'];
+const popular = [
+	'Professional',
+	'Friend',
+	'Partner',
+	'Mother',
+	'Father',
+	'Daughter',
+	'Son',
+	'Other',
+];
+const occasions = [
+	{ id: 1, text: 'anniversary', color: '#FF3D7F' },
+	{ id: 2, text: 'apology', color: '#B23DFF' },
+	{ id: 3, text: 'birthday', color: '#B1068F' },
+	{ id: 4, text: 'congratulations', color: '#FF3D7F' },
+	{ id: 5, text: 'thank you', color: '#B23DFF' },
+	{ id: 6, text: 'other', color: '#B1068F' }
 ];
 
 class GiftSelection extends Component {
@@ -48,7 +75,75 @@ class GiftSelection extends Component {
 			<Text style={{ marginLeft: 5 }}>Edit</Text>
 		</View>
 	})
-	state = { price: null }
+	onSexChange = (text) => {
+		this.props.requestSexChanged(text);
+	}
+	onAgeChange = (text) => {
+		this.props.requestAgeChanged(text);
+	}
+	onRelationshipChange = (text) => {
+		this.props.requestRelationshipChanged(text);
+	}
+	onReceiverNameChange = (text) => {
+		this.props.requestReceiverNameChanged(text);
+	}
+	onOccasionChange = (text) => {
+		this.props.requestOccasionChanged(text);
+	}
+	onPriceChange = (text) => {
+		this.props.requestPriceChanged(text);
+	}
+	onInterestChange = (text) => {
+		this.props.requestInterestChanged(_.concat(this.props.interest, text));
+	}
+	onStyleChange = (text) => {
+		this.props.requestStyleChanged(_.concat(this.props.style, text));
+	}
+	onOtherChange = (text) => {
+		this.props.requestOtherChanged(text);
+	}
+	onSubmitPress = async () => {
+		const { location, sex, age, relationship, receiverName,
+			price, occasion, interest, style, other } = this.props;
+		console.log();
+		await firebase.auth().currentUser.getIdToken(true)
+			.then((idToken) => {
+				try {
+					this.props.requestGift({
+						idToken,
+						location,
+						sex,
+						age,
+						relationship,
+						receiverName,
+						price,
+						occasion,
+						interest,
+						style,
+						other
+					}, () => {
+						this.props.navigation.navigate('mainGift');
+					});
+				} catch (err) {
+					//
+				}
+			}).catch((error) => {
+				// Handle error
+				console.log(error);
+			});
+	}
+	renderButton = () => {
+		if (this.props.loading) {
+			return <Spinner size="large" />;
+		}
+		return (
+			<Btn
+				title="SUBMIT REQUESTS"
+				bgColor={COLOR.primary}
+				onPress={this.onSubmitPress}
+			/>
+		);
+	}
 	render() {
 		const { section, sectionItem, sectionPad, sectionTag, sectionTitle } = styles;
 		return (
@@ -72,27 +167,29 @@ class GiftSelection extends Component {
 							>Hai Nguyen</Text>
 						</View>
 
-						<SlideSelect items={sex} />
-						<SlideSelect items={age} />
-						<SlideSelect items={popular} />
+						<SlideSelect items={sexs} onPress={this.onSexChange} />
+						<SlideSelect items={ages} onPress={this.onAgeChange} />
+						<SlideSelect items={popular} onPress={this.onRelationshipChange} />
 					</View>
 
-					{/* <View style={sectionPad}>
-						<Text style={sectionTitle}>Location</Text>
+					<View style={sectionPad}>
+						<Text style={sectionTitle}>Receiver</Text>
 						<View>
 							<TextInput
 								style={{
 									height: 60,
 									textAlign: 'center'
 								}}
-								placeholder="Location..."
+								placeholder="Receiver Name..."
+								value={this.props.receiverName}
+								onChangeText={this.onReceiverNameChange}
 							/>
 						</View>
-					</View> */}
+					</View>
 
 					<View style={section}>
 						<Text style={[sectionTitle, { margin: 15 }]}>Occasion</Text>
-						<SlideBox occasion={occasion} />
+						<SlideBox occasion={occasions} onPress={this.onOccasionChange} />
 					</View>
 
 					<View style={sectionPad}>
@@ -105,12 +202,11 @@ class GiftSelection extends Component {
 								marginBottom: 15,
 								textAlign: 'center'
 							}}
-						>${this.state.price ? this.state.price : 0}-${this.state.price + 100}</Text>
-
+						>${this.props.price ? this.props.price : 0}-${this.props.price + 100}</Text>
 
 						<Slider
 							minimumValue={0}
-							maximumValue={100}
+							maximumValue={1000}
 							minimumTrackTintColor={COLOR.primary}
 							maximumTrackTintColor='#eee'
 							thumbTintColor="#fff"
@@ -122,27 +218,26 @@ class GiftSelection extends Component {
 								borderColor: COLOR.primary,
 								borderWidth: 1
 							}}
-							step={1}
-							value={this.props.value}
-							onSlidingComplete={(price) => this.setState({ price })}	
+							value={this.props.price}
+							onValueChange={this.onPriceChange}
+							step={100}
 						/>
 
 					</View>
-
 					<View style={sectionPad}>
-						<Text style={sectionTitle}>Recipient's Intersts</Text>
+						<Text style={sectionTitle}>Recipient's Interests</Text>
 
 						<View style={sectionTag}>
-							<TagSelect>Dog</TagSelect>
-							<TagSelect>DIY</TagSelect>
-							<TagSelect>Cat</TagSelect>
-							<TagSelect>Tea</TagSelect>
-							<TagSelect>Coffee</TagSelect>
-							<TagSelect>Fitness</TagSelect>
-							<TagSelect>Cat</TagSelect>
-							<TagSelect>Tea</TagSelect>
-							<TagSelect>Sport</TagSelect>
-							<TagSelect>Science</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Dog</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>DIY</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Cat</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Tea</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Coffee</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Fitness</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Cat</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Tea</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Sport</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Science</TagSelect>
 
 						</View>
 					</View>
@@ -151,17 +246,12 @@ class GiftSelection extends Component {
 						<Text style={sectionTitle}>Recipient's Style</Text>
 
 						<View style={sectionTag}>
-							<TagSelect>Dog</TagSelect>
-							<TagSelect>DIY</TagSelect>
-							<TagSelect>Cat</TagSelect>
-							<TagSelect>Tea</TagSelect>
-							<TagSelect>Coffee</TagSelect>
-							<TagSelect>Fitness</TagSelect>
-							<TagSelect>Cat</TagSelect>
-							<TagSelect>Tea</TagSelect>
-							<TagSelect>Sport</TagSelect>
-							<TagSelect>Science</TagSelect>
-
+							<TagSelect onTagPress={this.onStyleChange}>elegant</TagSelect>
+							<TagSelect onTagPress={this.onStyleChange}>alternative</TagSelect>
+							<TagSelect onTagPress={this.onStyleChange}>fun</TagSelect>
+							<TagSelect onTagPress={this.onStyleChange}>sporty</TagSelect>
+							<TagSelect onTagPress={this.onStyleChange}>luxurious</TagSelect>
+							<TagSelect onTagPress={this.onStyleChange}>conventional</TagSelect>
 						</View>
 					</View>
 
@@ -177,16 +267,14 @@ class GiftSelection extends Component {
 								underlineColorAndroid={'transparent'}
 								multiline
 								placeholder="Dogs, going the beach, pampering, barware, etc"
+								value={this.props.other}
+								onChangeText={this.onOtherChange}
 							/>
 						</View>
 					</View>
 
 					<View style={{ marginVertical: 30 }}>
-						<Btn
-							title="SUBMIT REQUESTS"
-							bgColor={COLOR.primary}
-							onPress={() => this.props.navigation.navigate('giftselection')}
-						/>
+						{this.renderButton()}
 					</View>
 				</KeyboardAvoidingView>
 			</ScrollView>
@@ -208,7 +296,7 @@ const styles = StyleSheet.create({
 	sectionPad: {
 		backgroundColor: '#fff',
 		padding: 15,
-		marginBottom: 20
+		marginBottom: 15
 	},
 
 	sectionTitle: {
@@ -245,4 +333,21 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default GiftSelection;
+const mapStateToProps = ({ requestGiftState }) => {
+	const { location, sex, age, relationship, receiverName, loading, error,
+		price, occasion, interest, style, other } = requestGiftState;
+	return { location, sex, age, relationship, receiverName, loading, error, price, occasion, interest, style, other };
+};
+
+export default connect(mapStateToProps, {
+	requestSexChanged,
+	requestAgeChanged,
+	requestReceiverNameChanged,
+	requestRelationshipChanged,
+	requestOccasionChanged,
+	requestPriceChanged,
+	requestInterestChanged,
+	requestStyleChanged,
+	requestOtherChanged,
+	requestGift
+})(GiftSelection);

@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import { Avatar, Icon } from 'react-native-elements';
 import firebase from 'firebase';
 
+
+import Btn from '../../components/Btn';
+
 import { accountFetch, fetchRequest } from '../../actions';
 import { COLOR, WIDTH_SCREEN, STYLES} from '../../config/config';
 
@@ -31,7 +34,7 @@ class MainScreen extends Component {
 						<Text>total</Text>
 					</View>
 				</View>,
-				headerRight: <TouchableWithoutFeedback onPress={() => navigation.navigate('profile')}>
+				headerRight: <TouchableWithoutFeedback onPress={() => navigation.navigate('isProfile')}>
 					<Avatar
 						width={37}
 						height={37}
@@ -140,6 +143,7 @@ class MainScreen extends Component {
 					reverseColor="white"
 					name='add'
 					color={COLOR.primary}
+					onPress={() => this.props.navigation.navigate('address')}
 				/>
 
 				<Text style={{ marginTop: 10, fontWeight: '700' }}>FIND A GIFT</Text>
@@ -150,6 +154,11 @@ class MainScreen extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
+				<Btn 
+					style={{ width: 150 }}
+					title="go to detail"
+					onPress={() => this.props.navigation.navigate('giftselection')}
+				/>
 				{this.renderList()}
 			</View>
 		);

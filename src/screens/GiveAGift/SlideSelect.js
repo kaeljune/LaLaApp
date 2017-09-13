@@ -11,7 +11,8 @@ class SlideSelect extends Component {
         };
     }
     onActive = (i) => {
-        this.setState({ selectedId: i });    
+        this.setState({ selectedId: i });
+        this.props.onPress(i);   
     }
 
     render() {
@@ -22,8 +23,8 @@ class SlideSelect extends Component {
                     {items.map((item, i) => 
                         <ButtonSeclect 
                             onActive={this.onActive} 
-                            id={i} key={i}
-                            isActive={i === this.state.selectedId}
+                            id={item} key={i}
+                            isActive={item === this.state.selectedId}
                         >
                             {item}
                         </ButtonSeclect>

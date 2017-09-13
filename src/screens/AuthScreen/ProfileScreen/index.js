@@ -4,6 +4,7 @@ import {
 	Text,
 	ScrollView,
 	KeyboardAvoidingView,
+	TouchableWithoutFeedback,
 	AsyncStorage
 } from 'react-native';
 import Reactotron from 'reactotron-react-native';
@@ -22,13 +23,13 @@ class ProfileScreen extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		title: 'Profile Setting',
 		headerTintColor: COLOR.primary,
-		// headerLeft: <Icon
-		//     name='chevron-left'
-		//     color={COLOR.primary}
-		//     size={24}
-		//     style={{ marginLeft: 15 }}
-		//     onPress={() => navigation.goBack()}
-		// />,
+		headerLeft: <TouchableWithoutFeedback onPress={() => navigation.navigate('isFindGift')}><Icon
+			name='clear'
+			color={COLOR.primary}
+			size={24}
+			style={{ marginLeft: 15 }}
+			//onPress={() => navigation.navigate('mainGift')}
+		/></TouchableWithoutFeedback>,
 		headerRight:
 		<View
 			style={{	

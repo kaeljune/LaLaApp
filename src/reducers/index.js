@@ -6,6 +6,7 @@ import signupReducer from './SignupReducer';
 import fetchAccount from './fetch-account-reducer';
 import SelectionReducer from './SelectionReducer';
 import FetchRequestReducer from './FetchRequestReducer';
+import RequestGiftReducer from './RequestGiftReducer';
 
 export default combineReducers({
   selectedLibraryId: SelectionReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
   signupState: signupReducer,
   signinState: signinReducer,
   fetchAcc: fetchAccount,
-  listRequest: FetchRequestReducer
+  listRequest: FetchRequestReducer,
+  requestGiftState: RequestGiftReducer
 });

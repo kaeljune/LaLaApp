@@ -44,12 +44,11 @@ const isProfile = StackNavigator({
 });
 
 const isFindGift = StackNavigator({
+    mainGift: { screen: MainScreen },
     address: { screen: Address },
     giftselection: { screen: GiftSelection },
     findagift: { screen: FindAGift },
-    mainGift: { screen: MainScreen },
     giveagift: { screen: GiveAGift }, 
-
     detailgift: { screen: DetailGift },
     checkout: { screen: Checkout },
     writeanote: { screen: WriteANote },

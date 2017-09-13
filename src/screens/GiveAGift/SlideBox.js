@@ -13,6 +13,7 @@ class SlideBox extends Component {
 
     onActive = (id) => {
         this.setState({ selectedId: id });
+        this.props.onPress(id);
     }
     
     render() {
@@ -26,8 +27,8 @@ class SlideBox extends Component {
                     {occasion.map((item, i) => 
                         <BoxSelect 
                             onActive={this.onActive} 
-                            id={i} key={i} 
-                            isActive={i === this.state.selectedId}
+                            id={item.text} key={i} 
+                            isActive={item.text === this.state.selectedId}
                             color={item.color}
                         >
                             {item.text}

@@ -21,3 +21,17 @@ export const ACCOUNT_FETCH_FAIL = 'account_fetch_fail';
 
 export const FETCH_REQUEST = 'fetch_request';
 
+export const REQUEST_GIFT = 'request_gift';
+export const REQUEST_GIFT_SUCCESS = 'request_gift_success';
+export const REQUEST_GIFT_FAIL = 'request_gift_fail';
+export const REQUEST_LOCATION_CHANGED = 'request_location_changed';
+export const REQUEST_SEX_CHANGED = 'request_sex_changed';
+export const REQUEST_AGE_CHANGED = 'request_age_changed';
+export const REQUEST_RECEIVERNAME_CHANGED = 'request_receivername_changed';
+export const REQUEST_RELATIONSHIP_CHANGED = 'request_relationship_changed';
+export const REQUEST_OCCASION_CHANGED = 'request_occasion_changed';
+export const REQUEST_PRICE_CHANGED = 'request_price_changed';
+export const REQUEST_INTEREST_CHANGED = 'request_interest_changed';
+export const REQUEST_STYLE_CHANGED = 'request_style_changed';
+export const REQUEST_OTHER_CHANGED = 'request_other_changed';
+
