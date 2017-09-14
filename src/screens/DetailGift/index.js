@@ -3,16 +3,15 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
-  ScrollView,
   Animated
 } from 'react-native';
+import _ from 'lodash';
+import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 
 import Btn from '../../components/Btn';
 
 import * as config from '../../config/config';
-import product from '../../../assets/images/product2.jpg';
 
 class DetailGift extends Component {
   static navigationOptions = () => ({
@@ -53,7 +52,7 @@ class DetailGift extends Component {
       extrapolate: 'clamp',
     });
     const scale = this.state.scaleValue;
-
+    const { item } = this.props;
     return (
       <View style={styles.container}>
         <Animated.View
@@ -67,17 +66,17 @@ class DetailGift extends Component {
           }}
         >
           <Animated.Image
-            source={product}
+            source={{ uri: item.image }}
             style={{ height: heightImg, width: config.WIDTH_SCREEN, transform: [{ scale }], opacity }}
           />
         </Animated.View>
-       
+
         <Animated.ScrollView
           contentContainerStyle={{ paddingTop: heightImg }}
           onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.state.yOffset } } }],
           )}
         >
-        
+
           <View style={{}}>
             <View style={[styles.section, { alignItems: 'center', borderBottomColor: '#ddd', borderBottomWidth: 1 }]}>
               <Text
@@ -88,8 +87,8 @@ class DetailGift extends Component {
                   marginVertical: 15,
                   color: '#333'
                 }}
-              >The Levante backpack</Text>
-              <Text style={{ marginBottom: 20, fontSize: 16, fontWeight: '700', color: config.COLOR.secondary }}>$25.00</Text>
+              >{item.name}</Text>
+              <Text style={{ marginBottom: 20, fontSize: 16, fontWeight: '700', color: config.COLOR.secondary }}>{item.price}</Text>
 
               <Btn
                 title="Gift Now"
@@ -102,8 +101,8 @@ class DetailGift extends Component {
               <Text style={{ fontWeight: '400', color: '#000', marginBottom: 15, fontSize: 18 }}>Description</Text>
 
               <Text style={{ lineHeight: 30, fontSize: 15, fontWeight: '100', color: '#666' }}>
-                Sed porttitor lectus nibh. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Sed porttitor lectus nibh. Proin eget tortor risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vivamus suscipit tortor eget felis porttitor volutpat. Sed porttitor lectus nibh. Pellentesque in ipsum id orci porta dapibus. Nulla porttitor accumsan tincidunt. Donec rutrum congue leo eget malesuada.
-            </Text>
+                {item.description}
+              </Text>
             </View>
           </View>
         </Animated.ScrollView>
@@ -143,5 +142,12 @@ const styles = StyleSheet.create({
   }
 });
 
-export default DetailGift;
+const mapStateToProps = state => {
+  const GiftID = state.listRequest.giftActive;
+  const item = _.find(_.map(state.listRequest.listGift, (val, uid) => ({ ...val, uid })), { uid: state.listRequest.giftActive });
+  //const gifts = _.map(state.listRequest.listGift, (val, uid) => ({ ...val, uid }));
+  return { item, GiftID };
+};
+
+export default connect(mapStateToProps, {})(DetailGift);
 

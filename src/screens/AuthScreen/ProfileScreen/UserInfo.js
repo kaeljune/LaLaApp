@@ -1,11 +1,13 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import TextField from '../../../components/TextField';
+
+import { STYLES } from '../../../config/config';
 
 const UserInfo = ({ data }) => {
 	const { list, row, label } = styles;
 	return (
-		<View style={styles.container}>
+		<View style={[styles.container, STYLES.boxShadow]}>
 			<View style={list}>
 				<View style={row}>
 					<TextField 
@@ -49,25 +51,16 @@ const UserInfo = ({ data }) => {
 const styles = StyleSheet.create({
 	container: {
 		marginHorizontal: 15,	
-		borderColor: '#ddd',
-		borderWidth: 1
+		backgroundColor: '#fff'
 	},
-	list: {
-		backgroundColor: '#fff',
+	list: {	
 		padding: 15,
 	},
 	row: {
-		marginBottom: 5
-		// paddingHorizontal: 15 
-		// flexDirection: 'row',
-		// justifyContent: 'space-between',
-		// alignItems: 'center',
-		// borderBottomColor: '#eee',
-		// borderBottomWidth: 1
+		marginBottom: 5	
 	},
 	label: {
-		fontSize: 16,
-		fontWeight: '600',
+		fontSize: 14,
 		color: '#858585'
 	}
 });

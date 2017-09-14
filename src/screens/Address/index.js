@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import {
-  View, Text, StyleSheet, TextInput, ScrollView, TouchableWithoutFeedback
+  View, Text, 
+  StyleSheet, TextInput, 
+  ScrollView, TouchableWithoutFeedback,
+  Platform,
+  LayoutAnimation,
+  UIManager
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -15,6 +20,19 @@ class Address extends Component {
   static navigationOptions = () => ({
     title: 'Find Address',
   })
+
+  constructor(props) {
+    super(props);
+
+    if (Platform.OS === 'android') {
+			UIManager.setLayoutAnimationEnabledExperimental && 
+			UIManager.setLayoutAnimationEnabledExperimental(true);
+		}
+  }
+
+  componentWillUpdate() {
+    LayoutAnimation.spring();	
+  }
 
   onChangeText = (location) => {
     this.props.requestLocationChanged(location);
@@ -42,7 +60,7 @@ class Address extends Component {
         </View>
 
         <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 20 }}>
-          { location.length < 3 && 
+          { location.length < 2 && 
           <View style={{ marginBottom: 30 }}>
             <Text style={styles.titleSection}>RECENT SEARCHES</Text>
             <View>
@@ -53,7 +71,7 @@ class Address extends Component {
             </View>
           </View> }
           <View>
-            {location.length < 3 &&
+            {location.length < 2 &&
               <Text style={styles.titleSection}>POPULAR DESTINATIONS</Text>}
             <View>
               {filtererLocation.map((item) => (
