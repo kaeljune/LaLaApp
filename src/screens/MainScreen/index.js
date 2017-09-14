@@ -9,7 +9,7 @@ import firebase from 'firebase';
 import Btn from '../../components/Btn';
 
 import { accountFetch, fetchRequest } from '../../actions';
-import { COLOR, WIDTH_SCREEN, STYLES} from '../../config/config';
+import { COLOR, WIDTH_SCREEN, STYLES } from '../../config/config';
 
 class MainScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -58,24 +58,24 @@ class MainScreen extends Component {
 	componentDidMount() {
 		//console.log(this.props.state);
 		firebase.auth().currentUser.getIdToken(true)
-		.then((idToken) => {
-			console.log(idToken);
-			// Send token to your backend via HTTPS
-			// ...
-		}).catch((error) => {
-			// Handle error
-			console.log(error);
-		});
+			.then((idToken) => {
+				console.log(idToken);
+				// Send token to your backend via HTTPS
+				// ...
+			}).catch((error) => {
+				// Handle error
+				console.log(error);
+			});
 	}
 	renderItem = ({ item }) => (
 		<View style={[styles.item, STYLES.boxShadow]}>
 			<View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center' }}>
 				<Avatar
-					icon={{ name: 'person' }}
-					overlayContainerStyle={{ backgroundColor: COLOR.primary }}
-					rounded
 					height={50}
 					width={50}
+					overlayContainerStyle={{ backgroundColor: COLOR.primary }}
+					rounded
+					title="BP"		
 				/>
 				<Text style={{ fontSize: 18, marginTop: 7 }}>{item.receiverName}</Text>
 				<Text style={{ fontSize: 14, marginVertical: 7, color: '#ddd' }}>
@@ -154,7 +154,7 @@ class MainScreen extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Btn 
+				<Btn
 					style={{ width: 150 }}
 					title="go to detail"
 					onPress={() => this.props.navigation.navigate('giftselection')}

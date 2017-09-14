@@ -5,7 +5,7 @@ import { Button } from 'react-native-elements';
 
 function Btn(props) {
   return (
-    <View style={props.containerStyle ? props.container : styles.wrapBtn}>
+    <View style={props.containerStyle ? props.containerStyle : styles.wrapBtn}>
       <Button
         raise
         icon={props.icon ? props.icon : null}

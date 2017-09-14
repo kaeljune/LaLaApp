@@ -65,7 +65,7 @@ class GiftSelection extends Component {
     entries: items,
     activeSlide: 0
   }
-  
+
   get pagination() {
     const { entries, activeSlide } = this.state;
     return (
@@ -91,35 +91,31 @@ class GiftSelection extends Component {
   renderItem = ({ item, index }) => {
     return (
       <View style={[styles.slide, styles.boxShadow]}>
-        <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('detailgift')}>
+        <View>
           <Image
             source={item.images}
-            style={styles.image}
+            style={{ height: (config.HEIGHT_SCREEN * 0.75) * 0.4, width: config.WIDTH_SCREEN - 80 }}
           />
-        </TouchableWithoutFeedback>
 
-        <View style={{ padding: 20, flex: 1 }}>
-          <Text style={{ fontSize: 25, fontWeight: '100', color: '#313131', marginBottom: 20 }}>{item.name}</Text>
+          <View style={{ padding: 20, alignItems: 'center' }}>
+            <Text style={{ textAlign: 'center', fontSize: 20, fontWeight: '400', color: '#313131', marginBottom: 10, lineHeight: 30 }}>{item.name}</Text>
+            <Text style={{ color: '#777', fontSize: 14, fontWeight: '700', marginBottom: 10 }}>by Alex</Text>
+            <Text style={{ fontWeight: '600', fontSize: 16, marginVertical: 20 }}>$109</Text>
+            
+            <Btn 
+              bgColor={config.COLOR.secondary}
+              style={{ borderRadius: 3 }}
+              title="GIFT NOW"
+            />
 
-          <Text style={{ color: '#777', fontSize: 17 }}>by Alex</Text>
-        </View>
-
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Text style={{ fontWeight: '700', fontSize: 20, marginLeft: 20 }}>$109</Text>
-
-          <TouchableWithoutFeedback>
-            <View style={{ flexDirection: 'row', backgroundColor: config.COLOR.secondary, borderColor: config.COLOR.secondary, borderWidth: 1, padding: 15 }}>
-              <Icon name="add" size={17} color="#fff" />
-              <Text style={{ color: '#fff', fontWeight: '400', fontSize: 14, marginLeft: 5 }}>GIFT NOW</Text>
-            </View>
-          </TouchableWithoutFeedback>
+          </View>
         </View>
 
       </View>
     );
   };
 
- 
+
   render() {
     return (
       <View style={styles.container}>
@@ -127,15 +123,17 @@ class GiftSelection extends Component {
           props={this.props}
           ref={(c) => { this._carousel = c; }}
           data={items}
+          firstItem={this.state.activeSlide}
           renderItem={this.renderItem}
           sliderWidth={config.WIDTH_SCREEN}
           itemWidth={config.WIDTH_SCREEN - 60}
           onSnapToItem={(index) => this.setState({ activeSlide: index })}
+          activeSlideOffset={0}
+          enableSnap={true}
           inactiveSlideScale={0.95}
-          inactiveSlideOpacity={0.8}
-          enableMomentum={false}
-          slideStyle={{ paddingHorizontal: 10, marginTop: 20, paddingBottom: 10, width: config.WIDTH_SCREEN - 60 }}
-
+          enableMomentum={false}o
+          scrollEndDragDebounceValue={Platform.OS === 'ios' ? 0 : 100}
+          slideStyle={{ flexDirection: 'row', paddingHorizontal: 10, marginVertical: 30, paddingBottom: 10, height: config.HEIGHT_SCREEN * 0.75, width: config.WIDTH_SCREEN - 60, alignItems: 'center', }}
         />
         <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
           <Text style={{ fontSize: 20, fontWeight: '100', color: '#fff' }}>
@@ -157,7 +155,8 @@ const styles = StyleSheet.create({
 
   slide: {
     backgroundColor: '#fff',
-    flex: 1,
+    // minHeight: config.HEIGHT_SCREEN * 0.75
+    // flex: 1,
     // marginVertical: 25
     // alignItems: 'center',
   },
