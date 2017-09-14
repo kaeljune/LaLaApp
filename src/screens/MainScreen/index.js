@@ -8,8 +8,8 @@ import firebase from 'firebase';
 
 import Btn from '../../components/Btn';
 
-import { accountFetch, fetchRequest } from '../../actions';
-import { COLOR, WIDTH_SCREEN, STYLES} from '../../config/config';
+import { accountFetch, fetchRequest, fetchListGift } from '../../actions';
+import { COLOR, WIDTH_SCREEN, STYLES } from '../../config/config';
 
 class MainScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -68,6 +68,13 @@ class MainScreen extends Component {
 		});
 	}
 	renderItem = ({ item }) => (
+		<TouchableWithoutFeedback 
+			onPress={() => {
+				this.props.navigation.navigate('giftselection');
+				this.props.fetchListGift(item.uid);
+				}
+			}
+		>
 		<View style={[styles.item, STYLES.boxShadow]}>
 			<View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center' }}>
 				<Avatar
@@ -95,6 +102,7 @@ class MainScreen extends Component {
 				>{item.status}</Text>
 			</View>
 		</View>
+		</TouchableWithoutFeedback>
 	)
 
 	renderList = () => {
@@ -154,11 +162,6 @@ class MainScreen extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Btn 
-					style={{ width: 150 }}
-					title="go to detail"
-					onPress={() => this.props.navigation.navigate('giftselection')}
-				/>
 				{this.renderList()}
 			</View>
 		);
@@ -198,9 +201,10 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-	const items = _.map(state.listRequest, (val, uid) => ({ ...val, uid }));
+	const items = _.map(state.listRequest.results, (val, uid) => ({ ...val, uid }));
+	//const gifts = _.map(state.listRequest.listGift, (val, uid) => ({ ...val, uid }));
 	const auth = state.fetchAcc;
 	return { items, auth };
 };
 
-export default connect(mapStateToProps, { accountFetch, fetchRequest })(MainScreen);
+export default connect(mapStateToProps, { accountFetch, fetchRequest, fetchListGift })(MainScreen);

@@ -20,6 +20,8 @@ export const ACCOUNT_FETCH_SUCCESS = 'account_fetch_success';
 export const ACCOUNT_FETCH_FAIL = 'account_fetch_fail';
 
 export const FETCH_REQUEST = 'fetch_request';
+export const FETCH_LIST_GIFT = 'fetch_list_gift';
+export const FETCH_GIFT = 'fetch_gift';
 
 export const REQUEST_GIFT = 'request_gift';
 export const REQUEST_GIFT_SUCCESS = 'request_gift_success';
