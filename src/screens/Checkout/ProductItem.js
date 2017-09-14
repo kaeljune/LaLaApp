@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Animated, TouchableOpacity, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
+import _ from 'lodash';
 
 import { WIDTH_SCREEN, COLOR } from '../../config/config';
 
@@ -9,7 +10,7 @@ class ProductList extends Component {
 		super(props);
 		this.state = ({
 			right: new Animated.Value(0),
-			total: parseInt(this.props.total)
+			total: _.parseInt(this.props.total)
 		});
 	}
 
@@ -54,7 +55,7 @@ class ProductList extends Component {
 						</Text>
 					</View>
 
-					<Text style={{ color: COLOR.secondary, fontWeight: '600' }}>${price}</Text>
+					<Text style={{ color: COLOR.secondary, fontWeight: '600' }}>{price}</Text>
 				</View>
 
 				<View style={styles.quantityStyle}>

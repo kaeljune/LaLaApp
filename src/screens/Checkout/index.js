@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import _ from 'lodash';
+import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 
-import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';
+import { COLOR, WIDTH_SCREEN } from '../../config/config';
 
 import Btn from '../../components/Btn';
 import Feature from './Feature';
@@ -88,4 +90,10 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default Checkout;
+const mapStateToProps = state => {
+  const GiftID = state.listRequest.giftActive;
+  const item = _.find(_.map(state.listRequest.listGift, (val, uid) => ({ ...val, uid })), { uid: state.listRequest.giftActive });
+  return { item, GiftID };
+};
+
+export default connect(mapStateToProps, {})(Checkout);
