@@ -15,19 +15,24 @@ class GiftSelection extends Component {
     headerRight: (
       <TouchableWithoutFeedback>
         <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>
-          <Icon 
-            name="filter-list" 
-          />
-          <Text style={{ marginLeft: 5 }}>Filter</Text>
+          <View style={{ padding: 5 }}>
+            <Icon name="card-giftcard" size={25} color="#858585" />
+            <View style={styles.card} />
+          </View>
         </View>
       </TouchableWithoutFeedback>
     )
   })
 
-  state = {
-    entries: this.props.items,
-    activeSlide: 0
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      entries: this.props.items,
+      activeSlide: 0,
+    };
   }
+
 
   get pagination() {
     const { entries, activeSlide } = this.state;
@@ -50,10 +55,11 @@ class GiftSelection extends Component {
       />
     );
   }
+
   //renderItem = ({ item, index }) => (
   renderItem = ({ item }) => (
     <View style={[styles.slide, styles.boxShadow]}>
-      <TouchableWithoutFeedback 
+      <TouchableWithoutFeedback
         onPress={() => {
           this.props.navigation.navigate('detailgift');
           this.props.fetchGift(item.uid);
@@ -64,7 +70,7 @@ class GiftSelection extends Component {
           style={styles.image}
         />
       </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback 
+      <TouchableWithoutFeedback
         onPress={() => {
           this.props.navigation.navigate('detailgift');
           this.props.fetchGift(item.uid);
@@ -83,7 +89,7 @@ class GiftSelection extends Component {
       >
         <Text style={{ fontWeight: '700', fontSize: 20, marginLeft: 20 }}>{item.price}</Text>
 
-        <TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={this.addToCart}>
           <View
             style={{
               flexDirection: 'row',
@@ -94,7 +100,7 @@ class GiftSelection extends Component {
               padding: 15,
             }}
           >
-            <Icon name="card-giftcard" size={17} color="#fff" />
+            <Icon name="add" size={17} color="#fff" />
             <Text
               style={{ color: '#fff', fontWeight: '400', fontSize: 14, marginLeft: 5 }}
             >GIFT NOW</Text>
@@ -104,7 +110,6 @@ class GiftSelection extends Component {
 
     </View>
   );
-
 
   render() {
     return (
@@ -119,9 +124,9 @@ class GiftSelection extends Component {
           itemWidth={config.WIDTH_SCREEN - 60}
           onSnapToItem={(index) => this.setState({ activeSlide: index })}
           activeSlideOffset={0}
-          enableSnap={true}
+          enableSnap
           inactiveSlideScale={0.95}
-          enableMomentum={false}o
+          enableMomentum={false} o
           scrollEndDragDebounceValue={Platform.OS === 'ios' ? 0 : 100}
           slideStyle={{ flexDirection: 'row', paddingHorizontal: 10, marginVertical: 30, paddingBottom: 10, height: config.HEIGHT_SCREEN * 0.75, width: config.WIDTH_SCREEN - 60, alignItems: 'center', }}
         />
@@ -177,6 +182,17 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: 'rgba(255, 255, 255, 0.95)',
     padding: 15,
+  },
+  card: {
+    height: 15,
+    width: 15,
+    backgroundColor: config.COLOR.secondary,
+    borderRadius: 15,
+    borderWidth: 2,
+    borderColor: '#fff',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
   }
 });
 

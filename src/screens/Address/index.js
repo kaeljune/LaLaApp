@@ -29,6 +29,13 @@ class Address extends Component {
 			UIManager.setLayoutAnimationEnabledExperimental(true);
 		}
   }
+  
+  shouldComponentUpdate(nextProps) {
+		if (nextProps.location.length > 2) {
+			return true;
+		}
+		return false;
+	}
 
   componentWillUpdate() {
     LayoutAnimation.spring();	

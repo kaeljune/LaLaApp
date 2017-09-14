@@ -3,7 +3,9 @@ import {
   View,
   Text,
   StyleSheet,
-  Animated
+  Animated,
+  Image,
+  TouchableWithoutFeedback
 } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
@@ -15,7 +17,19 @@ import * as config from '../../config/config';
 
 class DetailGift extends Component {
   static navigationOptions = () => ({
-    header: null
+    // header: null
+    headerStyle: config.headerOverlay,
+    headerTintColor: config.COLOR.primary, 
+    headerRight: (
+      <TouchableWithoutFeedback>
+        <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>
+          <View style={{ padding: 5 }}>
+            <Icon name="card-giftcard" size={25} color="#858585" />
+            <View style={styles.card} />
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    )
   })
 
   state = {
@@ -38,62 +52,40 @@ class DetailGift extends Component {
   }
 
   render() {
-    const heightImg = (config.HEIGHT_SCREEN * 2) / 3;
+    const heightImg = (config.HEIGHT_SCREEN * 0.6);
 
-    const translateY = this.state.yOffset.interpolate({
-      inputRange: [0, (heightImg - config.HEIGHT_HEADER - 50)],
-      outputRange: [0, -(heightImg - config.HEIGHT_HEADER)],
-      extrapolate: 'clamp',
-    });
-
-    const opacity = this.state.yOffset.interpolate({
-      inputRange: [0, (heightImg - config.HEIGHT_HEADER - 50)],
-      outputRange: [1, 0.3],
-      extrapolate: 'clamp',
-    });
-    const scale = this.state.scaleValue;
     const { item } = this.props;
     return (
       <View style={styles.container}>
-        <Animated.View
-          style={{
-            position: 'absolute',
-            backgroundColor: '#212121',
-            top: this.state.yTransform,
-            left: 0,
-            right: 0,
-            transform: [{ translateY }]
-          }}
-        >
-          <Animated.Image
-            source={{ uri: item.image }}
-            style={{ height: heightImg, width: config.WIDTH_SCREEN, transform: [{ scale }], opacity }}
-          />
-        </Animated.View>
 
         <Animated.ScrollView
-          contentContainerStyle={{ paddingTop: heightImg }}
+          contentContainerStyle={{ paddingTop: config.HEIGHT_HEADER }}
           onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.state.yOffset } } }],
           )}
         >
 
-          <View style={{}}>
+        <Image
+          source={{ uri: item.image }}
+          style={{ height: heightImg, width: config.WIDTH_SCREEN }}
+        />
             <View style={[styles.section, { alignItems: 'center', borderBottomColor: '#ddd', borderBottomWidth: 1 }]}>
               <Text
                 style={{
                   textAlign: 'center',
-                  fontSize: 35,
-                  fontWeight: '700',
-                  marginVertical: 15,
+                  fontSize: 25,
+                  lineHeight: 40,
+                  fontWeight: '400',
+                  marginBottom: 15,
                   color: '#333'
                 }}
               >{item.name}</Text>
-              <Text style={{ marginBottom: 20, fontSize: 16, fontWeight: '700', color: config.COLOR.secondary }}>{item.price}</Text>
+              
+              <Text style={{ marginBottom: 20, fontSize: 16, fontWeight: '700', color: '#777' }}>{item.price}</Text>
 
               <Btn
                 title="Gift Now"
                 style={{ width: 150 }}
-                bgColor={config.COLOR.primary}
+                bgColor={config.COLOR.secondary}
                 onPress={() => this.props.navigation.navigate('checkout')}
               />
             </View>
@@ -104,27 +96,7 @@ class DetailGift extends Component {
                 {item.description}
               </Text>
             </View>
-          </View>
         </Animated.ScrollView>
-        <View
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            height: config.HEIGHT_HEADER,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-          }}
-        >
-          <Icon
-            color="#fff"
-            name="keyboard-backspace"
-            containerStyle={{ height: config.HEIGHT_HEADER, width: config.HEIGHT_HEADER }}
-            onPress={() => this.props.navigation.goBack()}
-          />
-        </View>
       </View>
     );
   }
@@ -139,6 +111,17 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     marginHorizontal: 15,
     paddingBottom: 30
+  },
+  card: {
+    height: 15,
+    width: 15,
+    backgroundColor: config.COLOR.secondary,
+    borderRadius: 15,
+    borderWidth: 2,
+    borderColor: '#fff',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
   }
 });
 
