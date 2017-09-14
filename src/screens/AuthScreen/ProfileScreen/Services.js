@@ -1,43 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import { Icon, List, ListItem } from 'react-native-elements';
 
-import { COLOR } from '../../../config/config';
-
-const listLink = [
-	{
-		title: 'Payment',
-	},
-	{
-		title: 'My Address',
-	},
-	{
-		title: 'Terms & Privacy',
-	},
-	{
-		title: 'Helps',
-	},
-];
+import { COLOR, STYLES } from '../../../config/config';
 
 class Services extends Component {
 	render() {
 		return (
 			<View>
-				<Text
-					style={{ 
-						textAlign: 'center',
-						marginTop: 30,
-						marginBottom: 20, 
-						fontSize: 20,
-						fontWeight: '400',
-						color: '#858585'
-					}}
-				>Other settings</Text>
+				<Text style={styles.text}>Other settings</Text>
 
-				<View style={{ marginHorizontal: 15, backgroundColor: '#fff', borderColor: '#ddd', borderWidth: 1 }}>
+				<View style={[styles.container, STYLES.boxShadow]}>
 					<View>
 						<TouchableWithoutFeedback>
-							<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15, borderBottomColor: '#ddd', borderBottomWidth: 1 }}>
+							<View style={[styles.row, styles.border]}>
 								<Text style={{ fontSize: 16, color: '#313131' }}>
 									Payment
 								</Text>
@@ -47,7 +23,7 @@ class Services extends Component {
 					</View>
 					<View>
 						<TouchableWithoutFeedback>
-							<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15, borderBottomColor: '#ddd', borderBottomWidth: 1 }}>
+							<View style={[styles.row, styles.border]}>
 								<Text style={{ fontSize: 16, color: '#313131' }}>
 									Helps
 								</Text>
@@ -57,7 +33,7 @@ class Services extends Component {
 					</View>
 					<View>
 						<TouchableWithoutFeedback>
-							<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15, borderBottomColor: '#ddd', borderBottomWidth: 1 }}>
+							<View style={[styles.row, styles.border]}>
 								<Text style={{ fontSize: 17, color: '#313131' }}>
 									Terms &amp; Privacy
 								</Text>
@@ -67,7 +43,7 @@ class Services extends Component {
 					</View>
 					<View>
 						<TouchableWithoutFeedback>
-							<View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+							<View style={styles.row}>
 								<Text style={{ fontSize: 17, color: '#313131' }}>
 									Sign out
 								</Text>
@@ -81,5 +57,29 @@ class Services extends Component {
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+	container: {
+		marginHorizontal: 15, 
+		marginBottom: 10,
+		backgroundColor: '#fff', 
+	},
+	row: {
+		flexDirection: 'row', 
+		justifyContent: 'space-between', 
+		padding: 15, 
+	},
+	border: {
+		borderBottomColor: '#eee', borderBottomWidth: 1 
+	},
+	text: {
+		marginLeft: 15,	
+		marginTop: 30,
+		marginBottom: 20, 
+		fontSize: 14,
+		fontWeight: '600',
+		color: '#313131'
+	}
+});
 
 export default Services;

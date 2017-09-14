@@ -11,13 +11,28 @@ import * as config from '../../config/config';
 
 class GiftSelection extends Component {
   static navigationOptions = () => ({
-    title: 'Gift selection'
+    title: 'Gift selection',
+    headerRight: (
+      <TouchableWithoutFeedback>
+        <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>
+          <View style={{ padding: 5 }}>
+            <Icon name="card-giftcard" size={25} color="#858585" />
+            <View style={styles.card} />
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    )
   })
 
-  state = {
-    entries: this.props.items,
-    activeSlide: 0
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      entries: this.props.items,
+      activeSlide: 0,
+    };
   }
+
 
   get pagination() {
     const { entries, activeSlide } = this.state;
@@ -40,10 +55,11 @@ class GiftSelection extends Component {
       />
     );
   }
+
   //renderItem = ({ item, index }) => (
   renderItem = ({ item }) => (
     <View style={[styles.slide, styles.boxShadow]}>
-      <TouchableWithoutFeedback 
+      <TouchableWithoutFeedback
         onPress={() => {
           this.props.navigation.navigate('detailgift');
           this.props.fetchGift(item.uid);
@@ -54,7 +70,7 @@ class GiftSelection extends Component {
           style={styles.image}
         />
       </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback 
+      <TouchableWithoutFeedback
         onPress={() => {
           this.props.navigation.navigate('detailgift');
           this.props.fetchGift(item.uid);
@@ -82,10 +98,11 @@ class GiftSelection extends Component {
           <View
             style={{
               flexDirection: 'row',
+              alignItems: 'center',
               backgroundColor: config.COLOR.secondary,
               borderColor: config.COLOR.secondary,
               borderWidth: 1,
-              padding: 15
+              padding: 15,
             }}
           >
             <Icon name="add" size={17} color="#fff" />
@@ -99,7 +116,6 @@ class GiftSelection extends Component {
     </View>
   );
 
-
   render() {
     return (
       <View style={styles.container}>
@@ -107,20 +123,17 @@ class GiftSelection extends Component {
           props={this.props}
           ref={(c) => { this._carousel = c; }}
           data={this.props.items}
+          firstItem={this.state.activeSlide}
           renderItem={this.renderItem}
           sliderWidth={config.WIDTH_SCREEN}
           itemWidth={config.WIDTH_SCREEN - 60}
           onSnapToItem={(index) => this.setState({ activeSlide: index })}
+          activeSlideOffset={0}
+          enableSnap
           inactiveSlideScale={0.95}
-          inactiveSlideOpacity={0.8}
-          enableMomentum={false}
-          slideStyle={{
-            paddingHorizontal: 10,
-            marginTop: 20,
-            paddingBottom: 10,
-            width: config.WIDTH_SCREEN - 60
-          }}
-
+          enableMomentum={false} o
+          scrollEndDragDebounceValue={Platform.OS === 'ios' ? 0 : 100}
+          slideStyle={{ flexDirection: 'row', paddingHorizontal: 10, marginVertical: 30, paddingBottom: 10, height: config.HEIGHT_SCREEN * 0.75, width: config.WIDTH_SCREEN - 60, alignItems: 'center', }}
         />
         <View
           style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}
@@ -146,8 +159,8 @@ const styles = StyleSheet.create({
 
   slide: {
     backgroundColor: '#fff',
-    flex: 1,
-    // marginVertical: 25
+    // flex: 1,
+    marginVertical: 25
     // alignItems: 'center',
   },
   boxShadow: {
@@ -164,8 +177,8 @@ const styles = StyleSheet.create({
     }),
   },
   image: {
-    width: config.WIDTH_SCREEN - 60,
-    height: 250
+    width: config.WIDTH_SCREEN - 80,
+    minHeight: config.HEIGHT_SCREEN * 0.75 * 0.4
   },
   title: {
     position: 'absolute',
@@ -174,6 +187,17 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: 'rgba(255, 255, 255, 0.95)',
     padding: 15,
+  },
+  card: {
+    height: 15,
+    width: 15,
+    backgroundColor: config.COLOR.secondary,
+    borderRadius: 15,
+    borderWidth: 2,
+    borderColor: '#fff',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
   }
 });
 

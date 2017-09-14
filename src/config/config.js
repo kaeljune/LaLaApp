@@ -27,6 +27,17 @@ const headerStyle = {
 	// paddingHorizontal: 10,
 	// height: HEIGHT_HEADER,
 	justifyContent: 'center',
+
+};
+
+const headerOverlay =  {
+	backgroundColor: 'rgba(255,255,255,.9)',
+	position: 'absolute',
+	height: HEIGHT_HEADER,
+	top: 0,
+	right: 0,
+	left: 0, 
+	zIndex: 9999
 };
 
 const STYLES = StyleSheet.create({
@@ -50,6 +61,6 @@ const API_URL = 'https://us-central1-airlala-7b1b2.cloudfunctions.net/';
 export {
 	STYLES,
 	API_URL, WIDTH_SCREEN, HEIGHT_SCREEN, HEIGHT_HEADER, COLOR, spaceNumber,
-	headerTitleStyle, headerStyle,
+	headerTitleStyle, headerStyle, headerOverlay,
 	RootAPI
 };

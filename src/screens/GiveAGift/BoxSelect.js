@@ -34,6 +34,13 @@ class BoxSelect extends Component {
 			top: nextProps.isActive ? -10 : 0
 		});
 	}
+
+	shouldComponentUpdate(nextProps) {
+		if (this.props.isActive !== nextProps.isActive) {
+			return true;
+		}
+		return false;
+	}
 	
 	componentWillUpdate() {	
 		LayoutAnimation.spring();	
@@ -42,7 +49,7 @@ class BoxSelect extends Component {
 	handlePress = (id) => {
 		this.props.onActive(id);
 	}
-
+	
 	render() {
 		const { color, children, isActive, id } = this.props;
 		const styleBox = [styles.box, { backgroundColor: color }, { top: this.state.top }];

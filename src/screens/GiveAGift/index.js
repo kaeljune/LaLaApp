@@ -5,11 +5,12 @@ import {
 	ScrollView,
 	KeyboardAvoidingView,
 	TextInput,
+	Slider,
 	StyleSheet,
 } from 'react-native';
 import firebase from 'firebase';
 import _ from 'lodash';
-import { Avatar, Icon, Slider } from 'react-native-elements';
+import { Avatar, Icon } from 'react-native-elements';
 
 import { connect } from 'react-redux';
 import {
@@ -32,6 +33,7 @@ import SlideSelect from './SlideSelect';
 import SlideBox from './SlideBox';
 import Btn from '../../components/Btn';
 import TagSelect from './TagSelect';
+import TextField from '../../components/TextField';
 import avatar from '../../../assets/images/avatar.png';
 
 const sexs = ['Female', 'Male', 'Other'];
@@ -58,13 +60,8 @@ const occasions = [
 class GiftSelection extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		title: 'Give a Gifts',
-		headerStyle,
+		headerStyle: STYLES.headerOverlay,
 		headerTitleStyle,
-		// headerLeft: <Icon
-		// 	name='chevron-left'
-		// 	color={COLOR.primary}
-		// 	onPress={() => navigation.goBack()}
-		// />,
 		headerRight: <View style={{ flexDirection: 'row', alignItems: 'center', paddingRight: 15 }}>
 			<Icon
 				size={15}
@@ -174,17 +171,13 @@ class GiftSelection extends Component {
 
 					<View style={sectionPad}>
 						<Text style={sectionTitle}>Receiver</Text>
-						<View>
-							<TextInput
-								style={{
-									height: 60,
-									textAlign: 'center'
-								}}
-								placeholder="Receiver Name..."
-								value={this.props.receiverName}
-								onChangeText={this.onReceiverNameChange}
-							/>
-						</View>
+						
+						<TextField
+								style={{ textAlign: 'center', marginTop: 20 }}
+							placeholder="Ex: AirLaLa"
+							value={this.props.receiverName}
+							onChangeText={this.onReceiverNameChange}
+						/>
 					</View>
 
 					<View style={section}>
@@ -203,23 +196,14 @@ class GiftSelection extends Component {
 								textAlign: 'center'
 							}}
 						>${this.props.price ? this.props.price : 0}-${this.props.price + 100}</Text>
-
-						<Slider
+						
+						<Slider 
 							minimumValue={0}
 							maximumValue={1000}
 							minimumTrackTintColor={COLOR.primary}
 							maximumTrackTintColor='#eee'
-							thumbTintColor="#fff"
-							thumbTouchSize={{
-								width: 100,
-								height: 100,
-							}}
-							thumbStyle={{
-								borderColor: COLOR.primary,
-								borderWidth: 1
-							}}
-							value={this.props.price}
-							onValueChange={this.onPriceChange}
+							value={this.props.price}	
+							onSlidingComplete={this.onPriceChange}
 							step={100}
 						/>
 
