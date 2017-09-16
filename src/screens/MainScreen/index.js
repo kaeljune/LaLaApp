@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { FlatList, View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import _ from 'lodash';
+import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Avatar, Icon } from 'react-native-elements';
-import firebase from 'firebase';
-
-
-import Btn from '../../components/Btn';
 
 import { accountFetch, fetchRequest, fetchListGift } from '../../actions';
 import { COLOR, WIDTH_SCREEN, STYLES } from '../../config/config';
@@ -40,7 +37,7 @@ class MainScreen extends Component {
 						height={37}
 						overlayContainerStyle={{ backgroundColor: COLOR.primary }}
 						rounded
-						title={state.params ? state.params.name : ''}
+						title={state.params ? state.params.name : '?'}
 					/>
 				</TouchableWithoutFeedback>
 			};
@@ -52,7 +49,7 @@ class MainScreen extends Component {
 		const { setParams } = this.props.navigation;
 		const { auth, items } = this.props;
 		const name = auth.userLogin.name;
-		setParams({ name: _.toUpper(name.substr(0, 2)), items: items.length });
+		setParams({ name: _.toUpper(name.match(/\b\w/g).join('')), items: items.length });
 	}
 
 	componentDidMount() {
@@ -67,43 +64,58 @@ class MainScreen extends Component {
 				console.log(error);
 			});
 	}
-	renderItem = ({ item }) => (
-		<TouchableWithoutFeedback 
-			onPress={() => {
-				this.props.navigation.navigate('giftselection');
-				this.props.fetchListGift(item.uid);
+
+	shouldComponentUpdate(nextProps) {
+		if (this.props.items !== nextProps.items) {
+			return true;
+		}
+		return false;
+	}
+
+	renderItem = ({ item }) => {
+		const name = item.receiverName ? item.receiverName : 'Anonymous';
+		const shortName = _.toUpper(name.match(/\b\w/g).join(''));
+
+		return (
+			<TouchableWithoutFeedback
+				onPress={() => {
+					this.props.navigation.navigate('giftselection');
+					this.props.fetchListGift(item.uid);
 				}
-			}
-		>
-		<View style={[styles.item, STYLES.boxShadow]}>
-			<View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center' }}>
-				<Avatar
-					height={50}
-					width={50}
-					overlayContainerStyle={{ backgroundColor: COLOR.primary }}
-					rounded
-					title="BP"		
-				/>
-				<Text style={{ fontSize: 18, marginTop: 7 }}>{ item.receiverName ? item.receiverName : 'Anonymous'}</Text>
-				<Text style={{ fontSize: 14, marginVertical: 7, color: '#ddd' }}>
-					for {item.occasion}
-				</Text>
-				<Text style={{ fontSize: 14, fontWeight: '600' }}>{item.priceRange}</Text>
-				<Text
-					style={{
-						backgroundColor: COLOR.secondary,
-						fontSize: 12,
-						color: '#fff',
-						marginTop: 7,
-						paddingVertical: 3,
-						paddingHorizontal: 7,
-						borderRadius: 2
-					}}
-				>{item.status}</Text>
-			</View>
-		</View>
-		</TouchableWithoutFeedback>
-	)
+				}
+			>
+				<View style={[styles.item, STYLES.boxShadow]}>
+					<View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center' }}>
+						<Avatar
+							height={50}
+							width={50}
+							overlayContainerStyle={{ backgroundColor: COLOR.primary }}
+							rounded
+							title={shortName}
+						/>
+						<Text style={{ fontSize: 18, marginTop: 7 }}>{name}</Text>
+						<Text style={{ fontSize: 14, marginVertical: 7, color: '#888' }}>
+							for {item.occasion}
+						</Text>
+						<Text style={{ fontSize: 14, fontWeight: '600' }}>{item.priceRange}</Text>
+						<Text
+							style={{
+								backgroundColor: COLOR.secondary,
+								fontSize: 12,
+								color: '#fff',
+								marginTop: 7,
+								paddingVertical: 3,
+								paddingHorizontal: 7,
+								borderRadius: 2
+							}}
+						>{item.status}</Text>
+					</View>
+				</View>
+			</TouchableWithoutFeedback>
+
+		);
+	}
+
 
 	renderList = () => {
 		const { items } = this.props;
@@ -161,7 +173,7 @@ class MainScreen extends Component {
 
 	render() {
 		return (
-			<View style={styles.container}>	
+			<View style={styles.container}>
 				{this.renderList()}
 			</View>
 		);
@@ -194,9 +206,6 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		width: WIDTH_SCREEN,
 		alignItems: 'center',
-		// borderTopColor: '#eee',
-		// borderTopWidth: 1,
-		// backgroundColor: '#fff',
 	}
 });
 

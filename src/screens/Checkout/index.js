@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import _ from 'lodash';
+import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 
 import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';
@@ -11,33 +13,29 @@ import ProductList from './ProductList';
 class Checkout extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		title: 'Checkout',
-		headerStyle: {
-			paddingHorizontal: 5
-		},
-		headerTitleStyle: {
-			alignSelf: 'center'
-		},
-		headerTintColor: '#313131',
-		headerLeft: <Icon
-			name='chevron-left'
-			color={COLOR.primary}
-			size={24}
-			onPress={() => navigation.goBack()}
-		/>,
-		headerRight: <View style={{ flexDirection: 'row', paddingRight: 5 }}>
+		headerStyle,
+		headerTitleStyle,
+		headerTintColor: COLOR.primary,
+		// headerLeft: <Icon
+		// 	name='chevron-left'
+		// 	color={COLOR.primary}
+		// 	size={24}
+		// 	onPress={() => navigation.goBack()}
+		// />,
+		headerRight: <View style={{ flexDirection: 'row', paddingRight: 15 }}>
 			<Icon
 				size={15}
-				name="queue"
+				name="chat"
 				color={COLOR.secondary}
 				onPress={() => navigation.goBack()}
 			/>
-			<Text style={{ marginLeft: 5, color: COLOR.secondary }}>Chat</Text>
+			<Text style={{ marginLeft: 5, color: '#555' }}>Chat</Text>
 		</View>
 	})
 	render() {
 		return (
-			<View style={{ flex: 1 }}>
-				<ScrollView contentContainerStyle={styles.wraper}>
+			<View style={{ flex: 1 }}>	
+				<ScrollView style={{ flex: 1, backgroundColor: '#f8f8f8' }} contentContainerStyle={styles.container}>
 					<Feature />
 					<ProductList />
 
@@ -70,14 +68,10 @@ class Checkout extends Component {
 }
 
 const styles = StyleSheet.create({
-	wraper: {
+	container: {
 		paddingBottom: 90,
-		backgroundColor: '#f8f8f8',
 	},
 	bottomCheckout: {
-		position: 'absolute',
-		bottom: 0,
-		left: 0,
 		backgroundColor: '#fff',
 		width: WIDTH_SCREEN,
 		borderTopColor: '#eee',
@@ -88,4 +82,10 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default Checkout;
+const mapStateToProps = state => {
+  const GiftID = state.listRequest.giftActive;
+  const item = _.find(_.map(state.listRequest.listGift, (val, uid) => ({ ...val, uid })), { uid: state.listRequest.giftActive });
+  return { item, GiftID };
+};
+
+export default connect(mapStateToProps, {})(Checkout);

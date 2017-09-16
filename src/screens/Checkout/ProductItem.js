@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, Animated, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Animated, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
+import _ from 'lodash';
 
-import { WIDTH_SCREEN, COLOR } from '../../config/config';
+import { WIDTH_SCREEN, COLOR, STYLES } from '../../config/config';
 
 class ProductList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = ({
 			right: new Animated.Value(0),
-			total: parseInt(this.props.total)
+			total: _.parseInt(this.props.total)
 		});
 	}
 
@@ -25,7 +26,7 @@ class ProductList extends Component {
 			return (
 				<TouchableOpacity onPress={this.downQuality} style={styles.quantityAction}>
 					<Icon 
-						size={17}
+						size={15}
 						color="#888"
 						name="remove"
 					/>
@@ -33,35 +34,42 @@ class ProductList extends Component {
 		}
 		return (
 			<View style={styles.quantityActionDisable}>
-			<Icon name="remove" color="#999" />
+			<Icon name="remove" color="#999" size={15} />
 			</View>
 		);
 	}
 
 	render() {
-		const { name, price } = this.props;
+		const { name, price, image } = this.props;
+		console.log(this.props)
 		return (
 			<View style={styles.itemStyle}>
-				<View style={{ width: 90, height: 90, backgroundColor: '#eee' }} />
+				<View style={{ width: 90, height: 90, backgroundColor: '#eee' }}>
+					<Image
+						source={{ uri: image }}
+						style={{ width: 90, height: 90 }}
+					/>
+				</View>
+
 				<View style={{ marginHorizontal: 15, flex: 1, justifyContent: 'space-around' }}>
 					<View>
-						<Text style={{ fontWeight: '500' }}>
+						<Text style={{ fontWeight: '600' }}>
 							{name}
 						</Text>
 
-						<Text style={{ marginVertical: 5, color: '#888', fontSize: 14 }}>
+						<Text style={{ marginVertical: 5, color: '#888', fontSize: 12 }}>
 							by <Text style={{ fontWeight: '500' }}>Maria</Text>
 						</Text>
 					</View>
 
-					<Text style={{ color: COLOR.secondary, fontWeight: '600' }}>${price}</Text>
+					<Text style={{ color: COLOR.secondary, fontWeight: '600' }}>{price}</Text>
 				</View>
 
 				<View style={styles.quantityStyle}>
 					<TouchableOpacity style={styles.quantityAction} onPress={this.upQuality}>
 						<Icon
 							color="#888"
-							size={17}
+							size={16}
 							name="add"
 						/>
 					</TouchableOpacity>
@@ -69,9 +77,9 @@ class ProductList extends Component {
 					<View>
 						<Text
 							style={{
-								fontWeight: '300',
+								fontWeight: '600',
 								color: COLOR.primary,
-								fontSize: 20,
+								fontSize: 16,
 							}}
 						>{this.state.total}</Text>
 					</View>
@@ -87,15 +95,11 @@ class ProductList extends Component {
 const styles = StyleSheet.create({
 	itemStyle: {
 		backgroundColor: '#fff',
-		width: WIDTH_SCREEN - 30,
-		marginHorizontal: 15,
-		marginVertical: 2,
-		borderRadius: 3,
-		borderWidth: 1,
-		borderColor: '#eee',
 		flexDirection: 'row',
 		alignItems: 'center',
-		justifyContent: 'space-around'
+		justifyContent: 'space-around',
+		borderBottomColor: '#eee',
+		borderBottomWidth: 1
 	},
 	quantityStyle: {
 		height: 90,

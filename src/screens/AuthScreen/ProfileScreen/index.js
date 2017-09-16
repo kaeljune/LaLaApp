@@ -17,7 +17,6 @@ import { Spinner } from '../../../components/Spinner';
 import TitleAvatar from './TitleAvatar';
 import UserInfo from './UserInfo';
 import Services from './Services';
-import SignoutButton from './SignoutButton';
 
 class ProfileScreen extends Component {
 	static navigationOptions = ({ navigation }) => ({
@@ -25,25 +24,31 @@ class ProfileScreen extends Component {
 		headerTintColor: COLOR.primary,
 		headerLeft: <TouchableWithoutFeedback onPress={() => navigation.navigate('isFindGift')}><Icon
 			name='clear'
-			color={COLOR.primary}
+			color='#313131'
 			size={24}
 			style={{ marginLeft: 15 }}
 			//onPress={() => navigation.navigate('mainGift')}
 		/></TouchableWithoutFeedback>,
 		headerRight:
-		<View
-			style={{	
-				paddingRight: 15
-			}}
-		>	
-			<Text style={{ marginLeft: 5 }}>Update</Text>
-		</View>,
+		<TouchableWithoutFeedback>
+			<View
+				style={{	
+					paddingRight: 15,
+					flexDirection: 'row',
+					alignItems: 'center'
+				}}
+			>
+				<Icon name="check" color={COLOR.secondary} />	
+				<Text style={{ marginLeft: 5 }}>Update</Text>
+			</View>
+		</TouchableWithoutFeedback>,
 		headerTitleStyle,
 		headerStyle,
 	})
 	state = {
 		userLogin: null
 	};
+
 	async componentWillMount() {
 		//await this.props.accountFetch();
 		const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
@@ -53,25 +58,19 @@ class ProfileScreen extends Component {
 			this.setState({ isLogin: false });
 		}
 	}
-	renderTitleAvatar = () => {
-		if (!this.state.userLogin) {
-			return <Spinner size="large" />;
-		}
-		return (
-			<TitleAvatar data={this.state.userLogin} />
-		);
-	}
-	renderUserInfo = () => {
-		if (!this.state.userLogin) {
-			return <Spinner size="large" />;
-		}
-		return (
-			<UserInfo data={this.state.userLogin} />
-		);
-	}
 
 	render() {
 		//const { state } = this.props.navigation.params;
+		if (!this.state.userLogin) {
+			return (<View 
+				style={{ 
+					flex: 1, 
+					alignItems: 'center', 
+					justifyContent: 'center', 
+					backgroundColor: '#fff'
+				}}
+			><Spinner /></View>);
+		}
 		return (
 			<ScrollView style={{ flex: 1, backgroundColor: '#f8f8f8' }} contentContainerStyle={{ paddingBottom: 20 }}>
 				<KeyboardAvoidingView behavior={'position'}>
@@ -86,10 +85,9 @@ class ProfileScreen extends Component {
 								right: 0,
 							}}
 						/>
-
-						{this.renderTitleAvatar()}
-
-						{this.renderUserInfo()}
+						<TitleAvatar data={this.state.userLogin} />
+						<UserInfo data={this.state.userLogin} />
+						
 						<Services />
 					</View>
 				</KeyboardAvoidingView>

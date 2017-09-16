@@ -89,7 +89,12 @@ class GiftSelection extends Component {
       >
         <Text style={{ fontWeight: '700', fontSize: 20, marginLeft: 20 }}>{item.price}</Text>
 
-        <TouchableWithoutFeedback onPress={this.addToCart}>
+        <TouchableWithoutFeedback
+          onPress={async () => {
+            await this.props.fetchGift(item.uid);
+            await this.props.navigation.navigate('checkout');
+          }}
+        >
           <View
             style={{
               flexDirection: 'row',
@@ -198,7 +203,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   const items = _.map(state.listRequest.listGift, (val, uid) => ({ ...val, uid }));
-  //const gifts = _.map(state.listRequest.listGift, (val, uid) => ({ ...val, uid }));
   const auth = state.fetchAcc;
   return { items, auth };
 };
