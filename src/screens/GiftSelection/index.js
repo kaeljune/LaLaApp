@@ -13,6 +13,9 @@ import * as config from '../../config/config';
 class GiftSelection extends Component {
   static navigationOptions = () => ({
     title: 'Gift selection',
+    headerTintColor: config.COLOR.primary,
+    headerTitleStyle: config.headerTitleStyle,
+    headerStyle: config.headerStyle,
     headerRight: (
       <TouchableOpacity>
         <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>
@@ -174,10 +177,10 @@ const styles = StyleSheet.create({
   boxShadow: {
     ...Platform.select({
       ios: {
-        shadowColor: 'rgba(0,0,0, .7)',
-        shadowOffset: { height: 0, width: 0 },
-        shadowOpacity: 1,
-        shadowRadius: 6,
+        shadowColor: 'rgba(0,0,0,0.3)',
+				shadowOffset: { height: 0, width: 0 },
+				shadowOpacity: 1,
+				shadowRadius: 5,
       },
       android: {
         elevation: 6

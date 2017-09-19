@@ -5,9 +5,11 @@ import {
 	ScrollView,
 	StyleSheet,
 	KeyboardAvoidingView,
+	Platform,
 	TouchableWithoutFeedback,
 	AsyncStorage
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
@@ -39,8 +41,7 @@ class ProfileScreen extends Component {
 					alignItems: 'center'
 				}}
 			>
-				<Icon name="check" color={COLOR.primary} />
-				<Text style={{ marginLeft: 5 }}>Update</Text>
+				<Icon name="edit" color={COLOR.primary} />
 			</View>
 		</TouchableWithoutFeedback>,
 		headerTitleStyle,
@@ -66,9 +67,13 @@ class ProfileScreen extends Component {
 			return <View style={styles.container}><Spinner color="#fff" /></View>;
 		}
 		return (
+			<KeyboardAwareScrollView
+				style={{ backgroundColor: '#f8f8f8' }}
+				scrollEnabled={true}
+				animated={true}
+			>
 
-			<ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 20 }}>
-				<KeyboardAvoidingView behavior={'position'}>
+
 					<View>
 						<View
 							style={{
@@ -85,8 +90,9 @@ class ProfileScreen extends Component {
 
 						<Services />
 					</View>
-				</KeyboardAvoidingView>
-			</ScrollView>
+
+
+			</KeyboardAwareScrollView>
 		);
 	}
 }
@@ -99,8 +105,8 @@ const mapStateToProps = ({ fetchAcc }) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#f8f8f8'
+		backgroundColor: '#f8f8f8',
 	}
-})
+});
 
 export default connect(mapStateToProps, {})(ProfileScreen);

@@ -62,15 +62,6 @@ class GiftSelection extends Component {
 		title: 'Find a local artisan',
 		headerStyle,
 		headerTitleStyle,
-		headerRight: <View style={{ flexDirection: 'row', alignItems: 'center', paddingRight: 15 }}>
-			<Icon
-				size={15}
-				name='create'
-				color={COLOR.primary}
-				onPress={() => navigation.goBack()}
-			/>
-			<Text style={{ marginLeft: 5 }}>Edit</Text>
-		</View>
 	})
 
 	onSexChange = (text) => {

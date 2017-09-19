@@ -1,45 +1,45 @@
-import React, { Component } from 'react';
-import { FlatList, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { PureComponent } from 'react';
+import { FlatList,
+	View,
+	Text,
+	StyleSheet,
+	TouchableOpacity
+} from 'react-native';
 import _ from 'lodash';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Avatar, Icon } from 'react-native-elements';
 
 import { accountFetch, fetchRequest, fetchListGift } from '../../actions';
-import { COLOR, WIDTH_SCREEN, STYLES } from '../../config/config';
+import { COLOR, WIDTH_SCREEN, STYLES, headerStyle, headerTitleStyle } from '../../config/config';
 
-class MainScreen extends Component {
+class MainScreen extends PureComponent {
 	static navigationOptions = ({ navigation }) => {
 		const { state } = navigation;
 		if (state.params !== undefined) {
 			return {
 				title: 'Gifts',
-				headerStyle: {
-					paddingHorizontal: 10
-				},
-				headerTitleStyle: {
-					alignSelf: 'center'
-				},
-
-				headerLeft: <View>
-					<View style={{ flexDirection: 'row' }}>
-						<Text
-							style={styles.box}
-						>
+				headerStyle,
+				headerTitleStyle,
+				headerLeft: <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}>
+					<View style={styles.box}>
+						<Text style={{ color: '#fff' }}>
 							{state.params ? state.params.items : '0'}
 						</Text>
-						<Text>total</Text>
 					</View>
+					<Text>total</Text>
 				</View>,
-				headerRight: <TouchableOpacity onPress={() => navigation.navigate('isProfile')}>
-					<Avatar
-						width={37}
-						height={37}
-						overlayContainerStyle={{ backgroundColor: COLOR.primary }}
-						rounded
-						title={state.params ? state.params.name : '?'}
-					/>
-				</TouchableOpacity>
+				headerRight: <View style={{ marginRight: 10 }}>
+					<TouchableOpacity onPress={() => navigation.navigate('isProfile')}>
+						<Avatar
+							width={37}
+							height={37}
+							overlayContainerStyle={{ backgroundColor: COLOR.primary }}
+							rounded
+							title={state.params ? state.params.name : '?'}
+						/>
+					</TouchableOpacity>
+				</View>
 			};
 		}
 	}
@@ -81,9 +81,8 @@ class MainScreen extends Component {
 					<TouchableOpacity
 						onPress={() => {
 							requestAnimationFrame(() => {
-
-						this.props.navigation.navigate('giftselection');
-						this.props.fetchListGift(item.uid);
+								this.props.navigation.navigate('giftselection');
+								this.props.fetchListGift(item.uid);
 							})
 						}}
 					>
@@ -197,11 +196,13 @@ const styles = StyleSheet.create({
 		backgroundColor: COLOR.secondary,
 		paddingHorizontal: 5,
 		paddingVertical: 1,
+		height: 25,
+		width: 25,
 		borderRadius: 20,
 		minWidth: 20,
-		textAlign: 'center',
-		color: '#fff',
-		marginRight: 5
+		marginRight: 5,
+		alignItems: 'center',
+		justifyContent: 'center'
 	},
 	bottomView: {
 		position: 'absolute',

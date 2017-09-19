@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 		fontSize: 14,
 		fontWeight: '400',
 		backgroundColor: 'transparent',
-		width: WIDTH_SCREEN - 100,
+		width: WIDTH_SCREEN * 0.75,
 		lineHeight: 25,
 		marginTop: 10,
 		marginBottom: 30,

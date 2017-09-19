@@ -35,14 +35,15 @@ class ForgotLink extends Component {
 
 const styles = StyleSheet.create({
     containerStyle: {
-        flexDirection: 'row', 
+        flexDirection: 'row',
         alignSelf: 'flex-end',
-        marginBottom: 30
+        marginBottom: 30,
+        alignItems: 'center'
     },
     textStyle: {
         color: '#858585',
-         fontSize: 14, 
-         fontWeight: '300', 
+         fontSize: 14,
+         fontWeight: '300',
          marginLeft: 5
     }
 });
