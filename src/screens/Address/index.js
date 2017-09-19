@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import {
-  View, Text, 
-  StyleSheet, TextInput, 
+  View, Text,
+  StyleSheet, TextInput,
   ScrollView, TouchableWithoutFeedback,
-  Platform,
-  LayoutAnimation,
-  UIManager
+  FlatList,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -13,61 +11,52 @@ import {
   requestLocationChanged
 } from '../../actions';
 
-//import * as config from '../../config/config';
+import * as config from '../../config/config';
+
+const locations = [
+  { name: 'Ha Noi' },
+  { name: 'Ho Chi Minh' },
+  { name: 'Hai Phong' },
+  { name: 'Da Nang' }
+];
 
 class Address extends Component {
 
   static navigationOptions = () => ({
-    title: 'Find Address',
+    // title: 'Find Address',
+    headerTintColor: config.COLOR.secondary,
+    headerStyle: {
+      backgroundColor: 'transparent',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 9999,
+      height: config.HEIGHT_HEADER
+    }
   })
-
-  constructor(props) {
-    super(props);
-
-    if (Platform.OS === 'android') {
-			UIManager.setLayoutAnimationEnabledExperimental && 
-			UIManager.setLayoutAnimationEnabledExperimental(true);
-		}
-  }
-  
-  shouldComponentUpdate(nextProps) {
-		if (nextProps.location.length > 2) {
-			return true;
-		}
-		return false;
-	}
-
-  componentWillUpdate() {
-    LayoutAnimation.spring();	
-  }
 
   onChangeText = (location) => {
     this.props.requestLocationChanged(location);
   }
+
   render() {
-    const locations = [
-      { name: 'Ha Noi' },
-      { name: 'Ho Chi Minh' },
-      { name: 'Hai Phong' },
-      { name: 'Da Nang' }
-    ];
     const { location } = this.props;
-    const filtererLocation = 
-      locations.filter((item) => item.name.indexOf(location) !== -1);
+    const filtererLocation = locations.filter((item) => item.name.toLowerCase().indexOf(location.toLowerCase()) >= 0);
     return (
       <View style={styles.container}>
         <View style={{ backgroundColor: '#fff' }}>
           <TextInput
             placeholder="Where to?"
-            value={location}
             onChangeText={this.onChangeText}
+            value={location}
             style={styles.input}
             underlineColorAndroid="transparent"
           />
         </View>
 
         <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 20 }}>
-          { location.length < 2 && 
+          { location.length < 2 &&
           <View style={{ marginBottom: 30 }}>
             <Text style={styles.titleSection}>RECENT SEARCHES</Text>
             <View>
@@ -81,7 +70,12 @@ class Address extends Component {
             {location.length < 2 &&
               <Text style={styles.titleSection}>POPULAR DESTINATIONS</Text>}
             <View>
-              {filtererLocation.map((item) => (
+            {filtererLocation.length > 0 ?
+              <FlatList
+                data={filtererLocation}
+                keyExtractor={item => item.name}
+                renderItem={({ item }) => (
+
                 <TouchableWithoutFeedback
                   onPress={() => {
                     this.onChangeText(item.name);
@@ -94,7 +88,9 @@ class Address extends Component {
                     <Text style={styles.textLocation}>{item.name}</Text>
                   </View>
                 </TouchableWithoutFeedback>
-              ))}
+                )}
+              />
+            : <Text>No match address</Text>}
             </View>
           </View>
         </ScrollView>
@@ -106,7 +102,8 @@ class Address extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    flex: 1
+    flex: 1,
+    paddingTop: config.HEIGHT_HEADER
   },
 
   input: {
@@ -125,11 +122,11 @@ const styles = StyleSheet.create({
     marginBottom: 15
   },
   row: {
-    flexDirection: 'row', 
-    alignItems: 'center', 
-    paddingVertical: 25, 
-    borderBottomWidth: 1, 
-    borderBottomColor: '#eee' 
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 25,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee'
   },
   textLocation: {
     fontSize: 16,

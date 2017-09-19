@@ -72,6 +72,7 @@ class GiftSelection extends Component {
 			<Text style={{ marginLeft: 5 }}>Edit</Text>
 		</View>
 	})
+
 	onSexChange = (text) => {
 		this.props.requestSexChanged(text);
 	}
