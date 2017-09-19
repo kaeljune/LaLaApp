@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   View, Text,
   StyleSheet, TextInput,
-  ScrollView, TouchableWithoutFeedback,
+  ScrollView,
+  TouchableOpacity,
   FlatList,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
@@ -36,6 +37,7 @@ class Address extends Component {
     }
   })
 
+
   onChangeText = (location) => {
     this.props.requestLocationChanged(location);
   }
@@ -47,7 +49,7 @@ class Address extends Component {
       <View style={styles.container}>
         <View style={{ backgroundColor: '#fff' }}>
           <TextInput
-            placeholder="Where to?"
+            placeholder="Where are you going?"
             onChangeText={this.onChangeText}
             value={location}
             style={styles.input}
@@ -76,10 +78,10 @@ class Address extends Component {
                 keyExtractor={item => item.name}
                 renderItem={({ item }) => (
 
-                <TouchableWithoutFeedback
-                  onPress={() => {
-                    this.onChangeText(item.name);
-                    this.props.navigation.navigate('giveagift');
+                <TouchableOpacity
+                  onPress={async() => {
+                    await this.onChangeText(item.name);
+                    await this.props.navigation.navigate('giveagift');
                   }}
                   key={item.name}
                 >
@@ -87,7 +89,7 @@ class Address extends Component {
                     <Icon name="location-on" size={18} color="#454545" />
                     <Text style={styles.textLocation}>{item.name}</Text>
                   </View>
-                </TouchableWithoutFeedback>
+                </TouchableOpacity>
                 )}
               />
             : <Text>No match address</Text>}

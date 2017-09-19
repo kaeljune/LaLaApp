@@ -3,6 +3,7 @@ import {
 	View,
 	Text,
 	ScrollView,
+	StyleSheet,
 	KeyboardAvoidingView,
 	TouchableWithoutFeedback,
 	AsyncStorage
@@ -13,7 +14,7 @@ import { Icon } from 'react-native-elements';
 //import { accountFetch } from '../../../actions';
 
 import { COLOR, headerTitleStyle, headerStyle } from '../../../config/config';
-import { Spinner } from '../../../components/Spinner';
+import Spinner from '../../../components/Spinner';
 import TitleAvatar from './TitleAvatar';
 import UserInfo from './UserInfo';
 import Services from './Services';
@@ -27,18 +28,18 @@ class ProfileScreen extends Component {
 			color='#313131'
 			size={24}
 			style={{ marginLeft: 15 }}
-			//onPress={() => navigation.navigate('mainGift')}
+		//onPress={() => navigation.navigate('mainGift')}
 		/></TouchableWithoutFeedback>,
 		headerRight:
 		<TouchableWithoutFeedback>
 			<View
-				style={{	
+				style={{
 					paddingRight: 15,
 					flexDirection: 'row',
 					alignItems: 'center'
 				}}
 			>
-				<Icon name="check" color={COLOR.secondary} />	
+				<Icon name="check" color={COLOR.primary} />
 				<Text style={{ marginLeft: 5 }}>Update</Text>
 			</View>
 		</TouchableWithoutFeedback>,
@@ -62,32 +63,26 @@ class ProfileScreen extends Component {
 	render() {
 		//const { state } = this.props.navigation.params;
 		if (!this.state.userLogin) {
-			return (<View 
-				style={{ 
-					flex: 1, 
-					alignItems: 'center', 
-					justifyContent: 'center', 
-					backgroundColor: '#fff'
-				}}
-			><Spinner /></View>);
+			return <View style={styles.container}><Spinner color="#fff" /></View>;
 		}
 		return (
-			<ScrollView style={{ flex: 1, backgroundColor: '#f8f8f8' }} contentContainerStyle={{ paddingBottom: 20 }}>
+
+			<ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 20 }}>
 				<KeyboardAvoidingView behavior={'position'}>
 					<View>
-						<View 
+						<View
 							style={{
-								backgroundColor: COLOR.primary, 
-								height: 330, 
+								backgroundColor: COLOR.primary,
+								height: 330,
 								position: 'absolute',
-								top: 0, 
-								left: 0, 
+								top: 0,
+								left: 0,
 								right: 0,
 							}}
 						/>
 						<TitleAvatar data={this.state.userLogin} />
 						<UserInfo data={this.state.userLogin} />
-						
+
 						<Services />
 					</View>
 				</KeyboardAvoidingView>
@@ -101,5 +96,11 @@ const mapStateToProps = ({ fetchAcc }) => {
 	return { account };
 };
 
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: '#f8f8f8'
+	}
+})
 
 export default connect(mapStateToProps, {})(ProfileScreen);

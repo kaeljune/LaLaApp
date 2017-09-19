@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { FlatList, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import _ from 'lodash';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
@@ -31,7 +31,7 @@ class MainScreen extends Component {
 						<Text>total</Text>
 					</View>
 				</View>,
-				headerRight: <TouchableWithoutFeedback onPress={() => navigation.navigate('isProfile')}>
+				headerRight: <TouchableOpacity onPress={() => navigation.navigate('isProfile')}>
 					<Avatar
 						width={37}
 						height={37}
@@ -39,7 +39,7 @@ class MainScreen extends Component {
 						rounded
 						title={state.params ? state.params.name : '?'}
 					/>
-				</TouchableWithoutFeedback>
+				</TouchableOpacity>
 			};
 		}
 	}
@@ -77,14 +77,16 @@ class MainScreen extends Component {
 		const shortName = _.toUpper(name.match(/\b\w/g).join(''));
 
 		return (
-			<TouchableWithoutFeedback
-				onPress={() => {
-					this.props.navigation.navigate('giftselection');
-					this.props.fetchListGift(item.uid);
-				}
-				}
-			>
 				<View style={[styles.item, STYLES.boxShadow]}>
+					<TouchableOpacity
+						onPress={() => {
+							requestAnimationFrame(() => {
+
+						this.props.navigation.navigate('giftselection');
+						this.props.fetchListGift(item.uid);
+							})
+						}}
+					>
 					<View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center' }}>
 						<Avatar
 							height={50}
@@ -110,8 +112,8 @@ class MainScreen extends Component {
 							}}
 						>{item.status}</Text>
 					</View>
+					</TouchableOpacity>
 				</View>
-			</TouchableWithoutFeedback>
 
 		);
 	}
@@ -125,7 +127,7 @@ class MainScreen extends Component {
 					<FlatList
 						numColumns={2}
 						contentContainerStyle={{ paddingVertical: 15 }}
-						columnWrapperStyle={{ paddingVertical: 8, paddingHorizontal: 8 }}
+						columnWrapperStyle={{ paddingHorizontal: 8 }}
 						data={items}
 						keyExtractor={(item) => items.indexOf(item)}
 						renderItem={this.renderItem}
@@ -188,7 +190,7 @@ const styles = StyleSheet.create({
 	item: {
 		padding: 10,
 		backgroundColor: '#fff',
-		marginHorizontal: 8,
+		margin: 8,
 		width: (WIDTH_SCREEN / 2) - 24,
 	},
 	box: {

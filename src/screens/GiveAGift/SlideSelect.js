@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 
 import ButtonSeclect from './ButtonSelect';
+
 class SlideSelect extends Component {
   constructor(props) {
     super(props);

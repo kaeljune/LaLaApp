@@ -19,13 +19,15 @@ class DetailGift extends Component {
   static navigationOptions = () => ({
     // header: null
     headerStyle: config.headerOverlay,
-    headerTintColor: config.COLOR.primary, 
+    headerTintColor: config.COLOR.primary,
     headerRight: (
       <TouchableWithoutFeedback>
         <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>
           <View style={{ padding: 5 }}>
             <Icon name="card-giftcard" size={25} color="#858585" />
-            <View style={styles.card} />
+            <View style={styles.card}>
+              <Text style={{ color: '#fff', fontSize: 10 }}>01</Text>
+            </View>
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -79,7 +81,7 @@ class DetailGift extends Component {
                   color: '#333'
                 }}
               >{item.name}</Text>
-              
+
               <Text style={{ marginBottom: 20, fontSize: 16, fontWeight: '700', color: '#777' }}>{item.price}</Text>
 
               <Btn
@@ -113,15 +115,17 @@ const styles = StyleSheet.create({
     paddingBottom: 30
   },
   card: {
-    height: 15,
-    width: 15,
+    height: 20,
+    width: 20,
     backgroundColor: config.COLOR.secondary,
     borderRadius: 15,
     borderWidth: 2,
     borderColor: '#fff',
     position: 'absolute',
     bottom: 0,
-    left: 0,
+    left: -5,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 
