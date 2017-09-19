@@ -38,6 +38,7 @@ class SlideSelect extends Component {
           renderItem={this.renderButton}
           keyExtractor={item => item}
           extraData={this.state}
+          removeClippedSubviews={false}
         />
 
       </View>

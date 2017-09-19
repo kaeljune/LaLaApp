@@ -76,6 +76,7 @@ class Address extends Component {
               <FlatList
                 data={filtererLocation}
                 keyExtractor={item => item.name}
+                removeClippedSubviews={false}
                 renderItem={({ item }) => (
 
                 <TouchableOpacity

@@ -142,6 +142,7 @@ class GiftSelection extends Component {
           activeSlideOffset={0}
           enableSnap
           inactiveSlideScale={0.95}
+          removeClippedSubviews={false}
           enableMomentum={false}
           scrollEndDragDebounceValue={Platform.OS === 'ios' ? 0 : 100}
           slideStyle={{ flexDirection: 'row', paddingHorizontal: 10, marginVertical: 30, paddingBottom: 10, height: config.HEIGHT_SCREEN * 0.75, width: config.WIDTH_SCREEN - 60, alignItems: 'center', }}
