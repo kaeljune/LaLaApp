@@ -18,13 +18,13 @@ class ProductList extends Component {
 		/>
 	)
 	render() {
-		console.log(this.props.items[0].image)
 		return (
 			<FlatList
 				showsVerticalScrollIndicator={false}
 				data={this.props.items}
 				keyExtractor={(item) => this.props.items.indexOf(item)}
 				renderItem={this.renderItem}
+				removeClippedSubviews={false}
 				style={[{
 					backgroundColor: '#fff',
 					margin: 10 

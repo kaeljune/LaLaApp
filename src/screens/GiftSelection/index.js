@@ -114,7 +114,7 @@ class GiftSelection extends Component {
             <Icon name="add" size={17} color="#fff" />
             <Text
               style={{ color: '#fff', fontWeight: '400', fontSize: 14, marginLeft: 5 }}
-            >GIFT NOW</Text>
+            >Add to Cart</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -123,10 +123,10 @@ class GiftSelection extends Component {
   );
 
   render() {
-    if(this.props.items = 0) {
-      return <View style={[styles.container, { justifyContent: 'center' }]}>
+    if (this.props.items = 0) {
+      return (<View style={[styles.container, { justifyContent: 'center' }]}>
         <Spinner color="#fff" />
-      </View>;
+      </View>);
     }
     return (
       <View style={styles.container}>
