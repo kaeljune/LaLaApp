@@ -56,10 +56,10 @@ class MainScreen extends Component {
 			isDel: false
 		}
 
-		if (Platform.OS === 'android') {
-			UIManager.setLayoutAnimationEnabledExperimental &&
-			UIManager.setLayoutAnimationEnabledExperimental(true);
-		}
+		// if (Platform.OS === 'android') {
+		// 	UIManager.setLayoutAnimationEnabledExperimental &&
+		// 	UIManager.setLayoutAnimationEnabledExperimental(true);
+		// }
 	}
 
 
@@ -84,9 +84,9 @@ class MainScreen extends Component {
 			});
 	}
 
-	componentWillUpdate() {
-		LayoutAnimation.spring();
-	}
+	// componentWillUpdate() {
+	// 	LayoutAnimation.spring();
+	// }
 
 	renderItem = ({ item }) => {
 		const name = item.receiverName ? item.receiverName : 'Anonymous';
@@ -180,6 +180,7 @@ class MainScreen extends Component {
 						data={items}
 						keyExtractor={(item) => items.indexOf(item)}
 						renderItem={this.renderItem}
+						removeClippedSubviews={false}
 					/>
 
 

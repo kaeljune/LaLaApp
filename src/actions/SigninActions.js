@@ -6,6 +6,7 @@ import {
   EMAIL_SIGNIN_FAIL,
   SIGNIN_EMAIL_CHANGED,
   SIGNIN_PASSWORD_CHANGED,
+  SIGNOUT
 } from './types';
 
 export const signinEmailChanged = (text) => ({
@@ -18,7 +19,14 @@ export const signinPasswordChanged = (text) => ({
   payload: text
 });
 
-
+export const signOut = () => async (dispatch) => {
+  firebase.auth().signOut().then(() => {
+    dispatch({ type: SIGNOUT });
+  }).catch((error) => {
+    // An error happened.
+    console.log(error);
+  });
+};
 export const emailSignin = ({ emailSF, passwordSF }) => async (dispatch) => {
   dispatch({ type: EMAIL_SIGNIN });
   try {

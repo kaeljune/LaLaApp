@@ -13,6 +13,8 @@ export const SIGNUP_CONFIRM_PASSWORD_CHANGED = 'signup_confirm_password_changed'
 export const SIGNUP_PHONE_CHANGED = 'signup_phone_changed';
 export const SIGNUP_NAME_CHANGED = 'signup_name_changed';
 
+export const SIGNOUT = 'signout';
+
 export const FACEBOOK_LOGIN_SUCCESS = 'facebook_login_success';
 export const FACEBOOK_LOGIN_FAIL = 'facebook_login_fail';
 

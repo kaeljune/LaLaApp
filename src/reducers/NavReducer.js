@@ -3,7 +3,9 @@ import { NavigationActions } from 'react-navigation';
 import { AppNavigator } from '../navigators/AppNavigators';
 import {
   ACCOUNT_FETCH_SUCCESS,
-  ACCOUNT_FETCH_FAIL
+  ACCOUNT_FETCH_FAIL,
+  SIGNOUT,
+  REQUEST_GIFT_SUCCESS
 } from '../actions/types.js';
 // Start with two routes: The Main screen, with the Login screen on top.
 const firstAction = AppNavigator.router.getActionForPathAndParams('isSignedIn');
@@ -18,6 +20,12 @@ const initialNavState = AppNavigator.router.getStateForAction(
 export default function nav(state = initialNavState, action) {
   let nextState;
   switch (action.type) {
+    case REQUEST_GIFT_SUCCESS:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'isSignedIn' }),
+        state
+      );
+      break;
     case ACCOUNT_FETCH_SUCCESS:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({
@@ -34,7 +42,7 @@ export default function nav(state = initialNavState, action) {
         state
       );
       break;
-    case 'Logout':
+    case SIGNOUT:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'isSignedOut' }),
         state

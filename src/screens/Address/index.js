@@ -37,7 +37,6 @@ class Address extends Component {
     }
   })
 
-
   onChangeText = (location) => {
     this.props.requestLocationChanged(location);
   }

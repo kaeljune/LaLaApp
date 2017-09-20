@@ -3,7 +3,6 @@ import {
 	View,
 	Text,
 	ScrollView,
-	KeyboardAvoidingView,
 	TextInput,
 	Slider,
 	StyleSheet,
@@ -11,6 +10,8 @@ import {
 import firebase from 'firebase';
 import _ from 'lodash';
 import { Avatar, Icon } from 'react-native-elements';
+
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { connect } from 'react-redux';
 import {
@@ -26,9 +27,9 @@ import {
 	requestGift
 } from '../../actions';
 
-import { COLOR, headerStyle, headerTitleStyle, STYLES } from '../../config/config';
+import { COLOR, headerStyle, headerTitleStyle } from '../../config/config';
 
-import { Spinner } from '../../components/Spinner';
+import Spinner from '../../components/Spinner';
 import SlideSelect from './SlideSelect';
 import SlideBox from './SlideBox';
 import Btn from '../../components/Btn';
@@ -94,7 +95,6 @@ class GiftSelection extends Component {
 	onSubmitPress = async () => {
 		const { location, sex, age, relationship, receiverName,
 			price, occasion, interest, style, other } = this.props;
-		console.log();
 		await firebase.auth().currentUser.getIdToken(true)
 			.then((idToken) => {
 				try {
@@ -111,7 +111,7 @@ class GiftSelection extends Component {
 						style,
 						other
 					}, () => {
-						this.props.navigation.navigate('mainGift');
+						//this.props.navigation.navigate('isFindGift'); => Nav Reducer
 					});
 				} catch (err) {
 					//
@@ -136,8 +136,13 @@ class GiftSelection extends Component {
 	render() {
 		const { section, sectionItem, sectionPad, sectionTag, sectionTitle } = styles;
 		return (
+			<KeyboardAwareScrollView
+			style={{ backgroundColor: '#f8f8f8' }}
+			scrollEnabled
+			animated
+		>
 			<ScrollView style={{ flex: 1, backgroundColor: '#f8f8f8' }} contentContainerStyle={{ padding: 0 }}>
-				<KeyboardAvoidingView behavior={'padding'} style={{ flex: 1 }}>
+
 					<View style={section}>
 						<View style={sectionItem}>
 							<Avatar
@@ -233,16 +238,16 @@ class GiftSelection extends Component {
 
 					<View style={sectionPad}>
 						<Text style={sectionTitle}>Other interests or thoughts optional</Text>
-						<View>
+						<View style={{ marginTop: 20 }}>
 							<TextInput
 								style={{
-									height: 60,
-									paddingLeft: 3,
+									minHeight: 60,
 									textAlign: 'center'
 								}}
 								underlineColorAndroid={'transparent'}
 								multiline
 								placeholder="Dogs, going the beach, pampering, barware, etc"
+								placeholderTextColor="#999"
 								value={this.props.other}
 								onChangeText={this.onOtherChange}
 							/>
@@ -252,8 +257,9 @@ class GiftSelection extends Component {
 					<View style={{ marginVertical: 30 }}>
 						{this.renderButton()}
 					</View>
-				</KeyboardAvoidingView>
+
 			</ScrollView>
+			</KeyboardAwareScrollView>
 		);
 	}
 }
