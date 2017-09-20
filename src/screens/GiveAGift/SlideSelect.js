@@ -54,8 +54,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#eee',
     borderBottomWidth: 1,
     width: '100%',
-    paddingTop: 15,
-    paddingBottom: 15
+    paddingVertical: 5
   }
 });
 

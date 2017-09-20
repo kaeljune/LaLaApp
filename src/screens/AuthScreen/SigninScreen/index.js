@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet, Alert, AsyncStorage } from 'react-native';
+import {
+  Animated,
+  ScrollView,
+  StyleSheet,
+  Alert,
+  Easing
+} from 'react-native';
 
 import { connect } from 'react-redux';
 import {
@@ -7,7 +13,7 @@ import {
 } from '../../../actions';
 
 import {
-  COLOR, WIDTH_SCREEN, HEIGHT_SCREEN,
+  COLOR, WIDTH_SCREEN,
   headerTitleStyle, headerStyle
 } from '../../../config/config';
 
@@ -29,17 +35,36 @@ class SigninScreen extends Component {
     headerTitleStyle,
     headerStyle,
   })
+
   state = {
     userData: null,
+    translateY: new Animated.Value(100),
+    opacity: new Animated.Value(0)
   };
-  async onAuthComplete(props) {
+
+  componentDidMount() {
+    Animated.parallel([
+      Animated.spring(this.state.translateY, {
+        toValue: 0,
+        useNativeDriver: true
+      }),
+      Animated.timing(this.state.opacity, {
+        toValue: 1,
+        duration: 200,
+        easing: Easing.circle,
+        useNativeDriver: true
+      })
+    ]).start();
+  }
+
+  // async onAuthComplete(props) {
     // await props.accountFetch();
     // const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
     // if (JSON.parse(fetchAcc).isLogin) {
     //     // this.props.navigation.navigate('isSignedIn', { });
     //     console.log('ton tai');
     // }
-  }
+  // }
   onSignUp = () => {
     this.props.navigation.navigate('signup');
   }
@@ -71,10 +96,10 @@ class SigninScreen extends Component {
     return (
       <ScrollView style={{ flex: 1, backgroundColor: '#f8f8f8' }} contentContainerStyle={styles.ContainerStyle}>
         <Brand />
-        <View style={{ alignItems: 'center', }}>
+        <Animated.View style={{ alignItems: 'center', transform: [{ translateY: this.state.translateY }], opacity: this.state.opacity }}>
           <SigninForm onButtonPress={this.onButtonPress} onForgot={this.onForgot} />
           <SignupLink onSignUp={this.onSignUp} />
-        </View>
+        </Animated.View>
       </ScrollView>
     );
   }

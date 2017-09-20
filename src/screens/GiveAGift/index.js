@@ -61,6 +61,7 @@ const occasions = [
 class GiftSelection extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		title: 'Find a local artisan',
+		headerTintColor: COLOR.secondary,
 		headerStyle,
 		headerTitleStyle,
 	})
@@ -238,14 +239,16 @@ class GiftSelection extends Component {
 
 					<View style={sectionPad}>
 						<Text style={sectionTitle}>Other interests or thoughts optional</Text>
-						<View style={{ marginTop: 20 }}>
+						<View style={{ marginTop: 20, borderStyle: 'dashed', borderWidth: 1, borderColor: '#ddd', paddingVertical: 20 }}>
 							<TextInput
 								style={{
 									minHeight: 60,
-									textAlign: 'center'
+									textAlign: 'center',
+									fontSize: 16
 								}}
 								underlineColorAndroid={'transparent'}
 								multiline
+								selectionColor={COLOR.primary}
 								placeholder="Dogs, going the beach, pampering, barware, etc"
 								placeholderTextColor="#999"
 								value={this.props.other}

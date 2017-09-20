@@ -26,6 +26,7 @@ class MainScreen extends Component {
 				headerStyle,
 				headerTitleStyle,
 				headerLeft: null,
+				headerBackTitle: null,
 				// headerLeft: <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}>
 				// 	<View style={styles.box}>
 				// 		<Text style={{ color: '#fff' }}>
@@ -53,7 +54,11 @@ class MainScreen extends Component {
 		super(props);
 
 		this.state = {
-			isDel: false
+			isDel: false,
+			animation: {
+				cardPosition: new Animated.Value(50),
+				addButonPosition: new Animated.Value(50)
+			}
 		}
 
 		// if (Platform.OS === 'android') {
@@ -71,9 +76,9 @@ class MainScreen extends Component {
 		setParams({ name: _.toUpper(name.match(/\b\w/g).join('')), items: items.length });
 	}
 
-	componentDidMount() {
+	async componentDidMount() {
 		//console.log(this.props.state);
-		firebase.auth().currentUser.getIdToken(true)
+		await firebase.auth().currentUser.getIdToken(true)
 			.then((idToken) => {
 				console.log(idToken);
 				// Send token to your backend via HTTPS
@@ -82,8 +87,18 @@ class MainScreen extends Component {
 				// Handle error
 				console.log(error);
 			});
-	}
 
+		// Animated.parallel([
+		// 	Animated.spring(this.state.animation.cardPosition, {
+		// 		toValue: 0,
+		// 		useNativeDriver: true
+		// 	}),
+		// 	Animated.spring(this.state.animation.addButonPosition, {
+		// 		toValue: 0,
+		// 		useNativeDriver: true
+		// 	})
+		// ]).start();
+	}
 	// componentWillUpdate() {
 	// 	LayoutAnimation.spring();
 	// }
@@ -93,21 +108,17 @@ class MainScreen extends Component {
 		const shortName = _.toUpper(name.match(/\b\w/g).join(''));
 
 		return (
-				<View style={[styles.item, STYLES.boxShadow]}>
-
+				<Animated.View style={[styles.item, STYLES.boxShadow]}>
 					<TouchableOpacity
 						onLongPress={() => {
 								this.setState({ isDel: true });
 							}
 						}
-						onPressIn={() => this.setState({ isDel: false })}
 						onPress={async () => {
-							if (!this.state.isDel) {
-								requestAnimationFrame(() => {
-										this.props.navigation.navigate('giftselection');
-										this.props.fetchListGift(item.uid);
-								});
-							} else { return false; }
+							requestAnimationFrame(() => {
+									this.props.navigation.navigate('giftselection');
+									this.props.fetchListGift(item.uid);
+							});
 						}}
 					>
 					<View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center' }}>
@@ -162,7 +173,7 @@ class MainScreen extends Component {
 					/>
 					</View>
 					}
-				</View>
+				</Animated.View>
 
 		);
 	}
@@ -193,7 +204,7 @@ class MainScreen extends Component {
 								raised
 								reverseColor="white"
 								name="check"
-								color={COLOR.primary}
+								color={COLOR.secondary}
 								onPress={() => this.setState({ isDel: false })}
 							/>
 							: <Icon
@@ -249,7 +260,7 @@ const styles = StyleSheet.create({
 		backgroundColor: COLOR.background,
 	},
 	item: {
-		// padding: 10,
+		padding: 10,
 		backgroundColor: '#fff',
 		margin: 8,
 		width: (WIDTH_SCREEN / 2) - 24,
