@@ -10,7 +10,7 @@ import {
   signupConfirmPasswordChanged, signinNameChanged, signinPhoneChanged,
 } from '../../../actions';
 
-import { Spinner } from '../../../components/Spinner';
+import Spinner from '../../../components/Spinner';
 import {
   COLOR,
   headerStyle,

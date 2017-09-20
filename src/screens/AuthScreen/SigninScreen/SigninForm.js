@@ -11,7 +11,7 @@ import {
   signinEmailChanged, signinPasswordChanged,
 } from '../../../actions';
 
-import { Spinner } from '../../../components/Spinner';
+import Spinner from '../../../components/Spinner';
 
 import { WIDTH_SCREEN, COLOR } from '../../../config/config';
 

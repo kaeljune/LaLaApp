@@ -9,12 +9,6 @@ class TextField extends Component {
     isShowPass: false
   }
 
-  togglePass = () => {
-    this.setState(prevState => ({
-      isShowPass: !prevState.isShowPass
-    }));
-  };
-
   render() {
     return (
       <View style={styles.container}>
@@ -44,13 +38,21 @@ class TextField extends Component {
                 width: 40,
               }}
             >
-              <TouchableOpacity onPress={this.togglePass}>
-                <View style={{
-                  height: 40, width: 40,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: 'red'
-                }}>
+              <TouchableOpacity
+                onPress={() => {
+                  this.setState(prevState => ({
+                    isShowPass: !prevState.isShowPass
+                  }));
+                }}
+              >
+                <View
+                  style={{
+                    height: 40,
+                    width: 40,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
                   <Icon
                     size={20}
                     color={this.state.isShowPass ? COLOR.primary : '#ddd'}

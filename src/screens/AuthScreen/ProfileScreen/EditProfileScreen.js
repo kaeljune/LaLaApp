@@ -6,7 +6,7 @@ import {
 	StyleSheet,
 	KeyboardAvoidingView,
 	Platform,
-	TouchableOpacity,
+	TouchableWithoutFeedback,
 	AsyncStorage
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -21,18 +21,13 @@ import TitleAvatar from './TitleAvatar';
 import UserInfo from './UserInfo';
 import Services from './Services';
 
-class ProfileScreen extends Component {
+class EditProfileScreen extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		title: 'Profile Setting',
 		headerTintColor: COLOR.primary,
-		headerLeft: <TouchableOpacity onPress={() => navigation.navigate('isFindGift')}><Icon
-			name='clear'
-			color='#313131'
-			size={24}
-			style={{ marginLeft: 15 }}
-		//onPress={() => navigation.navigate('mainGift')}
-		/></TouchableOpacity>,
-		headerRight: <TouchableOpacity onPress={navigation.navigate('editprofile')}>
+
+		headerRight:
+		<TouchableWithoutFeedback>
 			<View
 				style={{
 					paddingRight: 15,
@@ -40,9 +35,9 @@ class ProfileScreen extends Component {
 					alignItems: 'center'
 				}}
 			>
-				<Icon name="edit" color={COLOR.primary} />
+				<Icon name="check" color={COLOR.primary} />
 			</View>
-		</TouchableOpacity>,
+		</TouchableWithoutFeedback>,
 		headerTitleStyle,
 		headerStyle,
 	})
@@ -73,22 +68,24 @@ class ProfileScreen extends Component {
 				scrollEnabled
 				animated
 			>
-				<View>
-					<View
-						style={{
-							backgroundColor: COLOR.primary,
-							height: 330,
-							position: 'absolute',
-							top: 0,
-							left: 0,
-							right: 0,
-						}}
-					/>
-					<TitleAvatar data={this.state.userLogin} />
-					<UserInfo data={this.state.userLogin} />
+					<View>
+						<View
+							style={{
+								backgroundColor: COLOR.primary,
+								height: 330,
+								position: 'absolute',
+								top: 0,
+								left: 0,
+								right: 0,
+							}}
+						/>
+						<TitleAvatar data={this.state.userLogin} />
+						<UserInfo data={this.state.userLogin} />
 
-					<Services />
-				</View>
+						<Services />
+					</View>
+
+
 			</KeyboardAwareScrollView>
 		);
 	}
@@ -106,4 +103,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default connect(mapStateToProps, {})(ProfileScreen);
+export default connect(mapStateToProps, {})(EditProfileScreen);
