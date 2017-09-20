@@ -1,9 +1,13 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { FlatList,
 	View,
 	Text,
 	StyleSheet,
-	TouchableOpacity
+	TouchableOpacity,
+	LayoutAnimation,
+	Animated,
+	Platform,
+	UIManager
 } from 'react-native';
 import _ from 'lodash';
 import firebase from 'firebase';
@@ -13,7 +17,7 @@ import { Avatar, Icon } from 'react-native-elements';
 import { accountFetch, fetchRequest, fetchListGift } from '../../actions';
 import { COLOR, WIDTH_SCREEN, STYLES, headerStyle, headerTitleStyle } from '../../config/config';
 
-class MainScreen extends PureComponent {
+class MainScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
 		const { state } = navigation;
 		if (state.params !== undefined) {
@@ -21,14 +25,15 @@ class MainScreen extends PureComponent {
 				title: 'Gifts',
 				headerStyle,
 				headerTitleStyle,
-				headerLeft: <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}>
-					<View style={styles.box}>
-						<Text style={{ color: '#fff' }}>
-							{state.params ? state.params.items : '0'}
-						</Text>
-					</View>
-					<Text>total</Text>
-				</View>,
+				headerLeft: null,
+				// headerLeft: <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}>
+				// 	<View style={styles.box}>
+				// 		<Text style={{ color: '#fff' }}>
+				// 			{state.params ? state.params.items : '0'}
+				// 		</Text>
+				// 	</View>
+				// 	<Text>total</Text>
+				// </View>,
 				headerRight: <View style={{ marginRight: 10 }}>
 					<TouchableOpacity onPress={() => navigation.navigate('isProfile')}>
 						<Avatar
@@ -43,6 +48,20 @@ class MainScreen extends PureComponent {
 			};
 		}
 	}
+
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			isDel: false
+		}
+
+		if (Platform.OS === 'android') {
+			UIManager.setLayoutAnimationEnabledExperimental &&
+			UIManager.setLayoutAnimationEnabledExperimental(true);
+		}
+	}
+
 
 	async componentWillMount() {
 		await this.props.fetchRequest();
@@ -65,11 +84,8 @@ class MainScreen extends PureComponent {
 			});
 	}
 
-	shouldComponentUpdate(nextProps) {
-		if (this.props.items !== nextProps.items) {
-			return true;
-		}
-		return false;
+	componentWillUpdate() {
+		LayoutAnimation.spring();
 	}
 
 	renderItem = ({ item }) => {
@@ -78,12 +94,20 @@ class MainScreen extends PureComponent {
 
 		return (
 				<View style={[styles.item, STYLES.boxShadow]}>
+
 					<TouchableOpacity
-						onPress={() => {
-							requestAnimationFrame(() => {
-								this.props.navigation.navigate('giftselection');
-								this.props.fetchListGift(item.uid);
-							})
+						onLongPress={() => {
+								this.setState({ isDel: true });
+							}
+						}
+						onPressIn={() => this.setState({ isDel: false })}
+						onPress={async () => {
+							if (!this.state.isDel) {
+								requestAnimationFrame(() => {
+										this.props.navigation.navigate('giftselection');
+										this.props.fetchListGift(item.uid);
+								});
+							} else { return false; }
 						}}
 					>
 					<View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center' }}>
@@ -99,19 +123,45 @@ class MainScreen extends PureComponent {
 							for {item.occasion}
 						</Text>
 						<Text style={{ fontSize: 14, fontWeight: '600' }}>{item.priceRange}</Text>
-						<Text
+						<View
 							style={{
 								backgroundColor: COLOR.secondary,
-								fontSize: 12,
-								color: '#fff',
 								marginTop: 7,
 								paddingVertical: 3,
 								paddingHorizontal: 7,
 								borderRadius: 2
 							}}
-						>{item.status}</Text>
+						>
+							<Text
+								style={{
+									fontSize: 12,
+									color: '#fff',
+								}}
+							>{item.status}</Text>
+						</View>
 					</View>
 					</TouchableOpacity>
+					{ this.state.isDel &&
+					<View
+						style={{
+							position: 'absolute',
+							top: 0, left: 0, right: 0, bottom: 0,
+							backgroundColor: 'rgba(17,184,171,0.6)',
+							justifyContent: 'center',
+							alignItems: 'center'
+						}}
+					>
+					<Icon
+						size={15}
+						reverse
+						raised
+						reverseColor="white"
+						name="clear"
+						color={COLOR.secondary}
+						onPress={() => console.log(12)}
+					/>
+					</View>
+					}
 				</View>
 
 		);
@@ -132,17 +182,29 @@ class MainScreen extends PureComponent {
 						renderItem={this.renderItem}
 					/>
 
-					<View style={styles.bottomView}>
-						<Icon
-							size={25}
-							reverse
-							raised
-							reverseColor="white"
-							name="add"
-							color={COLOR.primary}
-							onPress={() => this.props.navigation.navigate('address')}
-						/>
 
+					<View style={styles.bottomView}>
+						{
+							this.state.isDel
+							? <Icon
+								size={25}
+								reverse
+								raised
+								reverseColor="white"
+								name="check"
+								color={COLOR.primary}
+								onPress={() => this.setState({ isDel: false })}
+							/>
+							: <Icon
+								size={25}
+								reverse
+								raised
+								reverseColor="white"
+								name="add"
+								color={COLOR.primary}
+								onPress={() => this.props.navigation.navigate('address')}
+							/>
+						}
 					</View>
 				</View>
 			);
@@ -157,7 +219,6 @@ class MainScreen extends PureComponent {
 					justifyContent: 'center'
 				}}
 			>
-
 				<Icon
 					reverse
 					raised
@@ -187,23 +248,23 @@ const styles = StyleSheet.create({
 		backgroundColor: COLOR.background,
 	},
 	item: {
-		padding: 10,
+		// padding: 10,
 		backgroundColor: '#fff',
 		margin: 8,
 		width: (WIDTH_SCREEN / 2) - 24,
 	},
-	box: {
-		backgroundColor: COLOR.secondary,
-		paddingHorizontal: 5,
-		paddingVertical: 1,
-		height: 25,
-		width: 25,
-		borderRadius: 20,
-		minWidth: 20,
-		marginRight: 5,
-		alignItems: 'center',
-		justifyContent: 'center'
-	},
+	// box: {
+	// 	backgroundColor: COLOR.secondary,
+	// 	paddingHorizontal: 5,
+	// 	paddingVertical: 1,
+	// 	height: 25,
+	// 	width: 25,
+	// 	borderRadius: 20,
+	// 	minWidth: 20,
+	// 	marginRight: 5,
+	// 	alignItems: 'center',
+	// 	justifyContent: 'center'
+	// },
 	bottomView: {
 		position: 'absolute',
 		bottom: 0,

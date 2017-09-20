@@ -53,6 +53,8 @@ class Address extends Component {
             onChangeText={this.onChangeText}
             value={location}
             style={styles.input}
+            colorTint="#ddd"
+            corlor={config.COLOR.primary}
             underlineColorAndroid="transparent"
           />
         </View>
@@ -112,8 +114,8 @@ const styles = StyleSheet.create({
   input: {
     fontWeight: '700',
     fontSize: 25,
-    paddingVertical: 30,
-    paddingHorizontal: 20
+    height: 60,
+    paddingHorizontal: 20,
   },
   section: {
 
