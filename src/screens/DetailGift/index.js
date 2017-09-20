@@ -85,7 +85,7 @@ class DetailGift extends Component {
               <Text style={{ marginBottom: 20, fontSize: 16, fontWeight: '700', color: '#777' }}>{item.price}</Text>
 
               <Btn
-                title="Gift Now"
+                title="Add to Cart"
                 style={{ width: 150 }}
                 bgColor={config.COLOR.secondary}
                 onPress={() => this.props.navigation.navigate('checkout')}

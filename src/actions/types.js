@@ -39,3 +39,6 @@ export const REQUEST_INTEREST_CHANGED = 'request_interest_changed';
 export const REQUEST_STYLE_CHANGED = 'request_style_changed';
 export const REQUEST_OTHER_CHANGED = 'request_other_changed';
 
+export const CART_CHANGED = 'cart_changed';
+export const FETCH_CART = 'fetch_cart';
+
