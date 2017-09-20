@@ -61,6 +61,7 @@ class DetailGift extends Component {
       <View style={styles.container}>
 
         <Animated.ScrollView
+          scrollEventThrottle={16}
           contentContainerStyle={{ paddingTop: config.HEIGHT_HEADER }}
           onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.state.yOffset } } }],
           )}

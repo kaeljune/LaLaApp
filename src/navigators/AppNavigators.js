@@ -23,11 +23,7 @@ import TermScreen from '../screens/TermScreen';
 import Delivery from '../screens/Delivery';
 import Payment from '../screens/Payment';
 import SplashScreen from '../screens/SplashScreen';
-
-// add detail Gift
 import DetailGift from '../screens/DetailGift';
-
-//add address
 import Address from '../screens/Address';
 
 const isSignedOut = StackNavigator({

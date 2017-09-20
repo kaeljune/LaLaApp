@@ -6,7 +6,7 @@ import {
 	StyleSheet,
 	KeyboardAvoidingView,
 	Platform,
-	TouchableWithoutFeedback,
+	TouchableOpacity,
 	AsyncStorage
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -25,15 +25,14 @@ class ProfileScreen extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		title: 'Profile Setting',
 		headerTintColor: COLOR.primary,
-		headerLeft: <TouchableWithoutFeedback onPress={() => navigation.navigate('isFindGift')}><Icon
+		headerLeft: <TouchableOpacity onPress={() => navigation.navigate('isFindGift')}><Icon
 			name='clear'
 			color='#313131'
 			size={24}
 			style={{ marginLeft: 15 }}
 		//onPress={() => navigation.navigate('mainGift')}
-		/></TouchableWithoutFeedback>,
-		headerRight:
-		<TouchableWithoutFeedback>
+		/></TouchableOpacity>,
+		headerRight: <TouchableOpacity onPress={navigation.navigate('editprofile')}>
 			<View
 				style={{
 					paddingRight: 15,
@@ -43,12 +42,14 @@ class ProfileScreen extends Component {
 			>
 				<Icon name="edit" color={COLOR.primary} />
 			</View>
-		</TouchableWithoutFeedback>,
+		</TouchableOpacity>,
 		headerTitleStyle,
 		headerStyle,
 	})
+
 	state = {
-		userLogin: null
+		userLogin: null,
+		edit: 'fjsf'
 	};
 
 	async componentWillMount() {
@@ -69,28 +70,25 @@ class ProfileScreen extends Component {
 		return (
 			<KeyboardAwareScrollView
 				style={{ backgroundColor: '#f8f8f8' }}
-				scrollEnabled={true}
-				animated={true}
+				scrollEnabled
+				animated
 			>
+				<View>
+					<View
+						style={{
+							backgroundColor: COLOR.primary,
+							height: 330,
+							position: 'absolute',
+							top: 0,
+							left: 0,
+							right: 0,
+						}}
+					/>
+					<TitleAvatar data={this.state.userLogin} />
+					<UserInfo data={this.state.userLogin} />
 
-
-					<View>
-						<View
-							style={{
-								backgroundColor: COLOR.primary,
-								height: 330,
-								position: 'absolute',
-								top: 0,
-								left: 0,
-								right: 0,
-							}}
-						/>
-						<TitleAvatar data={this.state.userLogin} />
-						<UserInfo data={this.state.userLogin} />
-						<Services />
-					</View>
-
-
+					<Services />
+				</View>
 			</KeyboardAwareScrollView>
 		);
 	}
