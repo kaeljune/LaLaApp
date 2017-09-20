@@ -29,17 +29,6 @@ class MainScreen extends PureComponent {
 					</View>
 					<Text>total</Text>
 				</View>,
-<<<<<<< HEAD
-				headerRight: <TouchableWithoutFeedback onPress={() => navigation.navigate('isProfile')}>
-					<Avatar
-						width={37}
-						height={37}
-						overlayContainerStyle={{ backgroundColor: COLOR.primary }}
-						rounded
-						title={state.params ? state.params.name : '?'}
-					/>
-				</TouchableWithoutFeedback>
-=======
 				headerRight: <View style={{ marginRight: 10 }}>
 					<TouchableOpacity onPress={() => navigation.navigate('isProfile')}>
 						<Avatar
@@ -51,7 +40,6 @@ class MainScreen extends PureComponent {
 						/>
 					</TouchableOpacity>
 				</View>
->>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
 			};
 		}
 	}
@@ -89,26 +77,15 @@ class MainScreen extends PureComponent {
 		const shortName = _.toUpper(name.match(/\b\w/g).join(''));
 
 		return (
-<<<<<<< HEAD
-			<TouchableWithoutFeedback
-				onPress={() => {
-					this.props.navigation.navigate('giftselection');
-					this.props.fetchListGift(item.uid);
-				}
-				}
-			>
-				<View style={[styles.item, STYLES.boxShadow]}>
-=======
 				<View style={[styles.item, STYLES.boxShadow]}>
 					<TouchableOpacity
 						onPress={() => {
 							requestAnimationFrame(() => {
 								this.props.navigation.navigate('giftselection');
 								this.props.fetchListGift(item.uid);
-							})
+							});
 						}}
 					>
->>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
 					<View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center' }}>
 						<Avatar
 							height={50}
@@ -134,13 +111,8 @@ class MainScreen extends PureComponent {
 							}}
 						>{item.status}</Text>
 					</View>
-<<<<<<< HEAD
-				</View>
-			</TouchableWithoutFeedback>
-=======
 					</TouchableOpacity>
 				</View>
->>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
 
 		);
 	}

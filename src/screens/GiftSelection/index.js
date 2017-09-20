@@ -95,11 +95,7 @@ class GiftSelection extends Component {
       >
         <Text style={{ fontWeight: '700', fontSize: 20, marginLeft: 20 }}>{item.price}</Text>
 
-<<<<<<< HEAD
-        <TouchableWithoutFeedback
-=======
         <TouchableOpacity
->>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
           onPress={async () => {
             await this.props.fetchGift(item.uid);
             await this.props.navigation.navigate('checkout');

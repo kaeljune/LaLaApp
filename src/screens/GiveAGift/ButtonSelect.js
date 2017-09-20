@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import React from 'react';
-import { Text, StyleSheet } from 'react-native';
-=======
 import React, { PureComponent } from 'react';
 import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
->>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
 
 import { COLOR, STYLES } from '../../config/config';
 

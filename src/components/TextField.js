@@ -23,11 +23,7 @@ class TextField extends Component {
           <TextInput
             value={this.props.value}
             secureTextEntry={this.props.secureTextEntry && !this.state.isShowPass}
-<<<<<<< HEAD
-            style={[{ paddingBottom: 10, lineHeight: 25, fontSize: 16, height: 40 }, this.props.style]}
-=======
             style={[{ height: 40, lineHeight: 25, fontSize: 16 }, this.props.style]}
->>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
             placeholder={this.props.placeholder}
             placeholderTextColor={COLOR.placeholderTextColor}
             underlineColorAndroid="transparent"
@@ -49,12 +45,15 @@ class TextField extends Component {
               }}
             >
               <TouchableOpacity onPress={this.togglePass}>
-                <View style={{
-                  height: 40, width: 40,
+                <View
+                  style={{
+                  height: 40,
+                  width: 40,
                   justifyContent: 'center',
                   alignItems: 'center',
                   backgroundColor: 'red'
-                }}>
+                }}
+                >
                   <Icon
                     size={20}
                     color={this.state.isShowPass ? COLOR.primary : '#ddd'}

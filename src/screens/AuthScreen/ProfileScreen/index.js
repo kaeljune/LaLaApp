@@ -35,22 +35,13 @@ class ProfileScreen extends Component {
 		headerRight:
 		<TouchableWithoutFeedback>
 			<View
-<<<<<<< HEAD
-				style={{	
-=======
 				style={{
->>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
 					paddingRight: 15,
 					flexDirection: 'row',
 					alignItems: 'center'
 				}}
 			>
-<<<<<<< HEAD
-				<Icon name="check" color={COLOR.secondary} />	
-				<Text style={{ marginLeft: 5 }}>Update</Text>
-=======
 				<Icon name="edit" color={COLOR.primary} />
->>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
 			</View>
 		</TouchableWithoutFeedback>,
 		headerTitleStyle,
@@ -73,18 +64,7 @@ class ProfileScreen extends Component {
 	render() {
 		//const { state } = this.props.navigation.params;
 		if (!this.state.userLogin) {
-<<<<<<< HEAD
-			return (<View 
-				style={{ 
-					flex: 1, 
-					alignItems: 'center', 
-					justifyContent: 'center', 
-					backgroundColor: '#fff'
-				}}
-			><Spinner /></View>);
-=======
 			return <View style={styles.container}><Spinner color="#fff" /></View>;
->>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
 		}
 		return (
 			<KeyboardAwareScrollView
@@ -107,11 +87,6 @@ class ProfileScreen extends Component {
 						/>
 						<TitleAvatar data={this.state.userLogin} />
 						<UserInfo data={this.state.userLogin} />
-<<<<<<< HEAD
-						
-=======
-
->>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
 						<Services />
 					</View>
 
