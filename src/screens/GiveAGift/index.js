@@ -141,7 +141,7 @@ class GiftSelection extends Component {
 			scrollEnabled
 			animated
 		>
-			<ScrollView style={{ flex: 1, backgroundColor: '#f8f8f8' }} contentContainerStyle={{ padding: 0 }}>
+
 
 					<View style={section}>
 						<View style={sectionItem}>
@@ -170,7 +170,7 @@ class GiftSelection extends Component {
 						<Text style={sectionTitle}>Receiver</Text>
 
 						<TextField
-								style={{ textAlign: 'center', marginTop: 20 }}
+							style={{ textAlign: 'center', marginTop: 20 }}
 							placeholder="Ex: AirLaLa"
 							value={this.props.receiverName}
 							onChangeText={this.onReceiverNameChange}
@@ -258,7 +258,7 @@ class GiftSelection extends Component {
 						{this.renderButton()}
 					</View>
 
-			</ScrollView>
+
 			</KeyboardAwareScrollView>
 		);
 	}

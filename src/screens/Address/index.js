@@ -22,19 +22,11 @@ const locations = [
 ];
 
 class Address extends Component {
-
   static navigationOptions = () => ({
     // title: 'Find Address',
+    headerBackTitle: null,
     headerTintColor: config.COLOR.secondary,
-    headerStyle: {
-      backgroundColor: 'transparent',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      zIndex: 9999,
-      height: config.HEIGHT_HEADER
-    }
+    headerStyle: config.headerStyle
   })
 
   onChangeText = (location) => {
@@ -106,8 +98,7 @@ class Address extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    flex: 1,
-    paddingTop: config.HEIGHT_HEADER
+    flex: 1
   },
 
   input: {

@@ -4,7 +4,8 @@ const RootAPI = 'https://us-central1-airlala-7b1b2.cloudfunctions.net';
 
 const WIDTH_SCREEN = Dimensions.get('window').width;
 const HEIGHT_SCREEN = Dimensions.get('window').height;
-const HEIGHT_HEADER = (HEIGHT_SCREEN * 50) / 667;
+// const HEIGHT_HEADER = (HEIGHT_SCREEN * 50) / 667;
+const HEIGHT_HEADER = 60
 
 const COLOR = {
 	primary: '#11B8AB',
