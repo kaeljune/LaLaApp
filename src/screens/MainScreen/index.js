@@ -130,6 +130,7 @@ class MainScreen extends PureComponent {
 						data={items}
 						keyExtractor={(item) => items.indexOf(item)}
 						renderItem={this.renderItem}
+						removeClippedSubviews={false}
 					/>
 
 					<View style={styles.bottomView}>

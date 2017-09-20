@@ -44,7 +44,9 @@ class Services extends Component {
 					</TouchableWithoutFeedback>
 				</View>
 				<View>
-					<TouchableWithoutFeedback>
+					<TouchableWithoutFeedback
+						onPress={this.props.signOut}
+					>
 						<View style={styles.row}>
 							<Text style={{ fontSize: 17, color: '#313131' }}>
 								Sign out

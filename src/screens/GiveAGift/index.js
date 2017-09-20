@@ -26,9 +26,9 @@ import {
 	requestGift
 } from '../../actions';
 
-import { COLOR, headerStyle, headerTitleStyle, STYLES } from '../../config/config';
+import { COLOR, headerStyle, headerTitleStyle } from '../../config/config';
 
-import { Spinner } from '../../components/Spinner';
+import Spinner from '../../components/Spinner';
 import SlideSelect from './SlideSelect';
 import SlideBox from './SlideBox';
 import Btn from '../../components/Btn';
@@ -94,7 +94,6 @@ class GiftSelection extends Component {
 	onSubmitPress = async () => {
 		const { location, sex, age, relationship, receiverName,
 			price, occasion, interest, style, other } = this.props;
-		console.log();
 		await firebase.auth().currentUser.getIdToken(true)
 			.then((idToken) => {
 				try {
@@ -111,7 +110,7 @@ class GiftSelection extends Component {
 						style,
 						other
 					}, () => {
-						this.props.navigation.navigate('mainGift');
+						//this.props.navigation.navigate('isFindGift'); => Nav Reducer
 					});
 				} catch (err) {
 					//
