@@ -25,18 +25,19 @@ const headerTitleStyle = {
 const headerStyle = {
 	paddingTop: 'auto',
 	// paddingHorizontal: 10,
-	// height: HEIGHT_HEADER,
-	justifyContent: 'center',
-
+	height: HEIGHT_HEADER,
+	// justifyContent: 'center',
+	backgroundColor: '#fff'
 };
 
 const headerOverlay =  {
-	backgroundColor: 'rgba(255,255,255,.9)',
+	backgroundColor: 'rgba(255,255,255,0.5)',
 	position: 'absolute',
 	height: HEIGHT_HEADER,
+	paddingTop: 'auto',
 	top: 0,
 	right: 0,
-	left: 0, 
+	left: 0,
 	zIndex: 9999
 };
 
@@ -44,10 +45,10 @@ const STYLES = StyleSheet.create({
 	boxShadow: {
 		...Platform.select({
 			ios: {
-				shadowColor: 'rgba(0,0,0, .7)',
+				shadowColor: 'rgba(0,0,0,0.2)',
 				shadowOffset: { height: 0, width: 0 },
 				shadowOpacity: 1,
-				shadowRadius: 3,
+				shadowRadius: 2,
 			},
 			android: {
 				elevation: 2

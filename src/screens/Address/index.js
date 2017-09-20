@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import {
   View, Text,
   StyleSheet, TextInput,
+<<<<<<< HEAD
   ScrollView, TouchableWithoutFeedback,
+=======
+  ScrollView,
+  TouchableOpacity,
+>>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
   FlatList,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
@@ -36,6 +41,10 @@ class Address extends Component {
     }
   })
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
   onChangeText = (location) => {
     this.props.requestLocationChanged(location);
   }
@@ -47,7 +56,11 @@ class Address extends Component {
       <View style={styles.container}>
         <View style={{ backgroundColor: '#fff' }}>
           <TextInput
+<<<<<<< HEAD
             placeholder="Where to?"
+=======
+            placeholder="Where are you going?"
+>>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
             onChangeText={this.onChangeText}
             value={location}
             style={styles.input}
@@ -74,12 +87,22 @@ class Address extends Component {
               <FlatList
                 data={filtererLocation}
                 keyExtractor={item => item.name}
+<<<<<<< HEAD
                 renderItem={({ item }) => (
 
                 <TouchableWithoutFeedback
                   onPress={() => {
                     this.onChangeText(item.name);
                     this.props.navigation.navigate('giveagift');
+=======
+                removeClippedSubviews={false}
+                renderItem={({ item }) => (
+
+                <TouchableOpacity
+                  onPress={async() => {
+                    await this.onChangeText(item.name);
+                    await this.props.navigation.navigate('giveagift');
+>>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
                   }}
                   key={item.name}
                 >
@@ -87,7 +110,11 @@ class Address extends Component {
                     <Icon name="location-on" size={18} color="#454545" />
                     <Text style={styles.textLocation}>{item.name}</Text>
                   </View>
+<<<<<<< HEAD
                 </TouchableWithoutFeedback>
+=======
+                </TouchableOpacity>
+>>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
                 )}
               />
             : <Text>No match address</Text>}

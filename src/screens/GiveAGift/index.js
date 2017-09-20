@@ -59,18 +59,9 @@ const occasions = [
 
 class GiftSelection extends Component {
 	static navigationOptions = ({ navigation }) => ({
-		title: 'Give a Gifts',
-		headerStyle: STYLES.headerOverlay,
+		title: 'Find a local artisan',
+		headerStyle,
 		headerTitleStyle,
-		headerRight: <View style={{ flexDirection: 'row', alignItems: 'center', paddingRight: 15 }}>
-			<Icon
-				size={15}
-				name='create'
-				color={COLOR.primary}
-				onPress={() => navigation.goBack()}
-			/>
-			<Text style={{ marginLeft: 5 }}>Edit</Text>
-		</View>
 	})
 
 	onSexChange = (text) => {
@@ -172,7 +163,7 @@ class GiftSelection extends Component {
 
 					<View style={sectionPad}>
 						<Text style={sectionTitle}>Receiver</Text>
-						
+
 						<TextField
 								style={{ textAlign: 'center', marginTop: 20 }}
 							placeholder="Ex: AirLaLa"
@@ -197,13 +188,13 @@ class GiftSelection extends Component {
 								textAlign: 'center'
 							}}
 						>${this.props.price ? this.props.price : 0}-${this.props.price + 100}</Text>
-						
-						<Slider 
+
+						<Slider
 							minimumValue={0}
 							maximumValue={1000}
 							minimumTrackTintColor={COLOR.primary}
 							maximumTrackTintColor='#eee'
-							value={this.props.price}	
+							value={this.props.price}
 							onSlidingComplete={this.onPriceChange}
 							step={100}
 						/>
@@ -281,7 +272,11 @@ const styles = StyleSheet.create({
 	sectionPad: {
 		backgroundColor: '#fff',
 		padding: 15,
-		marginBottom: 15
+		marginBottom: 15,
+		borderBottomColor: '#eee',
+		borderBottomWidth: 1,
+		borderTopColor: '#eee',
+		borderTopWidth: 1,
 	},
 
 	sectionTitle: {

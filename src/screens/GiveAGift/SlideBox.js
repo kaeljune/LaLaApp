@@ -37,6 +37,10 @@ class SlideBox extends Component {
           renderItem={this.renderBox}
           keyExtractor={item => item.id}
           extraData={this.state}
+<<<<<<< HEAD
+=======
+          removeClippedSubviews={false}
+>>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
         />
 
       </View>

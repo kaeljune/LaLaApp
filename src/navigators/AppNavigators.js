@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addNavigationHelpers, TabNavigator, StackNavigator } from 'react-navigation';
+import { NavigationActions, addNavigationHelpers, TabNavigator, StackNavigator } from 'react-navigation';
 
-import HocLoading from '../../src/components/hoc/Loadding';
+// import HocLoading from '../../src/components/hoc/Loadding';
 
 import DefaultScreen from '../screens/DefaultScreen';
 import MainScreen from '../screens/MainScreen';
@@ -31,73 +31,109 @@ import DetailGift from '../screens/DetailGift';
 import Address from '../screens/Address';
 
 const isSignedOut = StackNavigator({
-    default: { screen: DefaultScreen },
-    signin: { screen: SigninScreen },
-    signup: { screen: SignupScreen },
-    welcome: { screen: WelcomeScreen },
-    forgot: { screen: ForgotScreen },
+	default: { screen: DefaultScreen },
+	signin: { screen: SigninScreen },
+	signup: { screen: SignupScreen },
+	welcome: { screen: WelcomeScreen },
+	forgot: { screen: ForgotScreen },
 });
 
 const isProfile = StackNavigator({
-    profile: { screen: ProfileScreen },
-    term: { screen: TermScreen },
+	profile: { screen: ProfileScreen },
+	term: { screen: TermScreen },
 });
 
 const isFindGift = StackNavigator({
-    mainGift: { screen: MainScreen },
-    address: { screen: Address },
-    giftselection: { screen: GiftSelection },
-    findagift: { screen: FindAGift },
-    giveagift: { screen: GiveAGift }, 
-    detailgift: { screen: DetailGift },
-    checkout: { screen: Checkout },
-    writeanote: { screen: WriteANote },
-    deliveryblank: { screen: DeliveryBlank },
-    delivery: { screen: Delivery },
-    payment: { screen: Payment },
+	mainGift: { screen: MainScreen },
+	address: { screen: Address },
+	giftselection: { screen: GiftSelection },
+	findagift: { screen: FindAGift },
+	giveagift: { screen: GiveAGift },
+	detailgift: { screen: DetailGift },
+	checkout: { screen: Checkout },
+	writeanote: { screen: WriteANote },
+	deliveryblank: { screen: DeliveryBlank },
+	delivery: { screen: Delivery },
+	payment: { screen: Payment },
 });
 
 const isSignedIn = TabNavigator({
-    isFindGift: { screen: isFindGift },
-    isProfile: { screen: isProfile },
-    afterrequest: { screen: AfterRequest }, 
+	isFindGift: { screen: isFindGift },
+	isProfile: { screen: isProfile },
+	afterrequest: { screen: AfterRequest },
 },
-    {
-    navigationOptions: {
-      tabBarVisible: false
-    },
-    swipeEnabled: false,
-    animationEnabled: false,
-    lazy: true,
-    }
+	{
+		navigationOptions: {
+			tabBarVisible: false
+		},
+		swipeEnabled: false,
+		animationEnabled: false,
+		lazy: true,
+	}
 );
 export const AppNavigator = TabNavigator({
-    isLoading: { screen: SplashScreen },
-    isSignedOut: { screen: isSignedOut },
-    isSignedIn: { screen: isSignedIn }
+	isLoading: { screen: SplashScreen },
+	isSignedOut: { screen: isSignedOut },
+	isSignedIn: { screen: isSignedIn }
 },
-    {
-        navigationOptions: {
-            tabBarVisible: false
-        },
-        headerMode: 'screen',
-        swipeEnabled: false,
-        animationEnabled: false,
-        lazy: true,
-    }
+	{
+		navigationOptions: {
+			tabBarVisible: false
+		},
+		headerMode: 'screen',
+		swipeEnabled: false,
+		animationEnabled: false,
+		lazy: true,
+	}
 );
 
-const AppWithNavigationState = ({ dispatch, nav }) => (
-  <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
-);
+class AppWithNavigationState extends PureComponent {
+	_addNavigationHelpers(navigation) {
+    const original = addNavigationHelpers(navigation);
+    let debounce;
+    return {
+      ...original,
+      navigateWithDebounce: (routeName, params, action) => {
+        const func = () => {
+          clearTimeout(debounce);
+          debounce = setTimeout(() => {
+            navigation.dispatch(NavigationActions.navigate({
+              routeName,
+              params,
+              action
+            }));
+          }, 200);
+        };
+        return func();
+      }
+    };
+  }
+	render() {
+		const { dispatch, nav } = this.props;
+		return (
+			<AppNavigator
+				navigation={
+					this._addNavigationHelpers({
+						dispatch,
+						state: nav
+					})
+				}
+			/>
+		);
+	}
+}
+
+// const AppWithNavigationState = ({ dispatch, nav }) => (
+// 	<AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
+// );
 
 AppWithNavigationState.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  nav: PropTypes.object.isRequired,
+	dispatch: PropTypes.func.isRequired,
+	nav: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
-  nav: state.nav,
+	nav: state.nav,
 });
 
-export default connect(mapStateToProps)(HocLoading(AppWithNavigationState));
+export default connect(mapStateToProps)(AppWithNavigationState);

@@ -1,17 +1,26 @@
+<<<<<<< HEAD
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
+=======
+import React, { PureComponent } from 'react';
+import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
+>>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
 
 import { COLOR, STYLES } from '../../config/config';
 
-function ButtonSeclect(props) {
-	const styleBtn = props.isActive ? [styles.normal, styles.active, STYLES.boxShadow] : styles.normal;
-	return (
-
-		<Text style={styleBtn} onPress={() => props.onActive(props.id)} >
-			{props.children.toUpperCase()}
-		</Text>
-
-	)
+class ButtonSeclect extends PureComponent {
+	render() {
+		const { isActive, onActive, children, id } = this.props;
+		const styleBtn = isActive ? [styles.normal, styles.active, STYLES.boxShadow] : styles.normal;
+		const styleText = isActive ? [styles.text, { color: '#fff'}] : [styles.text, { color: '#555' }];
+		return (
+			<TouchableOpacity onPress={() => onActive(id)}>
+				<View style={styleBtn}>
+					<Text style={styleText}>{children}</Text>
+				</View>
+			</TouchableOpacity>
+		);
+	}
 }
 
 const styles = StyleSheet.create({
@@ -19,19 +28,19 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		backgroundColor: '#fff',
 		borderColor: '#eee',
-		fontWeight: '600',
-		fontSize: 11,
-		color: '#555',
 		margin: 5,
 		paddingVertical: 10,
 		paddingHorizontal: 15,
 		minWidth: 70,
-		textAlign: 'center',
 	},
 	active: {
 		backgroundColor: COLOR.primary,
-		color: '#fff',
 		borderColor: COLOR.primary
+	},
+	text: {
+		fontWeight: '600',
+		fontSize: 12,
+		textAlign: 'center',
 	}
 });
 

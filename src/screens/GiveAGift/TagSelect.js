@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import { Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import React, { PureComponent } from 'react';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { COLOR, STYLES } from '../../config/config';
 
-class TagSelect extends Component {
+class TagSelect extends PureComponent {
 	state = {
 		active: false
-	}
-	onPress = () => {
-		this.setState(prevState => ({ active: !prevState.active }));
 	}
 	render() {
 		const styleTag = this.state.active ? [styles.tag, styles.active, STYLES.boxShadow] : [styles.tag];
 		return (
-
-			<Text style={styleTag} onPress={this.onPress}>
-				{this.props.children}
-			</Text>
+			<TouchableOpacity onPress={() => this.setState(prevState => ({ active: !prevState.active }))}>
+			<View style={styleTag}>
+				<Text>
+					{this.props.children}
+				</Text>
+			</View>
+			</TouchableOpacity>
 
 		);
 	}
@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
 		paddingVertical: 10,
 		paddingHorizontal: 15,
 		minWidth: 50,
-		textAlign: 'center',
 		borderColor: '#eee',
 		borderWidth: 1,
 		borderRadius: 20,

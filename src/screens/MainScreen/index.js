@@ -1,36 +1,35 @@
-import React, { Component } from 'react';
-import { FlatList, View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import React, { PureComponent } from 'react';
+import { FlatList,
+	View,
+	Text,
+	StyleSheet,
+	TouchableOpacity
+} from 'react-native';
 import _ from 'lodash';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Avatar, Icon } from 'react-native-elements';
 
 import { accountFetch, fetchRequest, fetchListGift } from '../../actions';
-import { COLOR, WIDTH_SCREEN, STYLES } from '../../config/config';
+import { COLOR, WIDTH_SCREEN, STYLES, headerStyle, headerTitleStyle } from '../../config/config';
 
-class MainScreen extends Component {
+class MainScreen extends PureComponent {
 	static navigationOptions = ({ navigation }) => {
 		const { state } = navigation;
 		if (state.params !== undefined) {
 			return {
 				title: 'Gifts',
-				headerStyle: {
-					paddingHorizontal: 10
-				},
-				headerTitleStyle: {
-					alignSelf: 'center'
-				},
-
-				headerLeft: <View>
-					<View style={{ flexDirection: 'row' }}>
-						<Text
-							style={styles.box}
-						>
+				headerStyle,
+				headerTitleStyle,
+				headerLeft: <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}>
+					<View style={styles.box}>
+						<Text style={{ color: '#fff' }}>
 							{state.params ? state.params.items : '0'}
 						</Text>
-						<Text>total</Text>
 					</View>
+					<Text>total</Text>
 				</View>,
+<<<<<<< HEAD
 				headerRight: <TouchableWithoutFeedback onPress={() => navigation.navigate('isProfile')}>
 					<Avatar
 						width={37}
@@ -40,6 +39,19 @@ class MainScreen extends Component {
 						title={state.params ? state.params.name : '?'}
 					/>
 				</TouchableWithoutFeedback>
+=======
+				headerRight: <View style={{ marginRight: 10 }}>
+					<TouchableOpacity onPress={() => navigation.navigate('isProfile')}>
+						<Avatar
+							width={37}
+							height={37}
+							overlayContainerStyle={{ backgroundColor: COLOR.primary }}
+							rounded
+							title={state.params ? state.params.name : '?'}
+						/>
+					</TouchableOpacity>
+				</View>
+>>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
 			};
 		}
 	}
@@ -77,6 +89,7 @@ class MainScreen extends Component {
 		const shortName = _.toUpper(name.match(/\b\w/g).join(''));
 
 		return (
+<<<<<<< HEAD
 			<TouchableWithoutFeedback
 				onPress={() => {
 					this.props.navigation.navigate('giftselection');
@@ -85,6 +98,17 @@ class MainScreen extends Component {
 				}
 			>
 				<View style={[styles.item, STYLES.boxShadow]}>
+=======
+				<View style={[styles.item, STYLES.boxShadow]}>
+					<TouchableOpacity
+						onPress={() => {
+							requestAnimationFrame(() => {
+								this.props.navigation.navigate('giftselection');
+								this.props.fetchListGift(item.uid);
+							})
+						}}
+					>
+>>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
 					<View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center' }}>
 						<Avatar
 							height={50}
@@ -110,8 +134,13 @@ class MainScreen extends Component {
 							}}
 						>{item.status}</Text>
 					</View>
+<<<<<<< HEAD
 				</View>
 			</TouchableWithoutFeedback>
+=======
+					</TouchableOpacity>
+				</View>
+>>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
 
 		);
 	}
@@ -125,7 +154,7 @@ class MainScreen extends Component {
 					<FlatList
 						numColumns={2}
 						contentContainerStyle={{ paddingVertical: 15 }}
-						columnWrapperStyle={{ paddingVertical: 8, paddingHorizontal: 8 }}
+						columnWrapperStyle={{ paddingHorizontal: 8 }}
 						data={items}
 						keyExtractor={(item) => items.indexOf(item)}
 						renderItem={this.renderItem}
@@ -188,18 +217,20 @@ const styles = StyleSheet.create({
 	item: {
 		padding: 10,
 		backgroundColor: '#fff',
-		marginHorizontal: 8,
+		margin: 8,
 		width: (WIDTH_SCREEN / 2) - 24,
 	},
 	box: {
 		backgroundColor: COLOR.secondary,
 		paddingHorizontal: 5,
 		paddingVertical: 1,
+		height: 25,
+		width: 25,
 		borderRadius: 20,
 		minWidth: 20,
-		textAlign: 'center',
-		color: '#fff',
-		marginRight: 5
+		marginRight: 5,
+		alignItems: 'center',
+		justifyContent: 'center'
 	},
 	bottomView: {
 		position: 'absolute',

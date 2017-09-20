@@ -19,16 +19,17 @@ export const accountFetch = () => async (dispatch) => {
       }
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     accountFetchFail(dispatch);
     //emailLoginFail(dispatch);
   }
 };
-export const accountFetchFail = (dispatch) => {
+
+const accountFetchFail = (dispatch) => {
   dispatch({ type: ACCOUNT_FETCH_FAIL });
 };
 
-export const accountFetchSuccess = (dispatch, user) => {
+const accountFetchSuccess = (dispatch, user) => {
   dispatch({
     type: ACCOUNT_FETCH_SUCCESS,
     payload: user

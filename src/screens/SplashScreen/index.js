@@ -11,14 +11,18 @@ class SplashScreen extends Component {
 	static navigationOptions = {
 		header: null
 	}
-	state = {
-		userLogin: null,
-		isLogin: null,
 
-		scale1: new Animated.Value(1),
-		scale2: new Animated.Value(1),
-		scale3: new Animated.Value(1),
-	};
+	constructor(props) {
+		super(props);
+		this.state = {
+			userLogin: null,
+			isLogin: null,
+		};
+		this.scale1 = new Animated.Value(1);
+		this.scale2 = new Animated.Value(1);
+		this.scale3 = new Animated.Value(1);
+	}
+
 	async componentWillMount() {
 		//await AsyncStorage.removeItem('reduxPersist:fetchAcc');
 		await this.props.accountFetch();
@@ -30,39 +34,46 @@ class SplashScreen extends Component {
 		}
 	}
 
-	componentDidMount() {
+	async componentDidMount() {
+
 		Animated.loop(
 			Animated.parallel([
 				Animated.sequence([
-					Animated.timing(this.state.scale1, {
+					Animated.timing(this.scale1, {
 						toValue: 0.9,
-						duration: 1000
+						duration: 1000,
+						useNativeDriver: true
 					}),
-					Animated.timing(this.state.scale1, {
+					Animated.timing(this.scale1, {
 						toValue: 1,
-						duration: 1100
+						duration: 1100,
+						useNativeDriver: true
 					})
 				]),
 
 				Animated.sequence([
-					Animated.timing(this.state.scale2, {
+					Animated.timing(this.scale2, {
 						toValue: 0.85,
-						duration: 1050
+						duration: 1050,
+						useNativeDriver: true
 					}),
-					Animated.timing(this.state.scale2, {
+					Animated.timing(this.scale2, {
 						toValue: 1,
-						duration: 1150
+						duration: 1150,
+						useNativeDriver: true
 					})
 				]),
 
 				Animated.sequence([
-					Animated.timing(this.state.scale3, {
+					Animated.timing(this.scale3, {
 						toValue: 0.8,
-						duration: 1100
+						duration: 1100,
+						useNativeDriver: true
 					}),
-					Animated.timing(this.state.scale3, {
+					Animated.timing(this.scale3, {
 						toValue: 1,
-						duration: 1200
+						duration: 1200,
+						useNativeDriver: true
 					})
 				])
 			])
@@ -70,25 +81,20 @@ class SplashScreen extends Component {
 	}
 
 	render() {
-		// const animateStyle = {
-		// 	transform: [
-		// 		{ scale: this.state.scale }
-		// 	]
-		// };
 
 		const animateStyle1 = {
 			transform: [
-				{ scale: this.state.scale1 }
+				{ scale: this.scale1 }
 			]
 		};
 		const animateStyle2 = {
 			transform: [
-				{ scale: this.state.scale2 }
+				{ scale: this.scale2 }
 			]
 		};
 		const animateStyle3 = {
 			transform: [
-				{ scale: this.state.scale3 }
+				{ scale: this.scale3 }
 			]
 		};
 

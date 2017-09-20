@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableWithoutFeedback, Image, Platform } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, Platform } from 'react-native';
 import { Icon } from 'react-native-elements';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
+import Spinner from '../../components/Spinner';
 import { fetchGift } from '../../actions';
 
 import * as config from '../../config/config';
@@ -12,15 +13,20 @@ import * as config from '../../config/config';
 class GiftSelection extends Component {
   static navigationOptions = () => ({
     title: 'Gift selection',
+    headerTintColor: config.COLOR.primary,
+    headerTitleStyle: config.headerTitleStyle,
+    headerStyle: config.headerStyle,
     headerRight: (
-      <TouchableWithoutFeedback>
+      <TouchableOpacity>
         <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>
           <View style={{ padding: 5 }}>
             <Icon name="card-giftcard" size={25} color="#858585" />
-            <View style={styles.card} />
+            <View style={styles.card}>
+              <Text style={{ color: '#fff', fontSize: 10 }}>01</Text>
+            </View>
           </View>
         </View>
-      </TouchableWithoutFeedback>
+      </TouchableOpacity>
     )
   })
 
@@ -59,7 +65,7 @@ class GiftSelection extends Component {
   //renderItem = ({ item, index }) => (
   renderItem = ({ item }) => (
     <View style={[styles.slide, styles.boxShadow]}>
-      <TouchableWithoutFeedback
+      <TouchableOpacity
         onPress={() => {
           this.props.navigation.navigate('detailgift');
           this.props.fetchGift(item.uid);
@@ -69,27 +75,31 @@ class GiftSelection extends Component {
           source={{ uri: item.image }}
           style={styles.image}
         />
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback
-        onPress={() => {
-          this.props.navigation.navigate('detailgift');
-          this.props.fetchGift(item.uid);
-        }}
-      >
-        <View style={{ padding: 20, flex: 1 }}>
+      </TouchableOpacity>
+      <View style={{ padding: 20, flex: 1 }}>
+        <TouchableOpacity
+          onPress={() => {
+            this.props.navigation.navigate('detailgift');
+            this.props.fetchGift(item.uid);
+          }}
+        >
           <Text
             style={{ fontSize: 25, fontWeight: '100', color: '#313131', marginBottom: 20 }}
           >{item.name}</Text>
 
           <Text style={{ color: '#777', fontSize: 17 }}>by {item.artisan ? item.artisan : 'Baza'}</Text>
-        </View>
-      </TouchableWithoutFeedback>
+        </TouchableOpacity>
+      </View>
       <View
         style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
       >
         <Text style={{ fontWeight: '700', fontSize: 20, marginLeft: 20 }}>{item.price}</Text>
 
+<<<<<<< HEAD
         <TouchableWithoutFeedback
+=======
+        <TouchableOpacity
+>>>>>>> 043710a84f99f0935cf682515327a77a12da56d1
           onPress={async () => {
             await this.props.fetchGift(item.uid);
             await this.props.navigation.navigate('checkout');
@@ -110,13 +120,18 @@ class GiftSelection extends Component {
               style={{ color: '#fff', fontWeight: '400', fontSize: 14, marginLeft: 5 }}
             >GIFT NOW</Text>
           </View>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
       </View>
 
     </View>
   );
 
   render() {
+    if(this.props.items = 0) {
+      return <View style={[styles.container, { justifyContent: 'center' }]}>
+        <Spinner color="#fff" />
+      </View>;
+    }
     return (
       <View style={styles.container}>
         <Carousel
@@ -131,7 +146,8 @@ class GiftSelection extends Component {
           activeSlideOffset={0}
           enableSnap
           inactiveSlideScale={0.95}
-          enableMomentum={false} o
+          removeClippedSubviews={false}
+          enableMomentum={false}
           scrollEndDragDebounceValue={Platform.OS === 'ios' ? 0 : 100}
           slideStyle={{ flexDirection: 'row', paddingHorizontal: 10, marginVertical: 30, paddingBottom: 10, height: config.HEIGHT_SCREEN * 0.75, width: config.WIDTH_SCREEN - 60, alignItems: 'center', }}
         />
@@ -166,10 +182,10 @@ const styles = StyleSheet.create({
   boxShadow: {
     ...Platform.select({
       ios: {
-        shadowColor: 'rgba(0,0,0, .7)',
-        shadowOffset: { height: 0, width: 0 },
-        shadowOpacity: 1,
-        shadowRadius: 6,
+        shadowColor: 'rgba(0,0,0,0.3)',
+				shadowOffset: { height: 0, width: 0 },
+				shadowOpacity: 1,
+				shadowRadius: 5,
       },
       android: {
         elevation: 6
@@ -189,15 +205,17 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   card: {
-    height: 15,
-    width: 15,
+    height: 20,
+    width: 20,
     backgroundColor: config.COLOR.secondary,
     borderRadius: 15,
     borderWidth: 2,
     borderColor: '#fff',
     position: 'absolute',
     bottom: 0,
-    left: 0,
+    left: -5,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 
