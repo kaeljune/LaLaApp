@@ -3,7 +3,8 @@ import { NavigationActions } from 'react-navigation';
 import { AppNavigator } from '../navigators/AppNavigators';
 import {
   ACCOUNT_FETCH_SUCCESS,
-  ACCOUNT_FETCH_FAIL
+  ACCOUNT_FETCH_FAIL,
+  SIGNOUT
 } from '../actions/types.js';
 // Start with two routes: The Main screen, with the Login screen on top.
 const firstAction = AppNavigator.router.getActionForPathAndParams('isSignedIn');
@@ -34,7 +35,7 @@ export default function nav(state = initialNavState, action) {
         state
       );
       break;
-    case 'Logout':
+    case SIGNOUT:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'isSignedOut' }),
         state

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
-import { Icon, List, ListItem } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
+
+import { connect } from 'react-redux';
+import { signOut } from '../../../actions';
+
 
 import { COLOR, STYLES } from '../../../config/config';
 
@@ -40,7 +44,9 @@ class Services extends Component {
 					</TouchableWithoutFeedback>
 				</View>
 				<View>
-					<TouchableWithoutFeedback>
+					<TouchableWithoutFeedback
+						onPress={this.props.signOut}
+					>
 						<View style={styles.row}>
 							<Text style={{ fontSize: 17, color: '#313131' }}>
 								Sign out
@@ -78,4 +84,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default Services;
+export default connect(null, { signOut })(Services);

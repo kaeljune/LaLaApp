@@ -23,7 +23,7 @@ class TextField extends Component {
           <TextInput
             value={this.props.value}
             secureTextEntry={this.props.secureTextEntry && !this.state.isShowPass}
-            style={[{ paddingBottom: 10, lineHeight: 25, fontSize: 16 }, this.props.style]}
+            style={[{ paddingBottom: 10, lineHeight: 25, fontSize: 16, height: 40 }, this.props.style]}
             placeholder={this.props.placeholder}
             placeholderTextColor={COLOR.placeholderTextColor}
             underlineColorAndroid="transparent"
