@@ -18,7 +18,7 @@ class MainScreen extends Component {
 		const { state } = navigation;
 		if (state.params !== undefined) {
 			return {
-				title: 'Local Products',
+				title: 'Find Local Products',
 				headerStyle,
 				headerTitleStyle,
 				headerLeft: null,
@@ -205,12 +205,13 @@ class MainScreen extends Component {
 		}
 
 		return (
-			<View
+			<View style={{ flex: 1 }}>
+				<View
 				style={{
 					flex: 1,
 					flexDirection: 'column',
 					alignItems: 'center',
-					justifyContent: 'center'
+					justifyContent: 'center',
 				}}
 			>
 				<Icon
@@ -222,7 +223,27 @@ class MainScreen extends Component {
 					onPress={() => this.props.navigation.navigate('address')}
 				/>
 
-				<Text style={{ marginTop: 10, fontWeight: '700' }}>FIND A GIFT</Text>
+				<Text style={{ marginTop: 10, fontWeight: '700' }}>FOR ME</Text>
+			</View>
+				<View
+					style={{
+						flex: 1,
+						flexDirection: 'column',
+						alignItems: 'center',
+						justifyContent: 'center'
+					}}
+				>
+					<Icon
+						reverse
+						raised
+						reverseColor="white"
+						name='add'
+						color={COLOR.primary}
+						onPress={() => this.props.navigation.navigate('address')}
+					/>
+
+					<Text style={{ marginTop: 10, fontWeight: '700' }}>FOR OTHER PEOPLE</Text>
+				</View>
 			</View>
 		);
 	};

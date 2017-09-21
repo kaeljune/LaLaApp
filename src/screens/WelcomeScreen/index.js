@@ -6,8 +6,9 @@ import { AppLoading } from 'expo';
 import Slides from '../../components/slides';
 
 const SLIDE_DATA = [
-    { 
-        text: 'AirLaLa empowers local artisans and SMEs by AI-powered marketplace.', 
+    {
+        // text: 'AirLaLa empowers local artisans and SMEs by AI-powered marketplace.',
+        text: 'AirLala help travellers find the most authentic local products. Besides, AirLala empower local small businesses and artisan with low-interest financing with ease and transparency',
         color: '#03A9F4' },
     { text: 'Promoting and fostering local artisans and young entrepreneurs.', color: '#009688' },
     { text: 'Matchmaking international buyers with local partners.', color: '#03A9F4' },

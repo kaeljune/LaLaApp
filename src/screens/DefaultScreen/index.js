@@ -39,10 +39,8 @@ class DefaultScreen extends Component {
   }
   render() {
     return (
-      <Image
-        style={styles.container}
-        source={backgroundImage}
-      >
+
+      <View style={styles.container}>
         <View>
           <Image source={logo} style={styles.logoStyle} />
         </View>
@@ -67,7 +65,8 @@ class DefaultScreen extends Component {
             </Text>
           </Text>
         </View>
-      </Image>
+      </View>
+
     );
   }
 }
@@ -78,6 +77,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     resizeMode: 'cover',
     justifyContent: 'space-between',
+    backgroundColor: '#fff',
     width: WIDTH_SCREEN
   },
   logoStyle: {

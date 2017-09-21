@@ -38,7 +38,7 @@ import TextField from '../../components/TextField';
 import avatar from '../../../assets/images/avatar.png';
 
 const sexs = ['Female', 'Male', 'Other'];
-const ages = ['0,5', '6,10', '11,15', '15,18', '19,24', '25,34', '35,54', '55,64', '65,150'];
+const ages = ['0-5', '6-10', '11-15', '15-18', '19-24', '25-34', '35-54', '55-64', '65-150'];
 const popular = [
 	'Professional',
 	'Friend',
@@ -163,12 +163,12 @@ class GiftSelection extends Component {
 						</View>
 
 						<SlideSelect items={sexs} onPress={this.onSexChange} />
-						<SlideSelect items={ages} onPress={this.onAgeChange} />
+						<SlideSelect items={ages} onPress={this.onAgeChange} label="Age" />
 						<SlideSelect items={popular} onPress={this.onRelationshipChange} />
 					</View>
 
 					<View style={sectionPad}>
-						<Text style={sectionTitle}>Receiver</Text>
+						<Text style={sectionTitle}>Receiver's Name</Text>
 
 						<TextField
 							style={{ textAlign: 'center', marginTop: 20 }}
@@ -184,7 +184,7 @@ class GiftSelection extends Component {
 					</View>
 
 					<View style={sectionPad}>
-						<Text style={sectionTitle}>Price</Text>
+						<Text style={sectionTitle}>Preferred Budget</Text>
 
 						<Text
 							style={{
@@ -193,16 +193,16 @@ class GiftSelection extends Component {
 								marginBottom: 15,
 								textAlign: 'center'
 							}}
-						>${this.props.price ? this.props.price : 0}-${this.props.price + 100}</Text>
+						>${this.props.price ? this.props.price : 0}-${this.props.price + 25}</Text>
 
 						<Slider
 							minimumValue={0}
-							maximumValue={1000}
+							maximumValue={500}
 							minimumTrackTintColor={COLOR.primary}
 							maximumTrackTintColor='#eee'
 							value={this.props.price}
 							onSlidingComplete={this.onPriceChange}
-							step={100}
+							step={25}
 						/>
 
 					</View>
