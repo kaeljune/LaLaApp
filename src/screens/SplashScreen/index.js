@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { AsyncStorage, View, StyleSheet, ActivityIndicator, Animated } from 'react-native';
 import { connect } from 'react-redux';
 import { AppLoading } from 'expo';
@@ -7,7 +7,7 @@ import _ from 'lodash';
 import { accountFetch, navLogin, navLogout } from '../../actions';
 import { COLOR } from '../../config/config';
 
-class SplashScreen extends Component {
+class SplashScreen extends PureComponent {
 	static navigationOptions = {
 		header: null
 	}
@@ -34,7 +34,7 @@ class SplashScreen extends Component {
 		}
 	}
 
-	async componentDidMount() {
+	componentDidMount() {
 
 		Animated.loop(
 			Animated.parallel([

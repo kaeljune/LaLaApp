@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import {
   View, Text,
-  StyleSheet, ScrollView, AsyncStorage, Alert
+  StyleSheet,
+  Animated,
+  ScrollView,
+  Alert
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
@@ -35,6 +38,7 @@ class SignupScreen extends Component {
   })
   state = {
     userData: null,
+    translateY: new Animated.Value(200)
   };
   // async componentWillMount() {
   //     //await AsyncStorage.removeItem('@userLogin');
@@ -46,6 +50,14 @@ class SignupScreen extends Component {
   //         this.setState({ userData: false });
   //     }
   // }
+
+  componentDidMount() {
+    Animated.spring(this.state.translateY, {
+      toValue: 0,
+      useNativeDriver: true
+    }).start();
+  }
+
   onEmailChange = (text) => {
     this.props.signupEmailChanged(text);
   }
@@ -117,7 +129,7 @@ class SignupScreen extends Component {
         animated={true}
       >
       <ScrollView style={{ flex: 1}} contentContainerStyle={{ padding: 20 }}>
-          <View>
+          <Animated.View style={{ transform: [{ translateY: this.state.translateY }] }}>
             <TextField
               label="FULL NAME"
               value={this.props.name}
@@ -155,7 +167,7 @@ class SignupScreen extends Component {
               value={this.props.password}
               onChangeText={this.onConfirmPasswordChange}
             />
-          </View>
+          </Animated.View>
 
           <LinkTerm onTerms={this.props.onTerms} />
 

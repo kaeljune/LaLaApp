@@ -3,6 +3,7 @@ import {
   View, Text,
   StyleSheet, TextInput,
   ScrollView,
+  Animated,
   TouchableOpacity,
   FlatList,
 } from 'react-native';
@@ -22,20 +23,46 @@ const locations = [
 ];
 
 class Address extends Component {
-
   static navigationOptions = () => ({
-    // title: 'Find Address',
+    // title: 'Where are you going?',
+    headerBackTitle: null,
     headerTintColor: config.COLOR.secondary,
-    headerStyle: {
-      backgroundColor: 'transparent',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      zIndex: 9999,
-      height: config.HEIGHT_HEADER
-    }
+    headerStyle: config.headerStyle
   })
+
+  constructor(props) {
+    super(props);
+
+    this.positionSearch = new Animated.Value(-300);
+    this.opacitySearch = new Animated.Value(0);
+
+    this.positionLocation = new Animated.Value(300);
+    this.opacityLocation = new Animated.Value(0);
+  }
+
+  componentDidMount() {
+    Animated.parallel([
+      Animated.spring(this.positionSearch, {
+        toValue: 0,
+        useNativeDriver: true
+      }),
+      Animated.timing(this.opacitySearch, {
+        toValue: 1,
+        duration: 100,
+        useNativeDriver: true
+      }),
+      Animated.timing(this.positionLocation, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true
+      }),
+      Animated.timing(this.opacityLocation, {
+        toValue: 1,
+        duration: 100,
+        useNativeDriver: true
+      })
+    ]).start();
+  }
 
   onChangeText = (location) => {
     this.props.requestLocationChanged(location);
@@ -46,19 +73,38 @@ class Address extends Component {
     const filtererLocation = locations.filter((item) => item.name.toLowerCase().indexOf(location.toLowerCase()) >= 0);
     return (
       <View style={styles.container}>
-        <View style={{ backgroundColor: '#fff' }}>
+        <Animated.View
+          style={{
+            backgroundColor: '#fff',
+            paddingTop: 10,
+            opacity: this.opacitySearch,
+            transform: [{
+              translateX: this.positionSearch,
+            }]
+          }}
+        >
           <TextInput
             placeholder="Where are you going?"
+            autoFocus
             onChangeText={this.onChangeText}
             value={location}
             style={styles.input}
-            colorTint="#ddd"
+            selectionColor={config.COLOR.primary}
             corlor={config.COLOR.primary}
             underlineColorAndroid="transparent"
           />
-        </View>
+        </Animated.View>
 
-        <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 20 }}>
+        <Animated.View
+          style={{
+            flex: 1,
+            opacity: this.opacityLocation,
+            transform: [{
+              translateY: this.positionLocation,
+            }]
+          }}
+        >
+        <ScrollView  contentContainerStyle={{ padding: 20 }}>
           { location.length < 2 &&
           <View style={{ marginBottom: 30 }}>
             <Text style={styles.titleSection}>RECENT SEARCHES</Text>
@@ -98,6 +144,7 @@ class Address extends Component {
             </View>
           </View>
         </ScrollView>
+        </Animated.View>
       </View>
     );
   }
@@ -106,8 +153,7 @@ class Address extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    flex: 1,
-    paddingTop: config.HEIGHT_HEADER
+    flex: 1
   },
 
   input: {
