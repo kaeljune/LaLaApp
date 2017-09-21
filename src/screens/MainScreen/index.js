@@ -55,11 +55,7 @@ class MainScreen extends Component {
 				cardPosition: new Animated.Value(50),
 				addButonPosition: new Animated.Value(50)
 			}
-<<<<<<< HEAD
 		};
-=======
-		}
->>>>>>> 51432c43dd5687638c5f3df6cdb165276cef1b46
 
 		// if (Platform.OS === 'android') {
 		// 	UIManager.setLayoutAnimationEnabledExperimental &&
@@ -85,44 +81,10 @@ class MainScreen extends Component {
 		await this.props.fetchRequest();
 		const { setParams } = this.props.navigation;
 		const { auth, items } = this.props;
-<<<<<<< HEAD
 		const name = bodau(auth.userLogin.name);
 		setParams({ name: _.toUpper(name.match(/\b\w/g).join('')).substring(0, 2), items: items.length });
 	}
 
-=======
-		const name = auth.userLogin.name;
-		setParams({ name: _.toUpper(name.match(/\b\w/g).join('')), items: items.length });
-	}
-
-	async componentDidMount() {
-		//console.log(this.props.state);
-		await firebase.auth().currentUser.getIdToken(true)
-			.then((idToken) => {
-				console.log(idToken);
-				// Send token to your backend via HTTPS
-				// ...
-			}).catch((error) => {
-				// Handle error
-				console.log(error);
-			});
-
-		// Animated.parallel([
-		// 	Animated.spring(this.state.animation.cardPosition, {
-		// 		toValue: 0,
-		// 		useNativeDriver: true
-		// 	}),
-		// 	Animated.spring(this.state.animation.addButonPosition, {
-		// 		toValue: 0,
-		// 		useNativeDriver: true
-		// 	})
-		// ]).start();
-	}
-	// componentWillUpdate() {
-	// 	LayoutAnimation.spring();
-	// }
-
->>>>>>> 51432c43dd5687638c5f3df6cdb165276cef1b46
 	renderItem = ({ item }) => {
 		const name = item.receiverName ? item.receiverName : 'Anonymous';
 		const shortName = _.toUpper(name.match(/\b\w/g).join('')).substring(0, 2);
@@ -136,11 +98,7 @@ class MainScreen extends Component {
 						}
 						onPress={async () => {
 							requestAnimationFrame(() => {
-<<<<<<< HEAD
-									this.props.navigation.navigate('giftselection');
-=======
 									this.props.navigation.navigate('giftselection', { user: item });
->>>>>>> 51432c43dd5687638c5f3df6cdb165276cef1b46
 									this.props.fetchListGift(item.uid);
 							});
 						}}
