@@ -34,11 +34,10 @@ class Checkout extends Component {
 	})
 	render() {
 		return (
-			<View style={{ flex: 1 }}>	
+			<View style={{ flex: 1 }}>
 				<ScrollView style={{ flex: 1, backgroundColor: '#f8f8f8' }} contentContainerStyle={styles.container}>
-					<Feature />
+					<Feature user={this.props.navigation.state.params.user} />
 					<ProductList />
-
 				</ScrollView>
 				<View style={styles.bottomCheckout}>
 					<View
@@ -52,7 +51,7 @@ class Checkout extends Component {
 						<Text style={{ fontSize: 14, fontWeight: '100', color: '#454553', marginRight: 15 }}>TOTAL :</Text>
 						<Text style={{ fontSize: 20, fontWeight: '700', color: COLOR.secondary }}>$ 900</Text>
 					</View>
-					
+
 					<Btn
 						style={{
 							width: WIDTH_SCREEN / 2 - 30
@@ -60,7 +59,7 @@ class Checkout extends Component {
 						title="CHECKOUT"
 						bgColor={COLOR.primary}
 					/>
-			
+
 				</View>
 			</View>
 		);

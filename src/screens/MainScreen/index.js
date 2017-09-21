@@ -116,7 +116,7 @@ class MainScreen extends Component {
 						}
 						onPress={async () => {
 							requestAnimationFrame(() => {
-									this.props.navigation.navigate('giftselection');
+									this.props.navigation.navigate('giftselection', { user: item });
 									this.props.fetchListGift(item.uid);
 							});
 						}}

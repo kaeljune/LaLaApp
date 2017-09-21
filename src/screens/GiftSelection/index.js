@@ -67,7 +67,7 @@ class GiftSelection extends Component {
     <View style={[styles.slide, styles.boxShadow]}>
       <TouchableOpacity
         onPress={() => {
-          this.props.navigation.navigate('detailgift');
+          this.props.navigation.navigate('detailgift', { user: this.props.navigation.state.params.user });
           this.props.fetchGift(item.uid);
         }}
       >
@@ -79,7 +79,7 @@ class GiftSelection extends Component {
       <View style={{ padding: 20, flex: 1 }}>
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('detailgift');
+            this.props.navigation.navigate('detailgift', { user: this.props.navigation.state.params.user });
             this.props.fetchGift(item.uid);
           }}
         >
@@ -98,7 +98,9 @@ class GiftSelection extends Component {
         <TouchableOpacity
           onPress={async () => {
             await this.props.fetchGift(item.uid);
-            await this.props.navigation.navigate('checkout');
+            await this.props.navigation.navigate(
+              'checkout',
+              { user: this.props.navigation.state.params.user });
           }}
         >
           <View
