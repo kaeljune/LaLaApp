@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import {
     View,
@@ -9,28 +10,53 @@ import {
 import { Avatar } from 'react-native-elements';
 
 import { COLOR, HEIGHT_SCREEN } from '../../config/config';
-import avatar from '../../../assets/images/avatar.png';
+// import avatar from '../../../assets/images/avatar.png';
 
-function Feature() {
-    const { sectionContainer, sectionHead, avatarStyle } = styles;
-    return (
-        <View style={sectionContainer}>
-            <View style={sectionHead}>
-                <Avatar
-                    rounded
-                    height={100}
-                    width={100}
-                    source={avatar} 
-                    avatarStyle={{ borderColor: '#fff', borderWidth: 1 }}
-                    style={avatarStyle}
-                />
+class Feature extends Component {
+    render() {
+        console.log(this.props.user)
+        const name = this.props.user.receiverName ? this.props.user.receiverName : 'Anonymous';
+		const shortName = _.toUpper(name.match(/\b\w/g).join(''));
+        const { sectionContainer, sectionHead, avatarStyle } = styles;
+        return (
+            <View style={sectionContainer}>
+                <View style={sectionHead}>
+                    <Avatar
+                        rounded
+                        height={100}
+                        width={100}
+                        avatarStyle={{ borderColor: '#fff', borderWidth: 1 }}
+                        style={avatarStyle}
+                        title={shortName}
+                    />
 
-                <Text style={{ fontWeight: '600', fontSize: 18, marginBottom: 5, color: '#fff' }}>Hai Nguyen</Text>
-                <Text style={{ fontSize: 14, color: '#eee' }}>for Birthday</Text>
+                    <Text style={{ fontWeight: '600', fontSize: 18, marginBottom: 5, color: '#fff' }}>{name}</Text>
+                    <Text style={{ fontSize: 14, color: '#eee' }}>for {this.props.user.occasion}</Text>
+                </View>
             </View>
-        </View>
-    );
+        );
+    }
 }
+// function Feature(props) {
+//     const { sectionContainer, sectionHead, avatarStyle } = styles;
+//     return (
+//         <View style={sectionContainer}>
+//             <View style={sectionHead}>
+//                 <Avatar
+//                     rounded
+//                     height={100}
+//                     width={100}
+//                     avatarStyle={{ borderColor: '#fff', borderWidth: 1 }}
+//                     style={avatarStyle}
+//                     title={_.toUpper(props.user.receiverName.match(/\b\w/g).join(''))}
+//                 />
+
+//                 <Text style={{ fontWeight: '600', fontSize: 18, marginBottom: 5, color: '#fff' }}>{props.user.receiverName}</Text>
+//                 <Text style={{ fontSize: 14, color: '#eee' }}>for {props.user.occasion}</Text>
+//             </View>
+//         </View>
+//     );
+// }
 
 const styles = StyleSheet.create({
     sectionContainer: {
@@ -47,7 +73,7 @@ const styles = StyleSheet.create({
     },
     avatarStyle: {
         marginBottom: 20,
-        
+
     }
 });
 

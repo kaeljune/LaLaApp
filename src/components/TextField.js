@@ -16,6 +16,7 @@ class TextField extends Component {
         <View style={styles.inputWrap}>
           <TextInput
             value={this.props.value}
+            editable={this.props.editable}
             secureTextEntry={this.props.secureTextEntry && !this.state.isShowPass}
             style={[{ height: 40, lineHeight: 25, fontSize: 16 }, this.props.style]}
             placeholder={this.props.placeholder}

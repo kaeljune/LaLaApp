@@ -89,7 +89,7 @@ class DetailGift extends Component {
                 title="Add to Cart"
                 style={{ width: 150 }}
                 bgColor={config.COLOR.secondary}
-                onPress={() => this.props.navigation.navigate('checkout')}
+                onPress={() => this.props.navigation.navigate('checkout', { user: this.props.navigation.state.params.user })}
               />
             </View>
             <View style={styles.section}>

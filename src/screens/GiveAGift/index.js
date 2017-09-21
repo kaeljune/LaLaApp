@@ -60,7 +60,11 @@ const occasions = [
 
 class GiftSelection extends Component {
 	static navigationOptions = ({ navigation }) => ({
+<<<<<<< HEAD
 		title: 'Find a Local Product',
+=======
+		title: 'Find a local artisan',
+>>>>>>> 51432c43dd5687638c5f3df6cdb165276cef1b46
 		headerTintColor: COLOR.secondary,
 		headerStyle,
 		headerTitleStyle,
@@ -259,7 +263,11 @@ class GiftSelection extends Component {
 								underlineColorAndroid={'transparent'}
 								multiline
 								selectionColor={COLOR.primary}
+<<<<<<< HEAD
 								placeholder="He/She is interested in Traveling and Wine, etc..."
+=======
+								placeholder="Dogs, going the beach, pampering, barware, etc"
+>>>>>>> 51432c43dd5687638c5f3df6cdb165276cef1b46
 								placeholderTextColor="#999"
 								value={this.props.other}
 								onChangeText={this.onOtherChange}
