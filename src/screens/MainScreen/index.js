@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { FlatList,
+import {
+	FlatList,
 	View,
 	Text,
 	StyleSheet,
@@ -18,7 +19,7 @@ class MainScreen extends Component {
 		const { state } = navigation;
 		if (state.params !== undefined) {
 			return {
-				title: 'Local Products',
+				title: 'Find Local Products',
 				headerStyle,
 				headerTitleStyle,
 				headerLeft: null,
@@ -56,11 +57,6 @@ class MainScreen extends Component {
 				addButonPosition: new Animated.Value(50)
 			}
 		};
-
-		// if (Platform.OS === 'android') {
-		// 	UIManager.setLayoutAnimationEnabledExperimental &&
-		// 	UIManager.setLayoutAnimationEnabledExperimental(true);
-		// }
 	}
 
 
@@ -77,7 +73,7 @@ class MainScreen extends Component {
 			// str = str.replace(/\W+/g, ' ');
 			// str = str.replace(/\s/g, '-');
 			return str;
-	};
+		};
 		await this.props.fetchRequest();
 		const { setParams } = this.props.navigation;
 		const { auth, items } = this.props;
@@ -90,19 +86,13 @@ class MainScreen extends Component {
 		const shortName = _.toUpper(name.match(/\b\w/g).join('')).substring(0, 2);
 
 		return (
-				<Animated.View style={[styles.item, STYLES.boxShadow]}>
-					<TouchableOpacity
-						onLongPress={() => {
-								this.setState({ isDel: true });
-							}
-						}
-						onPress={async () => {
-							requestAnimationFrame(() => {
-									this.props.navigation.navigate('giftselection', { user: item });
-									this.props.fetchListGift(item.uid);
-							});
-						}}
-					>
+			<View style={[styles.item, STYLES.boxShadow]}>
+				<TouchableOpacity
+					onPress={async () => {
+						await this.props.fetchListGift(item.uid);
+						await this.props.navigation.navigate('giftselection', { user: item });
+					}}
+				>
 					<View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center' }}>
 						<Avatar
 							height={50}
@@ -133,8 +123,8 @@ class MainScreen extends Component {
 							>{item.status}</Text>
 						</View>
 					</View>
-					</TouchableOpacity>
-					{ this.state.isDel &&
+				</TouchableOpacity>
+				{this.state.isDel &&
 					<View
 						style={{
 							position: 'absolute',
@@ -144,18 +134,18 @@ class MainScreen extends Component {
 							alignItems: 'center'
 						}}
 					>
-					<Icon
-						size={15}
-						reverse
-						raised
-						reverseColor="white"
-						name="clear"
-						color={COLOR.secondary}
-						onPress={() => console.log(12)}
-					/>
+						<Icon
+							size={15}
+							reverse
+							raised
+							reverseColor="white"
+							name="clear"
+							color={COLOR.secondary}
+							onPress={() => console.log(12)}
+						/>
 					</View>
-					}
-				</Animated.View>
+				}
+			</View>
 
 		);
 	}
@@ -180,24 +170,24 @@ class MainScreen extends Component {
 					<View style={styles.bottomView}>
 						{
 							this.state.isDel
-							? <Icon
-								size={25}
-								reverse
-								raised
-								reverseColor="white"
-								name="check"
-								color={COLOR.secondary}
-								onPress={() => this.setState({ isDel: false })}
-							/>
-							: <Icon
-								size={25}
-								reverse
-								raised
-								reverseColor="white"
-								name="add"
-								color={COLOR.primary}
-								onPress={() => this.props.navigation.navigate('address')}
-							/>
+								? <Icon
+									size={25}
+									reverse
+									raised
+									reverseColor="white"
+									name="check"
+									color={COLOR.secondary}
+									onPress={() => this.setState({ isDel: false })}
+								/>
+								: <Icon
+									size={25}
+									reverse
+									raised
+									reverseColor="white"
+									name="add"
+									color={COLOR.primary}
+									onPress={() => this.props.navigation.navigate('address')}
+								/>
 						}
 					</View>
 				</View>
@@ -205,24 +195,45 @@ class MainScreen extends Component {
 		}
 
 		return (
-			<View
-				style={{
-					flex: 1,
-					flexDirection: 'column',
-					alignItems: 'center',
-					justifyContent: 'center'
-				}}
-			>
-				<Icon
-					reverse
-					raised
-					reverseColor="white"
-					name='add'
-					color={COLOR.primary}
-					onPress={() => this.props.navigation.navigate('address')}
-				/>
+			<View style={{ flex: 1 }}>
+				<View
+					style={{
+						flex: 1,
+						flexDirection: 'column',
+						alignItems: 'center',
+						justifyContent: 'center',
+					}}
+				>
+					<Icon
+						reverse
+						raised
+						reverseColor="white"
+						name='add'
+						color={COLOR.primary}
+						onPress={() => this.props.navigation.navigate('address')}
+					/>
 
-				<Text style={{ marginTop: 10, fontWeight: '700' }}>FIND A GIFT</Text>
+					<Text style={{ marginTop: 10, fontWeight: '700' }}>FOR ME</Text>
+				</View>
+				<View
+					style={{
+						flex: 1,
+						flexDirection: 'column',
+						alignItems: 'center',
+						justifyContent: 'center'
+					}}
+				>
+					<Icon
+						reverse
+						raised
+						reverseColor="white"
+						name='add'
+						color={COLOR.primary}
+						onPress={() => this.props.navigation.navigate('address')}
+					/>
+
+					<Text style={{ marginTop: 10, fontWeight: '700' }}>FOR OTHER PEOPLE</Text>
+				</View>
 			</View>
 		);
 	};

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, ScrollView, Dimensions, Image } from 'react-native';
+import { View, Text, ScrollView, Dimensions, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 
 import logo from '../../assets/images/logo.png';
@@ -9,7 +9,7 @@ const { width, height } = Dimensions.get('window');
 
 class Slides extends Component {
     state = { }
-    
+
     renderLastSlide(index) {
         const { data, onComplete } = this.props;
         if (index === data.length - 1) {
@@ -37,15 +37,16 @@ class Slides extends Component {
     }
     renderSlides() {
         return this.props.data.map((slide, index) => (
-                <Image 
-                    source={backgroundImage} 
-                    key={slide.text} 
-                    style={styles.slide}
-                >
-                    <Image source={logo} style={styles.logoStyle} />
-                    <Text style={styles.textStyle}>{ slide.text }</Text>
-                    {this.renderLastSlide(index)}
-                </Image>
+            <View
+                key={slide.text}
+                style={styles.slide}
+            >
+
+                <Image source={logo} style={styles.logoStyle} />
+                <Text style={styles.textStyle}>{ slide.text }</Text>
+                {this.renderLastSlide(index)}
+
+            </View>
             ));
     }
     render() {
@@ -65,6 +66,7 @@ const styles = {
     slide: {
         flex: 1,
         alignItems: 'center',
+        backgroundColor: '#fff',
         width,
         height,
         justifyContent: 'space-between'

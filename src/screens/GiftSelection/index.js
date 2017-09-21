@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, Platform } from 'react-native';
 import { Icon } from 'react-native-elements';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
-import Spinner from '../../components/Spinner';
+// import Spinner from '../../components/Spinner';
 import { fetchGift } from '../../actions';
 
 import * as config from '../../config/config';
 
-class GiftSelection extends Component {
+class GiftSelection extends PureComponent {
   static navigationOptions = () => ({
     title: 'Local Products Selection',
     headerTintColor: config.COLOR.primary,
@@ -39,9 +39,15 @@ class GiftSelection extends Component {
     };
   }
 
+  componentWillUpdate(nextProps) {
+    this.state = {
+      entries: nextProps.items,
+    };
+  }
+
 
   get pagination() {
-    const { entries, activeSlide } = this.state;
+    const { activeSlide, entries } = this.state;
     return (
       <Pagination
         dotsLength={entries.length}
@@ -62,7 +68,6 @@ class GiftSelection extends Component {
     );
   }
 
-  //renderItem = ({ item, index }) => (
   renderItem = ({ item }) => (
     <View style={[styles.slide, styles.boxShadow]}>
       <TouchableOpacity
@@ -125,17 +130,11 @@ class GiftSelection extends Component {
   );
 
   render() {
-    if (this.props.items = 0) {
-      return (<View style={[styles.container, { justifyContent: 'center' }]}>
-        <Spinner color="#fff" />
-      </View>);
-    }
     return (
       <View style={styles.container}>
         <Carousel
           props={this.props}
-          ref={(c) => { this._carousel = c; }}
-          data={this.props.items}
+          data={this.state.entries}
           firstItem={this.state.activeSlide}
           renderItem={this.renderItem}
           sliderWidth={config.WIDTH_SCREEN}
