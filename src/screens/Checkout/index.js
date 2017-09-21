@@ -59,6 +59,7 @@ class Checkout extends Component {
 						}}
 						title="CHECKOUT"
 						bgColor={COLOR.primary}
+						onPress={() => this.props.navigation.navigate('writeanote')}
 					/>
 			
 				</View>

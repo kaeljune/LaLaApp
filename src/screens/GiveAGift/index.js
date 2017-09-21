@@ -60,7 +60,7 @@ const occasions = [
 
 class GiftSelection extends Component {
 	static navigationOptions = ({ navigation }) => ({
-		title: 'Find a local artisan',
+		title: 'Find a Local Product',
 		headerTintColor: COLOR.secondary,
 		headerStyle,
 		headerTitleStyle,
@@ -210,17 +210,27 @@ class GiftSelection extends Component {
 						<Text style={sectionTitle}>Recipient's Interests</Text>
 
 						<View style={sectionTag}>
-							<TagSelect onTagPress={this.onInterestChange}>Dog</TagSelect>
-							<TagSelect onTagPress={this.onInterestChange}>DIY</TagSelect>
-							<TagSelect onTagPress={this.onInterestChange}>Cat</TagSelect>
-							<TagSelect onTagPress={this.onInterestChange}>Tea</TagSelect>
-							<TagSelect onTagPress={this.onInterestChange}>Coffee</TagSelect>
-							<TagSelect onTagPress={this.onInterestChange}>Fitness</TagSelect>
-							<TagSelect onTagPress={this.onInterestChange}>Cat</TagSelect>
-							<TagSelect onTagPress={this.onInterestChange}>Tea</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Academics</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Adventure</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Art</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Beer</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Cooking</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Crafts & DIY</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Creative Workspaces</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Design</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Entertaining</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Family</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Fashion</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Feminism</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Film</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Food</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Games</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Hign End Items</TagSelect>
 							<TagSelect onTagPress={this.onInterestChange}>Sport</TagSelect>
-							<TagSelect onTagPress={this.onInterestChange}>Science</TagSelect>
-
+							<TagSelect onTagPress={this.onInterestChange}>History</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Liquor</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Music</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Nature</TagSelect>
 						</View>
 					</View>
 
@@ -249,7 +259,7 @@ class GiftSelection extends Component {
 								underlineColorAndroid={'transparent'}
 								multiline
 								selectionColor={COLOR.primary}
-								placeholder="Dogs, going the beach, pampering, barware, etc"
+								placeholder="He/She is interested in Traveling and Wine, etc..."
 								placeholderTextColor="#999"
 								value={this.props.other}
 								onChangeText={this.onOtherChange}

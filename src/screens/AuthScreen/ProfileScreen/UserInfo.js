@@ -41,7 +41,7 @@ class UserInfo extends PureComponent {
 							multiline
 							numberOfLines={4}
 							labelStyle={styles.label}
-							value="3 Floor, IFA Building, 04 Nguyen Thi Minh Khai, Da Kao, 1 District, HCMC, VN"
+							value="Ho Chi Minh, VN"
 							onChangeText={this.onEmailChange}
 						/>
 					</View>

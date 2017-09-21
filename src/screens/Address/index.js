@@ -16,10 +16,10 @@ import {
 import * as config from '../../config/config';
 
 const locations = [
-  { name: 'Ha Noi' },
-  { name: 'Ho Chi Minh' },
-  { name: 'Hai Phong' },
-  { name: 'Da Nang' }
+  { name: 'Ha Noi, Viet Nam' },
+  { name: 'Ho Chi Minh, Viet Nam' },
+  { name: 'Hai Phong, Viet Nam' },
+  { name: 'Da Nang, Viet Nam' }
 ];
 
 class Address extends Component {

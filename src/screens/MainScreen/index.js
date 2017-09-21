@@ -4,13 +4,9 @@ import { FlatList,
 	Text,
 	StyleSheet,
 	TouchableOpacity,
-	LayoutAnimation,
 	Animated,
-	Platform,
-	UIManager
 } from 'react-native';
 import _ from 'lodash';
-import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Avatar, Icon } from 'react-native-elements';
 
@@ -22,7 +18,7 @@ class MainScreen extends Component {
 		const { state } = navigation;
 		if (state.params !== undefined) {
 			return {
-				title: 'Gifts',
+				title: 'Local Products',
 				headerStyle,
 				headerTitleStyle,
 				headerLeft: null,
@@ -59,7 +55,7 @@ class MainScreen extends Component {
 				cardPosition: new Animated.Value(50),
 				addButonPosition: new Animated.Value(50)
 			}
-		}
+		};
 
 		// if (Platform.OS === 'android') {
 		// 	UIManager.setLayoutAnimationEnabledExperimental &&
@@ -69,43 +65,29 @@ class MainScreen extends Component {
 
 
 	async componentWillMount() {
+		const bodau = (str) => {
+			str = str.toLowerCase();
+			str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
+			str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e');
+			str = str.replace(/ì|í|ị|ỉ|ĩ/g, 'i');
+			str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, 'o');
+			str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, 'u');
+			str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, 'y');
+			str = str.replace(/đ/g, 'd');
+			// str = str.replace(/\W+/g, ' ');
+			// str = str.replace(/\s/g, '-');
+			return str;
+	};
 		await this.props.fetchRequest();
 		const { setParams } = this.props.navigation;
 		const { auth, items } = this.props;
-		const name = auth.userLogin.name;
-		setParams({ name: _.toUpper(name.match(/\b\w/g).join('')), items: items.length });
+		const name = bodau(auth.userLogin.name);
+		setParams({ name: _.toUpper(name.match(/\b\w/g).join('')).substring(0, 2), items: items.length });
 	}
-
-	async componentDidMount() {
-		//console.log(this.props.state);
-		await firebase.auth().currentUser.getIdToken(true)
-			.then((idToken) => {
-				console.log(idToken);
-				// Send token to your backend via HTTPS
-				// ...
-			}).catch((error) => {
-				// Handle error
-				console.log(error);
-			});
-
-		// Animated.parallel([
-		// 	Animated.spring(this.state.animation.cardPosition, {
-		// 		toValue: 0,
-		// 		useNativeDriver: true
-		// 	}),
-		// 	Animated.spring(this.state.animation.addButonPosition, {
-		// 		toValue: 0,
-		// 		useNativeDriver: true
-		// 	})
-		// ]).start();
-	}
-	// componentWillUpdate() {
-	// 	LayoutAnimation.spring();
-	// }
 
 	renderItem = ({ item }) => {
 		const name = item.receiverName ? item.receiverName : 'Anonymous';
-		const shortName = _.toUpper(name.match(/\b\w/g).join(''));
+		const shortName = _.toUpper(name.match(/\b\w/g).join('')).substring(0, 2);
 
 		return (
 				<Animated.View style={[styles.item, STYLES.boxShadow]}>
@@ -133,7 +115,7 @@ class MainScreen extends Component {
 						<Text style={{ fontSize: 14, marginVertical: 7, color: '#888' }}>
 							for {item.occasion}
 						</Text>
-						<Text style={{ fontSize: 14, fontWeight: '600' }}>{item.priceRange}</Text>
+						<Text style={{ fontSize: 14, fontWeight: '600' }}>{`~${item.priceRange}$`}</Text>
 						<View
 							style={{
 								backgroundColor: COLOR.secondary,

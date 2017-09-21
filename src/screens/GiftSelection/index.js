@@ -12,7 +12,7 @@ import * as config from '../../config/config';
 
 class GiftSelection extends Component {
   static navigationOptions = () => ({
-    title: 'Gift selection',
+    title: 'Local Products Selection',
     headerTintColor: config.COLOR.primary,
     headerTitleStyle: config.headerTitleStyle,
     headerStyle: config.headerStyle,
@@ -96,9 +96,9 @@ class GiftSelection extends Component {
         <Text style={{ fontWeight: '700', fontSize: 20, marginLeft: 20 }}>{item.price}</Text>
 
         <TouchableOpacity
-          onPress={async () => {
-            await this.props.fetchGift(item.uid);
-            await this.props.navigation.navigate('checkout');
+          onPress={() => {
+            this.props.fetchGift(item.uid);
+            this.props.navigation.navigate('checkout');
           }}
         >
           <View
