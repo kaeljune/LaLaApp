@@ -11,7 +11,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Avatar, Icon } from 'react-native-elements';
 
-import { accountFetch, fetchRequest, fetchListGift } from '../../actions';
+import { accountFetch, fetchRequest, fetchListGift, fetchCart } from '../../actions';
 import { COLOR, WIDTH_SCREEN, STYLES, headerStyle, headerTitleStyle } from '../../config/config';
 
 class MainScreen extends Component {
@@ -75,6 +75,7 @@ class MainScreen extends Component {
 			return str;
 		};
 		await this.props.fetchRequest();
+		
 		const { setParams } = this.props.navigation;
 		const { auth, items } = this.props;
 		const name = bodau(auth.userLogin.name);
@@ -84,12 +85,12 @@ class MainScreen extends Component {
 	renderItem = ({ item }) => {
 		const name = item.receiverName ? item.receiverName : 'Anonymous';
 		const shortName = _.toUpper(name.match(/\b\w/g).join('')).substring(0, 2);
-
 		return (
 			<View style={[styles.item, STYLES.boxShadow]}>
 				<TouchableOpacity
 					onPress={async () => {
 						await this.props.fetchListGift(item.uid);
+						await this.props.fetchCart(item);
 						await this.props.navigation.navigate('giftselection', { user: item });
 					}}
 				>
@@ -285,4 +286,5 @@ const mapStateToProps = state => {
 	return { items, auth };
 };
 
-export default connect(mapStateToProps, { accountFetch, fetchRequest, fetchListGift })(MainScreen);
+export default connect(mapStateToProps, 
+	{ accountFetch, fetchRequest, fetchListGift, fetchCart })(MainScreen);

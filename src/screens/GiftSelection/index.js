@@ -2,11 +2,12 @@ import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, Platform } from 'react-native';
 import { Icon } from 'react-native-elements';
 import _ from 'lodash';
+import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 // import Spinner from '../../components/Spinner';
-import { fetchGift } from '../../actions';
+import { fetchGift, addQuantity, fetchCart } from '../../actions';
 
 import * as config from '../../config/config';
 
@@ -99,10 +100,10 @@ class GiftSelection extends PureComponent {
         style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
       >
         <Text style={{ fontWeight: '700', fontSize: 20, marginLeft: 20 }}>{item.price}</Text>
-
         <TouchableOpacity
           onPress={async () => {
             await this.props.fetchGift(item.uid);
+            await this.props.addQuantity(this.props.cardActive, item.uid);
             await this.props.navigation.navigate(
               'checkout',
               { user: this.props.navigation.state.params.user });
@@ -218,8 +219,9 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   const items = _.map(state.listRequest.listGift, (val, uid) => ({ ...val, uid }));
+  const cardActive = state.listRequest.cardActive;
   const auth = state.fetchAcc;
-  return { items, auth };
+  return { items, cardActive, auth };
 };
 
-export default connect(mapStateToProps, { fetchGift })(GiftSelection);
+export default connect(mapStateToProps, { fetchGift, addQuantity, fetchCart })(GiftSelection);

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, Animated, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
+// import Spinner from '../../components/Spinner';
 import _ from 'lodash';
+import { addQuantity, subQuantity } from '../../actions';
 
-import { WIDTH_SCREEN, COLOR, STYLES } from '../../config/config';
+import { COLOR } from '../../config/config';
 
 class ProductList extends Component {
 	constructor(props) {
@@ -16,9 +19,11 @@ class ProductList extends Component {
 
 	upQuality = () => {
 		this.setState(previousState => ({ total: previousState.total + 1 }));
+		this.props.addQuantity(this.props.cardActive, this.props.uid);
 	}
 	downQuality = () => {
 		this.setState(previousState => ({ total: previousState.total - 1 }));
+		this.props.subQuantity(this.props.cardActive, this.props.uid);
 	}
 
 	renderBtn = () => {
@@ -41,7 +46,6 @@ class ProductList extends Component {
 
 	render() {
 		const { name, price, image } = this.props;
-		console.log(this.props)
 		return (
 			<View style={styles.itemStyle}>
 				<View style={{ width: 90, height: 90, backgroundColor: '#eee' }}>
@@ -131,5 +135,5 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default ProductList;
+export default connect(null, { addQuantity, subQuantity })(ProductList);
 

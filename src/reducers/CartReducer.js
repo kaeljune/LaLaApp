@@ -5,6 +5,7 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
+  cart: null,
   customer: '',
   grandTotal : 11,
   items : null,

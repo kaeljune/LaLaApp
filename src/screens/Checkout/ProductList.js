@@ -3,18 +3,21 @@ import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
+import Reactotron from 'reactotron-react-native';
 import ProductItem from './ProductItem';
 
 import { STYLES } from '../../config/config';
 
 class ProductList extends Component {
 
-	renderItem = () => (
+	renderItem = ({ item }) => (
 		<ProductItem
-			image={this.props.items[0].image}
-			name={this.props.items[0].name}
-			price={_.parseInt(_.replace(this.props.items[0].price, /^\D+/g, ''))}
-			total={this.props.items[0].total}
+			cardActive={this.props.cardActive}
+			uid={item.uid}
+			image={item.image}
+			name={item.name}
+			price={_.parseInt(_.replace(item.price, /^\D+/g, ''))}
+			total={item.quantity}
 		/>
 	)
 	render() {
@@ -36,10 +39,9 @@ class ProductList extends Component {
 
 const mapStateToProps = state => {
 	const GiftID = state.listRequest.giftActive;
-	const items =
-		[_.merge(_.find(_.map(state.listRequest.listGift, (val, uid) => ({ ...val, uid })),
-			{ uid: state.listRequest.giftActive }), { total: 1 })];
-	return { items, GiftID };
+	const cardActive = state.listRequest.cardActive;
+	const items = _.filter(_.map(state.listRequest.cart[cardActive].items, (val, uid) => ({ ...val, uid })), (gift) => gift.quantity > 0);
+	return { items, cardActive, GiftID };
 };
 export default connect(mapStateToProps, {})(ProductList);
 

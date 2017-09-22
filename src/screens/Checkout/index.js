@@ -83,9 +83,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-  const GiftID = state.listRequest.giftActive;
-  const item = _.find(_.map(state.listRequest.listGift, (val, uid) => ({ ...val, uid })), { uid: state.listRequest.giftActive });
-  return { item, GiftID };
 };
 
 export default connect(mapStateToProps, {})(Checkout);
