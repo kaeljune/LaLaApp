@@ -14,6 +14,20 @@ import { Avatar, Icon } from 'react-native-elements';
 import { accountFetch, fetchRequest, fetchListGift } from '../../actions';
 import { COLOR, WIDTH_SCREEN, STYLES, headerStyle, headerTitleStyle } from '../../config/config';
 
+const bodau = (str) => {
+	str = str.toLowerCase();
+	str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
+	str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e');
+	str = str.replace(/ì|í|ị|ỉ|ĩ/g, 'i');
+	str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, 'o');
+	str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, 'u');
+	str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, 'y');
+	str = str.replace(/đ/g, 'd');
+	// str = str.replace(/\W+/g, ' ');
+	// str = str.replace(/\s/g, '-');
+	return str;
+};
+
 class MainScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
 		const { state } = navigation;
@@ -51,29 +65,11 @@ class MainScreen extends Component {
 		super(props);
 
 		this.state = {
-			isDel: false,
-			animation: {
-				cardPosition: new Animated.Value(50),
-				addButonPosition: new Animated.Value(50)
-			}
+			isDel: false
 		};
 	}
 
-
 	async componentWillMount() {
-		const bodau = (str) => {
-			str = str.toLowerCase();
-			str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
-			str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e');
-			str = str.replace(/ì|í|ị|ỉ|ĩ/g, 'i');
-			str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, 'o');
-			str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, 'u');
-			str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, 'y');
-			str = str.replace(/đ/g, 'd');
-			// str = str.replace(/\W+/g, ' ');
-			// str = str.replace(/\s/g, '-');
-			return str;
-		};
 		await this.props.fetchRequest();
 		const { setParams } = this.props.navigation;
 		const { auth, items } = this.props;
@@ -150,7 +146,6 @@ class MainScreen extends Component {
 		);
 	}
 
-
 	renderList = () => {
 		const { items } = this.props;
 		if (items.length > 0) {
@@ -165,7 +160,6 @@ class MainScreen extends Component {
 						renderItem={this.renderItem}
 						removeClippedSubviews={false}
 					/>
-
 
 					<View style={styles.bottomView}>
 						{

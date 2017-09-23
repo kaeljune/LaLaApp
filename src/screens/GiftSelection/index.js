@@ -76,10 +76,10 @@ class GiftSelection extends PureComponent {
           this.props.fetchGift(item.uid);
         }}
       >
-        <Image
-          source={{ uri: item.image }}
-          style={styles.image}
-        />
+      <Image
+        source={{ uri: item.image }}
+        style={styles.image}
+      />
       </TouchableOpacity>
       <View style={{ padding: 20, flex: 1 }}>
         <TouchableOpacity

@@ -3,6 +3,7 @@ import {
   View, Text,
   StyleSheet,
   Animated,
+  AsyncStorage,
   ScrollView,
   Alert
 } from 'react-native';
@@ -36,10 +37,12 @@ class SignupScreen extends Component {
     headerTitleStyle,
     headerStyle,
   })
+
   state = {
     userData: null,
     translateY: new Animated.Value(200)
   };
+
   // async componentWillMount() {
   //     //await AsyncStorage.removeItem('@userLogin');
   //     const userData = await AsyncStorage.getItem('@userLogin');
