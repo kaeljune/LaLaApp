@@ -4,17 +4,18 @@ import {
   Text,
   StyleSheet,
   Animated,
+  Image,
   TouchableWithoutFeedback
 } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import ProgressiveImage from 'react-native-progressive-image';
+// import ProgressiveImage from 'react-native-progressive-image';
 import { Icon } from 'react-native-elements';
 
 import Btn from '../../components/Btn';
 
 import * as config from '../../config/config';
-import progress from '../../../assets/images/progress.jpg';
+// import progress from '../../../assets/images/progress.jpg';
 
 class DetailGift extends Component {
   static navigationOptions = () => ({
@@ -38,7 +39,7 @@ class DetailGift extends Component {
   state = {
     yOffset: new Animated.Value(0),
     scaleValue: new Animated.Value(0.9),
-    yTransform: new Animated.Value(100)
+    yTransform: new Animated.Value(-100)
   }
 
   componentDidMount() {
@@ -67,11 +68,22 @@ class DetailGift extends Component {
           onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.state.yOffset } } }],
           )}
         >
-          <ProgressiveImage
-            thumbnailSource={progress}
-            imageSource={{ uri: item.image }}
-            style={{ flex: 1, alignItems: 'stretch', height: heightImg, width: config.WIDTH_SCREEN }}
-          />
+          <Animated.View
+            style={{
+              transform: [
+                { scale: this.state.scaleValue },
+                { translateY: this.state.yTransform }
+              ]
+            }}
+          >
+            <Image
+              source={{ uri: item.image }}
+              style={{
+                height: heightImg,
+                width: config.WIDTH_SCREEN,
+              }}
+            />
+          </Animated.View>
 
           <View style={[styles.section, { alignItems: 'center', borderBottomColor: '#ddd', borderBottomWidth: 1 }]}>
             <Text

@@ -10,6 +10,8 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Avatar, Icon } from 'react-native-elements';
 
+import Card from './Card';
+
 import { accountFetch, fetchRequest, fetchListGift } from '../../actions';
 import { COLOR, WIDTH_SCREEN, STYLES, headerStyle, headerTitleStyle } from '../../config/config';
 
@@ -76,71 +78,23 @@ class MainScreen extends Component {
 		setParams({ name: _.toUpper(name.match(/\b\w/g).join('')).substring(0, 2), items: items.length });
 	}
 
-	renderItem = ({ item }) => {
+	renderItem = ({ item, index }) => {
 		const name = item.receiverName ? item.receiverName : 'Anonymous';
 		const shortName = _.toUpper(name.match(/\b\w/g).join('')).substring(0, 2);
-
 		return (
-			<View style={[styles.item, STYLES.boxShadow]}>
-				<TouchableOpacity
+
+				<Card
+					shortName={shortName}
+					name={name}
+					occasion={item.occasion}
+					priceRange={item.priceRange}
+					status={item.status}
+					index={index}
 					onPress={async () => {
 						await this.props.fetchListGift(item.uid);
 						await this.props.navigation.navigate('giftselection', { user: item });
 					}}
-				>
-					<View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center' }}>
-						<Avatar
-							height={50}
-							width={50}
-							overlayContainerStyle={{ backgroundColor: COLOR.primary }}
-							rounded
-							title={shortName}
-						/>
-						<Text style={{ fontSize: 18, marginTop: 7 }}>{name}</Text>
-						<Text style={{ fontSize: 14, marginVertical: 7, color: '#888' }}>
-							for {item.occasion}
-						</Text>
-						<Text style={{ fontSize: 14, fontWeight: '600' }}>{`~${item.priceRange}$`}</Text>
-						<View
-							style={{
-								backgroundColor: COLOR.secondary,
-								marginTop: 7,
-								paddingVertical: 3,
-								paddingHorizontal: 7,
-								borderRadius: 2
-							}}
-						>
-							<Text
-								style={{
-									fontSize: 12,
-									color: '#fff',
-								}}
-							>{item.status}</Text>
-						</View>
-					</View>
-				</TouchableOpacity>
-				{this.state.isDel &&
-					<View
-						style={{
-							position: 'absolute',
-							top: 0, left: 0, right: 0, bottom: 0,
-							backgroundColor: 'rgba(17,184,171,0.6)',
-							justifyContent: 'center',
-							alignItems: 'center'
-						}}
-					>
-						<Icon
-							size={15}
-							reverse
-							raised
-							reverseColor="white"
-							name="clear"
-							color={COLOR.secondary}
-							onPress={() => console.log(12)}
-						/>
-					</View>
-				}
-			</View>
+				/>
 
 		);
 	}
@@ -160,6 +114,18 @@ class MainScreen extends Component {
 						removeClippedSubviews={false}
 					/>
 
+					<View
+						style={[
+							STYLES.boxShadow,
+							{
+								height: 40,
+								backgroundColor: '#fff',
+								borderTopColor: '#ddd',
+								borderTopWidth: 1,
+							}
+						]}
+					/>
+
 					<View style={styles.bottomView}>
 						{
 							this.state.isDel
@@ -171,7 +137,6 @@ class MainScreen extends Component {
 										reverseColor="white"
 										name="check"
 										color={COLOR.secondary}
-
 									/>
 								</TouchableOpacity>
 								: <TouchableOpacity onPress={() => this.props.navigation.navigate('address')}>
@@ -251,24 +216,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: COLOR.background,
 	},
-	item: {
-		padding: 10,
-		backgroundColor: '#fff',
-		margin: 8,
-		width: (WIDTH_SCREEN / 2) - 24,
-	},
-	// box: {
-	// 	backgroundColor: COLOR.secondary,
-	// 	paddingHorizontal: 5,
-	// 	paddingVertical: 1,
-	// 	height: 25,
-	// 	width: 25,
-	// 	borderRadius: 20,
-	// 	minWidth: 20,
-	// 	marginRight: 5,
-	// 	alignItems: 'center',
-	// 	justifyContent: 'center'
-	// },
 	bottomView: {
 		position: 'absolute',
 		bottom: 0,

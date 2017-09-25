@@ -54,7 +54,8 @@ class Checkout extends Component {
 
 					<Btn
 						style={{
-							width: WIDTH_SCREEN / 2 - 30
+							width: (WIDTH_SCREEN / 2) - 20,
+							marginRight: 15
 						}}
 						title="CHECKOUT"
 						bgColor={COLOR.primary}

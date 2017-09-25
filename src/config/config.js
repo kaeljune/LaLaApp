@@ -32,7 +32,7 @@ const headerStyle = {
 };
 
 const headerOverlay =  {
-	backgroundColor: 'rgba(255,255,255,0.5)',
+	backgroundColor: 'rgba(255,255,255,0.8)',
 	position: 'absolute',
 	height: HEIGHT_HEADER,
 	paddingTop: 'auto',
