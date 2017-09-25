@@ -1,15 +1,23 @@
 import React, { PureComponent } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, Platform } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
 import _ from 'lodash';
 import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
+// import ProgressiveImage from 'react-native-progressive-image';
 
+<<<<<<< HEAD
 // import Spinner from '../../components/Spinner';
 import { fetchGift, addQuantity, fetchCart } from '../../actions';
 
+=======
+import { fetchGift } from '../../actions';
+>>>>>>> 054d9bb1c108fb569a6c93ce1a46d988609e26b2
 import * as config from '../../config/config';
+// import progress from '../../../assets/images/progress.jpg';
+
+import CardGift from './CardGift';
 
 class GiftSelection extends PureComponent {
   static navigationOptions = () => ({
@@ -70,6 +78,7 @@ class GiftSelection extends PureComponent {
   }
 
   renderItem = ({ item }) => (
+<<<<<<< HEAD
     <View style={[styles.slide, styles.boxShadow]}>
       <TouchableOpacity
         onPress={() => {
@@ -128,6 +137,22 @@ class GiftSelection extends PureComponent {
       </View>
 
     </View>
+=======
+    <CardGift
+      onPress={() => {
+        this.props.navigation.navigate('detailgift', { user: this.props.navigation.state.params.user });
+        this.props.fetchGift(item.uid);
+      }}
+      onAddCart={async () => {
+        await this.props.fetchGift(item.uid);
+        await this.props.navigation.navigate(
+          'checkout',
+          { user: this.props.navigation.state.params.user });
+      }}
+
+      item={item}
+    />
+>>>>>>> 054d9bb1c108fb569a6c93ce1a46d988609e26b2
   );
 
   render() {

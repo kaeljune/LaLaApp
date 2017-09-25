@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    resizeMode: 'cover',
+    // resizeMode: 'cover',
     justifyContent: 'space-between',
     backgroundColor: '#fff',
     width: WIDTH_SCREEN

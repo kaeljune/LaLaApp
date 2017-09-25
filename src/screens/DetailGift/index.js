@@ -9,11 +9,13 @@ import {
 } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
+// import ProgressiveImage from 'react-native-progressive-image';
 import { Icon } from 'react-native-elements';
 
 import Btn from '../../components/Btn';
 
 import * as config from '../../config/config';
+// import progress from '../../../assets/images/progress.jpg';
 
 class DetailGift extends Component {
   static navigationOptions = () => ({
@@ -37,7 +39,7 @@ class DetailGift extends Component {
   state = {
     yOffset: new Animated.Value(0),
     scaleValue: new Animated.Value(0.9),
-    yTransform: new Animated.Value(100)
+    yTransform: new Animated.Value(-100)
   }
 
   componentDidMount() {
@@ -66,39 +68,51 @@ class DetailGift extends Component {
           onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.state.yOffset } } }],
           )}
         >
+          <Animated.View
+            style={{
+              transform: [
+                { scale: this.state.scaleValue },
+                { translateY: this.state.yTransform }
+              ]
+            }}
+          >
+            <Image
+              source={{ uri: item.image }}
+              style={{
+                height: heightImg,
+                width: config.WIDTH_SCREEN,
+              }}
+            />
+          </Animated.View>
 
-        <Image
-          source={{ uri: item.image }}
-          style={{ height: heightImg, width: config.WIDTH_SCREEN }}
-        />
-            <View style={[styles.section, { alignItems: 'center', borderBottomColor: '#ddd', borderBottomWidth: 1 }]}>
-              <Text
-                style={{
-                  textAlign: 'center',
-                  fontSize: 25,
-                  lineHeight: 40,
-                  fontWeight: '400',
-                  marginBottom: 15,
-                  color: '#333'
-                }}
-              >{item.name}</Text>
+          <View style={[styles.section, { alignItems: 'center', borderBottomColor: '#ddd', borderBottomWidth: 1 }]}>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: 25,
+                lineHeight: 40,
+                fontWeight: '400',
+                marginBottom: 15,
+                color: '#333'
+              }}
+            >{item.name}</Text>
 
-              <Text style={{ marginBottom: 20, fontSize: 16, fontWeight: '700', color: '#777' }}>{item.price}</Text>
+            <Text style={{ marginBottom: 20, fontSize: 16, fontWeight: '700', color: '#777' }}>{item.price}</Text>
 
-              <Btn
-                title="Add to Cart"
-                style={{ width: 150 }}
-                bgColor={config.COLOR.secondary}
-                onPress={() => this.props.navigation.navigate('checkout', { user: this.props.navigation.state.params.user })}
-              />
-            </View>
-            <View style={styles.section}>
-              <Text style={{ fontWeight: '400', color: '#000', marginBottom: 15, fontSize: 18 }}>Description</Text>
+            <Btn
+              title="Add to Cart"
+              style={{ width: 150 }}
+              bgColor={config.COLOR.secondary}
+              onPress={() => this.props.navigation.navigate('checkout', { user: this.props.navigation.state.params.user })}
+            />
+          </View>
+          <View style={styles.section}>
+            <Text style={{ fontWeight: '400', color: '#000', marginBottom: 15, fontSize: 18 }}>Description</Text>
 
-              <Text style={{ lineHeight: 30, fontSize: 15, fontWeight: '100', color: '#666' }}>
-                {item.description}
-              </Text>
-            </View>
+            <Text style={{ lineHeight: 30, fontSize: 15, fontWeight: '100', color: '#666' }}>
+              {item.description}
+            </Text>
+          </View>
         </Animated.ScrollView>
       </View>
     );

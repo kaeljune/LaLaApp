@@ -1,12 +1,15 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import TextField from '../../../components/TextField';
 
 import { STYLES } from '../../../config/config';
 
 class UserInfo extends PureComponent {
+	constructor(props) {
+		super(props);
+	}
 	render() {
-		const { data }  = this.props;
+		const { data, edit } = this.props;
 		const { list, row, label } = styles;
 		return (
 			<View style={[styles.container, STYLES.boxShadow]}>
@@ -17,6 +20,7 @@ class UserInfo extends PureComponent {
 							labelStyle={label}
 							value={data.userLogin.name}
 							onChangeText={this.onEmailChange}
+							editable={edit}
 						/>
 					</View>
 					<View style={row}>
@@ -25,6 +29,7 @@ class UserInfo extends PureComponent {
 							labelStyle={label}
 							value={data.userLogin.email}
 							onChangeText={this.onEmailChange}
+							editable={edit}
 						/>
 					</View>
 					<View style={row}>
@@ -33,17 +38,34 @@ class UserInfo extends PureComponent {
 							labelStyle={label}
 							value={data.userLogin.phone}
 							onChangeText={this.onEmailChange}
+							editable={edit}
 						/>
 					</View>
 					<View style={row}>
-						<TextField
-							label="Address"
-							multiline
-							numberOfLines={4}
-							labelStyle={styles.label}
-							value="Ho Chi Minh, VN"
-							onChangeText={this.onEmailChange}
-						/>
+						{console.log('edit', edit)}
+						{ edit ? (
+							<TextField
+								label="Address"
+								labelStyle={label}
+								value={data.userLogin.address}
+								onChangeText={this.onEmailChange}
+								editable={edit}
+							/>
+						)
+						: (
+							<View>
+								<Text style={styles.label}>Address</Text>
+								<View
+									style={{
+										borderBottomColor: '#ccc',
+										borderBottomWidth: 1,
+										paddingVertical: 15,
+									}}
+								>
+									<Text style={{ fontSize: 16 }}>{data.userLogin.address}</Text>
+								</View>
+							</View>
+						) }
 					</View>
 				</View>
 			</View>

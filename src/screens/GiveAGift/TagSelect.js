@@ -7,11 +7,12 @@ class TagSelect extends PureComponent {
 		active: false
 	}
 	render() {
-		const styleTag = this.state.active ? [styles.tag, styles.active, STYLES.boxShadow] : [styles.tag];
+		const { active } = this.state;
+		const styleTag = active ? [styles.tag, styles.active, STYLES.boxShadow] : [styles.tag];
 		return (
 			<TouchableOpacity onPress={() => this.setState(prevState => ({ active: !prevState.active }))}>
 			<View style={styleTag}>
-				<Text>
+				<Text style={{ color: active ? COLOR.primary : '#313131' }}>
 					{this.props.children}
 				</Text>
 			</View>
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
 	},
 	active: {
 		borderColor: COLOR.primary,
-		color: COLOR.primary
+		// color: COLOR.primary
 	}
 });
 

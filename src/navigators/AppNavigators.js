@@ -63,7 +63,7 @@ const isSignedIn = TabNavigator({
 			tabBarVisible: false
 		},
 		swipeEnabled: false,
-		animationEnabled: false,
+		// animationEnabled: false,
 		lazy: true,
 	}
 );
@@ -78,7 +78,7 @@ export const AppNavigator = TabNavigator({
 		},
 		headerMode: 'screen',
 		swipeEnabled: false,
-		animationEnabled: false,
+		// animationEnabled: false,
 		lazy: true,
 	}
 );

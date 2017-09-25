@@ -1,20 +1,14 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements';
-
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 function Btn(props) {
   return (
     <View style={props.containerStyle ? props.containerStyle : styles.wrapBtn}>
-      <Button
-        raise
-        icon={props.icon ? props.icon : null}
-        title={props.title}
-        backgroundColor={props.bgColor}
-        fontWeight="600"
-        buttonStyle={[styles.btnStyle, props.style]}
-        onPress={props.onPress}
-      />
+      <TouchableOpacity onPress={props.onPress}>
+        <View style={[styles.btnStyle, props.style, { backgroundColor: props.bgColor }]}>
+          <Text style={props.titleStyle ? props.titleStyle : styles.btnText}>{props.title}</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -23,7 +17,7 @@ const styles = StyleSheet.create({
   wrapBtn: {
     alignItems: 'center',
     justifyContent: 'center',
-    
+
   },
   btnStyle: {
     // minWidth: 150,
