@@ -29,6 +29,7 @@ export const REQUEST_GIFT = 'request_gift';
 export const REQUEST_GIFT_SUCCESS = 'request_gift_success';
 export const REQUEST_GIFT_FAIL = 'request_gift_fail';
 export const REQUEST_LOCATION_CHANGED = 'request_location_changed';
+export const CLEAR_LOCATION = 'clear_location';
 export const REQUEST_SEX_CHANGED = 'request_sex_changed';
 export const REQUEST_AGE_CHANGED = 'request_age_changed';
 export const REQUEST_RECEIVERNAME_CHANGED = 'request_receivername_changed';

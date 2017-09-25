@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import {
   REQUEST_LOCATION_CHANGED,
+  CLEAR_LOCATION,
   REQUEST_SEX_CHANGED,
   REQUEST_AGE_CHANGED,
   REQUEST_RECEIVERNAME_CHANGED,
@@ -20,7 +21,7 @@ import {
 import { RootAPI } from '../config/config';
 
 
-export const requestGift = ({ idToken, location, sex, age, receiverName, 
+export const requestGift = ({ idToken, location, sex, age, receiverName,
   relationship, price, occasion, interest, style, other }, callback) => async (dispatch) => {
   dispatch({ type: REQUEST_GIFT });
   try {
@@ -59,6 +60,9 @@ export const requestGiftSuccess = (dispatch) => {
 export const requestLocationChanged = (text) => ({
   type: REQUEST_LOCATION_CHANGED,
   payload: text
+});
+export const clearLocation = () => ({
+  type: CLEAR_LOCATION,
 });
 export const requestSexChanged = (text) => ({
   type: REQUEST_SEX_CHANGED,

@@ -1,5 +1,6 @@
 import {
   REQUEST_LOCATION_CHANGED,
+  CLEAR_LOCATION,
   REQUEST_SEX_CHANGED,
   REQUEST_AGE_CHANGED,
   REQUEST_RECEIVERNAME_CHANGED,
@@ -36,12 +37,14 @@ export default function (state = INITIAL_STATE, action) {
     case REQUEST_GIFT_SUCCESS:
       return { ...state, ...INITIAL_STATE };
     case REQUEST_GIFT_FAIL:
-      return { ...state, 
-        error: action.payload, 
-        loading: false 
+      return { ...state,
+        error: action.payload,
+        loading: false
     };
     case REQUEST_LOCATION_CHANGED:
       return { ...state, location: action.payload };
+    case CLEAR_LOCATION:
+      return { ...state, location: '' };
     case REQUEST_SEX_CHANGED:
       return { ...state, sex: action.payload };
     case REQUEST_AGE_CHANGED:

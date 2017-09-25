@@ -10,7 +10,8 @@ import {
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import {
-  requestLocationChanged
+  requestLocationChanged,
+  clearLocation
 } from '../../actions';
 
 import * as config from '../../config/config';
@@ -78,6 +79,8 @@ class Address extends Component {
             backgroundColor: '#fff',
             paddingTop: 10,
             opacity: this.opacitySearch,
+            flexDirection: 'row',
+            alignItems: 'center',
             transform: [{
               translateX: this.positionSearch,
             }]
@@ -93,6 +96,13 @@ class Address extends Component {
             corlor={config.COLOR.primary}
             underlineColorAndroid="transparent"
           />
+
+          { location.length > 0 &&
+          <TouchableOpacity onPress={() => this.props.clearLocation() }>
+            <View style={{ width: 50 }}>
+              <Icon name="clear" size={20} color="#999" />
+            </View>
+          </TouchableOpacity>}
         </Animated.View>
 
         <Animated.View
@@ -104,7 +114,7 @@ class Address extends Component {
             }]
           }}
         >
-        <ScrollView  contentContainerStyle={{ padding: 20 }}>
+        <ScrollView contentContainerStyle={{ padding: 20 }}>
           { location.length < 2 &&
           <View style={{ marginBottom: 30 }}>
             <Text style={styles.titleSection}>RECENT SEARCHES</Text>
@@ -158,9 +168,10 @@ const styles = StyleSheet.create({
 
   input: {
     fontWeight: '700',
-    fontSize: 25,
+    fontSize: 20,
     height: 60,
     paddingHorizontal: 20,
+    flex: 1,
   },
   section: {
 
@@ -190,4 +201,4 @@ const mapStateToProps = ({ requestGiftState }) => {
   return { location };
 };
 
-export default connect(mapStateToProps, { requestLocationChanged })(Address);
+export default connect(mapStateToProps, { requestLocationChanged, clearLocation })(Address);

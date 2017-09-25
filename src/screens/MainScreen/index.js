@@ -5,7 +5,6 @@ import {
 	Text,
 	StyleSheet,
 	TouchableOpacity,
-	Animated,
 } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
@@ -164,24 +163,28 @@ class MainScreen extends Component {
 					<View style={styles.bottomView}>
 						{
 							this.state.isDel
-								? <Icon
-									size={25}
-									reverse
-									raised
-									reverseColor="white"
-									name="check"
-									color={COLOR.secondary}
-									onPress={() => this.setState({ isDel: false })}
-								/>
-								: <Icon
-									size={25}
-									reverse
-									raised
-									reverseColor="white"
-									name="add"
-									color={COLOR.primary}
-									onPress={() => this.props.navigation.navigate('address')}
-								/>
+								? <TouchableOpacity onPress={() => this.setState({ isDel: false })}>
+									<Icon
+										size={25}
+										reverse
+										raised
+										reverseColor="white"
+										name="check"
+										color={COLOR.secondary}
+
+									/>
+								</TouchableOpacity>
+								: <TouchableOpacity onPress={() => this.props.navigation.navigate('address')}>
+									<Icon
+										size={25}
+										reverse
+										raised
+										reverseColor="white"
+										name="add"
+										color={COLOR.primary}
+
+									/>
+								</TouchableOpacity>
 						}
 					</View>
 				</View>
@@ -190,44 +193,46 @@ class MainScreen extends Component {
 
 		return (
 			<View style={{ flex: 1 }}>
-				<View
-					style={{
-						flex: 1,
-						flexDirection: 'column',
-						alignItems: 'center',
-						justifyContent: 'center',
-					}}
-				>
-					<Icon
-						reverse
-						raised
-						reverseColor="white"
-						name='add'
-						color={COLOR.primary}
-						onPress={() => this.props.navigation.navigate('address')}
-					/>
+				<TouchableOpacity onPress={() => this.props.navigation.navigate('address')}>
+					<View
+						style={{
+							flex: 1,
+							flexDirection: 'column',
+							alignItems: 'center',
+							justifyContent: 'center',
+						}}
+					>
+						<Icon
+							reverse
+							raised
+							reverseColor="white"
+							name='add'
+							color={COLOR.primary}
+						/>
 
-					<Text style={{ marginTop: 10, fontWeight: '700' }}>FOR ME</Text>
-				</View>
-				<View
-					style={{
-						flex: 1,
-						flexDirection: 'column',
-						alignItems: 'center',
-						justifyContent: 'center'
-					}}
-				>
-					<Icon
-						reverse
-						raised
-						reverseColor="white"
-						name='add'
-						color={COLOR.primary}
-						onPress={() => this.props.navigation.navigate('address')}
-					/>
+						<Text style={{ marginTop: 10, fontWeight: '700' }}>FOR ME</Text>
+					</View>
+				</TouchableOpacity>
+				<TouchableOpacity onPress={() => this.props.navigation.navigate('address')}>
+					<View
+						style={{
+							flex: 1,
+							flexDirection: 'column',
+							alignItems: 'center',
+							justifyContent: 'center'
+						}}
+					>
+						<Icon
+							reverse
+							raised
+							reverseColor="white"
+							name='add'
+							color={COLOR.primary}
+						/>
 
-					<Text style={{ marginTop: 10, fontWeight: '700' }}>FOR OTHER PEOPLE</Text>
-				</View>
+						<Text style={{ marginTop: 10, fontWeight: '700' }}>FOR OTHER PEOPLE</Text>
+					</View>
+				</TouchableOpacity>
 			</View>
 		);
 	};
