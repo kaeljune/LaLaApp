@@ -4,11 +4,11 @@ import { Icon } from 'react-native-elements';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
+import ProgressiveImage from 'react-native-progressive-image';
 
-// import Spinner from '../../components/Spinner';
 import { fetchGift } from '../../actions';
-
 import * as config from '../../config/config';
+import progress from '../../../assets/images/progress.jpg';
 
 class GiftSelection extends PureComponent {
   static navigationOptions = () => ({
@@ -76,8 +76,9 @@ class GiftSelection extends PureComponent {
           this.props.fetchGift(item.uid);
         }}
       >
-      <Image
-        source={{ uri: item.image }}
+      <ProgressiveImage
+        thumbnailSource={progress}
+        imageSource={{ uri: item.image }}
         style={styles.image}
       />
       </TouchableOpacity>
