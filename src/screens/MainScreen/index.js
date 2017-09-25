@@ -106,7 +106,7 @@ class MainScreen extends Component {
 						<Text style={{ fontSize: 14, marginVertical: 7, color: '#888' }}>
 							for {item.occasion}
 						</Text>
-						<Text style={{ fontSize: 14, fontWeight: '600' }}>{`~${item.priceRange}$`}</Text>
+						<Text style={{ fontSize: 14, fontWeight: '600' }}>{`"If you're"~${item.priceRange}$`}</Text>
 						<View
 							style={{
 								backgroundColor: COLOR.secondary,
