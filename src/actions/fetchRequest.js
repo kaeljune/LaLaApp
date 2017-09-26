@@ -27,9 +27,9 @@ export const subQuantity = (cardActive, id) => (dispatch) => {
   }
 };
 
-export const removeQuantity = (cardActive, id) => (dispatch) => {
+export const removeQuantity = () => (dispatch) => {
   try {
-    dispatch({ type: CART_CHANGED_REMOVE, payload: { cardActive, id } });
+    dispatch({ type: CART_CHANGED_REMOVE });
   } catch (e) {
     console.error(e);
   }

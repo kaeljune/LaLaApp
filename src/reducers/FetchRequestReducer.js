@@ -73,19 +73,7 @@ export default function (state = INITIAL_STATE, action) {
             };
         case CART_CHANGED_REMOVE:
             return { ...state, 
-                cart: {
-                    ...state.cart,
-                    [action.payload.cardActive]: {
-                        ...state.cart[action.payload.cardActive],
-                        items: { 
-                            ...state.cart[action.payload.cardActive].items,
-                            [action.payload.id]: {
-                                ...state.cart[action.payload.cardActive].items[action.payload.id],
-                                quantity: state.cart[action.payload.cardActive].items[action.payload.id].quantity ? state.cart[action.payload.cardActive].items[action.payload.id].quantity + 1 : 1
-                            }
-                        }
-                    }
-                }
+                cart: {}
             };
         case REHYDRATE:
             if (action.payload.listRequest) {

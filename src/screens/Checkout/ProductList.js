@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-
-import Reactotron from 'reactotron-react-native';
 import ProductItem from './ProductItem';
 
 import { STYLES } from '../../config/config';

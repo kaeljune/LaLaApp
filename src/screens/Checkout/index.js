@@ -4,8 +4,8 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 
+import Reactotron from 'reactotron-react-native';
 import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';
-
 import Btn from '../../components/Btn';
 import Feature from './Feature';
 import ProductList from './ProductList';
@@ -84,6 +84,10 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
+	const GiftID = state.listRequest.giftActive;
+	const cardActive = state.listRequest.cardActive;
+	const items = _.filter(_.map(state.listRequest.cart[cardActive].items, (val, uid) => ({ ...val, uid })), (gift) => gift.quantity > 0);
+	return { items, cardActive, GiftID };
 };
 
 export default connect(mapStateToProps, {})(Checkout);

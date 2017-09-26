@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Platform, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { Icon } from 'react-native-elements';
 import _ from 'lodash';
 import Reactotron from 'reactotron-react-native';
@@ -27,7 +27,7 @@ class GiftSelection extends PureComponent {
           <View style={{ padding: 5 }}>
             <Icon name="card-giftcard" size={25} color="#858585" />
             <View style={styles.card}>
-              <Text style={{ color: '#fff', fontSize: 10 }}>01</Text>
+              <Text style={{ color: '#fff', fontSize: 10 }}>1</Text>
             </View>
           </View>
         </View>
@@ -182,7 +182,9 @@ const mapStateToProps = state => {
   const items = _.map(state.listRequest.listGift, (val, uid) => ({ ...val, uid }));
   const cardActive = state.listRequest.cardActive;
   const auth = state.fetchAcc;
-  return { items, cardActive, auth };
+  const itemsCart = _.filter(_.map(state.listRequest.cart[cardActive].items, (val, uid) => ({ ...val, uid })), (gift) => gift.quantity > 0);
+  const sumCart = _.sumBy(itemsCart, (o) => { return o.quantity; });
+  return { items, cardActive, auth, sumCart };
 };
 
 export default connect(mapStateToProps, { fetchGift, addQuantity, fetchCart })(GiftSelection);
