@@ -24,7 +24,7 @@ class SplashScreen extends PureComponent {
 	}
 
 	async componentWillMount() {
-		//await AsyncStorage.removeItem('reduxPersist:fetchAcc');
+		//await AsyncStorage.removeItem('reduxPersist:listRequest');
 		await this.props.accountFetch();
 		const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
 		if (JSON.parse(fetchAcc).isLogin) {
@@ -35,7 +35,6 @@ class SplashScreen extends PureComponent {
 	}
 
 	componentDidMount() {
-
 		Animated.loop(
 			Animated.parallel([
 				Animated.sequence([

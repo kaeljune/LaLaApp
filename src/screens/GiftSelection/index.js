@@ -7,13 +7,9 @@ import { connect } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 // import ProgressiveImage from 'react-native-progressive-image';
 
-<<<<<<< HEAD
 // import Spinner from '../../components/Spinner';
 import { fetchGift, addQuantity, fetchCart } from '../../actions';
 
-=======
-import { fetchGift } from '../../actions';
->>>>>>> 054d9bb1c108fb569a6c93ce1a46d988609e26b2
 import * as config from '../../config/config';
 // import progress from '../../../assets/images/progress.jpg';
 
@@ -78,66 +74,6 @@ class GiftSelection extends PureComponent {
   }
 
   renderItem = ({ item }) => (
-<<<<<<< HEAD
-    <View style={[styles.slide, styles.boxShadow]}>
-      <TouchableOpacity
-        onPress={() => {
-          this.props.navigation.navigate('detailgift', { user: this.props.navigation.state.params.user });
-          this.props.fetchGift(item.uid);
-        }}
-      >
-        <Image
-          source={{ uri: item.image }}
-          style={styles.image}
-        />
-      </TouchableOpacity>
-      <View style={{ padding: 20, flex: 1 }}>
-        <TouchableOpacity
-          onPress={() => {
-            this.props.navigation.navigate('detailgift', { user: this.props.navigation.state.params.user });
-            this.props.fetchGift(item.uid);
-          }}
-        >
-          <Text
-            style={{ fontSize: 25, fontWeight: '100', color: '#313131', marginBottom: 20 }}
-          >{item.name}</Text>
-
-          <Text style={{ color: '#777', fontSize: 17 }}>by {item.artisan ? item.artisan : 'Baza'}</Text>
-        </TouchableOpacity>
-      </View>
-      <View
-        style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
-      >
-        <Text style={{ fontWeight: '700', fontSize: 20, marginLeft: 20 }}>{item.price}</Text>
-        <TouchableOpacity
-          onPress={async () => {
-            await this.props.fetchGift(item.uid);
-            await this.props.addQuantity(this.props.cardActive, item.uid);
-            await this.props.navigation.navigate(
-              'checkout',
-              { user: this.props.navigation.state.params.user });
-          }}
-        >
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              backgroundColor: config.COLOR.secondary,
-              borderColor: config.COLOR.secondary,
-              borderWidth: 1,
-              padding: 15,
-            }}
-          >
-            <Icon name="add" size={17} color="#fff" />
-            <Text
-              style={{ color: '#fff', fontWeight: '400', fontSize: 14, marginLeft: 5 }}
-            >Add to Cart</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-
-    </View>
-=======
     <CardGift
       onPress={() => {
         this.props.navigation.navigate('detailgift', { user: this.props.navigation.state.params.user });
@@ -145,6 +81,7 @@ class GiftSelection extends PureComponent {
       }}
       onAddCart={async () => {
         await this.props.fetchGift(item.uid);
+        await this.props.addQuantity(this.props.cardActive, item.uid);
         await this.props.navigation.navigate(
           'checkout',
           { user: this.props.navigation.state.params.user });
@@ -152,7 +89,6 @@ class GiftSelection extends PureComponent {
 
       item={item}
     />
->>>>>>> 054d9bb1c108fb569a6c93ce1a46d988609e26b2
   );
 
   render() {

@@ -93,8 +93,8 @@ class MainScreen extends Component {
 					index={index}
 					onPress={async () => {
 						await this.props.fetchListGift(item.uid);
-						await this.props.fetchCart(item);
-						await this.props.navigation.navigate('giftselection', { user: item });
+						 this.props.fetchCart(item);
+						 this.props.navigation.navigate('giftselection', { user: item });
 					}}
 				/>
 
