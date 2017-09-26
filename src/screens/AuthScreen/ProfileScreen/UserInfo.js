@@ -1,51 +1,93 @@
-import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { List, ListItem } from 'react-native-elements';
+import React, { PureComponent } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import TextField from '../../../components/TextField';
 
-const listProfile = [
-	{
-		title: 'EMAIL',
-		rightTitle: 'hainguyen@airlala.com',
-	},
-	{
-		title: 'PHONE NUMBER',
-		rightTitle: '(+84) 935 38 39 40',
-	},
-];
+import { STYLES } from '../../../config/config';
 
-function UserInfo() {
-	return (
-		<View style={{ marginHorizontal: 20 }}>
-			<Text style={{ marginVertical: 15, textAlign: 'center', fontSize: 18 }}>Profile User </Text>
-			<View style={styles.list}>
-				{
-					listProfile.map((item, i) => (
-						<View key={i} style={styles.row}>
-							<Text style={styles.label}>{item.title}</Text>
-							<Text>{item.rightTitle}</Text>
-						</View>
-					))
-				}
+class UserInfo extends PureComponent {
+	constructor(props) {
+		super(props);
+	}
+	render() {
+		const { data, edit } = this.props;
+		const { list, row, label } = styles;
+		return (
+			<View style={[styles.container, STYLES.boxShadow]}>
+				<View style={list}>
+					<View style={row}>
+						<TextField
+							label="User name"
+							labelStyle={label}
+							value={data.userLogin.name}
+							onChangeText={this.onEmailChange}
+							editable={edit}
+						/>
+					</View>
+					<View style={row}>
+						<TextField
+							label="Email"
+							labelStyle={label}
+							value={data.userLogin.email}
+							onChangeText={this.onEmailChange}
+							editable={edit}
+						/>
+					</View>
+					<View style={row}>
+						<TextField
+							label="Phone number"
+							labelStyle={label}
+							value={data.userLogin.phone}
+							onChangeText={this.onEmailChange}
+							editable={edit}
+						/>
+					</View>
+					<View style={row}>
+						{console.log('edit', edit)}
+						{ edit ? (
+							<TextField
+								label="Address"
+								labelStyle={label}
+								value={data.userLogin.address}
+								onChangeText={this.onEmailChange}
+								editable={edit}
+							/>
+						)
+						: (
+							<View>
+								<Text style={styles.label}>Address</Text>
+								<View
+									style={{
+										borderBottomColor: '#ccc',
+										borderBottomWidth: 1,
+										paddingVertical: 15,
+									}}
+								>
+									<Text style={{ fontSize: 16 }}>{data.userLogin.address}</Text>
+								</View>
+							</View>
+						) }
+					</View>
+				</View>
 			</View>
-		</View>);
+		)
+	}
 }
 
+
 const styles = StyleSheet.create({
+	container: {
+		marginHorizontal: 15,
+		backgroundColor: '#fff'
+	},
 	list: {
-		backgroundColor: '#fff',
+		padding: 15,
 	},
 	row: {
-		paddingVertical: 15, 
-		paddingHorizontal: 20,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-		borderBottomColor: '#eee',
-		borderBottomWidth: 1
+		marginBottom: 5
 	},
 	label: {
-		fontSize: 12,
-		color: '#5a5a5a'
+		fontSize: 14,
+		color: '#858585'
 	}
 });
 

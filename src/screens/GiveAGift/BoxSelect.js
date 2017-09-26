@@ -1,71 +1,62 @@
-import React, { Component } from 'react';
-import { View, Text, Animated, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { PureComponent } from 'react';
+import {
+	View,
+	Text,
+	LayoutAnimation,
+	TouchableOpacity,
+	Platform,
+	UIManager,
+	StyleSheet } from 'react-native';
 
 import { Icon } from 'react-native-elements';
-import { COLOR } from '../../config/config';
+import { COLOR, STYLES } from '../../config/config';
 
-class BoxSelect extends Component {
+class BoxSelect extends PureComponent {
 	constructor(props) {
 		super(props);
-		this.state = {
-			id: this.props.id,
-			opacity: 0,
-			scale: new Animated.Value(0),
-			scaleB: new Animated.Value(1),
-			top: new Animated.Value(0)
-		};
-	}
 
-	componentWillReceiveProps(nextProps) {
-		Animated.spring(
-			this.state.scale, {
-				toValue: nextProps.isActive ? 1 : 0,
-				bounciness: 0
-			}
-		).start();
-
-		Animated.spring(
-				this.state.top, {
-					toValue: nextProps.isActive ? -10 : 0
-				}
-			).start();
+		if (Platform.OS === 'android') {
+			UIManager.setLayoutAnimationEnabledExperimental &&
+			UIManager.setLayoutAnimationEnabledExperimental(true);
 		}
-
-	handlePress = (id) => {
-		this.props.onActive(id);
 	}
+
+	shouldComponentUpdate(nextProps) {
+		if (this.props.isActive !== nextProps.isActive) {
+			return true;
+		}
+		return false;
+	}
+
+	componentWillUpdate() {
+		LayoutAnimation.spring();
+	}
+
 
 	render() {
-		const { color, children, isActive, onActive, id } = this.props;
-		const styleBox = [styles.box, { backgroundColor: color }, { top: this.state.top }];
+		const { color, children, isActive, onActive } = this.props;
+		const scale = isActive ? 1 : 0;
 		const opacity = isActive ? 1 : 0;
+		const top = isActive ? -10 : 0
+		const styleBox = [styles.box, { backgroundColor: color }, { top }];
 
 		return (
 			<TouchableOpacity
-				onPress={() => this.handlePress(id)}
+				onPress={onActive}
 				style={{ paddingVertical: 10 }}
 				activeOpacity={0.9}
 			>
-				<Animated.View style={styleBox}>
+				<View style={[styleBox, STYLES.boxShadow]}>
 					<Text style={styles.text}>{children}</Text>
 
-					<Animated.View
-						style={{
-							height: 25,
-							width: 25,
-							borderRadius: 20,
-							borderColor: '#fff',
-							backgroundColor: '#000',
-							borderWidth: 1,
-							flexDirection: 'column',
-							justifyContent: 'center',
-							alignItems: 'center',
-							position: 'absolute',
-							bottom: 10,
-							opacity,
-							transform: [{ scale: this.state.scale }]
-
-						}}
+					<View
+						style={[
+							styles.cirle,
+							{
+								opacity,
+								transform: [{ scale }]
+							}
+						]}
 					>
 						<Icon
 							reverseColor={COLOR.primary}
@@ -73,8 +64,8 @@ class BoxSelect extends Component {
 							size={10}
 							color="#fff"
 						/>
-					</Animated.View>
-				</Animated.View>
+					</View>
+				</View>
 			</TouchableOpacity>
 		);
 	}
@@ -95,6 +86,19 @@ const styles = StyleSheet.create({
 	text: {
 		color: '#fff',
 		fontWeight: '600'
+	},
+	cirle: {
+		height: 25,
+		width: 25,
+		borderRadius: 20,
+		borderColor: '#fff',
+		backgroundColor: '#000',
+		borderWidth: 1,
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+		position: 'absolute',
+		bottom: 10,
 	}
 });
 

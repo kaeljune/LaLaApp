@@ -3,7 +3,8 @@ import {
     EMAIL_SIGNIN_SUCCESS,
     EMAIL_SIGNIN_FAIL,
     SIGNIN_EMAIL_CHANGED,
-    SIGNIN_PASSWORD_CHANGED
+    SIGNIN_PASSWORD_CHANGED,
+    SIGNOUT
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -30,6 +31,8 @@ export default function (state = INITIAL_STATE, action) {
                 passwordSF: '', 
                 loadingSF: false 
             };
+        case SIGNOUT:
+            return state;
         default:
             return state;
     }

@@ -1,55 +1,87 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { List, ListItem } from 'react-native-elements';
+import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
+import { Icon } from 'react-native-elements';
 
-import { COLOR } from '../../../config/config';
+import { connect } from 'react-redux';
+import { signOut } from '../../../actions';
 
-const listLink = [
-	{
-		title: 'Payment',
-	},
-	{
-		title: 'My Address',
-	},
-	{
-		title: 'Terms & Privacy',
-	},
-	{
-		title: 'Helps',
-	},
-];
+
+import { COLOR, STYLES } from '../../../config/config';
 
 class Services extends Component {
 	render() {
 		return (
-			<View>
-				<Text
-					style={{ 
-						marginTop: 20, 
-						textAlign: 'center', 
-						fontSize: 18
-					}}
-				>Other settings</Text>
-				<List 
-					containerStyle={{ 
-						marginHorizontal: 20, 
-						borderColor: 'transparent', 
-						borderBottomWidth: 0, 
-					}}
-				>
-					{
-						listLink.map((item, i) => (
-							<ListItem
-								key={i}
-								title={item.title}
-								chevronColor={COLOR.secondary}
-							/>
-						))
-					}
-				</List>
+
+			<View style={[styles.container, STYLES.boxShadow]}>
+				<View>
+					<TouchableWithoutFeedback>
+						<View style={[styles.row, styles.border]}>
+							<Text style={{ fontSize: 16, color: '#313131' }}>
+								Payment
+								</Text>
+							<Icon name="payment" color={COLOR.primary} />
+						</View>
+					</TouchableWithoutFeedback>
+				</View>
+				<View>
+					<TouchableWithoutFeedback>
+						<View style={[styles.row, styles.border]}>
+							<Text style={{ fontSize: 16, color: '#313131' }}>
+								Helps
+								</Text>
+							<Icon name="help-outline" color={COLOR.primary} />
+						</View>
+					</TouchableWithoutFeedback>
+				</View>
+				<View>
+					<TouchableWithoutFeedback>
+						<View style={[styles.row, styles.border]}>
+							<Text style={{ fontSize: 17, color: '#313131' }}>
+								Terms &amp; Privacy
+								</Text>
+							<Icon name="assignment" color={COLOR.primary} />
+						</View>
+					</TouchableWithoutFeedback>
+				</View>
+				<View>
+					<TouchableWithoutFeedback
+						onPress={this.props.signOut}
+					>
+						<View style={styles.row}>
+							<Text style={{ fontSize: 17, color: '#313131' }}>
+								Sign out
+								</Text>
+							<Icon name="exit-to-app" color={COLOR.primary} />
+						</View>
+					</TouchableWithoutFeedback>
+				</View>
 			</View>
+
 		);
 	}
 }
 
-export default Services;
+const styles = StyleSheet.create({
+	container: {
+		margin: 15,
+		backgroundColor: '#fff',
+	},
+	row: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		padding: 15,
+	},
+	border: {
+		borderBottomColor: '#eee', borderBottomWidth: 1
+	},
+	text: {
+		marginLeft: 15,
+		marginTop: 30,
+		marginBottom: 20,
+		fontSize: 14,
+		fontWeight: '600',
+		color: '#313131'
+	}
+});
+
+export default connect(null, { signOut })(Services);

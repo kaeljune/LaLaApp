@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView, Animated } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import Btn from '../../components/Btn';
@@ -19,12 +19,22 @@ class DeliveryBlank extends Component {
         // />
     })
 
+    componentWillMount() {
+        this.translateY = new Animated.Value(100);
+    }
+
+    componentDidMount() {
+        Animated.spring(this.translateY, {
+            toValue: 0
+        }).start();
+    }
+
     render() {
         return (
-            <View style={styles.wraper}>
-                <View style={{ flex: 8 }}>
-                    <Text style={{ marginBottom: 10 }}>SHIP TO:</Text>
-                    <View style={{ backgroundColor: '#fff' }}>
+            <ScrollView style={styles.wraper}>
+                <Animated.View style={{ marginBottom: 15, transform: [{ translateY: this.translateY }] }}>
+                    <Text style={{ padding: 15 }}>SHIP TO:</Text>
+                    <View style={{ backgroundColor: '#fff', borderTopColor: '#eee', borderTopWidth: 1 }}>
                         <View style={styles.rowStyle}>
                             <View style={{ width: 110 }}>
                                 <Text style={styles.labelStyle}>FULLNAME</Text>
@@ -109,15 +119,15 @@ class DeliveryBlank extends Component {
                         </View>
 
                     </View>
-                </View>
+                </Animated.View>
 
-                <View style={{ flex: 2 }}>
+                <View style={{ flex: 1 }}>
                     <Btn 
                         title="CHECKOUT"
                         bgColor={COLOR.primary}
                     />
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }
@@ -125,12 +135,14 @@ class DeliveryBlank extends Component {
 const styles = StyleSheet.create({
     wraper: {
         flex: 1,
-        padding: 15,
+        // padding: 15,
         backgroundColor: '#F8F8F8',
-        alignContent: 'space-between'
+        alignContent: 'space-between',
+        borderTopColor: '#eee',
+        borderTopWidth: 1,
     },
     rowStyle: {
-        padding: 10,
+        padding: 15,
         borderBottomColor: '#eee',
         borderBottomWidth: 1,
         flexDirection: 'row',

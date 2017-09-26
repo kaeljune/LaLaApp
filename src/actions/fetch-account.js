@@ -2,26 +2,34 @@
 import firebase from 'firebase';
 
 import {
-  ACCOUNT_FETCH_SUCCESS
+  ACCOUNT_FETCH_SUCCESS,
+  ACCOUNT_FETCH_FAIL
 } from './types';
 
 export const accountFetch = () => async (dispatch) => {
-  //await accountFetchSuccess(dispatch, 'user');
-  //dispatch({ type: ACCOUNT_FETCH_SUCCESS, payload: 'account' });
   try {
     await firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        accountFetchSuccess(dispatch, 'user');
+        firebase.database().ref(`/users/${user.uid}`)
+          .on('value', snapshot => {
+            accountFetchSuccess(dispatch, snapshot.val());
+          });
       } else {
-        accountFetchSuccess(dispatch, 'user1');
+        accountFetchFail(dispatch);
       }
-      });
+    });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    accountFetchFail(dispatch);
     //emailLoginFail(dispatch);
   }
 };
-export const accountFetchSuccess = (dispatch, user) => {
+
+const accountFetchFail = (dispatch) => {
+  dispatch({ type: ACCOUNT_FETCH_FAIL });
+};
+
+const accountFetchSuccess = (dispatch, user) => {
   dispatch({
     type: ACCOUNT_FETCH_SUCCESS,
     payload: user

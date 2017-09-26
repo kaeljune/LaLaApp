@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, FlatList, StyleSheet, TextInput } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TextInput } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import ListRadio from '../../components/ListRadio';
-
-import CheckBox from '../../components/CheckBox';
-import Radio from '../../components/Radio';
-import Switch from '../../components/Switch';
 import Btn from '../../components/Btn';
 
 import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';
@@ -51,14 +47,14 @@ class DeliveryBlank extends Component {
 	render() {
 		return (
 			<View style={styles.wraper}>
-				<ScrollView contentContainerStyle={{ padding: 15 }} style={{ flex: 0.9 }}>
+				<ScrollView contentContainerStyle={{ padding: 15 }}>
 					<Text style={{ paddingVertical: 15, fontWeight: '600', color: '#777' }}>SHIP TO:</Text>
 					<View>
 
 						<View style={styles.addLocation}>
 							<Icon
-								size={20}
-								name='add'
+								size={30}
+								name='location-on'
 								color={COLOR.primary}
 							/>
 
@@ -79,8 +75,9 @@ class DeliveryBlank extends Component {
 					</View>
 
 				</ScrollView>
-				<View style={{ flex: 0.1, backgroundColor: '#fff', borderTopColor: '#ddd', borderTopWidth: 1,  paddingVertical: 10 }}>
+				<View style={{ paddingVertical: 10 }}>
 					<Btn
+						style={{ width: 150 }}
 						bgColor={COLOR.primary}
 						title="NEXT"
 					/>
@@ -104,7 +101,7 @@ const styles = StyleSheet.create({
 	addLocation: {
 		marginBottom: 15,
 		paddingVertical: 5,
-		paddingHorizontal: 15,
+		paddingHorizontal: 5,
 		flexDirection: 'row',
 		borderColor: '#ddd',
 		borderWidth: 1,

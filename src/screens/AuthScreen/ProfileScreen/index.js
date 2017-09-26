@@ -1,113 +1,161 @@
 import React, { Component } from 'react';
 import {
-    View,
-    Text,
-    ScrollView,
-    AsyncStorage
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  AsyncStorage,
+  Modal,
+  StyleSheet
 } from 'react-native';
 import { connect } from 'react-redux';
-import firebase from 'firebase';
 import { Icon } from 'react-native-elements';
-import _ from 'lodash';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-//import { accountFetch } from '../../../actions/auth-actions';
-import { accountFetch } from '../../../actions';
-
-import { COLOR, headerTitleStyle, headerStyle } from '../../../config/config';
+import { COLOR, STYLES } from '../../../config/config';
+import Spinner from '../../../components/Spinner';
 import TitleAvatar from './TitleAvatar';
 import UserInfo from './UserInfo';
 import Services from './Services';
-import SignoutButton from './SignoutButton';
 
 class ProfileScreen extends Component {
-    static navigationOptions = ({ navigation }) => ({
-        title: 'Account',
-        headerTintColor: COLOR.primary,
-        // headerLeft: <Icon
-        //     name='chevron-left'
-        //     color={COLOR.primary}
-        //     size={24}
-        //     style={{ marginLeft: 15 }}
-        //     onPress={() => navigation.goBack()}
-        // />,
-        headerRight:
-        <View 
-            style={{ 
-                display: 'flex', 
-                flexDirection: 'row', 
-                justifyContent: 'center', 
-                paddingRight: 15 
-            }}
+
+  static navigationOptions = () => ({
+    header: null
+  })
+
+  state = {
+    userLogin: null,
+    modalVisible: false,
+    isEdit: false
+  };
+
+
+  async componentDidMount() {
+    const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
+    if (JSON.parse(fetchAcc).isLogin) {
+      this.setState({ userLogin: JSON.parse(fetchAcc) });
+    } else {
+      this.setState({ isLogin: false });
+    }
+  }
+
+
+  render() {
+    if (!this.state.userLogin) {
+      return <View style={[styles.container, { alignItems: 'center', justifyContent: 'center' }]}><Spinner /></View>;
+    }
+    return (
+      <View style={styles.container}>
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => { console.log(12); }}
         >
-            <Icon
-                name='create'
-                size={15}
-                color={COLOR.secondary}
-                onPress={() => navigation.goBack()}
-            />
-            <Text style={{ marginLeft: 5, color: COLOR.secondary }}>Edit</Text>
-        </View>,
-        headerTitleStyle,
-        headerStyle,
-    })
-    async componentWillMount() {
-        await this.props.accountFetch();
-        //await this.props.employeesFetch();
-        console.log(this.props);
-    }
-    
-    async componentDidMount() {
-        const aa = await AsyncStorage.getItem('@userLogin');
-        console.log(aa);
-        // firebase.auth().signOut().then(() => {
-        //     // Sign-out successful.
-        //     }).catch((error) => {
-        //     // An error happened.
-        // });
-        await firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                // User is signed in.
-                const displayName = user.displayName;
-                console.log(`  Name: ${displayName}`);
-                // ...
-            } else {
-                // User is signed out.
-                // ...
-                console.log('hixhix');
-            }
-            });
-        // await firebase.auth().signOut().then(() => {
-        //     // Sign-out successful.
-        //     }).catch((error) => {
-        //     // An error happened.
-        //     });
-        // this.props.accountFetch();
-        // console.log(this.props.account);
-    }
-    componentWillReceiveProps(nextProps) {
-    // nextProps are the next set of props that this component
-    // will be rendered with
-    // this.props is still the old set of props
-        console.log(nextProps);
-    //this.createDataSource(nextProps);
-    }
-    render() {
-        return (
-            <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
-                <TitleAvatar />
-                <UserInfo />
-                <Services />
-                <SignoutButton />
-            </ScrollView>
-        );
-    }
+          <KeyboardAwareScrollView>
+            <View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  height: 60,
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  borderBottomWidth: 1,
+                  borderBottomColor: '#ddd'
+                }}
+              >
+                <View style={{ width: 60, height: 60, justifyContent: 'center' }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState({ modalVisible: false, isEdit: false });
+                    }}
+                  >
+                    <Icon name="clear" />
+                  </TouchableOpacity>
+                </View>
+                <View>
+                <Text style={{ backgroundColor: 'transparent', fontWeight: '700', fontSize: 18 }}>Edit profile</Text>
+                </View>
+                <View style={{ width: 60, height: 60, justifyContent: 'center' }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                    this.setState({ modalVisible: false, isEdit: false });
+                    }}
+                  >
+                    <Icon name="check" color={COLOR.primary} />
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              <View>
+                <TitleAvatar data={this.state.userLogin} edit={this.state.isEdit} />
+                <UserInfo data={this.state.userLogin} edit={this.state.isEdit} />
+
+                <TouchableOpacity>
+                  <View style={[STYLES.boxShadow, { margin: 15, backgroundColor: COLOR.primary, padding: 15, alignItems: 'center' }]}>
+                    <Text style={{ color: '#fff', fontWeight: '700', fontSize: 16 }}>Update profile</Text>
+                  </View>
+                </TouchableOpacity>
+
+              </View>
+            </View>
+          </KeyboardAwareScrollView>
+        </Modal>
+        <ScrollView>
+          <View
+            style={{
+              backgroundColor: COLOR.primary,
+              height: 330,
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+            }}
+          />
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', height: 60, alignItems: 'center' }}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('isFindGift')}
+            >
+              <View style={{ width: 60, height: 60, justifyContent: 'center', }}>
+
+                <Icon name="clear" color="#fff" />
+
+              </View>
+            </TouchableOpacity>
+
+            <View >
+              <Text style={{ backgroundColor: 'transparent', color: '#fff', fontWeight: '700', fontSize: 18 }}>Profile</Text></View>
+            <TouchableOpacity
+                onPress={() => this.setState({ isEdit: true, modalVisible: true })}
+              >
+            <View style={{ width: 60, height: 60, justifyContent: 'center' }}>
+
+                <Icon name="edit" color="#fff" />
+
+            </View>
+            </TouchableOpacity>
+          </View>
+          <TitleAvatar data={this.state.userLogin} edit={this.state.isEdit} />
+          <UserInfo data={this.state.userLogin} edit={this.state.isEdit} />
+          <Services />
+        </ScrollView>
+      </View>
+    );
+  }
 }
 
 const mapStateToProps = ({ fetchAcc }) => {
-  //const account = _.map(state.account, (val, uid) => ({ ...val, uid }));
   const { account } = fetchAcc;
   return { account };
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f8f8f8'
+  }
+});
 
-export default connect(mapStateToProps, { accountFetch })(ProfileScreen);
+export default connect(mapStateToProps)(ProfileScreen);
+

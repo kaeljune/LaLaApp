@@ -8,6 +8,7 @@ function SignoutButton() {
 	return (<View style={styles.wrapBtn}>
 			<Btn
 				bgColor={COLOR.primary}
+				style={{ width: 150 }}
 				title="Sign Out"
 			/>
 		</View>);

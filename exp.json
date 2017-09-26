@@ -4,18 +4,22 @@
   "slug": "airlala",
   "privacy": "public",
   "sdkVersion": "17.0.0",
+  "ios": {
+    "bundleIdentifier": "com.kaeljune.airlala",
+    "supportsTablet": true
+  },
+  "android": {
+    "package": "com.kaeljune.airlala"
+  },
   "version": "1.0.0",
   "orientation": "portrait",
   "primaryColor": "#cccccc",
   "icon": "./assets/icons/app.png",
   "loading": {
     "icon": "./assets/icons/loading.png",
-    "hideExponentText": false
+    "hideExponentText": true
   },
   "packagerOpts": {
     "assetExts": ["ttf", "mp4"]
-  },
-  "ios": {
-    "supportsTablet": true
   }
 }

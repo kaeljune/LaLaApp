@@ -1,66 +1,47 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
+import { connect } from 'react-redux';
+import _ from 'lodash';
 
+import Reactotron from 'reactotron-react-native';
 import ProductItem from './ProductItem';
 
-const items = [
-    {
-        name: 'Wine bittle holder',
-        price: '500',
-        total: '1',
-    },
-    {
-        name: 'Wine bittle holder',
-        price: '500',
-        total: '1',
-    },
-    {
-        name: 'Wine bittle holder',
-        price: '500',
-        total: '1',
-    },
-    {
-        name: 'Wine bittle holder',
-        price: '500',
-        total: '1',
-    },
-    {
-        name: 'Wine bittle holder',
-        price: '500',
-        total: '1',
-    },
-    {
-        name: 'Wine bittle holder',
-        price: '500',
-        total: '1',
-    },
-    {
-        name: 'Wine bittle holder',
-        price: '500',
-        total: '1',
-    },
-];
+import { STYLES } from '../../config/config';
 
 class ProductList extends Component {
 
-    renderItem = () => (
-        <ProductItem
-            name="Wine bittle holder"
-            price="500"
-            total="1"
-        />
-    )
-    
-    render() {
-        return (
-            <FlatList 
-                showsVerticalScrollIndicator={false}
-                data={items}
-                keyExtractor={(item) => items.indexOf(item)}
-                renderItem={this.renderItem}
-            />
-        );
-    }
+	renderItem = ({ item }) => (
+		<ProductItem
+			cardActive={this.props.cardActive}
+			uid={item.uid}
+			image={item.image}
+			name={item.name}
+			price={_.parseInt(_.replace(item.price, /^\D+/g, ''))}
+			total={item.quantity}
+		/>
+	)
+	render() {
+		return (
+			<FlatList
+				showsVerticalScrollIndicator={false}
+				data={this.props.items}
+				keyExtractor={(item) => this.props.items.indexOf(item)}
+				renderItem={this.renderItem}
+				removeClippedSubviews={false}
+				style={[{
+					backgroundColor: '#fff',
+					margin: 10 
+				}, STYLES.boxShadow]}
+			/>
+		);
+	}
 }
 
-export default ProductList;
+const mapStateToProps = state => {
+	const GiftID = state.listRequest.giftActive;
+	const cardActive = state.listRequest.cardActive;
+	const items = _.filter(_.map(state.listRequest.cart[cardActive].items, (val, uid) => ({ ...val, uid })), (gift) => gift.quantity > 0);
+	return { items, cardActive, GiftID };
+};
+export default connect(mapStateToProps, {})(ProductList);
+

@@ -1,181 +1,210 @@
 import React, { Component } from 'react';
-import { FlatList, ScrollView, View, Text, StyleSheet } from 'react-native';
+import {
+	FlatList,
+	View,
+	Text,
+	StyleSheet,
+	TouchableOpacity,
+} from 'react-native';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Avatar, Icon } from 'react-native-elements';
-import { COLOR, WIDTH_SCREEN } from '../../config/config';
+
+import Card from './Card';
+
+import { accountFetch, fetchRequest, fetchListGift, fetchCart } from '../../actions';
+import { COLOR, WIDTH_SCREEN, STYLES, headerStyle, headerTitleStyle } from '../../config/config';
+
+const bodau = (str) => {
+	str = str.toLowerCase();
+	str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
+	str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e');
+	str = str.replace(/ì|í|ị|ỉ|ĩ/g, 'i');
+	str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, 'o');
+	str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, 'u');
+	str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, 'y');
+	str = str.replace(/đ/g, 'd');
+	// str = str.replace(/\W+/g, ' ');
+	// str = str.replace(/\s/g, '-');
+	return str;
+};
 
 class MainScreen extends Component {
-	static navigationOptions = () => ({
-		title: 'Gifts',
-		headerStyle: {
-			paddingHorizontal: 10
-		},
-		headerTitleStyle: {
-			alignSelf: 'center'
-		},
-
-		headerLeft: <View>
-			<View style={{ flexDirection: 'row' }}>
-				<Text
-					style={styles.box}
-				>
-					01
-                </Text>
-				<Text>total</Text>
-			</View>
-		</View>,
-		headerRight: <Avatar
-			width={37}
-			height={37}
-			overlayContainerStyle={{ backgroundColor: COLOR.primary }}
-			rounded
-			title="HN"
-		/>
-	})
-
-	state = {
-		items: [
-			{
-				name: 'Hai Nguyen',
-				purpose: 'Birthday',
-				price: '$500',
-				status: 'Gift ready'
-			},
-			{
-				name: 'Hai Nguyen',
-				purpose: 'Birthday',
-				price: '$500',
-				status: 'Gift ready'
-			},
-			{
-				name: 'Hai Nguyen',
-				purpose: 'Birthday',
-				price: '$500',
-				status: 'Gift ready'
-			},
-			{
-				name: 'Hai Nguyen',
-				purpose: 'Birthday',
-				price: '$500',
-				status: 'Gift ready'
-			},
-
-			{
-				name: 'Hai Nguyen',
-				purpose: 'Birthday',
-				price: '$500',
-				status: 'Gift ready'
-			},
-		]
+	static navigationOptions = ({ navigation }) => {
+		const { state } = navigation;
+		if (state.params !== undefined) {
+			return {
+				title: 'Find Local Products',
+				headerStyle,
+				headerTitleStyle,
+				headerLeft: null,
+				headerBackTitle: null,
+				// headerLeft: <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}>
+				// 	<View style={styles.box}>
+				// 		<Text style={{ color: '#fff' }}>
+				// 			{state.params ? state.params.items : '0'}
+				// 		</Text>
+				// 	</View>
+				// 	<Text>total</Text>
+				// </View>,
+				headerRight: <View style={{ marginRight: 10 }}>
+					<TouchableOpacity onPress={() => navigation.navigate('isProfile')}>
+						<Avatar
+							width={37}
+							height={37}
+							overlayContainerStyle={{ backgroundColor: COLOR.primary }}
+							rounded
+							title={state.params ? state.params.name : '?'}
+						/>
+					</TouchableOpacity>
+				</View>
+			};
+		}
 	}
 
-	renderItem = ({item}) => {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			isDel: false
+		};
+	}
+
+	async componentWillMount() {
+		await this.props.fetchRequest();
+		
+		const { setParams } = this.props.navigation;
+		const { auth, items } = this.props;
+		const name = bodau(auth.userLogin.name);
+		setParams({ name: _.toUpper(name.match(/\b\w/g).join('')).substring(0, 2), items: items.length });
+	}
+
+	renderItem = ({ item, index }) => {
+		const name = item.receiverName ? item.receiverName : 'Anonymous';
+		const shortName = _.toUpper(name.match(/\b\w/g).join('')).substring(0, 2);
 		return (
-			<View 
-				style={{
-					padding: 10,
-					backgroundColor: '#fff',
-					borderRadius: 3,
-					borderColor: '#eee',
-					borderWidth: 1,
-					marginHorizontal: 8,
-					width: (WIDTH_SCREEN / 2) - 24,
-				}}
-			>
-				<View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center' }}>
-					<Avatar
-						icon={{ name: 'person' }}
-						overlayContainerStyle={{ backgroundColor: COLOR.primary }}
-						rounded
-						height={50}
-						width={50}
-					/>
-					<Text style={{ fontSize: 18, marginTop: 7 }}>{item.name}</Text>
-					<Text style={{ fontSize: 14, marginVertical: 7, color: '#d3d5d8' }}>for {item.purpose}</Text>
-					<Text style={{ fontSize: 14, fontWeight: '600' }}>{item.price}</Text>
-					<Text
-						style={{
-							backgroundColor: COLOR.secondary,
-							fontSize: 12,
-							color: '#fff',
-							marginTop: 7,
-							paddingVertical: 3,
-							paddingHorizontal: 7,
-							borderRadius: 2
-						}}
-					>{item.status}</Text>
-				</View>
-				<View style={{ justifyContent: 'center', alignItems: 'center' }}>
-					<Icon
-						reverse
-						raised
-						reverseColor={COLOR.primary}
-						name="chevron-right"
-						size={16}
-						color="#fff"
-					/>
-				</View>
-			</View>			
-		)
+
+				<Card
+					shortName={shortName}
+					name={name}
+					occasion={item.occasion}
+					priceRange={item.priceRange}
+					status={item.status}
+					index={index}
+					onPress={async () => {
+						await this.props.fetchListGift(item.uid);
+						 this.props.fetchCart(item);
+						 this.props.navigation.navigate('giftselection', { user: item });
+					}}
+				/>
+
+		);
 	}
 
 	renderList = () => {
-		const { items } = this.state;
+		const { items } = this.props;
 		if (items.length > 0) {
 			return (
-				<View style={{ flex: 1, paddingBottom: 60 }}>
-            <FlatList
-								numColumns={2}
-								contentContainerStyle={{ paddingVertical: 15 }}
-								columnWrapperStyle={{ paddingVertical: 8, paddingHorizontal: 8 }}
-                data={items}
-                keyExtractor={(item) => items.indexOf(item)}
-                renderItem={this.renderItem}
-            />
+				<View style={{ flex: 1 }}>
+					<FlatList
+						numColumns={2}
+						contentContainerStyle={{ paddingVertical: 15 }}
+						columnWrapperStyle={{ paddingHorizontal: 8 }}
+						data={items}
+						keyExtractor={(item) => items.indexOf(item)}
+						renderItem={this.renderItem}
+						removeClippedSubviews={false}
+					/>
+
+					<View
+						style={[
+							STYLES.boxShadow,
+							{
+								height: 40,
+								backgroundColor: '#fff',
+								borderTopColor: '#ddd',
+								borderTopWidth: 1,
+							}
+						]}
+					/>
 
 					<View style={styles.bottomView}>
-						<Icon
-							size={25}
-							reverse
-							raised
-							reverseColor="white"
-							name="add"
-							color={COLOR.primary}
-							onPress={() => console.log('Add me')}
-						/>
+						{
+							this.state.isDel
+								? <TouchableOpacity onPress={() => this.setState({ isDel: false })}>
+									<Icon
+										size={25}
+										reverse
+										raised
+										reverseColor="white"
+										name="check"
+										color={COLOR.secondary}
+									/>
+								</TouchableOpacity>
+								: <TouchableOpacity onPress={() => this.props.navigation.navigate('address')}>
+									<Icon
+										size={25}
+										reverse
+										raised
+										reverseColor="white"
+										name="add"
+										color={COLOR.primary}
 
+									/>
+								</TouchableOpacity>
+						}
 					</View>
 				</View>
 			);
 		}
 
 		return (
-			<View
-				style={{
-					flex: 1,
-					flexDirection: 'column',
-					alignItems: 'center',
-					justifyContent: 'center'
-				}}
-			>
+			<View style={{ flex: 1 }}>
+				<TouchableOpacity onPress={() => this.props.navigation.navigate('address')}>
+					<View
+						style={{
+							flex: 1,
+							flexDirection: 'column',
+							alignItems: 'center',
+							justifyContent: 'center',
+						}}
+					>
+						<Icon
+							reverse
+							raised
+							reverseColor="white"
+							name='add'
+							color={COLOR.primary}
+						/>
 
-				<Icon
-					reverse
-					raised
-					reverseColor="white"
-					name='add'
-					color={COLOR.primary}
-				/>
+						<Text style={{ marginTop: 10, fontWeight: '700' }}>FOR ME</Text>
+					</View>
+				</TouchableOpacity>
+				<TouchableOpacity onPress={() => this.props.navigation.navigate('address')}>
+					<View
+						style={{
+							flex: 1,
+							flexDirection: 'column',
+							alignItems: 'center',
+							justifyContent: 'center'
+						}}
+					>
+						<Icon
+							reverse
+							raised
+							reverseColor="white"
+							name='add'
+							color={COLOR.primary}
+						/>
 
-				<Text style={{ marginTop: 10, fontWeight: 'bold' }}>FIND A GIFT</Text>
+						<Text style={{ marginTop: 10, fontWeight: '700' }}>FOR OTHER PEOPLE</Text>
+					</View>
+				</TouchableOpacity>
 			</View>
 		);
 	};
 
 	render() {
-		if (this.props.libraries.auth.user) {
-			console.log(this.props.libraries.auth.user);
-		}
 		return (
 			<View style={styles.container}>
 				{this.renderList()}
@@ -189,27 +218,20 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: COLOR.background,
 	},
-	box: {
-		backgroundColor: COLOR.secondary,
-		paddingHorizontal: 5,
-		paddingVertical: 1,
-		borderRadius: 20,
-		minWidth: 20,
-		textAlign: 'center',
-		color: '#fff',
-		marginRight: 5
-	},
 	bottomView: {
 		position: 'absolute',
 		bottom: 0,
 		width: WIDTH_SCREEN,
 		alignItems: 'center',
-		borderTopColor: '#eee',
-		borderTopWidth: 1,
-		backgroundColor: '#fff',
 	}
 });
 
-const mapStateToProps = auth => ({ libraries: auth });
+const mapStateToProps = state => {
+	const items = _.map(state.listRequest.results, (val, uid) => ({ ...val, uid }));
+	//const gifts = _.map(state.listRequest.listGift, (val, uid) => ({ ...val, uid }));
+	const auth = state.fetchAcc;
+	return { items, auth };
+};
 
-export default connect(mapStateToProps)(MainScreen);
+export default connect(mapStateToProps, 
+	{ accountFetch, fetchRequest, fetchListGift, fetchCart })(MainScreen);

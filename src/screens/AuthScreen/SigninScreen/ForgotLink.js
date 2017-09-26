@@ -18,8 +18,8 @@ class ForgotLink extends Component {
             <View style={containerStyle}>
                 <Icon
                     name='info-outline'
-                    color={COLOR.primary}
-                    size={14}
+                    color="#999"
+                    size={20}
                     onPress={this.onForgot}
                 />
                 <Text
@@ -35,14 +35,15 @@ class ForgotLink extends Component {
 
 const styles = StyleSheet.create({
     containerStyle: {
-        flexDirection: 'row', 
+        flexDirection: 'row',
         alignSelf: 'flex-end',
-        marginBottom: 30
+        marginBottom: 30,
+        alignItems: 'center'
     },
     textStyle: {
-        color: COLOR.primary,
-         fontSize: 12, 
-         fontWeight: '300', 
+        color: '#858585',
+         fontSize: 14,
+         fontWeight: '300',
          marginLeft: 5
     }
 });
