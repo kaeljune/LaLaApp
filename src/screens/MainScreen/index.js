@@ -12,7 +12,7 @@ import { Avatar, Icon } from 'react-native-elements';
 
 import Card from './Card';
 
-import { accountFetch, fetchRequest, fetchListGift } from '../../actions';
+import { accountFetch, fetchRequest, fetchListGift, fetchCart } from '../../actions';
 import { COLOR, WIDTH_SCREEN, STYLES, headerStyle, headerTitleStyle } from '../../config/config';
 
 const bodau = (str) => {
@@ -72,6 +72,7 @@ class MainScreen extends Component {
 
 	async componentWillMount() {
 		await this.props.fetchRequest();
+		
 		const { setParams } = this.props.navigation;
 		const { auth, items } = this.props;
 		const name = bodau(auth.userLogin.name);
@@ -92,7 +93,8 @@ class MainScreen extends Component {
 					index={index}
 					onPress={async () => {
 						await this.props.fetchListGift(item.uid);
-						await this.props.navigation.navigate('giftselection', { user: item });
+						 this.props.fetchCart(item);
+						 this.props.navigation.navigate('giftselection', { user: item });
 					}}
 				/>
 
@@ -229,4 +231,5 @@ const mapStateToProps = state => {
 	return { items, auth };
 };
 
-export default connect(mapStateToProps, { accountFetch, fetchRequest, fetchListGift })(MainScreen);
+export default connect(mapStateToProps, 
+	{ accountFetch, fetchRequest, fetchListGift, fetchCart })(MainScreen);

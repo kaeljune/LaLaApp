@@ -5,12 +5,47 @@ import firebase from 'firebase';
 import {
   FETCH_REQUEST,
   FETCH_LIST_GIFT,
-  FETCH_GIFT
+  FETCH_GIFT,
+  CART_CHANGED_ADD,
+  CART_CHANGED_SUB,
+  CART_CHANGED_REMOVE,
+  FETCH_CART
 } from './types';
+
+export const addQuantity = (cardActive, id) => (dispatch) => {
+  try {
+    dispatch({ type: CART_CHANGED_ADD, payload: { cardActive, id } });
+  } catch (e) {
+    console.error(e);
+  }
+};
+export const subQuantity = (cardActive, id) => (dispatch) => {
+  try {
+    dispatch({ type: CART_CHANGED_SUB, payload: { cardActive, id } });
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const removeQuantity = (cardActive, id) => (dispatch) => {
+  try {
+    dispatch({ type: CART_CHANGED_REMOVE, payload: { cardActive, id } });
+  } catch (e) {
+    console.error(e);
+  }
+};
 
 export const fetchGift = (id) => (dispatch) => {
   try {
     dispatch({ type: FETCH_GIFT, payload: id });
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const fetchCart = (item) => (dispatch) => {
+  try {
+    dispatch({ type: FETCH_CART, payload: { item } });
   } catch (e) {
     console.error(e);
   }
@@ -35,7 +70,7 @@ export const fetchListGift = (id) => async (dispatch) => {
     const ref = await firebase.database().ref(`users/${userId}/orders/${id}/gifts`);
     await ref.once('value', snapshot => {
       const gifts = snapshot.val();
-      dispatch({ type: FETCH_LIST_GIFT, payload: gifts });
+      dispatch({ type: FETCH_LIST_GIFT, payload: { id, gifts } });
     });
   } catch (e) {
     console.error(e);
