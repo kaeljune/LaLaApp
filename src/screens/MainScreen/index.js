@@ -228,7 +228,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
 	const items = _.map(state.listRequest.results, (val, uid) => ({ ...val, uid }));
-	//const gifts = _.map(state.listRequest.listGift, (val, uid) => ({ ...val, uid }));
 	const auth = state.fetchAcc;
 	return { items, auth };
 };

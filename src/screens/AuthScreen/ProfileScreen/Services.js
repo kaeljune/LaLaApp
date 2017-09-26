@@ -3,7 +3,7 @@ import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import { connect } from 'react-redux';
-import { signOut } from '../../../actions';
+import { signOut, removeQuantity } from '../../../actions';
 
 
 import { COLOR, STYLES } from '../../../config/config';
@@ -38,6 +38,18 @@ class Services extends Component {
 						<View style={[styles.row, styles.border]}>
 							<Text style={{ fontSize: 17, color: '#313131' }}>
 								Terms &amp; Privacy
+								</Text>
+							<Icon name="assignment" color={COLOR.primary} />
+						</View>
+					</TouchableWithoutFeedback>
+				</View>
+				<View>
+					<TouchableWithoutFeedback
+						onPress={this.props.removeQuantity}
+					>
+						<View style={[styles.row, styles.border]}>
+							<Text style={{ fontSize: 17, color: '#313131' }}>
+								Remove Cache
 								</Text>
 							<Icon name="assignment" color={COLOR.primary} />
 						</View>
@@ -84,4 +96,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default connect(null, { signOut })(Services);
+export default connect(null, { signOut, removeQuantity })(Services);
