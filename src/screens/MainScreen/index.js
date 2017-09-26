@@ -115,15 +115,12 @@ class MainScreen extends Component {
 					/>
 
 					<View
-						style={[
-							STYLES.boxShadow,
-							{
-								height: 40,
-								backgroundColor: '#fff',
-								borderTopColor: '#ddd',
-								borderTopWidth: 1,
-							}
-						]}
+						style={{
+							height: 40,
+							backgroundColor: '#fff',
+							borderTopColor: '#ddd',
+							borderTopWidth: 1,
+						}}
 					/>
 
 					<View style={styles.bottomView}>
@@ -219,6 +216,7 @@ const styles = StyleSheet.create({
 	bottomView: {
 		position: 'absolute',
 		bottom: 0,
+		zIndex: 10,
 		width: WIDTH_SCREEN,
 		alignItems: 'center',
 	}

@@ -9,26 +9,31 @@ import {
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
+
+import Location from './Location';
+
 import {
   requestLocationChanged,
   clearLocation
 } from '../../actions';
-
 import * as config from '../../config/config';
+
 
 const locations = [
   { name: 'Ha Noi, Viet Nam' },
   { name: 'Ho Chi Minh, Viet Nam' },
   { name: 'Hai Phong, Viet Nam' },
-  { name: 'Da Nang, Viet Nam' }
+  { name: 'Da Nang, Viet Nam' },
 ];
 
 class Address extends Component {
   static navigationOptions = () => ({
+    header: null
+    // header: null
     // title: 'Where are you going?',
-    headerBackTitle: null,
-    headerTintColor: config.COLOR.secondary,
-    headerStyle: config.headerStyle
+    // headerBackTitle: null,
+    // headerTintColor: config.COLOR.secondary,
+    // headerStyle: config.headerStyle
   })
 
   constructor(props) {
@@ -36,9 +41,9 @@ class Address extends Component {
 
     this.positionSearch = new Animated.Value(-300);
     this.opacitySearch = new Animated.Value(0);
-
     this.positionLocation = new Animated.Value(300);
     this.opacityLocation = new Animated.Value(0);
+    this.yOffset = new Animated.Value(0);
   }
 
   componentDidMount() {
@@ -69,26 +74,48 @@ class Address extends Component {
     this.props.requestLocationChanged(location);
   }
 
+  renderLocation = ({ item, index }) => {
+    return (
+      <Location
+        item={item}
+        index={index}
+        onPress={async () => {
+          await this.onChangeText(item.name);
+          await this.props.navigation.navigate('giveagift');
+        }}
+      />
+    )
+  }
+
   render() {
     const { location } = this.props;
     const filtererLocation = locations.filter((item) => item.name.toLowerCase().indexOf(location.toLowerCase()) >= 0);
     return (
       <View style={styles.container}>
+        <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+          <View
+            style={{
+              height: config.HEIGHT_HEADER,
+              alignItems: 'center',
+              flexDirection: 'row',
+              paddingHorizontal: 10
+            }}
+          >
+            <Icon name="keyboard-arrow-left" size={30} />
+          </View>
+        </TouchableOpacity>
         <Animated.View
           style={{
-            backgroundColor: '#fff',
-            paddingTop: 10,
             opacity: this.opacitySearch,
             flexDirection: 'row',
             alignItems: 'center',
             transform: [{
-              translateX: this.positionSearch,
+              translateX: this.positionSearch
             }]
           }}
         >
           <TextInput
             placeholder="Where are you going?"
-            autoFocus
             onChangeText={this.onChangeText}
             value={location}
             style={styles.input}
@@ -97,12 +124,22 @@ class Address extends Component {
             underlineColorAndroid="transparent"
           />
 
-          { location.length > 0 &&
-          <TouchableOpacity onPress={() => this.props.clearLocation() }>
-            <View style={{ width: 50 }}>
-              <Icon name="clear" size={20} color="#999" />
-            </View>
-          </TouchableOpacity>}
+          {location.length > 0 &&
+            <TouchableOpacity onPress={() => this.props.clearLocation()}>
+              <View style={{ width: 50, alignItems: 'center' }}>
+                <Icon
+                  name="clear"
+                  size={16}
+                  color="#fff"
+                  containerStyle={{
+                    height: 25,
+                    width: 25,
+                    borderRadius: 25,
+                    backgroundColor: '#ddd'
+                  }}
+                />
+              </View>
+            </TouchableOpacity>}
         </Animated.View>
 
         <Animated.View
@@ -114,46 +151,37 @@ class Address extends Component {
             }]
           }}
         >
-        <ScrollView contentContainerStyle={{ padding: 20 }}>
-          { location.length < 2 &&
-          <View style={{ marginBottom: 30 }}>
-            <Text style={styles.titleSection}>RECENT SEARCHES</Text>
-            <View>
-              <View style={styles.row}>
-                <Icon name="access-time" size={18} color="#454545" />
-                <Text style={styles.textLocation}>Ha Noi, Viet Nam</Text>
-              </View>
-            </View>
-          </View> }
-          <View>
+          <ScrollView contentContainerStyle={{ padding: 20 }}>
             {location.length < 2 &&
-              <Text style={styles.titleSection}>POPULAR DESTINATIONS</Text>}
-            <View>
-            {filtererLocation.length > 0 ?
-              <FlatList
-                data={filtererLocation}
-                keyExtractor={item => item.name}
-                removeClippedSubviews={false}
-                renderItem={({ item }) => (
-
-                <TouchableOpacity
-                  onPress={async() => {
-                    await this.onChangeText(item.name);
-                    await this.props.navigation.navigate('giveagift');
+              <View style={{ marginBottom: 30 }}>
+                <Text style={styles.titleSection}>RECENT SEARCHES</Text>
+                <View
+                  style={{
+                    borderBottomWidth: 1,
+                    borderBottomColor: '#eee',
                   }}
-                  key={item.name}
                 >
                   <View style={styles.row}>
-                    <Icon name="location-on" size={18} color="#454545" />
-                    <Text style={styles.textLocation}>{item.name}</Text>
+                    <Icon name="access-time" size={18} color="#454545" />
+                    <Text style={styles.textLocation}>Ha Noi, Viet Nam</Text>
                   </View>
-                </TouchableOpacity>
-                )}
-              />
-            : <Text>No match address</Text>}
+                </View>
+              </View>}
+            <View>
+              {location.length < 2 &&
+                <Text style={styles.titleSection}>POPULAR DESTINATIONS</Text>}
+              <View>
+                {filtererLocation.length > 0 ?
+                  <FlatList
+                    data={filtererLocation}
+                    keyExtractor={item => item.name}
+                    removeClippedSubviews={false}
+                    renderItem={this.renderLocation}
+                  />
+                  : <Text>No match address</Text>}
+              </View>
             </View>
-          </View>
-        </ScrollView>
+          </ScrollView>
         </Animated.View>
       </View>
     );
@@ -165,16 +193,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     flex: 1
   },
-
   input: {
     fontWeight: '700',
-    fontSize: 20,
+    fontSize: 25,
     height: 60,
     paddingHorizontal: 20,
     flex: 1,
-  },
-  section: {
-
   },
   titleSection: {
     fontSize: 11,
@@ -186,8 +210,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 25,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee'
   },
   textLocation: {
     fontSize: 16,
