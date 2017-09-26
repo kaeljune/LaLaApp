@@ -12,6 +12,8 @@ import { connect } from 'react-redux';
 // import ProgressiveImage from 'react-native-progressive-image';
 import { Icon } from 'react-native-elements';
 
+import { addQuantity } from '../../actions';
+
 import Btn from '../../components/Btn';
 
 import * as config from '../../config/config';
@@ -103,7 +105,10 @@ class DetailGift extends Component {
               title="Add to Cart"
               style={{ width: 150 }}
               bgColor={config.COLOR.secondary}
-              onPress={() => this.props.navigation.navigate('checkout', { user: this.props.navigation.state.params.user })}
+              onPress={async () => {
+                await this.props.addQuantity(this.props.cardActive, item.uid);
+                await this.props.navigation.navigate('checkout', { user: this.props.navigation.state.params.user })
+                }}
             />
           </View>
           <View style={styles.section}>
@@ -145,11 +150,12 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
+  const cardActive = state.listRequest.cardActive;
   const GiftID = state.listRequest.giftActive;
   const item = _.find(_.map(state.listRequest.listGift, (val, uid) => ({ ...val, uid })), { uid: state.listRequest.giftActive });
   //const gifts = _.map(state.listRequest.listGift, (val, uid) => ({ ...val, uid }));
-  return { item, GiftID };
+  return { cardActive, item, GiftID };
 };
 
-export default connect(mapStateToProps, {})(DetailGift);
+export default connect(mapStateToProps, { addQuantity })(DetailGift);
 
