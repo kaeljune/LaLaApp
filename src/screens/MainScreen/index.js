@@ -81,6 +81,7 @@ class MainScreen extends Component {
 
 	renderItem = ({ item, index }) => {
 		const name = item.receiverName ? item.receiverName : 'Anonymous';
+		bodau(name);
 		const shortName = _.toUpper(name.match(/\b\w/g).join('')).substring(0, 2);
 		return (
 
@@ -94,7 +95,7 @@ class MainScreen extends Component {
 					onPress={async () => {
 						await this.props.fetchListGift(item.uid);
 						 this.props.fetchCart(item);
-						 this.props.navigation.navigate('giftselection', { user: item });
+						 this.props.navigation.navigate('giftselection', { avaTitle: shortName, user: item });
 					}}
 				/>
 

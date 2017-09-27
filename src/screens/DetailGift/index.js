@@ -20,7 +20,7 @@ import * as config from '../../config/config';
 // import progress from '../../../assets/images/progress.jpg';
 
 class DetailGift extends Component {
-  static navigationOptions = () => ({
+  static navigationOptions = ({ navigation }) => ({
     // header: null
     headerStyle: config.headerOverlay,
     headerTintColor: config.COLOR.primary,
@@ -30,7 +30,7 @@ class DetailGift extends Component {
           <View style={{ padding: 5 }}>
             <Icon name="card-giftcard" size={25} color="#858585" />
             <View style={styles.card}>
-              <Text style={{ color: '#fff', fontSize: 10 }}>01</Text>
+              <Text style={{ color: '#fff', fontSize: 10 }}>{navigation.state.params.sumCart}</Text>
             </View>
           </View>
         </View>
@@ -107,7 +107,7 @@ class DetailGift extends Component {
               bgColor={config.COLOR.secondary}
               onPress={async () => {
                 await this.props.addQuantity(this.props.cardActive, item.uid);
-                await this.props.navigation.navigate('checkout', { user: this.props.navigation.state.params.user })
+                await this.props.navigation.navigate('checkout', { avaTitle: this.props.navigation.state.params.avaTitle, user: this.props.navigation.state.params.user });
                 }}
             />
           </View>
