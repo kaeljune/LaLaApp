@@ -104,7 +104,7 @@ class WriteANote extends Component {
 						title="NEXT"
 						style={{ width: 150 }}
 						bgColor={COLOR.primary}
-						onPress={() => this.props.navigation.navigate('afterrequest')}
+						onPress={() => this.props.navigation.navigate('deliveryblank')}
 					/>
 				</View>
 

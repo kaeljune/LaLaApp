@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, StyleSheet, TextInput } from 'react-native';
 import { Icon } from 'react-native-elements';
-
+import GooglePlacesInput from './GooglePlacesInput';
 import ListRadio from '../../components/ListRadio';
 import Btn from '../../components/Btn';
 
@@ -49,8 +49,8 @@ class DeliveryBlank extends Component {
 			<View style={styles.wraper}>
 				<ScrollView contentContainerStyle={{ padding: 15 }}>
 					<Text style={{ paddingVertical: 15, fontWeight: '600', color: '#777' }}>SHIP TO:</Text>
+					<GooglePlacesInput />
 					<View>
-
 						<View style={styles.addLocation}>
 							<Icon
 								size={30}
