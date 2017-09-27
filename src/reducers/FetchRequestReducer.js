@@ -7,7 +7,8 @@ import {
     CART_CHANGED_ADD,
     CART_CHANGED_SUB,
     CART_CHANGED_REMOVE,
-    FETCH_CART
+    FETCH_CART,
+    CART_MESSAGE_CHANGED
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -39,6 +40,16 @@ export default function (state = INITIAL_STATE, action) {
                     }
                 }
             });
+        case CART_MESSAGE_CHANGED:
+            return { ...state,
+                cart: {
+                    ...state.cart,
+                    [action.payload.cardActive]: {
+                        ...state.cart[action.payload.cardActive],
+                        message: action.payload.text,
+                    }
+                }
+            };
         case CART_CHANGED_ADD:
             return { ...state, 
                 cart: {

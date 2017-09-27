@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { WebBrowser } from 'expo';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
@@ -22,7 +23,10 @@ class Checkout extends Component {
 		// 	size={24}
 		// 	onPress={() => navigation.goBack()}
 		// />,
-		headerRight: <View style={{ flexDirection: 'row', paddingRight: 15 }}>
+		headerRight: <TouchableOpacity 
+		style={{ flexDirection: 'row', paddingRight: 15 }}
+		onPress={async () => { await WebBrowser.openBrowserAsync('https://m.me/airlala.official'); }}
+		>
 			<Icon
 				size={15}
 				name="chat"
@@ -30,7 +34,7 @@ class Checkout extends Component {
 				onPress={() => navigation.goBack()}
 			/>
 			<Text style={{ marginLeft: 5, color: '#555' }}>Chat</Text>
-		</View>
+		</TouchableOpacity>
 	})
 	render() {
 		return (
@@ -49,7 +53,7 @@ class Checkout extends Component {
 						}}
 					>
 						<Text style={{ fontSize: 14, fontWeight: '100', color: '#454553', marginRight: 15 }}>TOTAL :</Text>
-						<Text style={{ fontSize: 20, fontWeight: '700', color: COLOR.secondary }}>$ 900</Text>
+						<Text style={{ fontSize: 20, fontWeight: '700', color: COLOR.secondary }}>${this.props.total}</Text>
 					</View>
 
 					<Btn
@@ -59,7 +63,7 @@ class Checkout extends Component {
 						}}
 						title="CHECKOUT"
 						bgColor={COLOR.primary}
-						onPress={() => this.props.navigation.navigate('writeanote')}
+						onPress={() => this.props.navigation.navigate('writeanote', { avaTitle: this.props.navigation.state.params.avaTitle, user: this.props.navigation.state.params.user })}
 					/>
 
 				</View>
@@ -87,7 +91,8 @@ const mapStateToProps = state => {
 	const GiftID = state.listRequest.giftActive;
 	const cardActive = state.listRequest.cardActive;
 	const items = _.filter(_.map(state.listRequest.cart[cardActive].items, (val, uid) => ({ ...val, uid })), (gift) => gift.quantity > 0);
-	return { items, cardActive, GiftID };
+	const total = _.sumBy(items, function(o) { return o.quantity * _.parseInt(_.replace(o.price, /^\D+/g, '')); });
+	return { items, cardActive, GiftID, total };
 };
 
 export default connect(mapStateToProps, {})(Checkout);

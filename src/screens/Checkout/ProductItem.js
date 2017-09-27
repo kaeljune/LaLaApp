@@ -45,7 +45,7 @@ class ProductList extends Component {
 	}
 
 	render() {
-		const { name, price, image } = this.props;
+		const { artisan, name, price, image } = this.props;
 		return (
 			<View style={styles.itemStyle}>
 				<View style={{ width: 90, height: 90, backgroundColor: '#eee' }}>
@@ -62,11 +62,11 @@ class ProductList extends Component {
 						</Text>
 
 						<Text style={{ marginVertical: 5, color: '#888', fontSize: 12 }}>
-							by <Text style={{ fontWeight: '500' }}>Maria</Text>
+							by <Text style={{ fontWeight: '500' }}>{artisan || 'Airlala'}</Text>
 						</Text>
 					</View>
 
-					<Text style={{ color: COLOR.secondary, fontWeight: '600' }}>{price}</Text>
+					<Text style={{ color: COLOR.secondary, fontWeight: '600' }}>${price}</Text>
 				</View>
 
 				<View style={styles.quantityStyle}>

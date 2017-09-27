@@ -4,9 +4,9 @@ import {
   ScrollView,
   StyleSheet,
   Alert,
-  Easing
+  Easing,
 } from 'react-native';
-
+import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
 import {
   accountFetch, emailSignin, signinEmailChanged, signinPasswordChanged,

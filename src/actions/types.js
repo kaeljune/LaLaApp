@@ -43,5 +43,6 @@ export const REQUEST_OTHER_CHANGED = 'request_other_changed';
 export const CART_CHANGED_ADD = 'cart_changed_add';
 export const CART_CHANGED_SUB = 'cart_changed_sub';
 export const CART_CHANGED_REMOVE = 'cart_changed_remove';
+export const CART_MESSAGE_CHANGED = 'cart_message_changed';
 export const FETCH_CART = 'fetch_cart';
 

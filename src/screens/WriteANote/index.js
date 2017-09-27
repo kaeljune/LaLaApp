@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, Animated } from 'react-native';
+import { connect } from 'react-redux';
 import { Icon, Avatar } from 'react-native-elements';
+
+import { cartMessageChanged } from '../../actions';
 import Btn from '../../components/Btn';
 import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';
 import avatar from '../../../assets/images/avatar.png';
@@ -20,14 +23,15 @@ class WriteANote extends Component {
 	state = {
 		transformY: new Animated.Value(100)
 	}
-
-
 	componentDidMount() {
 		Animated.spring(this.state.transformY, {
 			toValue: 0,
 		}).start();
 	}
-
+	
+	onMessageChange = (text) => {
+    this.props.cartMessageChanged(this.props.cardActive, text);
+  }
 	render() {
 		return (
 			<View style={styles.wraper}>
@@ -44,10 +48,10 @@ class WriteANote extends Component {
 							width={120}
 							rounded
 							containerStyle={{ marginBottom: 15 }}
-							source={avatar}
+							title={this.props.navigation.state.params.avaTitle}
 						/>
-						<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 10 }}>Hai Nguyen</Text>
-						<Text>for Birthday</Text>
+						<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 10 }}>{this.props.navigation.state.params.user.receiverName}</Text>
+						<Text>for {this.props.navigation.state.params.user.occasion}</Text>
 					</View>
 
 					
@@ -84,8 +88,10 @@ class WriteANote extends Component {
 							<TextInput
 								multiline
 								style={{ textAlign: 'center', width: WIDTH_SCREEN - 90 }}
-								numberOfLines={7}
+								numberOfLines={10}
 								underlineColorAndroid="transparent"
+								value={this.props.message}
+								onChangeText={this.onMessageChange}
 								placeholder="Why are you giving this gift?"
 							/>
 						</View>
@@ -123,4 +129,11 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default WriteANote;
+const mapStateToProps = state => {
+	const cardActive = state.listRequest.cardActive;
+	const message = state.listRequest.cart[cardActive].message || '';
+	return { cardActive, message };
+};
+
+export default connect(mapStateToProps, 
+{ cartMessageChanged })(WriteANote);

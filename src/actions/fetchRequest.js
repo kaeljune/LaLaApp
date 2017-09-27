@@ -9,7 +9,8 @@ import {
   CART_CHANGED_ADD,
   CART_CHANGED_SUB,
   CART_CHANGED_REMOVE,
-  FETCH_CART
+  FETCH_CART,
+  CART_MESSAGE_CHANGED
 } from './types';
 
 export const addQuantity = (cardActive, id) => (dispatch) => {
@@ -35,17 +36,22 @@ export const removeQuantity = () => (dispatch) => {
   }
 };
 
-export const fetchGift = (id) => (dispatch) => {
+export const fetchCart = (item) => (dispatch) => {
   try {
-    dispatch({ type: FETCH_GIFT, payload: id });
+    dispatch({ type: FETCH_CART, payload: { item } });
   } catch (e) {
     console.error(e);
   }
 };
 
-export const fetchCart = (item) => (dispatch) => {
+export const cartMessageChanged = (cardActive, text) => ({
+  type: CART_MESSAGE_CHANGED,
+  payload: { cardActive, text }
+});
+
+export const fetchGift = (id) => (dispatch) => {
   try {
-    dispatch({ type: FETCH_CART, payload: { item } });
+    dispatch({ type: FETCH_GIFT, payload: id });
   } catch (e) {
     console.error(e);
   }
