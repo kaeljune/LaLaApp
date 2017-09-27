@@ -22,10 +22,10 @@ class ListRadio extends Component {
       <View>
 
         {this.props.data.map((item, i) => <Radio
-          onActive={this.onActive} 
+          onActive={this.onActive}
           text={item.location}
           id={i}
-          containerStyle={{ borderBottomColor: '#ddd', borderBottomWidth: 1 }}
+          containerStyle={{ borderBottomColor: '#eee', borderBottomWidth: 1 }}
           isActive={i === this.state.selectedId}
           key={i}
         />)}
