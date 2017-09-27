@@ -22,7 +22,7 @@ class GiftSelection extends PureComponent {
     headerTintColor: config.COLOR.primary,
     headerTitleStyle: config.headerTitleStyle,
     headerStyle: config.headerStyle,
-    headerRight: <TouchableOpacity 
+    headerRight: <TouchableOpacity
 		style={{ flexDirection: 'row', paddingRight: 15 }}
 		onPress={
       async () => { await WebBrowser.openBrowserAsync('https://m.me/airlala.official'); }}
@@ -81,16 +81,16 @@ get pagination() {
 renderItem = ({ item }) => (
   <CardGift
     onPress={() => {
-      this.props.navigation.navigate('detailgift', { avaTitle: this.props.navigation.state.params.avaTitle, user: this.props.navigation.state.params.user, sumCart: this.props.sumCart });
+      this.props.navigation.navigateWithDebounce('detailgift', { avaTitle: this.props.navigation.state.params.avaTitle, user: this.props.navigation.state.params.user, sumCart: this.props.sumCart });
       this.props.fetchGift(item.uid);
     }}
     onAddCart={async () => {
       await this.props.fetchGift(item.uid);
       await this.props.addQuantity(this.props.cardActive, item.uid);
-      await this.props.navigation.navigate(
+      await this.props.navigation.navigateWithDebounce(
         'checkout',
-        { avaTitle: this.props.navigation.state.params.avaTitle, 
-        user: this.props.navigation.state.params.user, 
+        { avaTitle: this.props.navigation.state.params.avaTitle,
+        user: this.props.navigation.state.params.user,
         sumCart: this.props.sumCart });
     }}
 

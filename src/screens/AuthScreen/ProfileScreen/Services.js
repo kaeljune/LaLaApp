@@ -51,7 +51,7 @@ class Services extends Component {
 							<Text style={{ fontSize: 17, color: '#313131' }}>
 								Remove Cache
 								</Text>
-							<Icon name="assignment" color={COLOR.primary} />
+							<Icon name="cached" color={COLOR.primary} />
 						</View>
 					</TouchableWithoutFeedback>
 				</View>

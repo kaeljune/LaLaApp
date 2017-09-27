@@ -1,17 +1,19 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Platform } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
-const homePlace = { 
+import * as config from '../../config/config';
+
+const homePlace = {
   description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } } };
-const workPlace = { 
+const workPlace = {
   description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } } };
 
 const GooglePlacesInput = () => (
     <GooglePlacesAutocomplete
       placeholder='Search'
       minLength={2} // minimum length of text to search
-      autoFocus={false}
+      autoFocus
       returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
       listViewDisplayed='auto'    // true/false/undefined
       fetchDetails
@@ -29,21 +31,51 @@ const GooglePlacesInput = () => (
         types: 'address' // default: 'geocode'
       }}
       styles={{
+        container: {
+          marginBottom: 20,
+          backgroundColor: '#fff',
+        },
         textInputContainer: {
-          backgroundColor: 'rgba(0,0,0,0)',
-          borderTopWidth: 0,
-          borderBottomWidth: 0,
+          backgroundColor: '#fff',
+          marginBottom: 10,
+          height: 65,
+          borderColor: '#eee',
+          borderWidth: 1,
+          borderTopWidth: 1,
+          borderTopColor: '#eee',
+          borderBottomWidth: 1,
+          borderBottomColor: '#eee',
+          ...Platform.select({
+            ios: {
+              shadowColor: 'rgba(0,0,0,0.2)',
+              shadowOffset: { height: 5, width: 0 },
+              shadowOpacity: 0.5,
+              shadowRadius: 5,
+            },
+            android: {
+              elevation: 2
+            },
+          }),
         },
         textInput: {
+          height: 50,
           marginLeft: 0,
           marginRight: 0,
-          height: 38,
-          color: '#5d5d5d',
-          fontSize: 16
+          color: '#313131',
+          fontSize: 20,
+          borderRadius: 0,
+          selectionColor: config.COLOR.primary
         },
         predefinedPlacesDescription: {
-          color: '#1faadb'
+          color: '#5d5d5d',
+          fontSize: 16,
+          margin: 0,
+          padding: 0
         },
+        separator: {
+          backgroundColor: '#ddd',
+        }
+
       }}
 
       currentLocation // Will add a 'Current location' button at the top of the predefined places list
