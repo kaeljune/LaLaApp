@@ -23,95 +23,92 @@ class WriteANote extends Component {
 
 	render() {
 		const { avaTitle, user } = this.props.navigation.state.params;
+
 		return (
-
-
 			<View style={styles.wraper}>
 				<KeyboardAwareScrollView>
-				<View style={styles.sectionContainer}>
-					<View
-						style={{
-							alignItems: 'center',
-						}}
-					>
-						<View style={styles.sectionHead}>
-							<Avatar
-								height={120}
-								width={120}
-								rounded
-								title={avaTitle}
-							/>
-							<Text style={{ fontSize: 18, fontWeight: '600', marginVertical: 20 }}>{user.receiverName.length > 0 ? user.receiverName : 'Anonymous'}</Text>
-							<Text>for {this.props.navigation.state.params.user.occasion}</Text>
-						</View>
-
-
+					<View style={styles.sectionContainer}>
 						<View
 							style={{
-								zIndex: 2,
-								justifyContent: 'center',
-								width: 35,
-								height: 35,
-								backgroundColor: '#FF5700',
-								borderRadius: 20
-							}}
-						>
-							<Icon
-								size={15}
-								name='assignment'
-								color='#fff'
-							/>
-
-						</View>
-
-						<View
-							style={{
-								top: -20,
-								padding: 10,
-								width: WIDTH_SCREEN - 60,
 								alignItems: 'center',
-								backgroundColor: '#fff',
-								borderColor: '#eee',
-								borderWidth: 1
 							}}
 						>
-							<Text style={{ color: '#11b8ab', marginVertical: 20 }}>HANDWRITTEN NOTE</Text>
+							<View style={styles.sectionHead}>
+								<Avatar
+									height={120}
+									width={120}
+									rounded
+									title={avaTitle}
+								/>
+								<Text style={{ fontSize: 18, fontWeight: '600', marginVertical: 20 }}>{user.receiverName.length > 0 ? user.receiverName : 'Anonymous'}</Text>
+								<Text>for {user.occasion}</Text>
+							</View>
 							<View
 								style={{
-									borderStyle: 'dashed',
-									borderColor: '#eee',
-									borderWidth: 1,
-									paddingVertical: 15,
+									zIndex: 2,
+									justifyContent: 'center',
+									width: 35,
+									height: 35,
+									backgroundColor: '#FF5700',
+									borderRadius: 20
 								}}
 							>
-								<TextInput
-									multiline
+								<Icon
+									size={15}
+									name='assignment'
+									color='#fff'
+								/>
+
+							</View>
+
+							<View
+								style={{
+									top: -20,
+									padding: 10,
+									width: WIDTH_SCREEN - 60,
+									alignItems: 'center',
+									backgroundColor: '#fff',
+									borderColor: '#eee',
+									borderWidth: 1
+								}}
+							>
+								<Text style={{ color: '#11b8ab', marginVertical: 20 }}>HANDWRITTEN NOTE</Text>
+								<View
 									style={{
-										textAlign: 'center',
-										width: WIDTH_SCREEN - 90,
-										minHeight: 60,
-										fontSize: 16,
+										borderStyle: 'dashed',
+										borderColor: '#eee',
+										borderWidth: 1,
 										paddingVertical: 15,
 									}}
-									underlineColorAndroid="transparent"
-									value={this.props.message}
-									onChangeText={this.onMessageChange}
-									placeholder="Why are you giving this gift?"
-									placeholderTextColor="#ddd"
-								/>
+								>
+									<TextInput
+										multiline
+										style={{
+											textAlign: 'center',
+											width: WIDTH_SCREEN - 90,
+											minHeight: 60,
+											fontSize: 16,
+											paddingVertical: 15,
+										}}
+										underlineColorAndroid="transparent"
+										value={this.props.message}
+										onChangeText={this.onMessageChange}
+										placeholder="Why are you giving this gift?"
+										placeholderTextColor="#ddd"
+									/>
+								</View>
 							</View>
 						</View>
 					</View>
-				</View>
 
-				<View style={{ flex: 1 }}>
-					<Btn
-						title="NEXT"
-						style={{ width: 150 }}
-						bgColor={COLOR.primary}
-						onPress={() => this.props.navigation.navigate('afterrequest')}
-					/>
-				</View>
+					<View style={{ flex: 1 }}>
+						<Btn
+							title="NEXT"
+							style={{ width: 150 }}
+							bgColor={COLOR.primary}
+							onPress={() => this.props.navigation.navigate('afterrequest')}
+						/>
+					</View>
 				</KeyboardAwareScrollView>
 			</View>
 		);

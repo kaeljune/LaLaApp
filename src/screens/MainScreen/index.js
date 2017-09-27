@@ -13,7 +13,7 @@ import { Avatar, Icon } from 'react-native-elements';
 import Card from './Card';
 
 import { accountFetch, fetchRequest, fetchListGift, fetchCart } from '../../actions';
-import { COLOR, WIDTH_SCREEN, STYLES, headerStyle, headerTitleStyle } from '../../config/config';
+import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';
 
 const bodau = (str) => {
 	str = str.toLowerCase();
@@ -48,7 +48,7 @@ class MainScreen extends Component {
 				// 	<Text>total</Text>
 				// </View>,
 				headerRight: <View style={{ marginRight: 10 }}>
-					<TouchableOpacity onPress={() => navigation.navigate('isProfile')}>
+					<TouchableOpacity onPress={() => navigation.navigateWithDebounce('isProfile')}>
 						<Avatar
 							width={37}
 							height={37}
@@ -72,7 +72,7 @@ class MainScreen extends Component {
 
 	async componentWillMount() {
 		await this.props.fetchRequest();
-		
+
 		const { setParams } = this.props.navigation;
 		const { auth, items } = this.props;
 		const name = bodau(auth.userLogin.name);
@@ -95,7 +95,7 @@ class MainScreen extends Component {
 					onPress={async () => {
 						await this.props.fetchListGift(item.uid);
 						 this.props.fetchCart(item);
-						 this.props.navigation.navigate('giftselection', { avaTitle: shortName, user: item });
+						 this.props.navigation.navigateWithDebounce('giftselection', { avaTitle: shortName, user: item });
 					}}
 				/>
 
@@ -139,7 +139,7 @@ class MainScreen extends Component {
 										color={COLOR.secondary}
 									/>
 								</TouchableOpacity>
-								: <TouchableOpacity onPress={() => this.props.navigation.navigate('address')}>
+								: <TouchableOpacity onPress={() => this.props.navigation.navigateWithDebounce('address')}>
 									<Icon
 										size={25}
 										reverse
@@ -158,7 +158,7 @@ class MainScreen extends Component {
 
 		return (
 			<View style={{ flex: 1 }}>
-				<TouchableOpacity onPress={() => this.props.navigation.navigate('address')}>
+				<TouchableOpacity onPress={() => this.props.navigation.navigateWithDebounce('address')}>
 					<View
 						style={{
 							flex: 1,
@@ -178,7 +178,7 @@ class MainScreen extends Component {
 						<Text style={{ marginTop: 10, fontWeight: '700' }}>FOR ME</Text>
 					</View>
 				</TouchableOpacity>
-				<TouchableOpacity onPress={() => this.props.navigation.navigate('address')}>
+				<TouchableOpacity onPress={() => this.props.navigation.navigateWithDebounce('address')}>
 					<View
 						style={{
 							flex: 1,
@@ -231,5 +231,5 @@ const mapStateToProps = state => {
 	return { items, auth };
 };
 
-export default connect(mapStateToProps, 
+export default connect(mapStateToProps,
 	{ accountFetch, fetchRequest, fetchListGift, fetchCart })(MainScreen);
