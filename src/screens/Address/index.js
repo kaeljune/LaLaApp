@@ -74,8 +74,7 @@ class Address extends Component {
     this.props.requestLocationChanged(location);
   }
 
-  renderLocation = ({ item, index }) => {
-    return (
+  renderLocation = ({ item, index }) => (
       <Location
         item={item}
         index={index}
@@ -85,7 +84,6 @@ class Address extends Component {
         }}
       />
     )
-  }
 
   render() {
     const { location } = this.props;
