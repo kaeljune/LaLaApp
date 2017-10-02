@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
 	View,
-	ScrollView,
 	Text,
 	Image,
 	Animated,
@@ -20,21 +19,16 @@ import {
 } from '../../config/config';
 
 class ForgotScreen extends Component {
-
-	static navigationOptions = ({ navigation }) => ({
+	static navigationOptions = () => ({
 		title: 'Reset Password',
 		headerTintColor: COLOR.primary,
-		// headerLeft: <Icon
-		//     name='chevron-left'
-		//     color={COLOR.primary}
-		//     onPress={() => navigation.goBack()}
-		// />,
+		headerBackTitle: null,
 		headerTitleStyle,
 		headerStyle,
 	})
 
 	state = {
-		email: '', password: '',
+		email: '',
 		animation: {
 			positionTop: new Animated.Value(-100),
 			positionBottom: new Animated.Value(100)
@@ -92,8 +86,9 @@ class ForgotScreen extends Component {
 							label="EMAIL"
 							value={email}
 							placeholder="What's your email?"
-							keyboardType='email-address'
-							onChangeText={() => this.setState({ email })}
+							keyboardType="email-address"
+            	returnKeyType="done"
+							onChangeText={(text) => this.setState({ email: text })}
 						/>
 					</View>
 

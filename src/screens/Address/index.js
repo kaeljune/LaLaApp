@@ -39,7 +39,7 @@ class Address extends Component {
   constructor(props) {
     super(props);
 
-    this.positionSearch = new Animated.Value(-300);
+    this.positionSearch = new Animated.Value(300);
     this.opacitySearch = new Animated.Value(0);
     this.positionLocation = new Animated.Value(300);
     this.opacityLocation = new Animated.Value(0);
@@ -57,9 +57,9 @@ class Address extends Component {
         duration: 100,
         useNativeDriver: true
       }),
-      Animated.timing(this.positionLocation, {
+      Animated.spring(this.positionLocation, {
         toValue: 0,
-        duration: 200,
+        duration: 500,
         useNativeDriver: true
       }),
       Animated.timing(this.opacityLocation, {

@@ -27,6 +27,7 @@ export const signOut = () => async (dispatch) => {
     console.log(error);
   });
 };
+
 export const emailSignin = ({ emailSF, passwordSF }) => async (dispatch) => {
   dispatch({ type: EMAIL_SIGNIN });
   try {
@@ -36,7 +37,7 @@ export const emailSignin = ({ emailSF, passwordSF }) => async (dispatch) => {
     })
     .catch((error) => {
       // Handle Errors here.
-      emailSigninFail(dispatch, error); 
+      emailSigninFail(dispatch, error);
     });
     // const userSignin = await firebase.auth().signInWithEmailAndPassword(emailSF, passwordSF);
     // await AsyncStorage.setItem('@userLogin', JSON.stringify(userSignin));

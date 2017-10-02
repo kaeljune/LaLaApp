@@ -1,47 +1,55 @@
 import React, { Component } from 'react';
 import {
   View, Text,
-  StyleSheet,
+  // StyleSheet,
   Animated,
-  AsyncStorage,
-  ScrollView,
+  Platform,
+  UIManager,
+  LayoutAnimation,
   Alert
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
+
 import {
   emailSignup, signupEmailChanged, signupPasswordChanged,
   signupConfirmPasswordChanged, signinNameChanged, signinPhoneChanged,
 } from '../../../actions';
-
-import Spinner from '../../../components/Spinner';
 import {
   COLOR,
   headerStyle,
-  headerTitleStyle
+  headerTitleStyle,
+  CustomLayoutSpring
 } from '../../../config/config';
+
+import Spinner from '../../../components/Spinner';
 import SigninLink from './SigninLink';
 import LinkTerm from './LinkTerm';
 import TextField from '../../../components/TextField';
 import Btn from '../../../components/Btn';
 
 class SignupScreen extends Component {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = () => ({
     title: 'Sign up',
     headerTintColor: COLOR.primary,
-    // headerLeft: <Icon
-    //     name='chevron-left'
-    //     color={COLOR.primary}
-    //     onPress={() => navigation.goBack()}
-    // />,
+    headerBackTitle: null,
     headerTitleStyle,
     headerStyle,
   })
 
-  state = {
-    userData: null,
-    translateY: new Animated.Value(200)
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      userData: null,
+      translateY: new Animated.Value(200)
+    };
+
+    if (Platform.OS === 'android') {
+      UIManager.setLayoutAnimationEnabledExperimental &&
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+  }
 
   // async componentWillMount() {
   //     //await AsyncStorage.removeItem('@userLogin');
@@ -61,31 +69,21 @@ class SignupScreen extends Component {
     }).start();
   }
 
-  onEmailChange = (text) => {
-    this.props.signupEmailChanged(text);
-  }
+  // onEmailChange = (text) => this.props.signupEmailChanged(text);
 
-  onPasswordChange = (text) => {
-    this.props.signupPasswordChanged(text);
-  }
-  onConfirmPasswordChange = (text) => {
-    this.props.signupConfirmPasswordChanged(text);
-  }
+  // onPasswordChange = (text) => this.props.signupPasswordChanged(text);
 
-  onPhoneChange = (text) => {
-    this.props.signinPhoneChanged(text);
-  }
-  onNameChange = (text) => {
-    this.props.signinNameChanged(text);
-  }
-  onTerms = () => {
-    this.props.navigation.navigate('term');
-  }
-  onSignIn = () => {
-    this.props.navigation.navigate('signin');
-  }
+  // onConfirmPasswordChange = (text) => this.props.signupConfirmPasswordChanged(text);
+
+  // onPhoneChange = (text) => this.props.signinPhoneChanged(text);
+
+  // onNameChange = (text) => this.props.signinNameChanged(text);
+
   onButtonPress = async () => {
     const { email, password, phone, name } = this.props;
+
+    LayoutAnimation.configureNext(CustomLayoutSpring);
+
     try {
       await this.props.emailSignup({ email, password, phone, name });
       if (this.props.error) {
@@ -105,77 +103,63 @@ class SignupScreen extends Component {
       //
     }
   }
-  renderButton = () => {
-    if (this.props.loading) {
-      return <Spinner size="large" />;
-    }
-    return (
-      <Btn
-        title="SIGN UP"
-        bgColor={COLOR.primary}
-        style={{ width: 150 }}
-        onPress={this.onButtonPress}
-      />
-    );
-  }
 
   render() {
-    const { containerStyle } = styles;
     return (
-
-      <KeyboardAwareScrollView
-        doNotForceDismissKeyboardWhenLayoutChanges={true}
-        style={{ backgroundColor: '#f8f8f8' }}
-        resetScrollToCoords={{ x: 0, y: 0 }}
-        contentContainerStyle={{ flex: 1, }}
-        scrollEnabled={true}
-        animated={true}
-      >
-      <ScrollView style={{ flex: 1}} contentContainerStyle={{ padding: 20 }}>
+      <View style={{ flex: 1 }}>
+        <KeyboardAwareScrollView
+          doNotForceDismissKeyboardWhenLayoutChanges
+          style={{ backgroundColor: '#f8f8f8', flex: 1 }}
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          contentContainerStyle={{ padding: 20}}
+          scrollEnabled
+          animated
+        >
           <Animated.View style={{ transform: [{ translateY: this.state.translateY }] }}>
             <TextField
-              label="FULL NAME"
+              label="USER NAME"
               value={this.props.name}
               placeholder="What's your name?"
-              onChangeText={this.onNameChange}
+              returnKeyType="next"
+              onChangeText={(text) => this.props.signinNameChanged(text)}
             />
             <TextField
               label="EMAIL"
               value={this.props.email}
               placeholder="What's your email?"
-              keyboardType='email-address'
-              onChangeText={this.onEmailChange}
+              keyboardType="email-address"
+              keyboardType="email-address"
+              returnKeyType="next"
+              onChangeText={(text) => this.props.signupEmailChanged(text)}
             />
             <TextField
               label="PHONE NUMBER"
               value={this.props.phone}
               placeholder="What’s your mobile number"
               keyboardType='numeric'
-              onChangeText={this.onPhoneChange}
+              returnKeyType="next"
+              onChangeText={(text) => this.props.signinPhoneChanged(text)}
             />
             <TextField
               label="PASSWORD"
               secureTextEntry
               placeholder="What’s your password"
               keyboardType='default'
+              returnKeyType="next"
               value={this.props.password}
-              onChangeText={this.onPasswordChange}
-            />
-
-            <TextField
-              label="CONFIRM PASSWORD"
-              secureTextEntry
-              placeholder="Confirm your password"
-              keyboardType='default'
-              value={this.props.password}
-              onChangeText={this.onConfirmPasswordChange}
+              onChangeText={(text) => this.props.signupPasswordChanged(text)}
             />
           </Animated.View>
 
-          <LinkTerm onTerms={this.props.onTerms} />
+          <LinkTerm onTerms={() => this.props.navigation.navigate('term')} />
 
           <View style={{ alignItems: 'center' }}>
-            {this.renderButton()}
+            <Btn
+              title="SIGN UP"
+              bgColor={COLOR.primary}
+              style={{ width: 150 }}
+              onPress={this.onButtonPress}
+            />
             <Text style={{ marginVertical: 15 }}>Or sign in with</Text>
             <Btn
               title="FACEBOOK"
@@ -183,20 +167,19 @@ class SignupScreen extends Component {
               style={{ width: 150 }}
               onPress={() => { Alert('loginface'); }}
             />
-            <SigninLink onSignIn={this.onSignIn} />
+            <SigninLink onSignIn={() => this.props.navigation.navigate('signin')} />
           </View>
-        </ScrollView>
-      </KeyboardAwareScrollView>
+        </KeyboardAwareScrollView>
+        {
+          this.props.loading &&
+          <View style={{ height: 200, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
+            <Spinner />
+          </View>
+        }
+      </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  containerStyle: {
-    backgroundColor: '#f8f8f8',
-    // padding: 20
-  }
-});
 
 const mapStateToProps = ({ signupState }) => {
   const { email, password, error, loading, phone, name } = signupState;

@@ -1,4 +1,4 @@
-import { Dimensions, Platform, StyleSheet } from 'react-native';
+import { Dimensions, Platform, StyleSheet, LayoutAnimation } from 'react-native';
 
 const RootAPI = 'https://us-central1-airlala-7b1b2.cloudfunctions.net';
 
@@ -58,11 +58,24 @@ const STYLES = StyleSheet.create({
 	}
 });
 
+const CustomLayoutSpring = {
+  duration: 400,
+  create: {
+    type: LayoutAnimation.Types.spring,
+    property: LayoutAnimation.Properties.scaleXY,
+    springDamping: 0.7,
+  },
+  update: {
+    type: LayoutAnimation.Types.spring,
+    springDamping: 0.7,
+  },
+};
+
 const API_URL = 'https://us-central1-airlala-7b1b2.cloudfunctions.net/';
 
 export {
 	STYLES,
 	API_URL, WIDTH_SCREEN, HEIGHT_SCREEN, HEIGHT_HEADER, COLOR, spaceNumber,
 	headerTitleStyle, headerStyle, headerOverlay,
-	RootAPI
+	RootAPI, CustomLayoutSpring
 };
