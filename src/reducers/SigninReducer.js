@@ -24,7 +24,7 @@ export default function (state = INITIAL_STATE, action) {
     case EMAIL_SIGNIN:
       return { ...state, loadingSF: true, errorSF: '' };
     case EMAIL_SIGNIN_SUCCESS:
-      return { ...state, ...INITIAL_STATE, user: action.payload };
+      return { ...state, loadingSF: false, user: action.payload };
     case EMAIL_SIGNIN_FAIL:
       return {
         ...state,

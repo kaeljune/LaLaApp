@@ -107,11 +107,12 @@ class SignupScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
         <KeyboardAwareScrollView
           doNotForceDismissKeyboardWhenLayoutChanges
-          style={{ backgroundColor: '#f8f8f8', flex: 1 }}
+          style={{ backgroundColor: '#f8f8f8', flex: 1, opacity: this.props.loading ? 0.2 : 1 }}
           resetScrollToCoords={{ x: 0, y: 0 }}
-          contentContainerStyle={{ padding: 20}}
+          contentContainerStyle={{ padding: 20 }}
           scrollEnabled
           animated
         >
@@ -170,6 +171,7 @@ class SignupScreen extends Component {
             <SigninLink onSignIn={() => this.props.navigation.navigate('signin')} />
           </View>
         </KeyboardAwareScrollView>
+        </View>
         {
           this.props.loading &&
           <View style={{ height: 200, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>

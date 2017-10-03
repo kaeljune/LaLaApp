@@ -13,21 +13,7 @@ import { Avatar, Icon } from 'react-native-elements';
 import Card from './Card';
 
 import { accountFetch, fetchRequest, fetchListGift, fetchCart } from '../../actions';
-import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';
-
-const bodau = (str) => {
-	str = str.toLowerCase();
-	str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
-	str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e');
-	str = str.replace(/ì|í|ị|ỉ|ĩ/g, 'i');
-	str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, 'o');
-	str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, 'u');
-	str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, 'y');
-	str = str.replace(/đ/g, 'd');
-	// str = str.replace(/\W+/g, ' ');
-	// str = str.replace(/\s/g, '-');
-	return str;
-};
+import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle, bodau } from '../../config/config';
 
 class MainScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -39,14 +25,6 @@ class MainScreen extends Component {
 				headerTitleStyle,
 				headerLeft: null,
 				headerBackTitle: null,
-				// headerLeft: <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}>
-				// 	<View style={styles.box}>
-				// 		<Text style={{ color: '#fff' }}>
-				// 			{state.params ? state.params.items : '0'}
-				// 		</Text>
-				// 	</View>
-				// 	<Text>total</Text>
-				// </View>,
 				headerRight: <View style={{ marginRight: 10 }}>
 					<TouchableOpacity onPress={() => navigation.navigateWithDebounce('isProfile')}>
 						<Avatar
@@ -79,25 +57,30 @@ class MainScreen extends Component {
 		setParams({ name: _.toUpper(name.match(/\b\w/g).join('')).substring(0, 2), items: items.length });
 	}
 
+	onPress = async (shortName, item) => {
+		if (this.state.isDel) return;
+
+		await this.props.fetchListGift(item.uid);
+			this.props.fetchCart(item);
+			this.props.navigation.navigateWithDebounce('giftselection', { avaTitle: shortName, user: item });
+	}
+
 	renderItem = ({ item, index }) => {
 		const name = item.receiverName ? item.receiverName : 'Anonymous';
 		bodau(name);
 		const shortName = _.toUpper(name.match(/\b\w/g).join('')).substring(0, 2);
 		return (
-
-				<Card
-					shortName={shortName}
-					name={name}
-					occasion={item.occasion}
-					priceRange={item.priceRange}
-					status={item.status}
-					index={index}
-					onPress={async () => {
-						await this.props.fetchListGift(item.uid);
-						 this.props.fetchCart(item);
-						 this.props.navigation.navigateWithDebounce('giftselection', { avaTitle: shortName, user: item });
-					}}
-				/>
+			<Card
+				shortName={shortName}
+				name={name}
+				occasion={item.occasion}
+				priceRange={item.priceRange}
+				isDel={this.state.isDel}
+				status={item.status}
+				index={index}
+				onLongPress={() => this.setState({ isDel: true })}
+				onPress={() => this.onPress(shortName, item)}
+			/>
 
 		);
 	}

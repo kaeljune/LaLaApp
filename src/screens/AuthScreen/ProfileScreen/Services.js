@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import { connect } from 'react-redux';
@@ -11,62 +11,51 @@ import { COLOR, STYLES } from '../../../config/config';
 class Services extends Component {
 	render() {
 		return (
-
 			<View style={[styles.container, STYLES.boxShadow]}>
-				<View>
-					<TouchableWithoutFeedback>
-						<View style={[styles.row, styles.border]}>
-							<Text style={{ fontSize: 16, color: '#313131' }}>
-								Payment
+				<TouchableOpacity>
+					<View style={[styles.row, styles.border]}>
+						<Text style={{ fontSize: 16, color: '#313131' }}>
+							Payment
 								</Text>
-							<Icon name="payment" color={COLOR.primary} />
-						</View>
-					</TouchableWithoutFeedback>
-				</View>
-				<View>
-					<TouchableWithoutFeedback>
-						<View style={[styles.row, styles.border]}>
-							<Text style={{ fontSize: 16, color: '#313131' }}>
-								Helps
+						<Icon name="payment" color={COLOR.primary} />
+					</View>
+				</TouchableOpacity>
+				<TouchableOpacity>
+					<View style={[styles.row, styles.border]}>
+						<Text style={{ fontSize: 16, color: '#313131' }}>
+							Helps
 								</Text>
-							<Icon name="help-outline" color={COLOR.primary} />
-						</View>
-					</TouchableWithoutFeedback>
-				</View>
-				<View>
-					<TouchableWithoutFeedback>
-						<View style={[styles.row, styles.border]}>
-							<Text style={{ fontSize: 17, color: '#313131' }}>
-								Terms &amp; Privacy
+						<Icon name="help-outline" color={COLOR.primary} />
+					</View>
+				</TouchableOpacity>
+				<TouchableOpacity>
+					<View style={[styles.row, styles.border]}>
+						<Text style={{ fontSize: 17, color: '#313131' }}>
+							Terms &amp; Privacy
 								</Text>
-							<Icon name="assignment" color={COLOR.primary} />
-						</View>
-					</TouchableWithoutFeedback>
-				</View>
-				<View>
-					<TouchableWithoutFeedback
-						onPress={this.props.removeQuantity}
-					>
-						<View style={[styles.row, styles.border]}>
-							<Text style={{ fontSize: 17, color: '#313131' }}>
-								Remove Cache
+						<Icon name="assignment" color={COLOR.primary} />
+					</View>
+				</TouchableOpacity>
+				<TouchableOpacity
+					onPress={this.props.removeQuantity}
+				>
+					<View style={[styles.row, styles.border]}>
+						<Text style={{ fontSize: 17, color: '#313131' }}>
+							Remove Cache
 								</Text>
-							<Icon name="cached" color={COLOR.primary} />
-						</View>
-					</TouchableWithoutFeedback>
-				</View>
-				<View>
-					<TouchableWithoutFeedback
-						onPress={this.props.signOut}
-					>
-						<View style={styles.row}>
-							<Text style={{ fontSize: 17, color: '#313131' }}>
-								Sign out
+						<Icon name="cached" color={COLOR.primary} />
+					</View>
+				</TouchableOpacity>
+				<TouchableOpacity
+					onPress={this.props.signOut}
+				>
+					<View style={styles.row}>
+						<Text style={{ fontSize: 17, color: '#313131' }}>
+							Sign out
 								</Text>
-							<Icon name="exit-to-app" color={COLOR.primary} />
-						</View>
-					</TouchableWithoutFeedback>
-				</View>
+						<Icon name="exit-to-app" color={COLOR.primary} />
+					</View>
+				</TouchableOpacity>
 			</View>
 
 		);

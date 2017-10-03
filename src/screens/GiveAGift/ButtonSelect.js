@@ -6,8 +6,12 @@ import { COLOR, STYLES } from '../../config/config';
 class ButtonSeclect extends PureComponent {
 	render() {
 		const { isActive, onActive, children, id } = this.props;
-		const styleBtn = isActive ? [styles.normal, styles.active, STYLES.boxShadow] : styles.normal;
-		const styleText = isActive ? [styles.text, { color: '#fff'}] : [styles.text, { color: '#555' }];
+		const styleBtn = isActive ?
+			[styles.normal, styles.active, STYLES.boxShadow] :
+			styles.normal;
+		const styleText = isActive ?
+			[styles.text, { color: '#fff' }] :
+			[styles.text, { color: '#858585' }];
 		return (
 			<TouchableOpacity onPress={() => onActive(id)}>
 				<View style={styleBtn}>
@@ -34,8 +38,8 @@ const styles = StyleSheet.create({
 		borderColor: COLOR.primary
 	},
 	text: {
-		fontWeight: '600',
-		fontSize: 12,
+		fontWeight: '700',
+		fontSize: 14,
 		textAlign: 'center',
 	}
 });

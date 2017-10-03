@@ -64,7 +64,7 @@ const isSignedIn = TabNavigator({
 			tabBarVisible: false
 		},
 		swipeEnabled: false,
-		// animationEnabled: false,
+		animationEnabled: true,
 		lazy: true,
 	}
 );

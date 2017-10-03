@@ -24,7 +24,8 @@ class SplashScreen extends PureComponent {
 	}
 
 	async componentWillMount() {
-		//await AsyncStorage.removeItem('reduxPersist:listRequest');
+		// await AsyncStorage.removeItem('reduxPersist:listRequest');
+
 		await this.props.accountFetch();
 		const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
 		if (JSON.parse(fetchAcc).isLogin) {
@@ -100,6 +101,7 @@ class SplashScreen extends PureComponent {
 		if (_.isNull(this.state.isLogin)) {
 			return <AppLoading />;
 		}
+
 		return (
 			<View style={styles.container}>
 
