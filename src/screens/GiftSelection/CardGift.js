@@ -22,7 +22,7 @@ class CardGift extends PureComponent {
         <View style={{ padding: 20, flex: 1 }}>
           <TouchableOpacity onPress={onPress}>
             <Text style={styles.title}>{item.name}</Text>
-            <Text style={{ color: '#777', fontSize: 17 }}>by {item.artisan ? item.artisan : 'Airlala'}</Text>
+            <Text style={{ color: '#777', fontSize: 17 }}>by {item.artisan || 'Airlala'}</Text>
           </TouchableOpacity>
         </View>
         <View

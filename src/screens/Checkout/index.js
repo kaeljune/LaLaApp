@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { WebBrowser } from 'expo';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import {
+	View,
+	Text,
+	StyleSheet,
+	ScrollView,
+	TouchableOpacity
+} from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 
-import Reactotron from 'reactotron-react-native';
 import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';
 import Btn from '../../components/Btn';
 import Feature from './Feature';
@@ -17,13 +22,7 @@ class Checkout extends Component {
 		headerStyle,
 		headerTitleStyle,
 		headerTintColor: COLOR.primary,
-		// headerLeft: <Icon
-		// 	name='chevron-left'
-		// 	color={COLOR.primary}
-		// 	size={24}
-		// 	onPress={() => navigation.goBack()}
-		// />,
-		headerRight: <TouchableOpacity 
+		headerRight: <TouchableOpacity
 		style={{ flexDirection: 'row', paddingRight: 15 }}
 		onPress={async () => { await WebBrowser.openBrowserAsync('https://m.me/airlala.official'); }}
 		>
@@ -74,7 +73,7 @@ class Checkout extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		paddingBottom: 90,
+		// paddingBottom: 90,
 	},
 	bottomCheckout: {
 		backgroundColor: '#fff',

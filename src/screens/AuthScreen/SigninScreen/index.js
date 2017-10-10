@@ -4,9 +4,8 @@ import {
   View,
   StyleSheet,
   Alert,
+  AsyncStorage,
   Platform,
-  UIManager,
-  LayoutAnimation,
   Easing,
 } from 'react-native';
 // import Reactotron from 'reactotron-react-native';
@@ -20,7 +19,6 @@ import {
 import {
   COLOR, WIDTH_SCREEN,
   headerTitleStyle, headerStyle,
-  CustomLayoutSpring
 } from '../../../config/config';
 
 import Spinner from '../../../components/Spinner';
@@ -46,35 +44,32 @@ class SigninScreen extends Component {
       opacity: new Animated.Value(0)
     };
 
-    if (Platform.OS === 'android') {
-      UIManager.setLayoutAnimationEnabledExperimental &&
-      UIManager.setLayoutAnimationEnabledExperimental(true);
-    }
   }
 
   componentDidMount() {
     Animated.parallel([
       Animated.spring(this.state.translateY, {
         toValue: 0,
-        useNativeDriver: true
+        useNativeDriver: Platform.OS === 'android'
       }),
       Animated.timing(this.state.opacity, {
         toValue: 1,
         duration: 200,
         easing: Easing.circle,
-        useNativeDriver: true
+        useNativeDriver: Platform.OS === 'android'
       })
     ]).start();
   }
 
-  // async onAuthComplete(props) {
-    // await props.accountFetch();
-    // const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
-    // if (JSON.parse(fetchAcc).isLogin) {
-    //     // this.props.navigation.navigate('isSignedIn', { });
-    //     console.log('ton tai');
-    // }
-  // }
+  async onAuthComplete(props) {
+    await props.accountFetch();
+    const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
+    if (JSON.parse(fetchAcc).isLogin) {
+        // this.props.navigation.navigate('isSignedIn', { });
+        console.log('ton tai');
+    }
+  }
+
   onSignUp = () => {
     this.props.navigation.navigate('signup');
   }
@@ -83,8 +78,6 @@ class SigninScreen extends Component {
   }
   onButtonPress = async () => {
     const { emailSF, passwordSF } = this.props;
-
-    LayoutAnimation.configureNext(CustomLayoutSpring);
 
     try {
       await this.props.emailSignin({ emailSF, passwordSF });
@@ -99,7 +92,6 @@ class SigninScreen extends Component {
           ],
           { cancelable: false }
         );
-
       } else {
         this.onAuthComplete(this.props);
       }
@@ -114,7 +106,11 @@ class SigninScreen extends Component {
         <View style={{ flex: 1 }}>
           <KeyboardAwareScrollView
             doNotForceDismissKeyboardWhenLayoutChanges
-            style={{ backgroundColor: '#f8f8f8', flex: 1, opacity: this.props.loadingSF ? 0.2 : 1 }}
+            style={{
+              backgroundColor: '#f8f8f8',
+              flex: 1,
+              opacity: this.props.loadingSF ? 0.2 : 1
+            }}
             resetScrollToCoords={{ x: 0, y: 0 }}
             contentContainerStyle={styles.ContainerStyle}
             scrollEnabled
@@ -129,7 +125,14 @@ class SigninScreen extends Component {
         </View>
         {
           this.props.loadingSF &&
-          <View style={{ height: 200, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
+          <View
+            style={{
+              height: 200,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: '#fff'
+            }}
+          >
             <Spinner />
           </View>
         }

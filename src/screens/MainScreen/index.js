@@ -3,6 +3,9 @@ import {
 	FlatList,
 	View,
 	Text,
+	LayoutAnimation,
+	UIManager,
+	Platform,
 	StyleSheet,
 	TouchableOpacity,
 } from 'react-native';
@@ -13,7 +16,7 @@ import { Avatar, Icon } from 'react-native-elements';
 import Card from './Card';
 
 import { accountFetch, fetchRequest, fetchListGift, fetchCart } from '../../actions';
-import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle, bodau } from '../../config/config';
+import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle, bodau, CustomLayoutSpring } from '../../config/config';
 
 class MainScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -46,6 +49,11 @@ class MainScreen extends Component {
 		this.state = {
 			isDel: false
 		};
+
+		if (Platform.OS === 'android') {
+      UIManager.setLayoutAnimationEnabledExperimental &&
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
 	}
 
 	async componentWillMount() {
@@ -54,7 +62,15 @@ class MainScreen extends Component {
 		const { setParams } = this.props.navigation;
 		const { auth, items } = this.props;
 		const name = bodau(auth.userLogin.name);
-		setParams({ name: _.toUpper(name.match(/\b\w/g).join('')).substring(0, 2), items: items.length });
+
+		console.log(name);
+
+		setParams({
+			name: _.toUpper(name.match(/\b\w/g)
+							.join(''))
+							.substring(0, 2),
+			items: items.length
+		});
 	}
 
 	onPress = async (shortName, item) => {
@@ -63,6 +79,11 @@ class MainScreen extends Component {
 		await this.props.fetchListGift(item.uid);
 			this.props.fetchCart(item);
 			this.props.navigation.navigateWithDebounce('giftselection', { avaTitle: shortName, user: item });
+	}
+
+	onLongPress = () => {
+		LayoutAnimation.configureNext(CustomLayoutSpring);
+		this.setState({ isDel: true })
 	}
 
 	renderItem = ({ item, index }) => {
@@ -78,12 +99,14 @@ class MainScreen extends Component {
 				isDel={this.state.isDel}
 				status={item.status}
 				index={index}
-				onLongPress={() => this.setState({ isDel: true })}
+				onLongPress={this.onLongPress}
 				onPress={() => this.onPress(shortName, item)}
 			/>
 
 		);
 	}
+
+
 
 	renderList = () => {
 		const { items } = this.props;

@@ -28,9 +28,9 @@ export default function (state = INITIAL_STATE, action) {
     case EMAIL_SIGNIN_FAIL:
       return {
         ...state,
+        loadingSF: false,
         errorSF: action.payload,
         passwordSF: '',
-        loadingSF: false
       };
     case SIGNOUT:
       return state;

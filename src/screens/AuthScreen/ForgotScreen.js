@@ -4,6 +4,7 @@ import {
 	Text,
 	Image,
 	Animated,
+	TouchableOpacity,
 	StyleSheet
 } from 'react-native';
 
@@ -117,12 +118,14 @@ class ForgotScreen extends Component {
 							onPress={() => { alert('loginface'); }}
 						/>
 
-						<View style={{ flexDirection: 'row', marginTop: 20 }}>
-							<Text style={{ color: '#95989A' }}>Do not have an account? </Text>
-							<Text style={{ fontWeight: '700', color: COLOR.primary }} onPress={this.onSignUp}>
-								Sign up
-                            </Text>
-						</View>
+						<TouchableOpacity onPress={this.onSignUp}>
+							<View style={{ flexDirection: 'row', marginTop: 20 }}>
+								<Text style={{ color: '#95989A' }}>Do not have an account? </Text>
+								<Text style={{ fontWeight: '700', color: COLOR.primary }}>
+									Sign up
+								</Text>
+							</View>
+						</TouchableOpacity>
 					</View>
 					</Animated.View >
 			</View>

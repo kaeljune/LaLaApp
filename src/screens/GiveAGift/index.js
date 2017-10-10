@@ -366,7 +366,6 @@ const mapStateToProps = ({ requestGiftState, fetchAcc }) => {
 	return { account, location, sex, age, relationship, receiverName, loading, error, price, occasion, interest, style, other };
 };
 
-
 export default connect(mapStateToProps, {
 	requestSexChanged,
 	requestAgeChanged,

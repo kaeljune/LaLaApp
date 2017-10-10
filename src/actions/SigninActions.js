@@ -33,27 +33,26 @@ export const emailSignin = ({ emailSF, passwordSF }) => async (dispatch) => {
   try {
     await firebase.auth().signInWithEmailAndPassword(emailSF, passwordSF)
     .then(user => {
-      emailSigninSuccess(dispatch, user);
+      dispatch(emailSigninSuccess(user));
     })
     .catch((error) => {
       // Handle Errors here.
-      emailSigninFail(dispatch, error);
+      dispatch(emailSigninFail(error));
     });
     // const userSignin = await firebase.auth().signInWithEmailAndPassword(emailSF, passwordSF);
     // await AsyncStorage.setItem('@userLogin', JSON.stringify(userSignin));
     // emailSigninSuccess(dispatch, userSignin);
-  } catch (e) {
-    emailSigninFail(dispatch, e);
+  } catch (error) {
+    dispatch(emailSigninFail(error));
   }
 };
 
-export const emailSigninFail = (dispatch, error) => {
-  dispatch({ type: EMAIL_SIGNIN_FAIL, payload: error });
-};
+export const emailSigninFail = (error) => ({
+  type: EMAIL_SIGNIN_FAIL,
+  payload: error
+});
 
-export const emailSigninSuccess = (dispatch, user) => {
-  dispatch({
-    type: EMAIL_SIGNIN_SUCCESS,
-    payload: user
-  });
-};
+export const emailSigninSuccess = (user) => ({
+  type: EMAIL_SIGNIN_SUCCESS,
+  payload: user
+});
