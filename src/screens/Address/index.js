@@ -28,12 +28,11 @@ const locations = [
 
 class Address extends Component {
   static navigationOptions = () => ({
-    header: null
     // header: null
     // title: 'Where are you going?',
-    // headerBackTitle: null,
-    // headerTintColor: config.COLOR.secondary,
-    // headerStyle: config.headerStyle
+    headerBackTitle: null,
+    headerTintColor: config.COLOR.secondary,
+    headerStyle: config.headerStyle
   })
 
   constructor(props) {
@@ -90,18 +89,7 @@ class Address extends Component {
     const filtererLocation = locations.filter((item) => item.name.toLowerCase().indexOf(location.toLowerCase()) >= 0);
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-          <View
-            style={{
-              height: config.HEIGHT_HEADER,
-              alignItems: 'center',
-              flexDirection: 'row',
-              paddingHorizontal: 10
-            }}
-          >
-            <Icon name="keyboard-arrow-left" size={30} />
-          </View>
-        </TouchableOpacity>
+
         <Animated.View
           style={{
             opacity: this.opacitySearch,

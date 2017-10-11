@@ -163,47 +163,63 @@ class MainScreen extends Component {
 		}
 
 		return (
-			<View style={{ flex: 1 }}>
-				<TouchableOpacity onPress={() => this.props.navigation.navigateWithDebounce('address')}>
-					<View
-						style={{
-							flex: 1,
-							flexDirection: 'column',
-							alignItems: 'center',
-							justifyContent: 'center',
-						}}
-					>
-						<Icon
-							reverse
-							raised
-							reverseColor="white"
-							name='add'
-							color={COLOR.primary}
-						/>
+			<View style={styles.container}>
 
-						<Text style={{ marginTop: 10, fontWeight: '700' }}>FOR ME</Text>
-					</View>
-				</TouchableOpacity>
-				<TouchableOpacity onPress={() => this.props.navigation.navigateWithDebounce('address')}>
-					<View
-						style={{
-							flex: 1,
-							flexDirection: 'column',
-							alignItems: 'center',
-							justifyContent: 'center'
-						}}
-					>
-						<Icon
-							reverse
-							raised
-							reverseColor="white"
-							name='add'
-							color={COLOR.primary}
-						/>
+				<View
+					style={{
+						flex: 1,
+						flexDirection: 'column',
+						alignItems: 'center',
+						justifyContent: 'center',
+					}}
+				>
+					<TouchableOpacity onPress={() => this.props.navigation.navigateWithDebounce('address')}>
+						<View
+							style={{
+								alignItems: 'center',
+								justifyContent: 'center',
+							}}
+						>
+							<Icon
+								reverse
+								raised
+								reverseColor="white"
+								name='add'
+								color={COLOR.primary}
+							/>
+							<Text style={{ marginTop: 10, fontWeight: '700' }}>FOR ME</Text>
+						</View>
+					</TouchableOpacity>
+				</View>
 
-						<Text style={{ marginTop: 10, fontWeight: '700' }}>FOR OTHER PEOPLE</Text>
-					</View>
-				</TouchableOpacity>
+				<View
+					style={{
+						flex: 1,
+						flexDirection: 'column',
+						alignItems: 'center',
+						justifyContent: 'center'
+					}}
+				>
+					<TouchableOpacity onPress={() => this.props.navigation.navigateWithDebounce('address')}>
+						<View
+							style={{
+								alignItems: 'center',
+								justifyContent: 'center',
+							}}
+						>
+							<Icon
+								reverse
+								raised
+								reverseColor="white"
+								name='add'
+								color={COLOR.primary}
+							/>
+
+							<Text style={{ marginTop: 10, fontWeight: '700' }}>FOR OTHER PEOPLE</Text>
+						</View>
+					</TouchableOpacity>
+				</View>
+
 			</View>
 		);
 	};
