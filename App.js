@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 
 
 import './src/config/firebase-config';
-import './ReactotronConfig';
 import store from './src/store';
 import AppWithNavigationState from './src/navigators/AppNavigators';
 
