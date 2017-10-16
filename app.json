@@ -8,10 +8,10 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "primaryColor": "#cccccc",
-    "icon": "./assets/icons/app-icon.png",
-    "loading": {
-      "icon": "./assets/icons/loading-icon.png"
-    },
+    "icon": "./assets/icons/app.png",
+    // "loading": {
+    //   "icon": "./assets/icons/loading.png"
+    // },
     "packagerOpts": {
       "assetExts": [
         "ttf",
