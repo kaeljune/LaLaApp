@@ -124,17 +124,7 @@ render() {
           <Text style={{ fontSize: 14 }}> / {this.props.items.length}</Text>
         </Text>
         {this.pagination}
-        <Icon 
-        name="playlist-add" 
-        onPress={() => {
-          this.props.navigation.navigate(
-          'checkout',
-          { avaTitle: this.props.navigation.state.params.avaTitle, 
-          user: this.props.navigation.state.params.user, 
-          sumCart: this.props.sumCart });
-        }} 
-        raised size={20} containerStyle={{ margin: 0 }}
-        />
+        <Icon name="playlist-add" raised size={20} containerStyle={{ margin: 0 }} />
       </View>
     </View>
 

@@ -1,4 +1,3 @@
-import Expo from 'expo';
 import React, { Component } from 'react';
 import { StyleSheet, View, StatusBar, Animated } from 'react-native';
 import { Provider } from 'react-redux';
@@ -12,15 +11,15 @@ import AppWithNavigationState from './src/navigators/AppNavigators';
 
 // injectTapEventPlugin();
 
-class App extends Component {
-  constructor() {
-    super();
-    //Hide warning "Setting a time on android simulator.."
-    console.disableYellowBox = true;
-    console.ignoredYellowBox = [
-        'Setting a timer'
-    ];
-}
+export default class App extends Component {
+//   constructor() {
+//     super();
+//     //Hide warning "Setting a time on android simulator.."
+//     // console.disableYellowBox = true;
+//     // console.ignoredYellowBox = [
+//     //     'Setting a timer'
+//     // ];
+// }
   render() {
     const flipLeft = (index, position) => {
       const inputRange = [index - 1, index, index + 1];
@@ -83,5 +82,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#F8F8F8'
   },
 });
-
-Expo.registerRootComponent(App);

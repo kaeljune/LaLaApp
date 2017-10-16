@@ -3,7 +3,7 @@
   "description": "An empty new project",
   "slug": "airlala",
   "privacy": "public",
-  "sdkVersion": "21.0.0",
+  "sdkVersion": "17.0.0",
   "ios": {
     "bundleIdentifier": "com.kaeljune.airlala",
     "supportsTablet": true
