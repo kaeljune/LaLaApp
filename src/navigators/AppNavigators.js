@@ -32,6 +32,7 @@ const isSignedOut = StackNavigator({
 	signup: { screen: SignupScreen },
 	welcome: { screen: WelcomeScreen },
 	forgot: { screen: ForgotScreen },
+	term: { screen: TermScreen },
 });
 
 const isProfile = StackNavigator({
@@ -63,7 +64,7 @@ const isSignedIn = TabNavigator({
 			tabBarVisible: false
 		},
 		swipeEnabled: false,
-		// animationEnabled: false,
+		animationEnabled: true,
 		lazy: true,
 	}
 );

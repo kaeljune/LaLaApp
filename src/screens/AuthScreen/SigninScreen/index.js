@@ -1,70 +1,75 @@
 import React, { Component } from 'react';
 import {
   Animated,
-  ScrollView,
+  View,
   StyleSheet,
   Alert,
+  AsyncStorage,
+  Platform,
   Easing,
 } from 'react-native';
-import Reactotron from 'reactotron-react-native';
+// import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 import {
   accountFetch, emailSignin, signinEmailChanged, signinPasswordChanged,
 } from '../../../actions';
 
 import {
   COLOR, WIDTH_SCREEN,
-  headerTitleStyle, headerStyle
+  headerTitleStyle, headerStyle,
 } from '../../../config/config';
 
-// import WrapAnimation from '../../../components/hoc/WrapAnimation';
-
+import Spinner from '../../../components/Spinner';
 import Brand from './Brand';
 import SigninForm from './SigninForm';
 import SignupLink from './SignupLink';
 
 class SigninScreen extends Component {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = () => ({
     title: 'Sign in',
+    headerBackTitle: null,
     headerTintColor: COLOR.primary,
-    // headerLeft: <Icon
-    //     name='chevron-left'
-    //     color={COLOR.primary}
-    //     onPress={() => navigation.goBack()}
-    // />,
     headerTitleStyle,
     headerStyle,
   })
 
-  state = {
-    userData: null,
-    translateY: new Animated.Value(100),
-    opacity: new Animated.Value(0)
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      userData: null,
+      translateY: new Animated.Value(100),
+      opacity: new Animated.Value(0)
+    };
+
+  }
 
   componentDidMount() {
     Animated.parallel([
       Animated.spring(this.state.translateY, {
         toValue: 0,
-        useNativeDriver: true
+        useNativeDriver: Platform.OS === 'android'
       }),
       Animated.timing(this.state.opacity, {
         toValue: 1,
         duration: 200,
         easing: Easing.circle,
-        useNativeDriver: true
+        useNativeDriver: Platform.OS === 'android'
       })
     ]).start();
   }
 
-  // async onAuthComplete(props) {
-    // await props.accountFetch();
-    // const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
-    // if (JSON.parse(fetchAcc).isLogin) {
-    //     // this.props.navigation.navigate('isSignedIn', { });
-    //     console.log('ton tai');
-    // }
-  // }
+  async onAuthComplete(props) {
+    await props.accountFetch();
+    const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
+    if (JSON.parse(fetchAcc).isLogin) {
+        // this.props.navigation.navigate('isSignedIn', { });
+        console.log('ton tai');
+    }
+  }
+
   onSignUp = () => {
     this.props.navigation.navigate('signup');
   }
@@ -73,8 +78,10 @@ class SigninScreen extends Component {
   }
   onButtonPress = async () => {
     const { emailSF, passwordSF } = this.props;
+
     try {
       await this.props.emailSignin({ emailSF, passwordSF });
+
       if (this.props.errorSF) {
         Alert.alert(
           this.props.errorSF.name,
@@ -93,14 +100,43 @@ class SigninScreen extends Component {
     }
   }
   render() {
+
     return (
-      <ScrollView style={{ flex: 1, backgroundColor: '#f8f8f8' }} contentContainerStyle={styles.ContainerStyle}>
-        <Brand />
-        <Animated.View style={{ alignItems: 'center', transform: [{ translateY: this.state.translateY }], opacity: this.state.opacity }}>
-          <SigninForm onButtonPress={this.onButtonPress} onForgot={this.onForgot} />
-          <SignupLink onSignUp={this.onSignUp} />
-        </Animated.View>
-      </ScrollView>
+      <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
+          <KeyboardAwareScrollView
+            doNotForceDismissKeyboardWhenLayoutChanges
+            style={{
+              backgroundColor: '#f8f8f8',
+              flex: 1,
+              opacity: this.props.loadingSF ? 0.2 : 1
+            }}
+            resetScrollToCoords={{ x: 0, y: 0 }}
+            contentContainerStyle={styles.ContainerStyle}
+            scrollEnabled
+            animated
+          >
+            <Brand />
+            <Animated.View style={{ alignItems: 'center', transform: [{ translateY: this.state.translateY }], opacity: this.state.opacity }}>
+              <SigninForm onButtonPress={this.onButtonPress} onForgot={this.onForgot} />
+              <SignupLink onSignUp={this.onSignUp} />
+            </Animated.View>
+          </KeyboardAwareScrollView>
+        </View>
+        {
+          this.props.loadingSF &&
+          <View
+            style={{
+              height: 200,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: '#fff'
+            }}
+          >
+            <Spinner />
+          </View>
+        }
+      </View>
     );
   }
 }

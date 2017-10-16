@@ -1,25 +1,39 @@
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+
 import ProductItem from './ProductItem';
 
-import { STYLES } from '../../config/config';
+import Swipe from '../../components/Swipe';
+
+import { STYLES, COLOR, WIDTH_SCREEN } from '../../config/config';
 
 class ProductList extends Component {
 
 	renderItem = ({ item }) => (
-		<ProductItem
-			cardActive={this.props.cardActive}
-			uid={item.uid}
-			image={item.image}
-			name={item.name}
-			price={_.parseInt(_.replace(item.price, /^\D+/g, ''))}
-			total={item.quantity}
-		/>
+		<Swipe
+			width={WIDTH_SCREEN - 20}
+			height={91}
+			backgroundColor={COLOR.secondary}
+			style={{
+				borderBottomColor: '#eee',
+				borderBottomWidth: 1
+			}}
+		>
+			<ProductItem
+				cardActive={this.props.cardActive}
+				uid={item.uid}
+				image={item.image}
+				name={item.name}
+				price={_.parseInt(_.replace(item.price, /^\D+/g, ''))}
+				total={item.quantity}
+			/>
+		</Swipe>
 	)
 	render() {
 		return (
+
 			<FlatList
 				showsVerticalScrollIndicator={false}
 				data={this.props.items}
@@ -28,9 +42,10 @@ class ProductList extends Component {
 				removeClippedSubviews={false}
 				style={[{
 					backgroundColor: '#fff',
-					margin: 10 
+					margin: 10
 				}, STYLES.boxShadow]}
 			/>
+
 		);
 	}
 }

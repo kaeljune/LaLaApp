@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         backgroundColor: COLOR.primary,
-        marginBottom: 10
+        // marginBottom: 10
     },
     sectionHead: {
         paddingVertical: 30,

@@ -2,15 +2,10 @@ import Expo from 'expo';
 import React, { Component } from 'react';
 import { StyleSheet, View, StatusBar, Animated } from 'react-native';
 import { Provider } from 'react-redux';
-// import injectTapEventPlugin from 'react-tap-event-plugin';
-
 
 import './src/config/firebase-config';
-import './ReactotronConfig';
 import store from './src/store';
 import AppWithNavigationState from './src/navigators/AppNavigators';
-
-// injectTapEventPlugin();
 
 class App extends Component {
   constructor() {
@@ -20,7 +15,7 @@ class App extends Component {
     console.ignoredYellowBox = [
         'Setting a timer'
     ];
-}
+  }
   render() {
     const flipLeft = (index, position) => {
       const inputRange = [index - 1, index, index + 1];

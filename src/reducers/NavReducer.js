@@ -7,6 +7,7 @@ import {
   SIGNOUT,
   REQUEST_GIFT_SUCCESS
 } from '../actions/types.js';
+
 // Start with two routes: The Main screen, with the Login screen on top.
 // const firstAction = AppNavigator.router.getActionForPathAndParams('mainGift');
 // const tempNavState = AppNavigator.router.getStateForAction(firstAction);
@@ -15,7 +16,6 @@ const initialNavState = AppNavigator.router.getStateForAction(
   secondAction,
   //tempNavState
 );
-
 
 export default function nav(state = initialNavState, action) {
   let nextState;

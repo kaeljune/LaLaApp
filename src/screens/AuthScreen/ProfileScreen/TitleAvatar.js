@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { Icon, Avatar } from 'react-native-elements';
 
 import { COLOR } from '../../../config/config';
 import { Spinner } from '../../../components/Spinner';
@@ -12,27 +12,8 @@ class TitleAvatar extends Component {
   render() {
     const { data, edit } = this.props;
     const { wraperStyle, textStyle, avatarStyle } = styles;
-    // if (!data.userLogin.email) {
-    //     return (
-    //         <View style={wraperStyle}>
-    //             <View
-    //                 style={avatarStyle}
-    //             >
-    //                 <Icon
-    //                     reverse
-    //                     reverseColor="#11b8ab"
-    //                     name='person-outline'
-    //                     color='#fff'
-    //                     size={45}
-    //                 />
-    //             </View>
-    //             <Spinner size="small" />
-    //         </View>
-    //     );
-    // }
     return (
       <View style={wraperStyle}>
-        {console.log('edit', edit)}
         <View
           style={avatarStyle}
         >

@@ -1,85 +1,53 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   Alert
 } from 'react-native';
-
 import { connect } from 'react-redux';
+
 import {
   signinEmailChanged, signinPasswordChanged,
 } from '../../../actions';
-
-import Spinner from '../../../components/Spinner';
-
 import { WIDTH_SCREEN, COLOR } from '../../../config/config';
 
 import TextField from '../../../components/TextField';
 import ForgotLink from './ForgotLink';
 import Btn from '../../../components/Btn';
 
-class SigninForm extends Component {
-  state = {
-    email: '', password: '',
-  };
-
-  onEmailChange = (text) => {
-    this.props.signinEmailChanged(text);
-  }
-
-  onPasswordChange = (text) => {
-    this.props.signinPasswordChanged(text);
-  }
-
-  onButtonPress = async () => {
-    this.props.onButtonPress();
-  }
-
-  onForgot = () => {
-    this.props.onForgot();
-    // console.log(12)
-  }
-  renderButton = () => {
-    if (this.props.loadingSF) {
-      return <Spinner size="large" />;
-    }
-    return (
-      <Btn
-        title="SIGN IN"
-        bgColor={COLOR.primary}
-        onPress={this.onButtonPress}
-        style={{ width: 150 }}
-      />
-    );
-  }
+class SigninForm extends PureComponent {
   render() {
     const { section } = styles;
     return (
       <View>
         <View style={section}>
-
           <TextField
             label="EMAIL"
             value={this.props.emailSF}
             placeholder="What's your email?"
-            keyboardType='email-address'
-            onChangeText={this.onEmailChange}
+            keyboardType="email-address"
+            returnKeyType="next"
+            onChangeText={(text) => this.props.signinEmailChanged(text)}
           />
 
           <TextField
             label="PASSWORD"
             placeholder="What’s your password"
             secureTextEntry
-            keyboardType='default'
+            returnKeyType="done"
             value={this.props.passwordSF}
-            onChangeText={this.onPasswordChange}
+            onChangeText={(text) => this.props.signinPasswordChanged(text)}
           />
-
         </View>
 
-        <ForgotLink onForgot={this.onForgot} />
-        {this.renderButton()}
+        <ForgotLink onForgot={() => this.props.onForgot()} />
+        <Btn
+          title="SIGN IN"
+          bgColor={COLOR.primary}
+          onPress={() => this.props.onButtonPress()}
+          style={{ width: 150 }}
+        />
         <Text style={{ marginVertical: 15, textAlign: 'center' }}>Or sign in with</Text>
         <Btn
           title="FACEBOOK"

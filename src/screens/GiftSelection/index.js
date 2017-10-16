@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native
 import { WebBrowser } from 'expo';
 import { Icon } from 'react-native-elements';
 import _ from 'lodash';
-import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 // import ProgressiveImage from 'react-native-progressive-image';

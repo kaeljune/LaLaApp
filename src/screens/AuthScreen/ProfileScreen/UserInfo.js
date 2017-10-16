@@ -39,7 +39,6 @@ class UserInfo extends PureComponent {
 						/>
 					</View>
 					<View style={row}>
-						{console.log('edit', edit)}
 						{ edit ? (
 							<TextField
 								label="Address"
