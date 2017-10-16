@@ -21,7 +21,10 @@ export default function nav(state = initialNavState, action) {
   switch (action.type) {
     case REQUEST_GIFT_SUCCESS:
       nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({ routeName: 'isSignedIn' }),
+        NavigationActions.navigate({ 
+          routeName: 'isSignedIn',
+          action: NavigationActions.navigate({ routeName: 'mainGift', params: {} })
+        }),
         state
       );
       break;

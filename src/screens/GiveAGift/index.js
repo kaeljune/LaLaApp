@@ -72,24 +72,11 @@ class GiftSelection extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state =  {
-			userLogin: null
-		}
-
 		if (Platform.OS === 'android') {
       UIManager.setLayoutAnimationEnabledExperimental &&
       UIManager.setLayoutAnimationEnabledExperimental(true);
 		}
 	}
-
-	async componentDidMount() {
-    const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
-    if (JSON.parse(fetchAcc).isLogin) {
-      this.setState({ userLogin: JSON.parse(fetchAcc) });
-    } else {
-      this.setState({ isLogin: false });
-    }
-  }
 
 	onSexChange = (text) => {
 		this.props.requestSexChanged(text);
