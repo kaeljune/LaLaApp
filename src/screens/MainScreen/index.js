@@ -16,7 +16,8 @@ import { Avatar, Icon } from 'react-native-elements';
 import Card from './Card';
 
 import { accountFetch, fetchRequest, fetchListGift, fetchCart } from '../../actions';
-import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle, bodau, CustomLayoutSpring } from '../../config/config';
+import { COLOR, WIDTH_SCREEN, 
+	headerStyle, headerTitleStyle, bodau, CustomLayoutSpring } from '../../config/config';
 
 class MainScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -63,8 +64,6 @@ class MainScreen extends Component {
 		const { auth, items } = this.props;
 		const name = bodau(auth.userLogin.name);
 
-		console.log(name);
-
 		setParams({
 			name: _.toUpper(name.match(/\b\w/g)
 							.join(''))
@@ -78,12 +77,13 @@ class MainScreen extends Component {
 
 		await this.props.fetchListGift(item.uid);
 			this.props.fetchCart(item);
-			this.props.navigation.navigateWithDebounce('giftselection', { avaTitle: shortName, user: item });
+			this.props.navigation.navigateWithDebounce('giftselection', 
+				{ avaTitle: shortName, user: item });
 	}
 
 	onLongPress = () => {
 		LayoutAnimation.configureNext(CustomLayoutSpring);
-		this.setState({ isDel: true })
+		this.setState({ isDel: true });
 	}
 
 	renderItem = ({ item, index }) => {
@@ -105,8 +105,6 @@ class MainScreen extends Component {
 
 		);
 	}
-
-
 
 	renderList = () => {
 		const { items } = this.props;

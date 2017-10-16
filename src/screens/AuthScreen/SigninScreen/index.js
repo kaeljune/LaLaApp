@@ -4,7 +4,6 @@ import {
   View,
   StyleSheet,
   Alert,
-  AsyncStorage,
   Platform,
   Easing,
 } from 'react-native';
@@ -43,7 +42,6 @@ class SigninScreen extends Component {
       translateY: new Animated.Value(100),
       opacity: new Animated.Value(0)
     };
-
   }
 
   componentDidMount() {
@@ -63,11 +61,6 @@ class SigninScreen extends Component {
 
   async onAuthComplete(props) {
     await props.accountFetch();
-    const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
-    if (JSON.parse(fetchAcc).isLogin) {
-        // this.props.navigation.navigate('isSignedIn', { });
-        console.log('ton tai');
-    }
   }
 
   onSignUp = () => {
@@ -100,7 +93,6 @@ class SigninScreen extends Component {
     }
   }
   render() {
-
     return (
       <View style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
@@ -117,7 +109,12 @@ class SigninScreen extends Component {
             animated
           >
             <Brand />
-            <Animated.View style={{ alignItems: 'center', transform: [{ translateY: this.state.translateY }], opacity: this.state.opacity }}>
+            <Animated.View 
+              style={{ 
+                alignItems: 'center', 
+                transform: [{ translateY: this.state.translateY }], 
+                opacity: this.state.opacity }}
+            >
               <SigninForm onButtonPress={this.onButtonPress} onForgot={this.onForgot} />
               <SignupLink onSignUp={this.onSignUp} />
             </Animated.View>

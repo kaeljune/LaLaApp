@@ -51,33 +51,12 @@ class SignupScreen extends Component {
     }
   }
 
-  // async componentWillMount() {
-  //     //await AsyncStorage.removeItem('@userLogin');
-  //     const userData = await AsyncStorage.getItem('@userLogin');
-  //     if (userData) {
-  //         this.setState({ userData });
-  //         this.props.navigation.navigate('isSignedIn');
-  //     } else {
-  //         this.setState({ userData: false });
-  //     }
-  // }
-
   componentDidMount() {
     Animated.spring(this.state.translateY, {
       toValue: 0,
       useNativeDriver: true
     }).start();
   }
-
-  // onEmailChange = (text) => this.props.signupEmailChanged(text);
-
-  // onPasswordChange = (text) => this.props.signupPasswordChanged(text);
-
-  // onConfirmPasswordChange = (text) => this.props.signupConfirmPasswordChanged(text);
-
-  // onPhoneChange = (text) => this.props.signinPhoneChanged(text);
-
-  // onNameChange = (text) => this.props.signinNameChanged(text);
 
   onButtonPress = async () => {
     const { email, password, phone, name } = this.props;
@@ -174,7 +153,13 @@ class SignupScreen extends Component {
         </View>
         {
           this.props.loading &&
-          <View style={{ height: 200, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
+          <View 
+            style={{ 
+              height: 200, 
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              backgroundColor: '#fff' }}
+          >
             <Spinner />
           </View>
         }

@@ -9,12 +9,11 @@ import {
 } from '../actions/types.js';
 
 // Start with two routes: The Main screen, with the Login screen on top.
-const firstAction = AppNavigator.router.getActionForPathAndParams('isSignedIn');
-const tempNavState = AppNavigator.router.getStateForAction(firstAction);
+// const firstAction = AppNavigator.router.getActionForPathAndParams('isSignedIn');
+// const tempNavState = AppNavigator.router.getStateForAction(firstAction);
 const secondAction = AppNavigator.router.getActionForPathAndParams('isLoading');
 const initialNavState = AppNavigator.router.getStateForAction(
-  secondAction,
-  tempNavState
+  secondAction
 );
 
 export default function nav(state = initialNavState, action) {
@@ -30,8 +29,8 @@ export default function nav(state = initialNavState, action) {
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({
           routeName: 'isSignedIn',
-          params: {},
-          action: NavigationActions.navigate({ routeName: 'mainGift', params: {} })
+          //params: {},
+          //action: NavigationActions.navigate({ routeName: 'mainGift', params: {} })
         }),
         state
       );
