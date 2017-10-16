@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "airlala-mobile",
-    "description": "An empty new project",
-    "slug": "airlala-mobile",
+    "name": "airlala",
+    "description": "airlala mobile app",
+    "slug": "airlala",
     "privacy": "public",
     "sdkVersion": "21.0.0",
     "version": "1.0.0",
