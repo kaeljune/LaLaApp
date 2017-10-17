@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, StyleSheet, ActivityIndicator, Animated } from 'react-native';
 import { connect } from 'react-redux';
 
-import { accountFetch, navLogin, navLogout } from '../../actions';
+import { fetchRequest, accountFetch, navLogin, navLogout } from '../../actions';
 import { COLOR } from '../../config/config';
 
 class SplashScreen extends PureComponent {
@@ -24,6 +24,7 @@ class SplashScreen extends PureComponent {
 	async componentWillMount() {
 		// await AsyncStorage.removeItem('reduxPersist:listRequest');
 		await this.props.accountFetch();
+		//await this.props.fetchRequest();
 	}
 
 	componentDidMount() {
@@ -168,4 +169,4 @@ const mapStateToProps = ({ fetchAcc }) => {
 	return { account };
 };
 
-export default connect(mapStateToProps, { accountFetch, navLogin, navLogout })(SplashScreen);
+export default connect(mapStateToProps, { accountFetch, fetchRequest, navLogin, navLogout })(SplashScreen);

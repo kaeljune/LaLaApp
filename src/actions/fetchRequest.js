@@ -59,10 +59,10 @@ export const fetchGift = (id) => (dispatch) => {
 
 export const fetchRequest = () => async (dispatch) => {
   try {
-    const userId = await firebase.auth().currentUser.uid;
+    const userId = firebase.auth().currentUser.uid;
     const ref = await firebase.database().ref(`users/${userId}/orders`);
     // console.log(12)
-    await ref.once('value', snapshot => {
+    await ref.on('value', snapshot => {
       const orders = snapshot.val();
       dispatch({ type: FETCH_REQUEST, payload: orders });
     });
@@ -75,7 +75,7 @@ export const fetchListGift = (id) => async (dispatch) => {
   try {
     const userId = await firebase.auth().currentUser.uid;
     const ref = await firebase.database().ref(`users/${userId}/orders/${id}/gifts`);
-    await ref.once('value', snapshot => {
+    await ref.on('value', snapshot => {
       const gifts = snapshot.val();
       dispatch({ type: FETCH_LIST_GIFT, payload: { id, gifts } });
     });

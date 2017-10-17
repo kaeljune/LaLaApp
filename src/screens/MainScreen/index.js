@@ -71,6 +71,13 @@ class MainScreen extends Component {
 			items: items.length
 		});
 	}
+	// componentWillReceiveProps(nextProps) {
+  //   // nextProps are the next set of props that this component
+  //   // will be rendered with
+  //   // this.props is still the old set of props
+	// 	console.log('hello');
+  //   //this.createDataSource(nextProps);
+  // }
 
 	onPress = async (shortName, item) => {
 		if (this.state.isDel) return;
