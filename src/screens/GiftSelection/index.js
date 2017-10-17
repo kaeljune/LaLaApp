@@ -5,13 +5,11 @@ import { Icon } from 'react-native-elements';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
-// import ProgressiveImage from 'react-native-progressive-image';
 
-// import Spinner from '../../components/Spinner';
 import { fetchGift, addQuantity, fetchCart } from '../../actions';
 
 import * as config from '../../config/config';
-// import progress from '../../../assets/images/progress.jpg';
+
 
 import CardGift from './CardGift';
 
@@ -66,7 +64,7 @@ get pagination() {
         width: 10,
         height: 10,
         borderRadius: 5,
-        marginHorizontal: 8,
+        //marginHorizontal: 5,
         backgroundColor: 'rgba(255, 255, 255, 0.92)'
       }}
       inactiveDotStyle={{}}
@@ -117,7 +115,7 @@ render() {
         slideStyle={{ flexDirection: 'row', paddingHorizontal: 10, marginVertical: 30, paddingBottom: 10, height: config.HEIGHT_SCREEN * 0.75, width: config.WIDTH_SCREEN - 60, alignItems: 'center', }}
       />
       <View
-        style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}
+        style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', paddingHorizontal: 15 }}
       >
         <Text style={{ fontSize: 20, fontWeight: '100', color: '#fff' }}>
           {this.state.activeSlide + 1}
@@ -140,9 +138,7 @@ const styles = StyleSheet.create({
 
   slide: {
     backgroundColor: '#fff',
-    // flex: 1,
     marginVertical: 25
-    // alignItems: 'center',
   },
   boxShadow: {
     ...Platform.select({

@@ -19,6 +19,8 @@ export default class App extends React.Component {
     };
 
     this.panResponder = PanResponder.create({
+      onStartShouldSetPanResponder: (evt, gestureState) => true,
+      // onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
       onMoveShouldSetPanResponder: (event, gestureState) => this.handleMoveShouldSetPanResponder(event, gestureState),
       onPanResponderGrant: (event, gestureState) => this.handlePanResponderGrant(event, gestureState),
       onPanResponderMove: (event, gestureState) => this.handlePanResponderMove(event, gestureState),
@@ -40,16 +42,22 @@ export default class App extends React.Component {
     return true;
   }
 
-  handlePanResponderGrant = (event, gestureState) => { }
+  handlePanResponderGrant = (event, gestureState) => {
+    this.props.handleSwipe(false);
+    return true;
+  }
 
   handlePanResponderMove = (event, gestureState) => {
     const { dx } = gestureState;
     const left = dx >= 0 ? 0 : this.props.width - 100;
 
+    this.props.handleSwipe(false);
+
     this.setState({
       locationX: new Animated.Value(dx),
       left
     });
+
   }
 
   handlePanResponderRelease = (event, gestureState) => {
@@ -57,6 +65,8 @@ export default class App extends React.Component {
 
     const opacity = Math.abs(dx) >= this.props.width;
     this.setState({ opacity });
+
+    this.props.handleSwipe(true);
 
     if (Math.abs(dx) > 100) {
       if (dx > 0) {
