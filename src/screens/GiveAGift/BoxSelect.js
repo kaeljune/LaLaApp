@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import {
 	View,
 	Text,
@@ -11,7 +11,7 @@ import {
 import { Icon } from 'react-native-elements';
 import { COLOR, STYLES } from '../../config/config';
 
-class BoxSelect extends PureComponent {
+class BoxSelect extends Component {
 	constructor(props) {
 		super(props);
 

@@ -22,7 +22,7 @@ class Card extends PureComponent {
         ]}
       >
       <Touch onPress={onPress} onLongPress={onLongPress}>
-        <View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center', opacity: isDel ? '0.6' : 1 }}>
+        <View style={{ paddingHorizontal: 5, paddingVertical: 10, alignItems: 'center', opacity: isDel ? 0.6 : 1 }}>
           <Avatar
             height={50}
             width={50}

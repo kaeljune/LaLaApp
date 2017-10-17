@@ -11,8 +11,13 @@ import { STYLES, COLOR, WIDTH_SCREEN } from '../../config/config';
 
 class ProductList extends Component {
 
+	handleSwipe = (bool) => {
+		this.props.handleTouch(bool);
+	}
+
 	renderItem = ({ item }) => (
 		<Swipe
+			handleSwipe={this.handleSwipe}
 			width={WIDTH_SCREEN - 20}
 			height={91}
 			backgroundColor={COLOR.secondary}
@@ -35,6 +40,7 @@ class ProductList extends Component {
 		return (
 
 			<FlatList
+				scrollEnabled={false}
 				showsVerticalScrollIndicator={false}
 				data={this.props.items}
 				keyExtractor={(item) => this.props.items.indexOf(item)}

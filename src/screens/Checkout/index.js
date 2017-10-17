@@ -35,12 +35,25 @@ class Checkout extends Component {
 			<Text style={{ marginLeft: 5, color: '#555' }}>Chat</Text>
 		</TouchableOpacity>
 	})
+
+	state = {
+		scrollEnable: true
+	}
+
+	handleTouch = (bool) => {
+		this.setState({
+			scrollEnable: bool
+		})
+	}
+
 	render() {
 		return (
 			<View style={{ flex: 1 }}>
-				<ScrollView style={{ flex: 1, backgroundColor: '#f8f8f8' }} contentContainerStyle={styles.container}>
+				<ScrollView style={{ flex: 1, backgroundColor: '#f8f8f8' }} contentContainerStyle={styles.container} scrollEnabled={this.state.scrollEnable}>
 					<Feature user={this.props.navigation.state.params.user} />
-					<ProductList />
+					<ProductList
+						handleTouch={this.handleTouch}
+					/>
 				</ScrollView>
 				<View style={styles.bottomCheckout}>
 					<View
