@@ -14,7 +14,6 @@ import { COLOR, HEIGHT_SCREEN } from '../../config/config';
 
 class Feature extends Component {
     render() {
-        console.log(this.props.user)
         const name = this.props.user.receiverName ? this.props.user.receiverName : 'Anonymous';
 		const shortName = _.toUpper(name.match(/\b\w/g).join(''));
         const { sectionContainer, sectionHead, avatarStyle } = styles;
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         backgroundColor: COLOR.primary,
-        marginBottom: 10
+        // marginBottom: 10
     },
     sectionHead: {
         paddingVertical: 30,

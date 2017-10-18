@@ -30,7 +30,6 @@ class ProfileScreen extends Component {
     isEdit: false
   };
 
-
   async componentDidMount() {
     const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
     if (JSON.parse(fetchAcc).isLogin) {

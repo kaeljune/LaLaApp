@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { WebBrowser } from 'expo';
+import {
+	View,
+	Text,
+	StyleSheet,
+	ScrollView,
+	TouchableOpacity
+} from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 
 import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';
-
 import Btn from '../../components/Btn';
 import Feature from './Feature';
 import ProductList from './ProductList';
@@ -16,13 +22,10 @@ class Checkout extends Component {
 		headerStyle,
 		headerTitleStyle,
 		headerTintColor: COLOR.primary,
-		// headerLeft: <Icon
-		// 	name='chevron-left'
-		// 	color={COLOR.primary}
-		// 	size={24}
-		// 	onPress={() => navigation.goBack()}
-		// />,
-		headerRight: <View style={{ flexDirection: 'row', paddingRight: 15 }}>
+		headerRight: <TouchableOpacity
+		style={{ flexDirection: 'row', paddingRight: 15 }}
+		onPress={async () => { await WebBrowser.openBrowserAsync('https://m.me/airlala.official'); }}
+		>
 			<Icon
 				size={15}
 				name="chat"
@@ -30,14 +33,27 @@ class Checkout extends Component {
 				onPress={() => navigation.goBack()}
 			/>
 			<Text style={{ marginLeft: 5, color: '#555' }}>Chat</Text>
-		</View>
+		</TouchableOpacity>
 	})
+
+	state = {
+		scrollEnable: true
+	}
+
+	handleTouch = (bool) => {
+		this.setState({
+			scrollEnable: bool
+		});
+	}
+
 	render() {
 		return (
 			<View style={{ flex: 1 }}>
-				<ScrollView style={{ flex: 1, backgroundColor: '#f8f8f8' }} contentContainerStyle={styles.container}>
+				<ScrollView style={{ flex: 1, backgroundColor: '#f8f8f8' }} contentContainerStyle={styles.container} scrollEnabled={this.state.scrollEnable}>
 					<Feature user={this.props.navigation.state.params.user} />
-					<ProductList />
+					<ProductList
+						handleTouch={this.handleTouch}
+					/>
 				</ScrollView>
 				<View style={styles.bottomCheckout}>
 					<View
@@ -49,7 +65,7 @@ class Checkout extends Component {
 						}}
 					>
 						<Text style={{ fontSize: 14, fontWeight: '100', color: '#454553', marginRight: 15 }}>TOTAL :</Text>
-						<Text style={{ fontSize: 20, fontWeight: '700', color: COLOR.secondary }}>$ 900</Text>
+						<Text style={{ fontSize: 20, fontWeight: '700', color: COLOR.secondary }}>${this.props.total}</Text>
 					</View>
 
 					<Btn
@@ -59,7 +75,7 @@ class Checkout extends Component {
 						}}
 						title="CHECKOUT"
 						bgColor={COLOR.primary}
-						onPress={() => this.props.navigation.navigate('writeanote')}
+						onPress={() => this.props.navigation.navigate('writeanote', { avaTitle: this.props.navigation.state.params.avaTitle, user: this.props.navigation.state.params.user })}
 					/>
 
 				</View>
@@ -70,7 +86,7 @@ class Checkout extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		paddingBottom: 90,
+		// paddingBottom: 90,
 	},
 	bottomCheckout: {
 		backgroundColor: '#fff',
@@ -84,6 +100,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
+	const GiftID = state.listRequest.giftActive;
+	const cardActive = state.listRequest.cardActive;
+	const items = _.filter(_.map(state.listRequest.cart[cardActive].items, (val, uid) => ({ ...val, uid })), (gift) => gift.quantity > 0);
+	const total = _.sumBy(items, function(o) { return o.quantity * _.parseInt(_.replace(o.price, /^\D+/g, '')); });
+	return { items, cardActive, GiftID, total };
 };
 
 export default connect(mapStateToProps, {})(Checkout);

@@ -5,9 +5,6 @@ import TextField from '../../../components/TextField';
 import { STYLES } from '../../../config/config';
 
 class UserInfo extends PureComponent {
-	constructor(props) {
-		super(props);
-	}
 	render() {
 		const { data, edit } = this.props;
 		const { list, row, label } = styles;
@@ -42,7 +39,6 @@ class UserInfo extends PureComponent {
 						/>
 					</View>
 					<View style={row}>
-						{console.log('edit', edit)}
 						{ edit ? (
 							<TextField
 								label="Address"

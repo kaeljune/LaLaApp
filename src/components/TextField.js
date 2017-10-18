@@ -10,26 +10,30 @@ class TextField extends Component {
   }
 
   render() {
+    const { label, labelStyle, value, editable,
+      secureTextEntry, style, placeholder, onChangeText, multiline, numberOfLines, keyboardType, returnKeyType } = this.props;
     return (
       <View style={styles.container}>
-        {this.props.label && <Text style={this.props.labelStyle ? [styles.labelStyle, this.props.labelStyle] : styles.labelStyle}>{this.props.label}</Text>}
+        {label && <Text style={labelStyle ? [styles.labelStyle, labelStyle] : styles.labelStyle}>{this.props.label}</Text>}
         <View style={styles.inputWrap}>
           <TextInput
-            value={this.props.value}
-            editable={this.props.editable}
-            secureTextEntry={this.props.secureTextEntry && !this.state.isShowPass}
-            style={[{ height: 40, lineHeight: 25, fontSize: 16 }, this.props.style]}
-            placeholder={this.props.placeholder}
+            value={value}
+            editable={editable}
+            secureTextEntry={secureTextEntry && !this.state.isShowPass}
+            style={[{ height: 40, lineHeight: 25, fontSize: 16 }, style]}
+            placeholder={placeholder}
             placeholderTextColor={COLOR.placeholderTextColor}
             underlineColorAndroid="transparent"
             tintColor={'#313131'}
             selectionColor={'#777'}
-            onChangeText={this.props.onChangeText}
-            multiline={this.props.multiline}
-            numberOfLines={this.props.numberOfLines && 4}
+            onChangeText={onChangeText}
+            multiline={multiline}
+            numberOfLines={numberOfLines && 4}
+            keyboardType={keyboardType}
+            returnKeyType={returnKeyType}
           />
 
-          {this.props.secureTextEntry && (
+          {secureTextEntry && (
             <View
               style={{
                 position: 'absolute',
@@ -58,7 +62,6 @@ class TextField extends Component {
                     size={20}
                     color={this.state.isShowPass ? COLOR.primary : '#ddd'}
                     name="visibility"
-
                   />
                 </View>
               </TouchableOpacity>

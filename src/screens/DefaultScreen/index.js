@@ -2,53 +2,47 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  Animated,
+  // Animated,
   // AsyncStorage,
   StyleSheet,
+  TouchableOpacity,
   Image,
 } from 'react-native';
-import _ from 'lodash';
-import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
 
+import logo from '../../../assets/images/logolarge.png';
+import { WIDTH_SCREEN, HEIGHT_SCREEN } from '../../config/config';
 import { accountFetch, navLogin } from '../../actions';
 
-
 import Btn from '../../components/Btn';
-
-import logo from '../../../assets/images/logolarge.png';
-import backgroundImage from '../../../assets/images/bg.png';
-import { WIDTH_SCREEN, HEIGHT_SCREEN, COLOR } from '../../config/config';
 
 class DefaultScreen extends Component {
   static navigationOptions = () => ({
     header: null,
   })
+
   // async componentDidMount() {
-  //await AsyncStorage.removeItem('@userLogin');
+  //   await AsyncStorage.removeItem('@userLogin');
   // }
 
   onGetStarted = () => {
     this.props.navigation.navigate('welcome');
   }
+
   onSignIn = () => {
     this.props.navigation.navigate('signin', {
       transition: 'flipTop',
-      name: 'Lucy',
     });
   }
+
   render() {
     return (
-
       <View style={styles.container}>
-        <View>
-          <Image source={logo} style={styles.logoStyle} />
-        </View>
-        <View>
-          <Text style={styles.desStyle}>
-            Empowering global artisans & small businesses by artificial intelligent
-                    </Text>
-        </View>
+        <Image source={logo} style={styles.logoStyle} />
+
+        <Text style={styles.desStyle}>
+          Empowering global artisans & small businesses by artificial intelligent
+        </Text>
 
         <View style={{ marginBottom: HEIGHT_SCREEN / 6, }}>
           <Btn
@@ -58,15 +52,16 @@ class DefaultScreen extends Component {
             onPress={this.onGetStarted}
           />
 
-          <Text style={styles.textStyle} onPress={this.onSignIn}>
-            <Text>Already have an account? </Text>
-            <Text style={{ fontWeight: '600' }} >
-              Sign in
+          <TouchableOpacity onPress={this.onSignIn}>
+            <Text style={styles.textStyle}>
+              <Text style={{ color: '#858585' }}>Already have an account? </Text>
+              <Text style={{ fontWeight: '600' }} >
+                Sign in
+              </Text>
             </Text>
-          </Text>
+          </TouchableOpacity>
         </View>
       </View>
-
     );
   }
 }
@@ -75,7 +70,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    // resizeMode: 'cover',
     justifyContent: 'space-between',
     backgroundColor: '#fff',
     width: WIDTH_SCREEN
@@ -83,28 +77,25 @@ const styles = StyleSheet.create({
   logoStyle: {
     resizeMode: 'contain',
     width: 275,
-    //height: 40,
     marginTop: HEIGHT_SCREEN / 5,
-    // marginBottom: HEIGHT_SCREEN / 6,
   },
   desStyle: {
     textAlign: 'center',
     fontSize: 18,
     lineHeight: 30,
     fontWeight: '400',
-    backgroundColor: 'transparent',
     width: WIDTH_SCREEN * 0.75
   },
   textStyle: {
     textAlign: 'center',
-    fontSize: 18,
     fontWeight: '100',
-    backgroundColor: 'transparent',
     marginTop: 30
   }
 });
+
 const mapStateToProps = ({ fetchAcc }) => {
   const { account } = fetchAcc;
   return { account };
 };
+
 export default connect(mapStateToProps, { accountFetch, navLogin })(DefaultScreen);

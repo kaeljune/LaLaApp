@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "airlala",
+    "description": "airlala mobile app",
+    "slug": "airlala",
+    "privacy": "public",
+    "sdkVersion": "21.0.0",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "primaryColor": "#cccccc",
+    "icon": "./assets/icons/app.png",
+    "loading": {
+      "icon": "./assets/icons/loading.png"
+    },
+    "packagerOpts": {
+      "assetExts": [
+        "ttf",
+        "mp4"
+      ]
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kaeljune.airlala"
+    },
+    "android": {
+      "package": "com.kaeljune.airlala"
+    },
+    "ignoreNodeModulesValidation": true
+  }
+}

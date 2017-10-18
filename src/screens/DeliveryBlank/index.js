@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, StyleSheet, TextInput } from 'react-native';
 import { Icon } from 'react-native-elements';
-
+import GooglePlacesInput from './GooglePlacesInput';
 import ListRadio from '../../components/ListRadio';
 import Btn from '../../components/Btn';
 
@@ -49,33 +49,14 @@ class DeliveryBlank extends Component {
 			<View style={styles.wraper}>
 				<ScrollView contentContainerStyle={{ padding: 15 }}>
 					<Text style={{ paddingVertical: 15, fontWeight: '600', color: '#777' }}>SHIP TO:</Text>
-					<View>
-
-						<View style={styles.addLocation}>
-							<Icon
-								size={30}
-								name='location-on'
-								color={COLOR.primary}
-							/>
-
-							<TextInput
-								style={{
-									width: WIDTH_SCREEN - 90,
-									marginLeft: 20,
-									height: 50
-								}}
-								placeholder="Add new location"
-								underlineColorAndroid="transparent"
-							/>
-						</View>
-					</View>
+					<GooglePlacesInput />
 
 					<View style={styles.listLocation}>
 						<ListRadio data={items} />
 					</View>
 
 				</ScrollView>
-				<View style={{ paddingVertical: 10 }}>
+				<View style={{ paddingVertical: 10, backgroundColor: '#fff', borderTopColor: '#ddd', borderTopWidth: 1 }}>
 					<Btn
 						style={{ width: 150 }}
 						bgColor={COLOR.primary}
@@ -93,20 +74,20 @@ const styles = StyleSheet.create({
 		backgroundColor: COLOR.background
 	},
 	listLocation: {
-		backgroundColor: '#fff', 
-		borderColor: '#ddd', 
-		borderWidth: 1, 
-		borderBottomWidth: 0 
-	},
-	addLocation: {
-		marginBottom: 15,
-		paddingVertical: 5,
-		paddingHorizontal: 5,
-		flexDirection: 'row',
-		borderColor: '#ddd',
+		backgroundColor: '#fff',
+		borderColor: '#eee',
 		borderWidth: 1,
-		backgroundColor: '#fff'
-	}
+		borderBottomWidth: 0
+	},
+	// addLocation: {
+	// 	marginBottom: 15,
+	// 	paddingVertical: 5,
+	// 	paddingHorizontal: 5,
+	// 	flexDirection: 'row',
+	// 	borderColor: '#ddd',
+	// 	borderWidth: 1,
+	// 	backgroundColor: '#fff'
+	// }
 });
 
 export default DeliveryBlank;

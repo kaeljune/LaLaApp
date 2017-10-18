@@ -22,6 +22,10 @@ export const ACCOUNT_FETCH_SUCCESS = 'account_fetch_success';
 export const ACCOUNT_FETCH_FAIL = 'account_fetch_fail';
 
 export const FETCH_REQUEST = 'fetch_request';
+export const CARD_REMOVE = 'card_remove';
+export const CARD_REMOVE_SUCCESS = 'card_remove_success';
+export const CARD_REMOVE_FAIL = 'card_remove_fail';
+
 export const FETCH_LIST_GIFT = 'fetch_list_gift';
 export const FETCH_GIFT = 'fetch_gift';
 
@@ -43,5 +47,7 @@ export const REQUEST_OTHER_CHANGED = 'request_other_changed';
 export const CART_CHANGED_ADD = 'cart_changed_add';
 export const CART_CHANGED_SUB = 'cart_changed_sub';
 export const CART_CHANGED_REMOVE = 'cart_changed_remove';
+export const CART_CHANGED_REMOVEITEM = 'cart_changed_removeitem';
+export const CART_MESSAGE_CHANGED = 'cart_message_changed';
 export const FETCH_CART = 'fetch_cart';
 

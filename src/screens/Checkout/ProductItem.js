@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, Animated, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import {
+	View,
+	Text,
+	TouchableOpacity,
+	StyleSheet,
+	Image,
+} from 'react-native';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 // import Spinner from '../../components/Spinner';
@@ -12,7 +18,6 @@ class ProductList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = ({
-			right: new Animated.Value(0),
 			total: _.parseInt(this.props.total)
 		});
 	}
@@ -30,7 +35,7 @@ class ProductList extends Component {
 		if (this.state.total > 0) {
 			return (
 				<TouchableOpacity onPress={this.downQuality} style={styles.quantityAction}>
-					<Icon 
+					<Icon
 						size={15}
 						color="#888"
 						name="remove"
@@ -39,13 +44,14 @@ class ProductList extends Component {
 		}
 		return (
 			<View style={styles.quantityActionDisable}>
-			<Icon name="remove" color="#999" size={15} />
+				<Icon name="remove" color="#999" size={15} />
 			</View>
 		);
 	}
 
 	render() {
-		const { name, price, image } = this.props;
+		const { artisan, name, price, image } = this.props;
+
 		return (
 			<View style={styles.itemStyle}>
 				<View style={{ width: 90, height: 90, backgroundColor: '#eee' }}>
@@ -62,11 +68,11 @@ class ProductList extends Component {
 						</Text>
 
 						<Text style={{ marginVertical: 5, color: '#888', fontSize: 12 }}>
-							by <Text style={{ fontWeight: '500' }}>Maria</Text>
+							by <Text style={{ fontWeight: '500' }}>{artisan || 'Airlala'}</Text>
 						</Text>
 					</View>
 
-					<Text style={{ color: COLOR.secondary, fontWeight: '600' }}>{price}</Text>
+					<Text style={{ color: COLOR.secondary, fontWeight: '600' }}>${price}</Text>
 				</View>
 
 				<View style={styles.quantityStyle}>
@@ -102,8 +108,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-around',
-		borderBottomColor: '#eee',
-		borderBottomWidth: 1
+
 	},
 	quantityStyle: {
 		height: 90,

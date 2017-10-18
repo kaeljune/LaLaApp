@@ -7,7 +7,9 @@ import {
     CART_CHANGED_ADD,
     CART_CHANGED_SUB,
     CART_CHANGED_REMOVE,
-    FETCH_CART
+    CART_CHANGED_REMOVEITEM,
+    FETCH_CART,
+    CART_MESSAGE_CHANGED
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -39,6 +41,16 @@ export default function (state = INITIAL_STATE, action) {
                     }
                 }
             });
+        case CART_MESSAGE_CHANGED:
+            return { ...state,
+                cart: {
+                    ...state.cart,
+                    [action.payload.cardActive]: {
+                        ...state.cart[action.payload.cardActive],
+                        message: action.payload.text,
+                    }
+                }
+            };
         case CART_CHANGED_ADD:
             return { ...state, 
                 cart: {
@@ -71,7 +83,7 @@ export default function (state = INITIAL_STATE, action) {
                     }
                 }
             };
-        case CART_CHANGED_REMOVE:
+        case CART_CHANGED_REMOVEITEM:
             return { ...state, 
                 cart: {
                     ...state.cart,
@@ -81,11 +93,15 @@ export default function (state = INITIAL_STATE, action) {
                             ...state.cart[action.payload.cardActive].items,
                             [action.payload.id]: {
                                 ...state.cart[action.payload.cardActive].items[action.payload.id],
-                                quantity: state.cart[action.payload.cardActive].items[action.payload.id].quantity ? state.cart[action.payload.cardActive].items[action.payload.id].quantity + 1 : 1
+                                quantity: state.cart[action.payload.cardActive].items[action.payload.id].quantity ? 0 : 0
                             }
                         }
                     }
                 }
+            };
+        case CART_CHANGED_REMOVE:
+            return { ...state, 
+                cart: {}
             };
         case REHYDRATE:
             if (action.payload.listRequest) {

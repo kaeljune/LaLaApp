@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native';
+//import { AsyncStorage } from 'react-native';
 import firebase from 'firebase';
 
 import {
@@ -46,7 +46,7 @@ export const emailSignup = ({ email, password, name, phone }) => async (dispatch
             firebase.database().ref(`users/${user.uid}`)
             .update({ name, phone, email }, () => {
             });
-            AsyncStorage.setItem('@userLogin', JSON.stringify(user));
+            //AsyncStorage.setItem('@userLogin', JSON.stringify(user));
             emailSignupSuccess(dispatch, user);
         })
         .catch((error) => {

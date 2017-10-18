@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import {
 	View,
 	Text,
-	ScrollView,
 	TextInput,
 	Slider,
+	LayoutAnimation,
+	UIManager,
+	Platform,
+	AsyncStorage,
 	StyleSheet,
 } from 'react-native';
 import firebase from 'firebase';
@@ -27,7 +30,7 @@ import {
 	requestGift
 } from '../../actions';
 
-import { COLOR, headerStyle, headerTitleStyle } from '../../config/config';
+import { COLOR, headerStyle, headerTitleStyle, CustomLayoutSpring } from '../../config/config';
 
 import Spinner from '../../components/Spinner';
 import SlideSelect from './SlideSelect';
@@ -66,6 +69,15 @@ class GiftSelection extends Component {
 		headerTitleStyle,
 	})
 
+	constructor(props) {
+		super(props);
+
+		if (Platform.OS === 'android') {
+      UIManager.setLayoutAnimationEnabledExperimental &&
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+		}
+	}
+
 	onSexChange = (text) => {
 		this.props.requestSexChanged(text);
 	}
@@ -96,6 +108,9 @@ class GiftSelection extends Component {
 	onSubmitPress = async () => {
 		const { location, sex, age, relationship, receiverName,
 			price, occasion, interest, style, other } = this.props;
+
+		LayoutAnimation.configureNext(CustomLayoutSpring);
+
 		await firebase.auth().currentUser.getIdToken(true)
 			.then((idToken) => {
 				try {
@@ -122,153 +137,155 @@ class GiftSelection extends Component {
 				console.log(error);
 			});
 	}
-	renderButton = () => {
-		if (this.props.loading) {
-			return <Spinner size="large" />;
-		}
-		return (
-			<Btn
-				title="SUBMIT REQUESTS"
-				bgColor={COLOR.primary}
-				onPress={this.onSubmitPress}
-			/>
-		);
-	}
+
 	render() {
 		const { section, sectionItem, sectionPad, sectionTag, sectionTitle } = styles;
+
 		return (
-			<KeyboardAwareScrollView
-				style={{ backgroundColor: '#f8f8f8' }}
-				scrollEnabled
-				animated
-			>
-				<View style={section}>
-					<View style={sectionItem}>
-						<Avatar
-							height={120}
-							width={120}
-							rounded
-							source={avatar}
+			<View style={{ flex: 1 }}>
+				<KeyboardAwareScrollView
+					style={{ backgroundColor: '#f8f8f8', flex: 1, opacity: this.props.loadingSF ? 0.2 : 1 }}
+					scrollEnabled
+					animated
+				>
+					<View style={section}>
+						<View style={sectionItem}>
+							<Avatar
+								height={120}
+								width={120}
+								rounded
+								source={avatar}
+							/>
+
+							<Text
+								style={{
+									marginVertical: 15,
+									fontSize: 18,
+									fontWeight: '600'
+								}}
+							>Hai Nguyen</Text>
+						</View>
+
+						<SlideSelect items={sexs} onPress={this.onSexChange} />
+						<SlideSelect items={ages} onPress={this.onAgeChange} label="Age" />
+						<SlideSelect items={popular} onPress={this.onRelationshipChange} />
+					</View>
+
+					<View style={sectionPad}>
+						<Text style={sectionTitle}>Receiver's Name</Text>
+
+						<TextField
+							style={{ textAlign: 'center', marginTop: 20 }}
+							placeholder="Ex: AirLaLa"
+							value={this.props.receiverName}
+							onChangeText={this.onReceiverNameChange}
 						/>
+					</View>
+
+					<View style={section}>
+						<Text style={[sectionTitle, { margin: 15 }]}>Occasion</Text>
+						<SlideBox occasion={occasions} onPress={this.onOccasionChange} />
+					</View>
+
+					<View style={sectionPad}>
+						<Text style={sectionTitle}>Preferred Budget</Text>
 
 						<Text
 							style={{
-								marginVertical: 15,
-								fontSize: 18,
-								fontWeight: '600'
+								fontSize: 20,
+								marginTop: 30,
+								marginBottom: 15,
+								textAlign: 'center'
 							}}
-						>Hai Nguyen</Text>
+						>${this.props.price ? this.props.price : 0}-${this.props.price + 25}</Text>
+
+						<Slider
+							minimumValue={0}
+							maximumValue={500}
+							minimumTrackTintColor={COLOR.primary}
+							maximumTrackTintColor='#eee'
+							value={this.props.price}
+							onSlidingComplete={this.onPriceChange}
+							step={25}
+						/>
+
+					</View>
+					<View style={sectionPad}>
+						<Text style={sectionTitle}>Recipient's Interests</Text>
+
+						<View style={sectionTag}>
+							<TagSelect onTagPress={this.onInterestChange}>Academics</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Adventure</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Art</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Beer</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Cooking</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Crafts & DIY</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Creative Workspaces</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Design</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Entertaining</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Family</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Fashion</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Feminism</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Film</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Food</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Games</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Hign End Items</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Sport</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>History</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Liquor</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Music</TagSelect>
+							<TagSelect onTagPress={this.onInterestChange}>Nature</TagSelect>
+						</View>
 					</View>
 
-					<SlideSelect items={sexs} onPress={this.onSexChange} />
-					<SlideSelect items={ages} onPress={this.onAgeChange} label="Age" />
-					<SlideSelect items={popular} onPress={this.onRelationshipChange} />
-				</View>
+					<View style={sectionPad}>
+						<Text style={sectionTitle}>Recipient's Style</Text>
 
-				<View style={sectionPad}>
-					<Text style={sectionTitle}>Receiver's Name</Text>
-
-					<TextField
-						style={{ textAlign: 'center', marginTop: 20 }}
-						placeholder="Ex: AirLaLa"
-						value={this.props.receiverName}
-						onChangeText={this.onReceiverNameChange}
-					/>
-				</View>
-
-				<View style={section}>
-					<Text style={[sectionTitle, { margin: 15 }]}>Occasion</Text>
-					<SlideBox occasion={occasions} onPress={this.onOccasionChange} />
-				</View>
-
-				<View style={sectionPad}>
-					<Text style={sectionTitle}>Preferred Budget</Text>
-
-					<Text
-						style={{
-							fontSize: 20,
-							marginTop: 30,
-							marginBottom: 15,
-							textAlign: 'center'
-						}}
-					>${this.props.price ? this.props.price : 0}-${this.props.price + 25}</Text>
-
-					<Slider
-						minimumValue={0}
-						maximumValue={500}
-						minimumTrackTintColor={COLOR.primary}
-						maximumTrackTintColor='#eee'
-						value={this.props.price}
-						onSlidingComplete={this.onPriceChange}
-						step={25}
-					/>
-
-				</View>
-				<View style={sectionPad}>
-					<Text style={sectionTitle}>Recipient's Interests</Text>
-
-					<View style={sectionTag}>
-						<TagSelect onTagPress={this.onInterestChange}>Academics</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Adventure</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Art</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Beer</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Cooking</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Crafts & DIY</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Creative Workspaces</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Design</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Entertaining</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Family</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Fashion</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Feminism</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Film</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Food</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Games</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Hign End Items</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Sport</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>History</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Liquor</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Music</TagSelect>
-						<TagSelect onTagPress={this.onInterestChange}>Nature</TagSelect>
+						<View style={sectionTag}>
+							<TagSelect onTagPress={this.onStyleChange}>elegant</TagSelect>
+							<TagSelect onTagPress={this.onStyleChange}>alternative</TagSelect>
+							<TagSelect onTagPress={this.onStyleChange}>fun</TagSelect>
+							<TagSelect onTagPress={this.onStyleChange}>sporty</TagSelect>
+							<TagSelect onTagPress={this.onStyleChange}>luxurious</TagSelect>
+							<TagSelect onTagPress={this.onStyleChange}>conventional</TagSelect>
+						</View>
 					</View>
-				</View>
 
-				<View style={sectionPad}>
-					<Text style={sectionTitle}>Recipient's Style</Text>
-
-					<View style={sectionTag}>
-						<TagSelect onTagPress={this.onStyleChange}>elegant</TagSelect>
-						<TagSelect onTagPress={this.onStyleChange}>alternative</TagSelect>
-						<TagSelect onTagPress={this.onStyleChange}>fun</TagSelect>
-						<TagSelect onTagPress={this.onStyleChange}>sporty</TagSelect>
-						<TagSelect onTagPress={this.onStyleChange}>luxurious</TagSelect>
-						<TagSelect onTagPress={this.onStyleChange}>conventional</TagSelect>
+					<View style={sectionPad}>
+						<Text style={sectionTitle}>Other interests or thoughts optional</Text>
+						<View style={{ marginTop: 20, borderStyle: 'dashed', borderWidth: 1, borderColor: '#ddd', paddingVertical: 20 }}>
+							<TextInput
+								style={{
+									minHeight: 60,
+									textAlign: 'center',
+									fontSize: 16
+								}}
+								underlineColorAndroid={'transparent'}
+								multiline
+								selectionColor={COLOR.primary}
+								placeholder="He/She is interested in Traveling and Wine, etc..."
+								placeholderTextColor="#999"
+								value={this.props.other}
+								onChangeText={this.onOtherChange}
+							/>
+						</View>
 					</View>
-				</View>
 
-				<View style={sectionPad}>
-					<Text style={sectionTitle}>Other interests or thoughts optional</Text>
-					<View style={{ marginTop: 20, borderStyle: 'dashed', borderWidth: 1, borderColor: '#ddd', paddingVertical: 20 }}>
-						<TextInput
-							style={{
-								minHeight: 60,
-								textAlign: 'center',
-								fontSize: 16
-							}}
-							underlineColorAndroid={'transparent'}
-							multiline
-							selectionColor={COLOR.primary}
-							placeholder="He/She is interested in Traveling and Wine, etc..."
-							placeholderTextColor="#999"
-							value={this.props.other}
-							onChangeText={this.onOtherChange}
+					<View style={{ marginVertical: 30 }}>
+						<Btn
+							title="SUBMIT REQUESTS"
+							bgColor={COLOR.primary}
+							onPress={this.onSubmitPress}
 						/>
 					</View>
-				</View>
-
-				<View style={{ marginVertical: 30 }}>
-					{this.renderButton()}
-				</View>
-			</KeyboardAwareScrollView>
+				</KeyboardAwareScrollView>
+				{
+					this.props.loading &&
+					<View style={{ height: 200, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
+						<Spinner />
+					</View>
+				}
+			</View>
 		);
 	}
 }
@@ -328,10 +345,12 @@ const styles = StyleSheet.create({
 	}
 });
 
-const mapStateToProps = ({ requestGiftState }) => {
+const mapStateToProps = ({ requestGiftState, fetchAcc }) => {
 	const { location, sex, age, relationship, receiverName, loading, error,
 		price, occasion, interest, style, other } = requestGiftState;
-	return { location, sex, age, relationship, receiverName, loading, error, price, occasion, interest, style, other };
+	const { account } = fetchAcc;
+
+	return { account, location, sex, age, relationship, receiverName, loading, error, price, occasion, interest, style, other };
 };
 
 export default connect(mapStateToProps, {

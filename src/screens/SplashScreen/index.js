@@ -1,10 +1,8 @@
 import React, { PureComponent } from 'react';
-import { AsyncStorage, View, StyleSheet, ActivityIndicator, Animated } from 'react-native';
+import { View, StyleSheet, ActivityIndicator, Animated } from 'react-native';
 import { connect } from 'react-redux';
-import { AppLoading } from 'expo';
-import _ from 'lodash';
 
-import { accountFetch, navLogin, navLogout } from '../../actions';
+import { fetchRequest, accountFetch, navLogin, navLogout } from '../../actions';
 import { COLOR } from '../../config/config';
 
 class SplashScreen extends PureComponent {
@@ -14,24 +12,19 @@ class SplashScreen extends PureComponent {
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			userLogin: null,
-			isLogin: null,
-		};
+		// this.state = {
+		// 	userLogin: null,
+		// 	isLogin: null,
+		// };
 		this.scale1 = new Animated.Value(1);
 		this.scale2 = new Animated.Value(1);
 		this.scale3 = new Animated.Value(1);
 	}
 
 	async componentWillMount() {
-		//await AsyncStorage.removeItem('reduxPersist:listRequest');
+		// await AsyncStorage.removeItem('reduxPersist:listRequest');
 		await this.props.accountFetch();
-		const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
-		if (JSON.parse(fetchAcc).isLogin) {
-			this.setState({ isLogin: JSON.parse(fetchAcc).isLogin });
-		} else {
-			this.setState({ isLogin: false });
-		}
+		//await this.props.fetchRequest();
 	}
 
 	componentDidMount() {
@@ -80,7 +73,6 @@ class SplashScreen extends PureComponent {
 	}
 
 	render() {
-
 		const animateStyle1 = {
 			transform: [
 				{ scale: this.scale1 }
@@ -97,9 +89,6 @@ class SplashScreen extends PureComponent {
 			]
 		};
 
-		if (_.isNull(this.state.isLogin)) {
-			return <AppLoading />;
-		}
 		return (
 			<View style={styles.container}>
 
@@ -180,4 +169,4 @@ const mapStateToProps = ({ fetchAcc }) => {
 	return { account };
 };
 
-export default connect(mapStateToProps, { accountFetch, navLogin, navLogout })(SplashScreen);
+export default connect(mapStateToProps, { accountFetch, fetchRequest, navLogin, navLogout })(SplashScreen);
