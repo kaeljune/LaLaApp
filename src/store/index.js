@@ -1,4 +1,4 @@
-// import Reactotron from 'reactotron-react-native';
+import Reactotron from 'reactotron-react-native';
 import { compose, applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { persistStore, autoRehydrate } from 'redux-persist';
@@ -7,7 +7,8 @@ import reducers from '../reducers';
 
 // import '../../ReactotronConfig';
 
-const store = createStore(
+//const store = createStore(
+const store = Reactotron.createStore(
   reducers,
   {},
   compose(
@@ -15,7 +16,7 @@ const store = createStore(
     autoRehydrate(),
   )
 );
-
+//const store = Reactotron.createStore(rootReducer, compose(middleware))
 persistStore(store,
   {
     storage: AsyncStorage, whitelist: ['fetchAcc', 'listRequest'], blacklist: ['nav']

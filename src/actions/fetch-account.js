@@ -3,8 +3,7 @@ import firebase from 'firebase';
 
 import {
   ACCOUNT_FETCH_SUCCESS,
-  ACCOUNT_FETCH_FAIL,
-  EDIT
+  ACCOUNT_FETCH_FAIL
 } from './types';
 
 export const accountFetch = () => async (dispatch) => {
@@ -47,8 +46,6 @@ export const handleUpdateProfle = ({ name, email, phone }) => async dispatch => 
     });
 
   await user.updateEmail(email);
-
-  // console.log('action', { name, phone })
 
   firebase.database().ref(`users/${user.uid}`)
     .update({ name, phone, email }, () => {

@@ -15,7 +15,7 @@ import { Avatar, Icon } from 'react-native-elements';
 
 import Card from './Card';
 
-import { accountFetch, fetchRequest, fetchListGift, fetchCart } from '../../actions';
+import { accountFetch, fetchRequest, fetchListGift, fetchCart, cardRemove } from '../../actions';
 import { COLOR, WIDTH_SCREEN, 
 	headerStyle, headerTitleStyle, bodau, CustomLayoutSpring } from '../../config/config';
 
@@ -71,6 +71,13 @@ class MainScreen extends Component {
 			items: items.length
 		});
 	}
+	// componentWillReceiveProps(nextProps) {
+  //   // nextProps are the next set of props that this component
+  //   // will be rendered with
+  //   // this.props is still the old set of props
+	// 	console.log('hello');
+  //   //this.createDataSource(nextProps);
+  // }
 
 	onPress = async (shortName, item) => {
 		if (this.state.isDel) return;
@@ -83,6 +90,7 @@ class MainScreen extends Component {
 
 	onLongPress = () => {
 		LayoutAnimation.configureNext(CustomLayoutSpring);
+		
 		this.setState({ isDel: true });
 	}
 
@@ -92,6 +100,7 @@ class MainScreen extends Component {
 		const shortName = _.toUpper(name.match(/\b\w/g).join('')).substring(0, 2);
 		return (
 			<Card
+				uid={item.uid}
 				shortName={shortName}
 				name={name}
 				occasion={item.occasion}
@@ -252,4 +261,4 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps,
-	{ accountFetch, fetchRequest, fetchListGift, fetchCart })(MainScreen);
+	{ accountFetch, fetchRequest, cardRemove, fetchListGift, fetchCart })(MainScreen);

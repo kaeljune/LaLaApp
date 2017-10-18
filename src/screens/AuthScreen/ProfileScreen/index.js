@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, AsyncStorage, StyleSheet, } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, } from 'react-native';
 import { connect } from 'react-redux';
 import { Avatar, Icon } from 'react-native-elements';
 
@@ -16,7 +16,7 @@ class ProfileScreen extends Component {
     headerTitleStyle: config.headerTitleStyle,
     headerStyle: config.headerStyle,
     headerLeft: <Touch onPress={() => navigation.navigate('isFindGift')}>
-      <View style={{ paddingHorizontal: 15, height: config.HEIGHT_HEADER, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={styles.actionHeader}>
         <Icon
           name="clear"
           color={config.COLOR.primary}
@@ -24,11 +24,11 @@ class ProfileScreen extends Component {
       </View>
     </Touch>,
     headerRight: <Touch onPress={() => navigation.navigate('editprofile')}>
-      <View style={{ paddingHorizontal: 15, height: config.HEIGHT_HEADER, justifyContent: 'center', alignItems: 'center' }}>
-      <Icon
-        name="settings"
-        color={config.COLOR.secondary}
-      />
+      <View style={styles.actionHeader}>
+        <Icon
+          name="settings"
+          color={config.COLOR.secondary}
+        />
       </View>
     </Touch>
   })
@@ -57,7 +57,6 @@ class ProfileScreen extends Component {
     }
     return (
       <ScrollView style={styles.container}>
-        {console.log('121357348579', this.props.user.phone)}
         <View style={styles.heading}>
           <Avatar
             xlarge
@@ -168,6 +167,12 @@ class ProfileScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  actionHeader: {
+    paddingHorizontal: 15,
+    height: config.HEIGHT_HEADER,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   container: {
     flex: 1,
     backgroundColor: config.COLOR.background
@@ -179,10 +184,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   section: {
-    backgroundColor: '#fff',
-    // borderRadius: 5,
-    // borderColor: '#f5f5f5',
-    // borderWidth: 1
+    backgroundColor: '#fff'
   },
   titleSection: {
     textAlign: 'center',

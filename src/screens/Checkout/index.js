@@ -43,7 +43,7 @@ class Checkout extends Component {
 	handleTouch = (bool) => {
 		this.setState({
 			scrollEnable: bool
-		})
+		});
 	}
 
 	render() {
