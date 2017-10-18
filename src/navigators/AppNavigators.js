@@ -11,6 +11,7 @@ import WelcomeScreen from '../screens/WelcomeScreen';
 import SigninScreen from '../screens/AuthScreen/SigninScreen';
 import SignupScreen from '../screens/AuthScreen/SignupScreen';
 import ProfileScreen from '../screens/AuthScreen/ProfileScreen';
+import EditProfileScreen from '../screens/AuthScreen/ProfileScreen/EditProfileScreen';
 import ForgotScreen from '../screens/AuthScreen/ForgotScreen';
 import GiveAGift from '../screens/GiveAGift';
 import GiftSelection from '../screens/GiftSelection';
@@ -36,7 +37,9 @@ const isSignedOut = StackNavigator({
 });
 
 const isProfile = StackNavigator({
+
 	profile: { screen: ProfileScreen },
+	editprofile: { screen: EditProfileScreen },
 	term: { screen: TermScreen },
 });
 

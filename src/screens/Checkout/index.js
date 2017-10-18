@@ -49,7 +49,7 @@ class Checkout extends Component {
 	render() {
 		return (
 			<View style={{ flex: 1 }}>
-				<ScrollView style={{ flex: 1, backgroundColor: '#f8f8f8' }} contentContainerStyle={styles.container} scrollEnabled={this.state.scrollEnable}>
+				<ScrollView style={{ flex: 1, backgroundColor: '#f8f8f8' }} contentContainerStyle={styles.container}>
 					<Feature user={this.props.navigation.state.params.user} />
 					<ProductList
 						handleTouch={this.handleTouch}

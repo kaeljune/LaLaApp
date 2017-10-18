@@ -127,7 +127,7 @@ export default class App extends React.Component {
 						opacity: opacity ? 1 : 0,
 					}}
         >
-          <Text style={{ color: '#fff', fontWeight: '600' }}>Remove Item</Text>
+          <Text onPress={() => this.props.removeItem()} style={{ color: '#fff', fontWeight: '600' }}>Remove Item</Text>
           <Text onPress={this.onUndo} style={{ color: '#fff', fontWeight: '600' }}>Undo</Text>
         </View>
         <Animated.View

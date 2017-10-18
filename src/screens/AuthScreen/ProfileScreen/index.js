@@ -1,160 +1,220 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  AsyncStorage,
-  Modal,
-  StyleSheet
-} from 'react-native';
+import { View, ScrollView, Text, AsyncStorage, StyleSheet, } from 'react-native';
 import { connect } from 'react-redux';
-import { Icon } from 'react-native-elements';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Avatar, Icon } from 'react-native-elements';
 
-import { COLOR, STYLES } from '../../../config/config';
+import * as config from '../../../config/config';
+import { signOut, removeQuantity } from '../../../actions';
+import Touch from '../../../components/Touch';
 import Spinner from '../../../components/Spinner';
-import TitleAvatar from './TitleAvatar';
-import UserInfo from './UserInfo';
-import Services from './Services';
 
 class ProfileScreen extends Component {
-
-  static navigationOptions = () => ({
-    header: null
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Profile',
+    headerBackTitle: null,
+    headerTintColor: config.COLOR.primary,
+    headerTitleStyle: config.headerTitleStyle,
+    headerStyle: config.headerStyle,
+    headerLeft: <Touch onPress={() => navigation.navigate('isFindGift')}>
+      <View style={{ paddingHorizontal: 15, height: config.HEIGHT_HEADER, justifyContent: 'center', alignItems: 'center' }}>
+        <Icon
+          name="clear"
+          color={config.COLOR.primary}
+        />
+      </View>
+    </Touch>,
+    headerRight: <Touch onPress={() => navigation.navigate('editprofile')}>
+      <View style={{ paddingHorizontal: 15, height: config.HEIGHT_HEADER, justifyContent: 'center', alignItems: 'center' }}>
+      <Icon
+        name="settings"
+        color={config.COLOR.secondary}
+      />
+      </View>
+    </Touch>
   })
 
-  state = {
-    userLogin: null,
-    modalVisible: false,
-    isEdit: false
-  };
+  // state = {
+  //   user: null
+  // }
 
-  async componentDidMount() {
-    const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
-    if (JSON.parse(fetchAcc).isLogin) {
-      this.setState({ userLogin: JSON.parse(fetchAcc) });
-    } else {
-      this.setState({ isLogin: false });
-    }
-  }
-
+  // async componentDidMount() {
+  //   const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
+  //   if (JSON.parse(fetchAcc).isLogin) {
+  //     this.setState({ user: JSON.parse(fetchAcc) });
+  //   } else {
+  //     this.setState({ isLogin: false });
+  //   }
+  // }
 
   render() {
-    if (!this.state.userLogin) {
-      return <View style={[styles.container, { alignItems: 'center', justifyContent: 'center' }]}><Spinner /></View>;
+    if (!this.props.user) {
+      return (<View
+        style={[
+          styles.container,
+          { alignItems: 'center', justifyContent: 'center' }
+        ]}
+      ><Spinner /></View>);
     }
     return (
-      <View style={styles.container}>
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => { console.log(12); }}
-        >
-          <KeyboardAwareScrollView>
-            <View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  height: 60,
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  borderBottomWidth: 1,
-                  borderBottomColor: '#ddd'
-                }}
-              >
-                <View style={{ width: 60, height: 60, justifyContent: 'center' }}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      this.setState({ modalVisible: false, isEdit: false });
-                    }}
-                  >
-                    <Icon name="clear" />
-                  </TouchableOpacity>
-                </View>
-                <View>
-                <Text style={{ backgroundColor: 'transparent', fontWeight: '700', fontSize: 18 }}>Edit profile</Text>
-                </View>
-                <View style={{ width: 60, height: 60, justifyContent: 'center' }}>
-                  <TouchableOpacity
-                    onPress={() => {
-                    this.setState({ modalVisible: false, isEdit: false });
-                    }}
-                  >
-                    <Icon name="check" color={COLOR.primary} />
-                  </TouchableOpacity>
-                </View>
-              </View>
-
-              <View>
-                <TitleAvatar data={this.state.userLogin} edit={this.state.isEdit} />
-                <UserInfo data={this.state.userLogin} edit={this.state.isEdit} />
-
-                <TouchableOpacity>
-                  <View style={[STYLES.boxShadow, { margin: 15, backgroundColor: COLOR.primary, padding: 15, alignItems: 'center' }]}>
-                    <Text style={{ color: '#fff', fontWeight: '700', fontSize: 16 }}>Update profile</Text>
-                  </View>
-                </TouchableOpacity>
-
-              </View>
-            </View>
-          </KeyboardAwareScrollView>
-        </Modal>
-        <ScrollView>
-          <View
-            style={{
-              backgroundColor: COLOR.primary,
-              height: 330,
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-            }}
+      <ScrollView style={styles.container}>
+        {console.log('121357348579', this.props.user.phone)}
+        <View style={styles.heading}>
+          <Avatar
+            xlarge
+            rounded
+            source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg' }}
+            onPress={() => console.log('Works!')}
+            activeOpacity={0.7}
           />
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', height: 60, alignItems: 'center' }}>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('isFindGift')}
-            >
-              <View style={{ width: 60, height: 60, justifyContent: 'center', }}>
+          <Text
+            style={{
+              color: '#fff',
+              marginTop: 30,
+              fontSize: 25,
+              fontWeight: '400'
+            }}
+          >{this.props.user.name}</Text>
+        </View>
 
-                <Icon name="clear" color="#fff" />
+        <View style={{ padding: 15, marginTop: 15 }}>
+          <Text style={styles.titleSection}>USER PROFILE</Text>
 
+          <View style={[config.STYLES.boxShadow, styles.section]}>
+            <View style={[styles.borderStyle, { padding: 15, flexDirection: 'row' }]}>
+              <Icon name="person" color={config.COLOR.primary} />
+              <View style={{ marginLeft: 15, flex: 1 }}>
+                <Text style={styles.titleProfile} >User name</Text>
+                <Text style={{ color: '#888', }}>{this.props.user.name}</Text>
               </View>
-            </TouchableOpacity>
-
-            <View >
-              <Text style={{ backgroundColor: 'transparent', color: '#fff', fontWeight: '700', fontSize: 18 }}>Profile</Text></View>
-            <TouchableOpacity
-                onPress={() => this.setState({ isEdit: true, modalVisible: true })}
-              >
-            <View style={{ width: 60, height: 60, justifyContent: 'center' }}>
-
-                <Icon name="edit" color="#fff" />
-
             </View>
-            </TouchableOpacity>
+
+            <View style={[styles.borderStyle, { padding: 15, flexDirection: 'row' }]}>
+              <Icon name="email" color={config.COLOR.primary} />
+              <View style={{ marginLeft: 15, flex: 1 }}>
+                <Text style={styles.titleProfile} >Email</Text>
+                <Text style={{ color: '#888', }}>{this.props.user.email}</Text>
+              </View>
+            </View>
+
+            <View style={{ padding: 15, flexDirection: 'row' }}>
+              <Icon name="phone" color={config.COLOR.primary} />
+              <View style={{ marginLeft: 15, flex: 1 }}>
+                <Text style={styles.titleProfile} >Phone</Text>
+                <Text style={{ color: '#888', }}>{this.props.user.phone}</Text>
+              </View>
+            </View>
           </View>
-          <TitleAvatar data={this.state.userLogin} edit={this.state.isEdit} />
-          <UserInfo data={this.state.userLogin} edit={this.state.isEdit} />
-          <Services />
-        </ScrollView>
-      </View>
+        </View>
+
+        <View style={{ padding: 15 }}>
+          <Text style={styles.titleSection}>SETTING</Text>
+          <View style={[config.STYLES.boxShadow, styles.section]}>
+            <Touch>
+              <View style={[styles.row, styles.borderStyle]}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Icon name="payment" color={config.COLOR.primary} />
+                  <Text style={styles.rowText} >Payment</Text>
+                </View>
+                <Icon name="keyboard-arrow-right" color={config.COLOR.secondary} />
+              </View>
+            </Touch>
+
+            <Touch>
+              <View style={[styles.row, styles.borderStyle]}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Icon name="help-outline" color={config.COLOR.primary} />
+                  <Text style={styles.rowText} >Helps</Text>
+                </View>
+                <Icon name="keyboard-arrow-right" color={config.COLOR.secondary} />
+              </View>
+            </Touch>
+
+            <Touch>
+              <View style={[styles.row, styles.borderStyle]}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Icon name="assignment" color={config.COLOR.primary} />
+                  <Text style={styles.rowText} >Terms &amp; Privacy</Text>
+                </View>
+                <Icon name="keyboard-arrow-right" color={config.COLOR.secondary} />
+              </View>
+            </Touch>
+
+            <Touch onPress={this.props.removeQuantity}>
+              <View style={[styles.row, styles.borderStyle]}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Icon name="cached" color={config.COLOR.primary} />
+                  <Text style={styles.rowText}>Remove Cache</Text>
+                </View>
+                <Icon name="keyboard-arrow-right" color={config.COLOR.secondary} />
+              </View>
+            </Touch>
+
+            <Touch onPress={this.props.signOut}>
+              <View style={styles.row}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Icon name="exit-to-app" color={config.COLOR.primary} />
+                  <Text style={styles.rowText}>Sign Out</Text>
+                </View>
+                <Icon name="keyboard-arrow-right" color={config.COLOR.secondary} />
+              </View>
+            </Touch>
+
+          </View>
+        </View>
+
+      </ScrollView>
     );
   }
 }
 
-const mapStateToProps = ({ fetchAcc }) => {
-  const { account } = fetchAcc;
-  return { account };
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f8f8'
+    backgroundColor: config.COLOR.background
+  },
+  heading: {
+    height: 300,
+    backgroundColor: config.COLOR.primary,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  section: {
+    backgroundColor: '#fff',
+    // borderRadius: 5,
+    // borderColor: '#f5f5f5',
+    // borderWidth: 1
+  },
+  titleSection: {
+    textAlign: 'center',
+    fontSize: 15,
+    color: '#353535',
+    fontWeight: '400',
+    marginBottom: 15
+  },
+  borderStyle: {
+    borderBottomColor: '#eee',
+    borderBottomWidth: 1
+  },
+  row: {
+    paddingHorizontal: 15,
+    paddingVertical: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  rowText: {
+    fontSize: 15,
+    fontWeight: '500',
+    marginLeft: 15
+  },
+  titleProfile: {
+    fontSize: 15,
+    fontWeight: '500',
+    marginBottom: 10
   }
 });
 
-export default connect(mapStateToProps)(ProfileScreen);
+const mapStateToProps = ({ fetchAcc }) => ({
+  user: fetchAcc.userLogin
+});
 
+export default connect(mapStateToProps, { signOut, removeQuantity })(ProfileScreen);

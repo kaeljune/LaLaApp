@@ -15,9 +15,15 @@ class ProductList extends Component {
 		this.props.handleTouch(bool);
 	}
 
+	removeItem = () => {
+		console.log(1223123123)
+	}
+
 	renderItem = ({ item }) => (
 		<Swipe
-			handleSwipe={this.handleSwipe}
+			uidItem={item.uid}
+			handleSwipe={() => this.handleSwipe(item.uid)}
+			removeItem={this.removeItem}
 			width={WIDTH_SCREEN - 20}
 			height={91}
 			backgroundColor={COLOR.secondary}

@@ -108,7 +108,6 @@ class SignupScreen extends Component {
               value={this.props.email}
               placeholder="What's your email?"
               keyboardType="email-address"
-              keyboardType="email-address"
               returnKeyType="next"
               onChangeText={(text) => this.props.signupEmailChanged(text)}
             />
@@ -153,11 +152,11 @@ class SignupScreen extends Component {
         </View>
         {
           this.props.loading &&
-          <View 
-            style={{ 
-              height: 200, 
-              justifyContent: 'center', 
-              alignItems: 'center', 
+          <View
+            style={{
+              height: 200,
+              justifyContent: 'center',
+              alignItems: 'center',
               backgroundColor: '#fff' }}
           >
             <Spinner />

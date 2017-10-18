@@ -46,3 +46,11 @@ export const CART_CHANGED_REMOVE = 'cart_changed_remove';
 export const CART_MESSAGE_CHANGED = 'cart_message_changed';
 export const FETCH_CART = 'fetch_cart';
 
+// edit profile type
+
+export const EDIT = {
+  NAME_USER: 'name_user',
+  EMAIL_USER: 'emai_user',
+  PHONE_USER: 'phone_user'
+};
+
