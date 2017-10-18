@@ -1,16 +1,30 @@
 import React, { PureComponent } from 'react';
 import {
   View,
+  Alert,
   Text,
   StyleSheet,
 } from 'react-native';
 import { Avatar, Icon } from 'react-native-elements';
-
+import { connect } from 'react-redux';
+import { cardRemove } from '../../actions';
 import { COLOR, WIDTH_SCREEN, STYLES } from '../../config/config';
 
 import Touch from '../../components/Touch';
 
 class Card extends PureComponent {
+  onXButtonPress = async () => {
+    const { uid } = this.props;
+    Alert.alert(
+      'helo',
+      'gi day',
+      [
+        { text: 'Cancel', onPress: () => { }, style: 'cancel' },
+        { text: 'OK', onPress: () => this.props.cardRemove(uid) },
+      ],
+      { cancelable: false }
+    );
+  }
   render() {
     const { shortName, name, occasion, priceRange, status, onPress, onLongPress, isDel } = this.props;
 
@@ -46,9 +60,9 @@ class Card extends PureComponent {
         </View>
         </Touch>
         {
-          isDel && <View style={[styles.delBtn, STYLES.boxShadow]}>
+          isDel && <Touch onPress={this.onXButtonPress}><View style={[styles.delBtn, STYLES.boxShadow]}>
             <Icon name="clear" color="#fff" />
-          </View>
+          </View></Touch>
         }
       </View>
     );
@@ -80,4 +94,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Card;
+export default connect(null, { cardRemove })(Card);

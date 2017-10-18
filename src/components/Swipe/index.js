@@ -5,7 +5,6 @@ import {
   Animated,
   PanResponder,
   View,
-  Dimensions
 } from 'react-native';
 
 export default class App extends React.Component {
@@ -27,11 +26,15 @@ export default class App extends React.Component {
       onPanResponderRelease: (event, gestureState) => this.handlePanResponderRelease(event, gestureState),
     });
 	}
-
+  
 	onUndo = () => {
     Animated.spring(this.state.locationX, {
       toValue: 0
     }).start(() => this.setState({ opacity: false }));
+  }
+
+  onRemoveItem = () => {
+    this.props.removeItem();
   }
 
   handleMoveShouldSetPanResponder = (event, gestureState) => {
@@ -57,7 +60,6 @@ export default class App extends React.Component {
       locationX: new Animated.Value(dx),
       left
     });
-
   }
 
   handlePanResponderRelease = (event, gestureState) => {
@@ -127,7 +129,7 @@ export default class App extends React.Component {
 						opacity: opacity ? 1 : 0,
 					}}
         >
-          <Text style={{ color: '#fff', fontWeight: '600' }}>Remove Item</Text>
+          <Text onPress={this.onRemoveItem} style={{ color: '#fff', fontWeight: '600' }}>Remove Item</Text>
           <Text onPress={this.onUndo} style={{ color: '#fff', fontWeight: '600' }}>Undo</Text>
         </View>
         <Animated.View

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
+import { removeItemCart } from '../../actions';
 import ProductItem from './ProductItem';
 
 import Swipe from '../../components/Swipe';
@@ -14,9 +15,14 @@ class ProductList extends Component {
 	handleSwipe = (bool) => {
 		this.props.handleTouch(bool);
 	}
+	removeItem = (uid) => {
+		console.log(uid);
+		this.props.removeItemCart(this.props.cardActive, uid);
+	}
 
 	renderItem = ({ item }) => (
 		<Swipe
+			removeItem={() => this.removeItem(item.uid)}
 			handleSwipe={this.handleSwipe}
 			width={WIDTH_SCREEN - 20}
 			height={91}
@@ -62,5 +68,5 @@ const mapStateToProps = state => {
 	const items = _.filter(_.map(state.listRequest.cart[cardActive].items, (val, uid) => ({ ...val, uid })), (gift) => gift.quantity > 0);
 	return { items, cardActive, GiftID };
 };
-export default connect(mapStateToProps, {})(ProductList);
+export default connect(mapStateToProps, { removeItemCart })(ProductList);
 

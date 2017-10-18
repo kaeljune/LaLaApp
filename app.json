@@ -9,9 +9,9 @@
     "orientation": "portrait",
     "primaryColor": "#cccccc",
     "icon": "./assets/icons/app.png",
-    // "loading": {
-    //   "icon": "./assets/icons/loading.png"
-    // },
+    "loading": {
+      "icon": "./assets/icons/loading.png"
+    },
     "packagerOpts": {
       "assetExts": [
         "ttf",

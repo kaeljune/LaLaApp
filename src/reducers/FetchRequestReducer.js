@@ -7,6 +7,7 @@ import {
     CART_CHANGED_ADD,
     CART_CHANGED_SUB,
     CART_CHANGED_REMOVE,
+    CART_CHANGED_REMOVEITEM,
     FETCH_CART,
     CART_MESSAGE_CHANGED
 } from '../actions/types';
@@ -77,6 +78,22 @@ export default function (state = INITIAL_STATE, action) {
                             [action.payload.id]: {
                                 ...state.cart[action.payload.cardActive].items[action.payload.id],
                                 quantity: state.cart[action.payload.cardActive].items[action.payload.id].quantity ? state.cart[action.payload.cardActive].items[action.payload.id].quantity - 1 : 0
+                            }
+                        }
+                    }
+                }
+            };
+        case CART_CHANGED_REMOVEITEM:
+            return { ...state, 
+                cart: {
+                    ...state.cart,
+                    [action.payload.cardActive]: {
+                        ...state.cart[action.payload.cardActive],
+                        items: { 
+                            ...state.cart[action.payload.cardActive].items,
+                            [action.payload.id]: {
+                                ...state.cart[action.payload.cardActive].items[action.payload.id],
+                                quantity: state.cart[action.payload.cardActive].items[action.payload.id].quantity ? 0 : 0
                             }
                         }
                     }
