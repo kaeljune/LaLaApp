@@ -16,11 +16,11 @@ class Card extends PureComponent {
   onXButtonPress = async () => {
     const { uid } = this.props;
     Alert.alert(
-      'helo',
-      'gi day',
+      'Remove Card Item',
+      'Do you want to remove this Item?',
       [
         { text: 'Cancel', onPress: () => { }, style: 'cancel' },
-        { text: 'OK', onPress: () => this.props.cardRemove(uid) },
+        { text: 'Remove', onPress: () => this.props.cardRemove(uid) },
       ],
       { cancelable: false }
     );
