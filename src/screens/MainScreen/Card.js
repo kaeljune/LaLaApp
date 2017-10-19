@@ -116,7 +116,7 @@ class Card extends PureComponent {
             Animated.timing(this.translateY, {
               toValue: 300,
               velocity: 0.1,
-              duration: 500,
+              duration: 150,
               useNativeDriver: Platform.OS === 'android'
             })
           ]).start(() => this.props.cardRemove(uid)) },
@@ -177,9 +177,9 @@ class Card extends PureComponent {
           </Animated.View>
           </Touch>
         {
-          isDel && <View style={styles.delBtn}>
+          isDel && <View style={[styles.delBtn, STYLES.boxShadow]}>
             <Touch onPress={this.onXButtonPress}>
-              <View style={{ width: 30, height: 30, justifyContent: 'center', backgroundColor: COLOR.secondary }}>
+              <View style={styles.inner}>
                 <Icon name="clear" color="#fff" />
               </View>
             </Touch>
@@ -210,15 +210,19 @@ const styles = StyleSheet.create({
     borderRadius: 2
   },
   delBtn: {
-    backgroundColor: COLOR.secondary,
     height: 30,
     width: 30,
     position: 'absolute',
     top: 0,
     right: 0,
-    borderRadius: 3,
-    overflow: 'hidden'
   },
+  inner: {
+    width: 30,
+    height: 30,
+    justifyContent: 'center',
+    backgroundColor: COLOR.secondary,
+    borderRadius: 3
+  }
 
 });
 

@@ -39,6 +39,7 @@ class ProductList extends Component {
 						size={15}
 						color="#888"
 						name="remove"
+						containerStyle={{ backgroundColor: '#fff', height: 40, width: 40 }}
 					/>
 				</TouchableOpacity>);
 		}
@@ -80,6 +81,7 @@ class ProductList extends Component {
 						<Icon
 							color="#888"
 							size={16}
+							containerStyle={{ backgroundColor: '#fff', height: 40, width: 40 }}
 							name="add"
 						/>
 					</TouchableOpacity>
