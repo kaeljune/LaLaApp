@@ -15,7 +15,6 @@ const INITIAL_STATE = {
 export default function (state = INITIAL_STATE, action) {
 	switch (action.type) {
 		case ACCOUNT_FETCH_SUCCESS:
-			console.log('133124', action.payload);
 			return { ...state, userLogin: action.payload, isLogin: true, name: action.payload.name, email: action.payload.email, phone: action.payload.phone, };
 		case ACCOUNT_FETCH_FAIL:
 			return { ...state, userLogin: null, isLogin: false };

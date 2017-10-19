@@ -3,16 +3,14 @@ import {
 	View,
 	Text,
 	TextInput,
-	Slider,
 	LayoutAnimation,
 	UIManager,
 	Platform,
-	AsyncStorage,
 	StyleSheet,
 } from 'react-native';
 import firebase from 'firebase';
 import _ from 'lodash';
-import { Avatar, Icon } from 'react-native-elements';
+import { Avatar, Slider } from 'react-native-elements';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -205,7 +203,15 @@ class GiftSelection extends Component {
 							minimumTrackTintColor={COLOR.primary}
 							maximumTrackTintColor='#eee'
 							value={this.props.price}
-							onSlidingComplete={this.onPriceChange}
+							onValueChange={this.onPriceChange}
+							thumbStyle={{
+								backgroundColor: '#fff',
+								borderColor: COLOR.primary,
+								borderWidth: 1,
+								height: 35,
+								width: 35,
+								borderRadius: 30
+							}}
 							step={25}
 						/>
 
