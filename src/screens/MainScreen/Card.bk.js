@@ -18,11 +18,11 @@ class Card extends PureComponent {
   constructor(props) {
     super(props);
 
-
+    this.scaleValue = new Animated.Value(0);
     this.rotate = new Animated.Value(0);
-    this.scaleValue = new Animated.Value(1);
+    this.scaleValue1 = new Animated.Value(1);
     this.translateY = new Animated.Value(200);
-    this.opacity = new Animated.Value(0)
+    this.opacity = new Animated.Value(0);
   }
 
   componentDidMount() {
@@ -31,16 +31,17 @@ class Card extends PureComponent {
     Animated.sequence([
       Animated.delay(time),
       Animated.parallel([
+
         Animated.timing(this.opacity, {
           toValue: 1,
-          duration: 500,
+          duration: 300,
           useNativeDriver: Platform.OS === 'android'
         }),
         Animated.spring(this.translateY, {
           toValue: 0,
-          tension: 1,
+          velocity: 0.1,
           useNativeDriver: Platform.OS === 'android'
-        }),
+        })
       ])
     ]).start();
   }
@@ -48,7 +49,7 @@ class Card extends PureComponent {
   componentWillReceiveProps(nextProps) {
     if (nextProps.isDel) {
       return Animated.sequence([
-        Animated.timing(this.scaleValue, {
+        Animated.timing(this.scaleValue1, {
           toValue: (WIDTH_SCREEN / HEIGHT_SCREEN) * 1.65,
           duration: 500,
           useNativeDriver: Platform.OS === 'android'
@@ -77,7 +78,7 @@ class Card extends PureComponent {
     }
 
     return Animated.parallel([
-      Animated.timing(this.scaleValue, {
+      Animated.timing(this.scaleValue1, {
         toValue: 1,
         duration: 500,
         useNativeDriver: Platform.OS === 'android'
@@ -90,16 +91,34 @@ class Card extends PureComponent {
     ]).start();
   }
 
-
   onXButtonPress = async () => {
     const { uid } = this.props;
-
     Alert.alert(
       'Remove Card Item',
       'Do you want to remove this Item?',
       [
-        { text: 'Cancel', onPress: () => { }, style: 'cancel' },
-        { text: 'Remove', onPress: () => this.props.cardRemove(uid) },
+        { text: 'Cancel', onPress: () => {}, style: 'cancel' },
+        { text: 'Remove',
+          // onPress: ()  => this.props.cardRemove(uid)},
+
+          onPress: () => Animated.parallel([
+            Animated.timing(this.scaleValue, {
+              toValue: 0,
+              duration: 200,
+              useNativeDriver: Platform.OS === 'android'
+            }),
+            Animated.timing(this.opacity, {
+              toValue: 0,
+              duration: 200,
+              useNativeDriver: Platform.OS === 'android'
+            }),
+            Animated.timing(this.translateY, {
+              toValue: 300,
+              velocity: 0.1,
+              duration: 200,
+              useNativeDriver: Platform.OS === 'android'
+            })
+          ]).start(() => this.props.cardRemove(uid)) },
       ],
       { cancelable: false }
     );
@@ -113,13 +132,19 @@ class Card extends PureComponent {
       outputRange: ['-1deg', '0deg', '1deg']
     });
 
+    const transform = [
+      { scale: this.scaleValue },
+      { translateY: this.translateY },
+    ];
+
     return (
       <Animated.View
         style={[
           styles.item,
+
           {
-            transform: [{ translateY: this.translateY }],
-            opacity: this.opacity
+            transform,
+            // opacity: this.opacity
           }
         ]}
       >
@@ -129,7 +154,7 @@ class Card extends PureComponent {
               STYLES.boxShadow,
               styles.innerItem,
               {
-                transform: [{ scale: this.scaleValue }, { rotate }]
+                //transform: [{ scale: this.scaleValue1 }, { rotate }]
               }
             ]}
           >
@@ -154,7 +179,7 @@ class Card extends PureComponent {
               >{status}</Text>
             </View>
           </Animated.View>
-        </Touch>
+          </Touch>
         {
           isDel && <View style={[styles.delBtn, STYLES.boxShadow]}>
             <Touch onPress={this.onXButtonPress}>
@@ -202,6 +227,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.secondary,
     borderRadius: 3
   }
+
 });
 
 export default connect(null, { cardRemove })(Card);

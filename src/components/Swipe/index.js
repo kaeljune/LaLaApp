@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import {
   StyleSheet,
   Text,
   Animated,
+  Platform,
   PanResponder,
   View,
 } from 'react-native';
 
+import { Icon } from 'react-native-elements';
+
 import { WIDTH_SCREEN } from '../../config/config';
 
-export default class App extends React.Component {
+export default class App extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -31,7 +34,8 @@ export default class App extends React.Component {
 
 	onUndo = () => {
     Animated.spring(this.state.locationX, {
-      toValue: 0
+      toValue: 0,
+      useNativeDriver: Platform.OS === 'android'
     }).start(() => this.setState({ opacity: false }));
   }
 
@@ -57,7 +61,6 @@ export default class App extends React.Component {
   }
 
   handlePanResponderGrant = (event, gestureState) => {
-
     this.props.handleSwipe(false);
   }
 
@@ -84,7 +87,8 @@ export default class App extends React.Component {
     if (Math.abs(dx) > 100) {
       if (dx > 0) {
         Animated.spring(this.state.locationX, {
-          toValue: this.props.width
+          toValue: this.props.width,
+          useNativeDriver: Platform.OS === 'android'
         }).start();
       } else {
         Animated.spring(this.state.locationX, {
@@ -95,7 +99,8 @@ export default class App extends React.Component {
       this.setState({ opacity: true });
     } else {
       Animated.spring(this.state.locationX, {
-        toValue: 0
+        toValue: 0,
+        useNativeDriver: Platform.OS === 'android'
       }).start(() => this.setState({ opacity: false }));
     }
   }
@@ -128,7 +133,7 @@ export default class App extends React.Component {
 						opacity: opacity ? 0 : 1,
           }}
         >
-          <Text style={{ color: '#fff', fontWeight: '600' }}>Remove</Text>
+          <Icon name="delete" color="#fff" size={20} />
         </View>
         <View
 					style={{

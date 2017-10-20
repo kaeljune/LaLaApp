@@ -16,8 +16,7 @@ import { Avatar, Icon } from 'react-native-elements';
 import Card from './Card';
 
 import { accountFetch, fetchRequest, fetchListGift, fetchCart, cardRemove } from '../../actions';
-import { COLOR, WIDTH_SCREEN, 
-	headerStyle, headerTitleStyle, bodau, CustomLayoutSpring } from '../../config/config';
+import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle, bodau } from '../../config/config';
 
 class MainScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -71,26 +70,18 @@ class MainScreen extends Component {
 			items: items.length
 		});
 	}
-	// componentWillReceiveProps(nextProps) {
-  //   // nextProps are the next set of props that this component
-  //   // will be rendered with
-  //   // this.props is still the old set of props
-	// 	console.log('hello');
-  //   //this.createDataSource(nextProps);
-  // }
 
 	onPress = async (shortName, item) => {
 		if (this.state.isDel) return;
 
 		await this.props.fetchListGift(item.uid);
 			this.props.fetchCart(item);
-			this.props.navigation.navigateWithDebounce('giftselection', 
+			this.props.navigation.navigateWithDebounce('giftselection',
 				{ avaTitle: shortName, user: item });
 	}
 
 	onLongPress = () => {
-		LayoutAnimation.configureNext(CustomLayoutSpring);
-		
+		LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
 		this.setState({ isDel: true });
 	}
 

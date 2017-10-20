@@ -51,7 +51,7 @@ class ProductList extends Component {
 	}
 
 	render() {
-		const { artisan, name, price, image } = this.props;
+		const { artisan, name, price, image, uid } = this.props;
 
 		return (
 			<View style={styles.itemStyle}>

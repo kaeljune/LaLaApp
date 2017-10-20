@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
@@ -16,7 +17,7 @@ class ProductList extends Component {
 		this.props.handleTouch(bool);
 	}
 	removeItem = (uid) => {
-		console.log(uid);
+		console.log('uid', uid);
 		this.props.removeItemCart(this.props.cardActive, uid);
 	}
 
@@ -43,8 +44,21 @@ class ProductList extends Component {
 		</Swipe>
 	)
 	render() {
-		return (
+ 		if	(this.props.items.length <= 0) {
+			return (<TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+					<View style={styles.blankWrap}>
+						<Text style={styles.blankText}>No item in card.</Text>
+						<Icon
+							name="add"
+							color={COLOR.primary}
+							reverse
+							raised
+						/>
+					</View>
+				</TouchableOpacity>);
+		}
 
+		return (
 			<FlatList
 				scrollEnabled={false}
 				showsVerticalScrollIndicator={false}
@@ -57,10 +71,23 @@ class ProductList extends Component {
 					margin: 10
 				}, STYLES.boxShadow]}
 			/>
-
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+	blankWrap: {
+		alignItems: 'center',
+		height: WIDTH_SCREEN - 100,
+		justifyContent: 'center'
+	},
+	blankText: {
+		fontSize: 16,
+		fontWeight: '100',
+		color: '#777',
+		marginBottom: 15
+	}
+});
 
 const mapStateToProps = state => {
 	const GiftID = state.listRequest.giftActive;
@@ -68,4 +95,5 @@ const mapStateToProps = state => {
 	const items = _.filter(_.map(state.listRequest.cart[cardActive].items, (val, uid) => ({ ...val, uid })), (gift) => gift.quantity > 0);
 	return { items, cardActive, GiftID };
 };
+
 export default connect(mapStateToProps, { removeItemCart })(ProductList);

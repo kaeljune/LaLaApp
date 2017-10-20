@@ -41,7 +41,6 @@ class Checkout extends Component {
 	}
 
 	handleTouch = (bool) => {
-		console.log('bool', bool)
 		this.setState({
 			scrollEnable: bool
 		});
@@ -51,10 +50,13 @@ class Checkout extends Component {
 		return (
 			<View style={{ flex: 1 }}>
 				<ScrollView style={{ flex: 1, backgroundColor: '#f8f8f8' }} contentContainerStyle={styles.container} scrollEnabled={this.state.scrollEnable}>
+
 					<Feature user={this.props.navigation.state.params.user} />
 					<ProductList
 						handleTouch={this.handleTouch}
+						navigation={this.props.navigation}
 					/>
+
 				</ScrollView>
 				<View style={styles.bottomCheckout}>
 					<View
