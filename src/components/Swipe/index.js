@@ -7,6 +7,8 @@ import {
   View,
 } from 'react-native';
 
+import { WIDTH_SCREEN } from '../../config/config';
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +20,7 @@ export default class App extends React.Component {
     };
 
     this.panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: (evt, gestureState) => true,
+      onStartShouldSetPanResponder: (event, gestureState) => this.handleStartShouldSetPanResponder(event, gestureState),
       // onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
       onMoveShouldSetPanResponder: (event, gestureState) => this.handleMoveShouldSetPanResponder(event, gestureState),
       onPanResponderGrant: (event, gestureState) => this.handlePanResponderGrant(event, gestureState),
@@ -26,7 +28,7 @@ export default class App extends React.Component {
       onPanResponderRelease: (event, gestureState) => this.handlePanResponderRelease(event, gestureState),
     });
 	}
-  
+
 	onUndo = () => {
     Animated.spring(this.state.locationX, {
       toValue: 0
@@ -35,6 +37,15 @@ export default class App extends React.Component {
 
   onRemoveItem = () => {
     this.props.removeItem();
+  }
+
+  handleStartShouldSetPanResponder = (event, gestureState) => {
+    if (event.nativeEvent.pageX > WIDTH_SCREEN - 50) {
+      return false;
+    }
+
+    console.log(event.nativeEvent.pageX);
+    return true;
   }
 
   handleMoveShouldSetPanResponder = (event, gestureState) => {
@@ -46,8 +57,8 @@ export default class App extends React.Component {
   }
 
   handlePanResponderGrant = (event, gestureState) => {
+
     this.props.handleSwipe(false);
-    return true;
   }
 
   handlePanResponderMove = (event, gestureState) => {
@@ -153,16 +164,14 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: 200
+    // width: 200
   },
   swipe: {
     position: 'absolute',
     justifyContent: 'center',
-    // width: WIDTH,
     top: 0,
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: 'blue'
   }
 });

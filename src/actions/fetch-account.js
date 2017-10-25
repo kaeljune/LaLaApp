@@ -33,3 +33,23 @@ const accountFetchSuccess = (user) => ({
     type: ACCOUNT_FETCH_SUCCESS,
     payload: user
 });
+
+
+// edit profile action
+
+export const handleUpdateProfle = ({ name, email, phone }) => async dispatch => {
+  const user = firebase.auth().currentUser;
+
+  await user.updateProfile({
+      displayName: name,
+      phoneNumber: phone
+    });
+
+  await user.updateEmail(email);
+
+  firebase.database().ref(`users/${user.uid}`)
+    .update({ name, phone, email }, () => {
+      firebase.database().ref(`/users/${user.uid}`)
+      .on('value', snapshot => dispatch(accountFetchSuccess(snapshot.val())));
+    });
+};

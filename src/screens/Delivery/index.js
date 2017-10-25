@@ -1,112 +1,154 @@
-import React, { PureComponent } from 'react';
-import { View, Platform, StyleSheet } from 'react-native';
-import DrawerLayout from 'react-native-drawer-layout-polyfill';
-import stripe from 'tipsi-stripe';
-import Header from './components/Header';
-import MenuItem from './components/MenuItem';
-import ApplePayScreen from './scenes/ApplePayScreen';
-import AndroidPayScreen from './scenes/AndroidPayScreen';
-import CardFormScreen from './scenes/CardFormScreen';
-import CustomCardScreen from './scenes/CustomCardScreen';
-import CustomBankScreen from './scenes/CustomBankScreen';
-import CardTextFieldScreen from './scenes/CardTextFieldScreen';
-import testID from './utils/testID';
+import React, { Component } from 'react';
+import { View, Text, StyleSheet, TextInput, ScrollView, Animated } from 'react-native';
+import { Icon } from 'react-native-elements';
 
-stripe.init({
-  publishableKey: 'pk_test_YEdKG8mOtSWplKXHlyOPDlqd',
-  merchantId: 'com.kaeljune.airlala',
-  androidPayMode: 'test',
-});
+import Btn from '../../components/Btn';
+import Switch from '../../components/Switch';
+import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle } from '../../config/config';
 
-export default class Root extends PureComponent {
-  state = {
-    index: 0,
-    isDrawerOpen: false,
-    routes: [
-      Platform.select({
-        ios: ApplePayScreen,
-        android: AndroidPayScreen,
-      }),
-      CardFormScreen,
-      CustomCardScreen,
-      CustomBankScreen,
-      CardTextFieldScreen,
-    ].filter(item => item),
-  }
 
-  getCurrentScene = () => this.state.routes[this.state.index]
+class DeliveryBlank extends Component {
+	static navigationOptions = ({ navigation }) => ({
+		title: 'Delivery',
+		headerStyle,
+		headerTitleStyle
+	})
 
-  handleChangeTab = (index) => {
-    this.drawer.closeDrawer();
-    this.setState({ index });
-  }
+	componentWillMount() {
+		this.translateY = new Animated.Value(100);
+	}
 
-  handleDrawerRef = (node) => {
-    this.drawer = node;
-  }
+	componentDidMount() {
+		Animated.spring(this.translateY, {
+			toValue: 0
+		}).start();
+	}
 
-  handleMenuPress = () => {
-    if (this.state.isDrawerOpen) {
-      this.drawer.closeDrawer();
-    } else {
-      this.drawer.openDrawer();
-    }
-  }
+	render() {
+		return (
+			<ScrollView style={styles.wraper}>
+				<Animated.View style={{ marginBottom: 15, transform: [{ translateY: this.translateY }] }}>
+					<Text style={{ padding: 15 }}>SHIP TO:</Text>
+					<View style={{ backgroundColor: '#fff', borderTopColor: '#eee', borderTopWidth: 1 }}>
+						<View style={styles.rowStyle}>
+							<View style={{ width: 110 }}>
+								<Text style={styles.labelStyle}>FULLNAME</Text>
+							</View>
+							<TextInput
+								style={{ width: WIDTH_SCREEN - 160 }}
+								value="Hai Nguyen"
+								underlineColorAndroid="transparent"
+							/>
+						</View>
 
-  handleDrawerOpen = () => {
-    this.setState({ isDrawerOpen: true });
-  }
+						<View style={styles.rowStyle}>
+							<View style={{ width: 110 }}>
+								<Text style={styles.labelStyle}>PHONE NUMBER</Text>
+							</View>
 
-  handleDrawerClose = () => {
-    this.setState({ isDrawerOpen: false });
-  }
+							<TextInput
+								style={{ width: WIDTH_SCREEN - 155 }}
+								value="(+84) 935 38 39 40"
+								underlineColorAndroid="transparent"
+							/>
+						</View>
 
-  renderNavigation = () => (
-    <View style={styles.drawer}>
-      {this.state.routes.map((Scene, index) => (
-        <MenuItem
-          key={index}
-          title={Scene.title}
-          active={this.state.index === index}
-          onPress={() => this.handleChangeTab(index)}
-          {...testID(Scene.title)}
-        />
-      ))}
-    </View>
-  )
+						<View style={styles.rowStyle}>
+							<View style={{ width: 110 }}>
+								<Text style={styles.labelStyle}>ADDRESS</Text>
+							</View>
 
-  render() {
-    const Scene = this.getCurrentScene();
+							<TextInput
+								style={{ width: WIDTH_SCREEN - 155 }}
+								value="Ho Chi Minh City"
+								underlineColorAndroid="transparent"
+							/>
+						</View>
+						<View style={styles.rowStyle}>
+							<View style={{ width: 110 }}>
+								<Text style={styles.labelStyle}>CITY</Text>
+							</View>
 
-    return (
-      <View style={styles.container}>
-        <View style={styles.statusbar} />
-        <Header title={`Example: ${Scene.title}`} onMenuPress={this.handleMenuPress} />
-        <DrawerLayout
-          drawerWidth={200}
-          drawerPosition={DrawerLayout.positions.Left}
-          renderNavigationView={this.renderNavigation}
-          onDrawerOpen={this.handleDrawerOpen}
-          onDrawerClose={this.handleDrawerClose}
-          ref={this.handleDrawerRef}
-        >
-          <Scene />
-        </DrawerLayout>
-      </View>
-    );
-  }
+							<TextInput
+								style={{ width: WIDTH_SCREEN - 155 }}
+								value="TAIWAN"
+								underlineColorAndroid="transparent"
+							/>
+						</View>
+						<View style={styles.rowStyle}>
+							<View style={{ width: 110 }}>
+								<Text style={styles.labelStyle}>STATE</Text>
+							</View>
+
+							<TextInput
+								style={{ width: WIDTH_SCREEN - 155 }}
+								value="TAIPEI"
+								underlineColorAndroid="transparent"
+							/>
+						</View>
+						<View style={styles.rowStyle}>
+							<View style={{ width: 110 }}>
+								<Text style={styles.labelStyle}>ZIP CODE</Text>
+							</View>
+
+							<TextInput
+								style={{ width: WIDTH_SCREEN - 155 }}
+								value="7000"
+								underlineColorAndroid="transparent"
+							/>
+						</View>
+
+						<View style={styles.rowStyle}>
+
+							<Switch
+								text="SAVE FOR FUTURE PURCHASES"
+								value
+								color={COLOR.primary}
+								styleText={{
+									color: '#454553',
+									fontSize: 10
+								}}
+								height={30}
+								width={45}
+							/>
+						</View>
+
+					</View>
+				</Animated.View>
+
+				<View style={{ flex: 1 }}>
+					<Btn
+						title="CHECKOUT"
+						bgColor={COLOR.primary}
+					/>
+				</View>
+			</ScrollView>
+		);
+	}
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  statusbar: {
-    height: Platform.select({ ios: 20, android: 0 }),
-  },
-  drawer: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-  },
+	wraper: {
+		flex: 1,
+		// padding: 15,
+		backgroundColor: '#F8F8F8',
+		alignContent: 'space-between',
+		borderTopColor: '#eee',
+		borderTopWidth: 1,
+	},
+	rowStyle: {
+		padding: 15,
+		borderBottomColor: '#eee',
+		borderBottomWidth: 1,
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between'
+	},
+	labelStyle: {
+		color: '#454553',
+		fontSize: 10,
+		marginRight: 10
+	}
 });
+
+export default DeliveryBlank;
