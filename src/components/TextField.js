@@ -25,7 +25,7 @@ class TextField extends Component {
             placeholderTextColor={COLOR.placeholderTextColor}
             underlineColorAndroid="transparent"
             tintColor={'#313131'}
-            selectionColor={'#777'}
+            //selectionColor={'#777'}
             onChangeText={onChangeText}
             multiline={multiline}
             numberOfLines={numberOfLines && 4}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, StatusBar, Animated } from 'react-native';
 import { Provider } from 'react-redux';
 // import injectTapEventPlugin from 'react-tap-event-plugin';
-import './ReactotronConfig';
+//import './ReactotronConfig';
 
 import './src/config/firebase-config';
 import store from './src/store';

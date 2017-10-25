@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet, TextInput } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TextInput, Platform } from 'react-native';
 import { Icon } from 'react-native-elements';
 import GooglePlacesInput from './GooglePlacesInput';
 import ListRadio from '../../components/ListRadio';
@@ -43,7 +43,6 @@ class DeliveryBlank extends Component {
 		//     onPress={() => navigation.goBack()}
 		// />
 	})
-
 	render() {
 		return (
 			<View style={styles.wraper}>
@@ -61,6 +60,7 @@ class DeliveryBlank extends Component {
 						style={{ width: 150 }}
 						bgColor={COLOR.primary}
 						title="NEXT"
+						onPress={() => this.props.navigation.navigate('delivery')}
 					/>
 				</View>
 			</View>
