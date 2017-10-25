@@ -18,11 +18,10 @@ class Card extends PureComponent {
   constructor(props) {
     super(props);
 
-
     this.rotate = new Animated.Value(0);
     this.scaleValue = new Animated.Value(1);
     this.translateY = new Animated.Value(200);
-    this.opacity = new Animated.Value(0)
+    this.opacity = new Animated.Value(0);
   }
 
   componentDidMount() {

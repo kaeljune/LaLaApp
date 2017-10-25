@@ -3,7 +3,7 @@ import { View, StyleSheet, ActivityIndicator, Animated } from 'react-native';
 import { connect } from 'react-redux';
 
 import { fetchRequest, accountFetch, navLogin, navLogout } from '../../actions';
-import { COLOR } from '../../config/config';
+import { COLOR, bodau } from '../../config/config';
 
 class SplashScreen extends PureComponent {
 	static navigationOptions = {
@@ -91,7 +91,6 @@ class SplashScreen extends PureComponent {
 
 		return (
 			<View style={styles.container}>
-
 				<View style={{ width: 150, height: 150 }}>
 					<Animated.View
 						style={[

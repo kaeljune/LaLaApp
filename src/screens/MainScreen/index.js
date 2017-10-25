@@ -162,7 +162,6 @@ class MainScreen extends Component {
 
 		return (
 			<View style={styles.container}>
-
 				<View
 					style={{
 						flex: 1,

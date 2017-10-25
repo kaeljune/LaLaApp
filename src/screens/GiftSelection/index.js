@@ -18,6 +18,7 @@ class GiftSelection extends PureComponent {
     title: 'Local Products Selection',
     headerTintColor: config.COLOR.primary,
     headerTitleStyle: config.headerTitleStyle,
+    headerBackTitle: null,
     headerStyle: config.headerStyle,
     headerRight: <TouchableOpacity
 		style={{ flexDirection: 'row', paddingRight: 15 }}

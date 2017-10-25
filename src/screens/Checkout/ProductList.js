@@ -29,8 +29,9 @@ class ProductList extends Component {
 			height={91}
 			backgroundColor={COLOR.secondary}
 			style={{
-				borderBottomColor: '#eee',
-				borderBottomWidth: 1
+				borderColor: '#eee',
+				borderWidth: 1,
+				marginBottom: 5
 			}}
 		>
 			<ProductItem
@@ -66,10 +67,7 @@ class ProductList extends Component {
 				keyExtractor={(item) => this.props.items.indexOf(item)}
 				renderItem={this.renderItem}
 				removeClippedSubviews={false}
-				style={[{
-					backgroundColor: '#fff',
-					margin: 10
-				}, STYLES.boxShadow]}
+				style={{ margin: 10 }}
 			/>
 		);
 	}

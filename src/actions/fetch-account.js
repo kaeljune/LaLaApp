@@ -37,18 +37,19 @@ const accountFetchSuccess = (user) => ({
 
 // edit profile action
 
-export const handleUpdateProfle = ({ name, email, phone }) => async dispatch => {
+export const handleUpdateProfle = ({ name, email, phone, avatar }) => async dispatch => {
   const user = firebase.auth().currentUser;
 
   await user.updateProfile({
       displayName: name,
-      phoneNumber: phone
+      phoneNumber: phone,
+      photoURL: avatar
     });
 
   await user.updateEmail(email);
 
   firebase.database().ref(`users/${user.uid}`)
-    .update({ name, phone, email }, () => {
+    .update({ name, phone, email, avatar }, () => {
       firebase.database().ref(`/users/${user.uid}`)
       .on('value', snapshot => dispatch(accountFetchSuccess(snapshot.val())));
     });

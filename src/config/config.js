@@ -50,6 +50,8 @@ const STYLES = StyleSheet.create({
 				shadowOffset: { height: 5, width: 0 },
 				shadowOpacity: 0.5,
 				shadowRadius: 5,
+				borderColor: '#eee',
+				borderWidth: 1
 			},
 			android: {
 				elevation: 2

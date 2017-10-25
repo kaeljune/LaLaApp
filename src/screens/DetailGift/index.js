@@ -21,9 +21,9 @@ import * as config from '../../config/config';
 
 class DetailGift extends Component {
   static navigationOptions = ({ navigation }) => ({
-    // header: null
     headerStyle: config.headerOverlay,
     headerTintColor: config.COLOR.primary,
+    headerBackTitle: null,
     headerRight: (
       <TouchableWithoutFeedback>
         <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>

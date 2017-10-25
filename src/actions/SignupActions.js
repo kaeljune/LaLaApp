@@ -40,11 +40,11 @@ export const emailSignup = ({ email, password, name, phone }) => async (dispatch
         await firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(user => {
             user.updateProfile({
-            displayName: name,
-            phoneNumber: phone
+              displayName: name,
+              phoneNumber: phone,
             });
             firebase.database().ref(`users/${user.uid}`)
-            .update({ name, phone, email }, () => {
+            .update({ name, phone, email, avatar: '' }, () => {
             });
             //AsyncStorage.setItem('@userLogin', JSON.stringify(user));
             emailSignupSuccess(dispatch, user);

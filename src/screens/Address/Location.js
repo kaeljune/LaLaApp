@@ -11,7 +11,11 @@ const Location = ({ item, onPress }) =>
   >
     <TouchableOpacity onPress={onPress}>
       <View style={styles.row}>
-        <Icon name="location-on" size={18} color="#454545" />
+        <Icon
+          name="location-on"
+          size={18}
+          color="#454545"
+        />
         <Text style={styles.textLocation}>{item.name}</Text>
       </View>
     </TouchableOpacity>

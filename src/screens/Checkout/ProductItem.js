@@ -39,19 +39,24 @@ class ProductList extends Component {
 						size={15}
 						color="#888"
 						name="remove"
-						containerStyle={{ backgroundColor: '#fff', height: 40, width: 40 }}
+						containerStyle={{ backgroundColor: '#fff', height: 30, width: 39 }}
 					/>
 				</TouchableOpacity>);
 		}
 		return (
-			<View style={styles.quantityActionDisable}>
-				<Icon name="remove" color="#999" size={15} />
+			<View style={styles.quantityAction}>
+				<Icon
+					name="remove"
+					color="#999"
+					size={15}
+					containerStyle={{ backgroundColor: '#fff', height: 30, width: 39 }}
+				/>
 			</View>
 		);
 	}
 
 	render() {
-		const { artisan, name, price, image, uid } = this.props;
+		const { artisan, name, price, image } = this.props;
 
 		return (
 			<View style={styles.itemStyle}>
@@ -81,7 +86,7 @@ class ProductList extends Component {
 						<Icon
 							color="#888"
 							size={16}
-							containerStyle={{ backgroundColor: '#fff', height: 40, width: 40 }}
+							containerStyle={{ backgroundColor: '#fff', height: 30, width: 39 }}
 							name="add"
 						/>
 					</TouchableOpacity>
@@ -110,7 +115,6 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-around',
-
 	},
 	quantityStyle: {
 		height: 90,
@@ -124,21 +128,8 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'center',
-		borderRadius: 20,
 		height: 30,
-		width: 40,
-		//borderColor: '#999',
-		//borderWidth: 1
-	},
-	quantityActionDisable: {
-		flexDirection: 'column',
-		alignItems: 'center',
-		justifyContent: 'center',
-		borderRadius: 20,
-		height: 30,
-		width: 40,
-		//borderColor: '#eee',
-		//borderWidth: 1
+		width: 39
 	}
 });
 

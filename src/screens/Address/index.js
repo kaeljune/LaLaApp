@@ -6,6 +6,7 @@ import {
   Animated,
   TouchableOpacity,
   FlatList,
+  Platform
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -28,20 +29,19 @@ const locations = [
 
 class Address extends Component {
   static navigationOptions = () => ({
-    // header: null
+    header: null,
     // title: 'Where are you going?',
-    headerBackTitle: null,
-    headerTintColor: config.COLOR.secondary,
-    headerStyle: config.headerStyle
+    // headerBackTitle: null,
   })
 
   constructor(props) {
     super(props);
 
-    this.positionSearch = new Animated.Value(300);
+    this.positionSearch = new Animated.Value(-300);
     this.opacitySearch = new Animated.Value(0);
     this.positionLocation = new Animated.Value(300);
     this.opacityLocation = new Animated.Value(0);
+    this.scaleLocation = new Animated.Value(0);
     this.yOffset = new Animated.Value(0);
   }
 
@@ -58,14 +58,19 @@ class Address extends Component {
       }),
       Animated.spring(this.positionLocation, {
         toValue: 0,
-        duration: 500,
+        tension: 20,
         useNativeDriver: true
       }),
-      Animated.timing(this.opacityLocation, {
+      Animated.timing(this.scaleLocation, {
         toValue: 1,
-        duration: 100,
+        duration: 250,
         useNativeDriver: true
-      })
+      }),
+      // Animated.timing(this.opacityLocation, {
+      //   toValue: 1,
+      //   duration: 100,
+      //   useNativeDriver: true
+      // })
     ]).start();
   }
 
@@ -74,15 +79,15 @@ class Address extends Component {
   }
 
   renderLocation = ({ item, index }) => (
-      <Location
-        item={item}
-        index={index}
-        onPress={async () => {
-          await this.onChangeText(item.name);
-          await this.props.navigation.navigate('giveagift');
-        }}
-      />
-    )
+    <Location
+      item={item}
+      index={index}
+      onPress={async () => {
+        await this.onChangeText(item.name);
+        await this.props.navigation.navigate('giveagift');
+      }}
+    />
+  )
 
   render() {
     const { location } = this.props;
@@ -93,48 +98,61 @@ class Address extends Component {
         <Animated.View
           style={{
             opacity: this.opacitySearch,
-            flexDirection: 'row',
-            alignItems: 'center',
+            padding: 15,
             transform: [{
-              translateX: this.positionSearch
+              translateY: this.positionSearch
             }]
           }}
         >
-          <TextInput
-            placeholder="Where are you going?"
-            onChangeText={this.onChangeText}
-            value={location}
-            style={styles.input}
-            selectionColor={config.COLOR.primary}
-            corlor={config.COLOR.primary}
-            underlineColorAndroid="transparent"
-          />
+          <View style={[ config.STYLES.boxShadow, { alignItems: 'center', backgroundColor: '#fff', borderRadius: 3, flexDirection: 'row' }]}>
+            <View style={{ backgroundColor: 'transparent', paddingRight: 5, alignItems: 'center', justifyContent: 'center' }}>
+              <Icon
+                name={Platform.OS === 'android' ? 'arrow-back' : 'keyboard-arrow-left'}
+                color={config.COLOR.secondary}
+                containerStyle={{ height: 50, width: 40 }}
+                size={Platform.OS === 'android' ? 20 : 35}
+                onPress={() => this.props.navigation.goBack()}
+              />
+            </View>
+            <TextInput
+              placeholder="Where are you going?"
+              placeholderTextColor="#777"
+              onChangeText={this.onChangeText}
+              value={location}
+              style={styles.input}
+              returnKeyType={'done'}
+              selectionColor={config.COLOR.primary}
+              corlor={config.COLOR.primary}
+              underlineColorAndroid="transparent"
+            />
 
-          {location.length > 0 &&
-            <TouchableOpacity onPress={() => this.props.clearLocation()}>
-              <View style={{ width: 50, alignItems: 'center' }}>
-                <Icon
-                  name="clear"
-                  size={16}
-                  color="#fff"
-                  containerStyle={{
-                    height: 25,
-                    width: 25,
-                    borderRadius: 25,
-                    backgroundColor: '#ddd'
-                  }}
-                />
-              </View>
-            </TouchableOpacity>}
+            {location.length > 0 &&
+              <TouchableOpacity onPress={() => this.props.clearLocation()}>
+                <View style={{ width: 50, alignItems: 'center' }}>
+                  <Icon
+                    name="clear"
+                    size={16}
+                    color="#fff"
+                    containerStyle={{
+                      height: 20,
+                      width: 20,
+                      borderRadius: 20,
+                      backgroundColor: '#ddd'
+                    }}
+                  />
+                </View>
+              </TouchableOpacity>}
+          </View>
         </Animated.View>
 
         <Animated.View
           style={{
             flex: 1,
-            opacity: this.opacityLocation,
-            transform: [{
-              translateY: this.positionLocation,
-            }]
+            // opacity: this.opacityLocation,
+            transform: [
+              { translateY: this.positionLocation},
+              { scale: this.scaleLocation }
+            ]
           }}
         >
           <ScrollView contentContainerStyle={{ padding: 20 }}>
@@ -159,6 +177,7 @@ class Address extends Component {
               <View>
                 {filtererLocation.length > 0 ?
                   <FlatList
+                    scrollEnabled
                     data={filtererLocation}
                     keyExtractor={item => item.name}
                     removeClippedSubviews={false}
@@ -181,11 +200,8 @@ const styles = StyleSheet.create({
   },
   input: {
     fontWeight: '700',
-    fontSize: 25,
-    height: 60,
-    paddingHorizontal: 20,
-    flex: 1,
-    marginTop: 15
+    height: 50,
+    flex: 1
   },
   titleSection: {
     fontSize: 11,

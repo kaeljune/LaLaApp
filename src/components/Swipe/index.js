@@ -24,8 +24,7 @@ export default class App extends PureComponent {
 
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (event, gestureState) => this.handleStartShouldSetPanResponder(event, gestureState),
-      // onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-      onMoveShouldSetPanResponder: (event, gestureState) => this.handleMoveShouldSetPanResponder(event, gestureState),
+      onMoveShouldSetPanResponder: (event, gestureState) => this.handleStartShouldSetPanResponder(event, gestureState),
       onPanResponderGrant: (event, gestureState) => this.handlePanResponderGrant(event, gestureState),
       onPanResponderMove: (event, gestureState) => this.handlePanResponderMove(event, gestureState),
       onPanResponderRelease: (event, gestureState) => this.handlePanResponderRelease(event, gestureState),
@@ -48,16 +47,13 @@ export default class App extends PureComponent {
       return false;
     }
 
-    console.log(event.nativeEvent.pageX);
     return true;
   }
 
   handleMoveShouldSetPanResponder = (event, gestureState) => {
     const { dx, dy } = gestureState;
-    if (Math.abs(dy) > Math.abs(dx)) {
-      return false;
-    }
-    return true;
+
+    return Math.abs(dy) < Math.abs(dx);
   }
 
   handlePanResponderGrant = (event, gestureState) => {
@@ -66,7 +62,8 @@ export default class App extends PureComponent {
 
   handlePanResponderMove = (event, gestureState) => {
     const { dx } = gestureState;
-    const left = dx >= 0 ? 0 : this.props.width - 100;
+
+    const left = dx >= 0 ? 0 : this.props.width - 60;
 
     this.props.handleSwipe(false);
 
@@ -84,7 +81,7 @@ export default class App extends PureComponent {
 
     this.props.handleSwipe(true);
 
-    if (Math.abs(dx) > 100) {
+    if (Math.abs(dx) > 60) {
       if (dx > 0) {
         Animated.spring(this.state.locationX, {
           toValue: this.props.width,
@@ -126,14 +123,14 @@ export default class App extends PureComponent {
             position: 'absolute',
             justifyContent: 'center',
 						alignItems: 'center',
-            width: height,
+            width: height - 30,
             top: 0,
             left,
             bottom: 0,
 						opacity: opacity ? 0 : 1,
           }}
         >
-          <Icon name="delete" color="#fff" size={20} />
+          <Icon name="delete" color="#fff" size={30} />
         </View>
         <View
 					style={{
@@ -152,9 +149,9 @@ export default class App extends PureComponent {
           style={[
             styles.swipe,
             {
-              transform: [{
-                translateX: this.state.locationX
-              }],
+              transform: [
+                { translateX: this.state.locationX }
+              ],
             }
           ]}
           {...this.panResponder.panHandlers}

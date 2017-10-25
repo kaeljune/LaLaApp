@@ -33,9 +33,9 @@ class ProfileScreen extends Component {
     </Touch>
   })
 
-  // state = {
-  //   user: null
-  // }
+  state = {
+    image: null
+  }
 
   // async componentDidMount() {
   //   const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
@@ -61,10 +61,18 @@ class ProfileScreen extends Component {
           <Avatar
             xlarge
             rounded
-            source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg' }}
+            icon={{ name: 'person' }}
             onPress={() => console.log('Works!')}
             activeOpacity={0.7}
           />
+          {/* <Avatar
+            xlarge
+            rounded
+            source={{ url: this.props.user.avatar  }}
+            onPress={() => console.log('Works!')}
+            activeOpacity={0.7}
+          /> */}
+
           <Text
             style={{
               color: '#fff',

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, Alert, AsyncStorage, StyleSheet, } from 'react-native';
+import { View, Alert, AsyncStorage, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Avatar, Icon } from 'react-native-elements';
-
+// import { ImagePicker } from 'expo';
 
 import * as config from '../../../config/config';
 import { handleUpdateProfle } from '../../../actions';
@@ -11,6 +11,7 @@ import { handleUpdateProfle } from '../../../actions';
 import Spinner from '../../../components/Spinner';
 import TextField from '../../../components/TextField';
 import Btn from '../../../components/Btn';
+// import Touch from '../../../components/Touch';
 
 class ProfileScreen extends Component {
   static navigationOptions = () => ({
@@ -22,23 +23,27 @@ class ProfileScreen extends Component {
   })
 
   state = {
+    isModal: false,
     user: null,
+    avatar: '',
     name: '',
     email: '',
     phone: '',
     isLogin: null,
-    loading: false
   }
 
   async componentDidMount() {
     const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
+
+    console.log('fetchAcc', fetchAcc);
 
     if (JSON.parse(fetchAcc).isLogin) {
       this.setState({
         user: JSON.parse(fetchAcc),
         name: JSON.parse(fetchAcc).name,
         email: JSON.parse(fetchAcc).email,
-        phone: JSON.parse(fetchAcc).phone
+        phone: JSON.parse(fetchAcc).phone,
+        // avatar: JSON.parse(fetchAcc).avatar
       });
     } else {
       this.setState({ isLogin: false });
@@ -47,8 +52,6 @@ class ProfileScreen extends Component {
 
   onSubmitUpdate = () => {
     const { name, phone, email } = this.state;
-
-
     Alert.alert(
       'Update Prfile.',
       'Do you want to update your profile?',
@@ -58,8 +61,6 @@ class ProfileScreen extends Component {
       ],
       { cancelable: false }
     );
-
-
   }
 
   render() {
@@ -70,29 +71,84 @@ class ProfileScreen extends Component {
 
       <KeyboardAwareScrollView
         doNotForceDismissKeyboardWhenLayoutChanges
-        style={styles.container }
+        style={styles.container}
         resetScrollToCoords={{ x: 0, y: 0 }}
         scrollEnabled
         animated
       >
+        {/* <Modal
+          animationType="fade"
+          transparent
+          visible={this.state.isModal}
+          onRequestClose={() => { this.setState({ isModal: false }); }}
+        >
+          <View style={{ backgroundColor: 'rgba(0,0,0,.3)', flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
+            <View
+              style={{
+                width: config.WIDTH_SCREEN,
+                backgroundColor: '#fff',
+                borderRadius: 3,
+              }}
+            >
+              <View style={{ paddingVertical: 15, marginBottom: 30, borderBottomColor: '#eee', borderBottomWidth: 1 }}>
+                <Text style={{ textAlign: 'center', fontSize: 17, fontWeight: '600' }}>Select image from :</Text>
+              </View>
+
+              <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                <View style={{ alignItems: 'center', }}>
+                <TouchableOpacity onPress={() => {}}>
+                    <Icon
+                      name="add-a-photo"
+                      size={35}
+                      color={config.COLOR.primary}
+                      containerStyle={{ backgroundColor: '#f8f8f8', padding: 15, borderRadius: 3 }}
+                    />
+                    <Text style={{ fontSize: 16, marginTop: 15 }}>Camera</Text>
+                  </TouchableOpacity>
+                </View>
+
+                <View style={{ alignItems: 'center' }}>
+                  <TouchableOpacity onPress={this.pickImgFromLibrary}>
+                    <Icon
+                      name="photo-library"
+                      size={35}
+                      color={config.COLOR.primary}
+                      containerStyle={{ backgroundColor: '#f8f8f8', padding: 15, borderRadius: 3 }}
+                    />
+                    <Text style={{ fontSize: 16, marginTop: 15 }}>Camera</Text>
+                  </TouchableOpacity>
+                </View>
+
+              </View>
+
+              <View style={{ marginTop: 15, padding: 15 }}>
+                <Touch onPress={() => this.setState({ ...this.state, isModal: false })}>
+                  <View style={{ backgroundColor: '#fff', padding: 15, borderWidth: 1, borderColor: '#eee', borderRadius: 5 }}>
+                    <Text style={{ textAlign: 'center' }}>Cancel</Text>
+                  </View>
+                </Touch>
+              </View>
+            </View>
+          </View>
+        </Modal> */}
         <View style={styles.heading}>
           <View>
-            <Avatar
-              xlarge
-              rounded
-              source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg' }}
-              onPress={() => console.log('Works!')}
-              activeOpacity={0.7}
-            />
+            <TouchableOpacity>
+              <Avatar
+                xlarge
+                rounded
+                icon={{ name: 'person' }}
+              />
 
-            <Icon
-              size={15}
-              name="camera-alt"
-              color={config.COLOR.secondary}
-              containerStyle={{ position: 'absolute', right: -10, top: 30, margin: 0 }}
-              raised
-              reverse
-            />
+              {/* <Icon
+                size={15}
+                name="camera-alt"
+                color={config.COLOR.secondary}
+                containerStyle={{ position: 'absolute', right: -10, top: 30, margin: 0 }}
+                raised
+                reverse
+              /> */}
+            </TouchableOpacity>
 
           </View>
         </View>

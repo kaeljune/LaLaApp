@@ -7,6 +7,7 @@ import {
 
 const INITIAL_STATE = {
 	name: '',
+	avatar: '',
 	phone: '',
 	userLogin: null,
 	isLogin: null
@@ -15,12 +16,12 @@ const INITIAL_STATE = {
 export default function (state = INITIAL_STATE, action) {
 	switch (action.type) {
 		case ACCOUNT_FETCH_SUCCESS:
-			return { ...state, userLogin: action.payload, isLogin: true, name: action.payload.name, email: action.payload.email, phone: action.payload.phone, };
+			return { ...state, userLogin: action.payload, isLogin: true, name: action.payload.name, email: action.payload.email, phone: action.payload.phone, avatar: action.payload.avatar };
 		case ACCOUNT_FETCH_FAIL:
 			return { ...state, userLogin: null, isLogin: false };
 		case REHYDRATE:
 			if (action.payload.fetchAcc) {
-				return { ...state, userLogin: action.payload.fetchAcc, name: action.payload.name, email: action.payload.email, phone: action.payload.phone };
+				return { ...state, userLogin: action.payload.fetchAcc, name: action.payload.name, email: action.payload.email, phone: action.payload.phone, avatar: action.payload.avatar };
 			}
 			return state;
 
