@@ -12,6 +12,7 @@ class FindAGift extends Component {
 		title: 'Find a Gift',
 		headerStyle,
 		headerTitleStyle,
+		headerTintColor: config.COLOR.secondary,
 		// headerLeft: <Icon
 		//     name='chevron-left'
 		//     color={COLOR.primary}

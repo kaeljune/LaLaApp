@@ -31,7 +31,7 @@ import Btn from '../../../components/Btn';
 class SignupScreen extends Component {
   static navigationOptions = () => ({
     title: 'Sign up',
-    headerTintColor: COLOR.primary,
+    headerTintColor: COLOR.secondary,
     headerBackTitle: null,
     headerTitleStyle,
     headerStyle,

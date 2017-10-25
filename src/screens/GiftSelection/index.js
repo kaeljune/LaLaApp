@@ -16,7 +16,7 @@ import CardGift from './CardGift';
 class GiftSelection extends PureComponent {
   static navigationOptions = () => ({
     title: 'Local Products Selection',
-    headerTintColor: config.COLOR.primary,
+    headerTintColor: config.COLOR.secondary,
     headerTitleStyle: config.headerTitleStyle,
     headerBackTitle: null,
     headerStyle: config.headerStyle,

@@ -15,7 +15,7 @@ import { COLOR, headerStyle, headerTitleStyle } from '../../config/config';
 class AfterRequest extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'After Request',
-        headerTintColor: COLOR.primaryFont,
+        headerTintColor: COLOR.secondary,
         headerLeft: <Icon
             name='chevron-left'
             color={COLOR.primary}
@@ -42,7 +42,7 @@ class AfterRequest extends Component {
                 <SectionHead />
                 <LookingButton />
                 <SectionMessage />
-                <Btn 
+                <Btn
                     title="DONE"
                     bgColor={COLOR.primary}
                 />

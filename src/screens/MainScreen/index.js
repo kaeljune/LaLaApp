@@ -16,7 +16,7 @@ import { Avatar, Icon } from 'react-native-elements';
 import Card from './Card';
 
 import { accountFetch, fetchRequest, fetchListGift, fetchCart, cardRemove } from '../../actions';
-import { COLOR, WIDTH_SCREEN, headerStyle, headerTitleStyle, bodau } from '../../config/config';
+import { COLOR, WIDTH_SCREEN, HEIGHT_SCREEN, headerStyle, headerTitleStyle, bodau } from '../../config/config';
 
 class MainScreen extends Component {
 	static navigationOptions = ({ navigation }) => {

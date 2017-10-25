@@ -37,7 +37,6 @@ const isSignedOut = StackNavigator({
 });
 
 const isProfile = StackNavigator({
-
 	profile: { screen: ProfileScreen },
 	editprofile: { screen: EditProfileScreen },
 	term: { screen: TermScreen },

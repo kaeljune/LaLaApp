@@ -23,7 +23,6 @@ export const signOut = () => async (dispatch) => {
   firebase.auth().signOut().then(() => {
     dispatch({ type: SIGNOUT });
   }).catch((error) => {
-    // An error happened.
     console.log(error);
   });
 };

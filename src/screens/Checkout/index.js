@@ -21,10 +21,11 @@ class Checkout extends Component {
 		title: 'Checkout',
 		headerStyle,
 		headerTitleStyle,
-		headerTintColor: COLOR.primary,
+		headerBackTitle: null,
+		headerTintColor: COLOR.secondary,
 		headerRight: <TouchableOpacity
-		style={{ flexDirection: 'row', paddingRight: 15 }}
-		onPress={async () => { await WebBrowser.openBrowserAsync('https://m.me/airlala.official'); }}
+			style={{ flexDirection: 'row', paddingRight: 15 }}
+			onPress={async () => { await WebBrowser.openBrowserAsync('https://m.me/airlala.official'); }}
 		>
 			<Icon
 				size={15}

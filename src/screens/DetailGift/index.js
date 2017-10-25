@@ -22,7 +22,7 @@ import * as config from '../../config/config';
 class DetailGift extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerStyle: config.headerOverlay,
-    headerTintColor: config.COLOR.primary,
+    headerTintColor: config.COLOR.secondary,
     headerBackTitle: null,
     headerRight: (
       <TouchableWithoutFeedback>

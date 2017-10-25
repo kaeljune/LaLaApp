@@ -142,17 +142,18 @@ class GiftSelection extends Component {
 		return (
 			<View style={{ flex: 1 }}>
 				<KeyboardAwareScrollView
-					style={{ backgroundColor: '#f8f8f8', flex: 1, opacity: this.props.loadingSF ? 0.2 : 1 }}
+					style={{ backgroundColor: '#f8f8f8', flex: 1, opacity: this.props.loading ? 0.2 : 1 }}
 					scrollEnabled
 					animated
 				>
 					<View style={section}>
 						<View style={sectionItem}>
 							<Avatar
-								height={120}
-								width={120}
+								height={70}
+								width={70}
 								rounded
-								source={avatar}
+								overlayContainerStyle={{ backgroundColor: COLOR.primary }}
+								icon={{ name: 'person' }}
 							/>
 
 							<Text
@@ -161,23 +162,25 @@ class GiftSelection extends Component {
 									fontSize: 18,
 									fontWeight: '600'
 								}}
-							>Hai Nguyen</Text>
+							>{this.props.name}</Text>
 						</View>
-
-						<SlideSelect items={sexs} onPress={this.onSexChange} />
-						<SlideSelect items={ages} onPress={this.onAgeChange} label="Age" />
-						<SlideSelect items={popular} onPress={this.onRelationshipChange} />
 					</View>
 
 					<View style={sectionPad}>
 						<Text style={sectionTitle}>Receiver's Name</Text>
 
 						<TextField
-							style={{ textAlign: 'center', marginTop: 20 }}
+							style={{ textAlign: 'center', marginTop: 20, }}
 							placeholder="Ex: AirLaLa"
 							value={this.props.receiverName}
 							onChangeText={this.onReceiverNameChange}
 						/>
+					</View>
+
+					<View style={section}>
+						<SlideSelect items={sexs} onPress={this.onSexChange} label="Gender" />
+						<SlideSelect items={ages} onPress={this.onAgeChange} label="Age" />
+						<SlideSelect items={popular} onPress={this.onRelationshipChange} label="Relationship" />
 					</View>
 
 					<View style={section}>
@@ -352,11 +355,12 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({ requestGiftState, fetchAcc }) => {
+	// console.log('fee', fetchAcc)
 	const { location, sex, age, relationship, receiverName, loading, error,
 		price, occasion, interest, style, other } = requestGiftState;
-	const { account } = fetchAcc;
+	const name = fetchAcc.name;
 
-	return { account, location, sex, age, relationship, receiverName, loading, error, price, occasion, interest, style, other };
+	return { name, location, sex, age, relationship, receiverName, loading, error, price, occasion, interest, style, other };
 };
 
 export default connect(mapStateToProps, {

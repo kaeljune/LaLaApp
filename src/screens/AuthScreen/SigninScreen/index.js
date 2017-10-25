@@ -29,7 +29,7 @@ class SigninScreen extends Component {
   static navigationOptions = () => ({
     title: 'Sign in',
     headerBackTitle: null,
-    headerTintColor: COLOR.primary,
+    headerTintColor: COLOR.secondary,
     headerTitleStyle,
     headerStyle,
   })
@@ -109,10 +109,10 @@ class SigninScreen extends Component {
             animated
           >
             <Brand />
-            <Animated.View 
-              style={{ 
-                alignItems: 'center', 
-                transform: [{ translateY: this.state.translateY }], 
+            <Animated.View
+              style={{
+                alignItems: 'center',
+                transform: [{ translateY: this.state.translateY }],
                 opacity: this.state.opacity }}
             >
               <SigninForm onButtonPress={this.onButtonPress} onForgot={this.onForgot} />

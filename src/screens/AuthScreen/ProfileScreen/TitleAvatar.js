@@ -28,7 +28,7 @@ class TitleAvatar extends Component {
 
         {edit ? (
           <TouchableOpacity
-            onPress={() => console.log('chon imaga')}
+            onPress={() => {}}
           >
             <View style={{ borderWidth: 1, borderColor: '#fff', paddingVertical: 5, paddingHorizontal: 10, marginTop: 15 }}>
               <Text style={{ color: '#fff' }}>Change photo</Text>

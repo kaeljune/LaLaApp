@@ -10,9 +10,9 @@ import SignupButton from './SignupButton';
 
 class SignupForm extends Component {
     state = { name: '', email: '', phone: '', password: '' };
-    
+
     render() {
-        console.log(this.props.onTerms);
+
         return (
             <View>
                 <View>

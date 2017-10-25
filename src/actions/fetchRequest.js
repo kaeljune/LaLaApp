@@ -24,7 +24,6 @@ export const cardRemove = (cardActive) => async (dispatch) => {
   try {
     const userId = firebase.auth().currentUser.uid;
     const ref = await firebase.database().ref(`users/${userId}/orders/`);
-    //console.log(ref);
     await ref.child(cardActive).remove((error) => {
       if (!error) {
         dispatch(cardRemoveSuccess());
@@ -98,7 +97,6 @@ export const fetchRequest = () => async (dispatch) => {
   try {
     const userId = firebase.auth().currentUser.uid;
     const ref = await firebase.database().ref(`users/${userId}/orders`);
-    // console.log(12)
     await ref.on('value', snapshot => {
       const orders = snapshot.val();
       dispatch({ type: FETCH_REQUEST, payload: orders });

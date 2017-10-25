@@ -6,7 +6,7 @@ import { COLOR, headerTitleStyle, headerStyle } from '../../config/config';
 class TermScreen extends Component {
     static navigationOptions = () => ({
     title: 'Term',
-    headerTintColor: COLOR.primary,
+    headerTintColor: COLOR.secondary,
     headerBackTitle: null,
     headerTitleStyle,
     headerStyle,

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 
 import ButtonSeclect from './ButtonSelect';
+
 class SlideSelect extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +31,14 @@ class SlideSelect extends Component {
     const { items, label } = this.props;
     return (
       <View style={styles.sectionItem}>
-        { label && <Text style={{ fontWeight: '700', marginTop: 15 }}>{label}</Text>}
+        { label && <Text
+          style={{
+            textAlign: 'center',
+            color: '#636363',
+            fontWeight: '600',
+            marginTop: 10
+          }}
+        >{label}</Text>}
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}

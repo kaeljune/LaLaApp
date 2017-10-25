@@ -150,27 +150,29 @@ class Address extends Component {
             flex: 1,
             // opacity: this.opacityLocation,
             transform: [
-              { translateY: this.positionLocation},
+              { translateY: this.positionLocation },
               { scale: this.scaleLocation }
             ]
           }}
         >
           <ScrollView contentContainerStyle={{ padding: 20 }}>
-            {location.length < 2 &&
-              <View style={{ marginBottom: 30 }}>
-                <Text style={styles.titleSection}>RECENT SEARCHES</Text>
-                <View
-                  style={{
-                    borderBottomWidth: 1,
-                    borderBottomColor: '#eee',
-                  }}
-                >
-                  <View style={styles.row}>
-                    <Icon name="access-time" size={18} color="#454545" />
-                    <Text style={styles.textLocation}>Ha Noi, Viet Nam</Text>
-                  </View>
-                </View>
-              </View>}
+            {
+              // location.length < 2 &&
+              // <View style={{ marginBottom: 30 }}>
+              //   <Text style={styles.titleSection}>RECENT SEARCHES</Text>
+              //   <View
+              //     style={{
+              //       borderBottomWidth: 1,
+              //       borderBottomColor: '#eee',
+              //     }}
+              //   >
+              //     <View style={styles.row}>
+              //       <Icon name="access-time" size={18} color="#454545" />
+              //       <Text style={styles.textLocation}>Ha Noi, Viet Nam</Text>
+              //     </View>
+              //   </View>
+              // </View>
+            }
             <View>
               {location.length < 2 &&
                 <Text style={styles.titleSection}>POPULAR DESTINATIONS</Text>}

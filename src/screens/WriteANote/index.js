@@ -12,7 +12,7 @@ import avatar from '../../../assets/images/avatar.png';
 class WriteANote extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		title: 'Write a Note',
-		headerTintColor: COLOR.primary,
+		headerTintColor: COLOR.secondary,
 		headerStyle,
 		headerTitleStyle,
 	})

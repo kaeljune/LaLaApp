@@ -17,7 +17,7 @@ class ProfileScreen extends Component {
   static navigationOptions = () => ({
     title: 'Edit Profile',
     headerBackTitle: null,
-    headerTintColor: config.COLOR.primary,
+    headerTintColor: config.COLOR.secondary,
     headerTitleStyle: config.headerTitleStyle,
     headerStyle: config.headerStyle
   })
@@ -34,8 +34,6 @@ class ProfileScreen extends Component {
 
   async componentDidMount() {
     const fetchAcc = await AsyncStorage.getItem('reduxPersist:fetchAcc');
-
-    console.log('fetchAcc', fetchAcc);
 
     if (JSON.parse(fetchAcc).isLogin) {
       this.setState({

@@ -22,7 +22,7 @@ import {
 class ForgotScreen extends Component {
 	static navigationOptions = () => ({
 		title: 'Reset Password',
-		headerTintColor: COLOR.primary,
+		headerTintColor: COLOR.secondary,
 		headerBackTitle: null,
 		headerTitleStyle,
 		headerStyle,

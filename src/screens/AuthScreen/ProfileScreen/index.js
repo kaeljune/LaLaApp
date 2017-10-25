@@ -12,14 +12,14 @@ class ProfileScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Profile',
     headerBackTitle: null,
-    headerTintColor: config.COLOR.primary,
+    headerTintColor: config.COLOR.secondary,
     headerTitleStyle: config.headerTitleStyle,
     headerStyle: config.headerStyle,
     headerLeft: <Touch onPress={() => navigation.navigate('isFindGift')}>
       <View style={styles.actionHeader}>
         <Icon
           name="clear"
-          color={config.COLOR.primary}
+          color={config.COLOR.secondary}
         />
       </View>
     </Touch>,
@@ -27,7 +27,7 @@ class ProfileScreen extends Component {
       <View style={styles.actionHeader}>
         <Icon
           name="settings"
-          color={config.COLOR.secondary}
+          color={config.COLOR.primary}
         />
       </View>
     </Touch>
@@ -62,7 +62,7 @@ class ProfileScreen extends Component {
             xlarge
             rounded
             icon={{ name: 'person' }}
-            onPress={() => console.log('Works!')}
+            onPress={() => {}}
             activeOpacity={0.7}
           />
           {/* <Avatar
