@@ -41,6 +41,7 @@ class Checkout extends Component {
 	}
 
 	handleTouch = (bool) => {
+		console.log('bool', bool)
 		this.setState({
 			scrollEnable: bool
 		});

@@ -69,4 +69,3 @@ const mapStateToProps = state => {
 	return { items, cardActive, GiftID };
 };
 export default connect(mapStateToProps, { removeItemCart })(ProductList);
-

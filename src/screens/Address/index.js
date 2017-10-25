@@ -185,6 +185,7 @@ const styles = StyleSheet.create({
     height: 60,
     paddingHorizontal: 20,
     flex: 1,
+    marginTop: 15
   },
   titleSection: {
     fontSize: 11,
