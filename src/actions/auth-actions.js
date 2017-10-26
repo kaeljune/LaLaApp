@@ -1,5 +1,5 @@
 import { AsyncStorage } from 'react-native';
-import { Facebook } from 'expo';
+//import { Facebook } from 'expo';
 // import firebase from 'firebase';
 
 import {
